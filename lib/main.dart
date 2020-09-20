@@ -1,6 +1,8 @@
+import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/widgets/app_bar/drawer_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(Application());
@@ -9,14 +11,21 @@ void main() {
 class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Anakon',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<DrawerBloc>(
+          create: (_) => DrawerBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Anakon',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: ApplicationPage(),
       ),
-      home: ApplicationPage(),
     );
   }
 }
@@ -28,7 +37,7 @@ class ApplicationPage extends StatelessWidget {
         drawer: DrawerWidget(),
         appBar: AppBar(
           toolbarHeight: 70,
-          backgroundColor: Colors.indigo,
+          backgroundColor: Colors.indigo.withOpacity(1),
           leading: Builder(builder: (context) {
             return IconButton(
               icon: Icon(

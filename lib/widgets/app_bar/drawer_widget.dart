@@ -1,6 +1,9 @@
+import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+import 'drawer_button_widget.dart';
 
 class DrawerWidget extends StatelessWidget{
   @override
@@ -24,49 +27,33 @@ class DrawerWidget extends StatelessWidget{
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FlatButton(
-                      onPressed: null,
-                      child: Text(
-                        "Anakon",
-                        style: TextStyle(
-                            fontSize: 28,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    DrawerButtonWidget(
+                      buttonName: DrawerButtons.ANAKON,
+                      isTitle: true,
+                      onTap: (){},
                     ),
                     SizedBox(
                       height: 70,
                     ),
-                    FlatButton(
-                        onPressed: null,
-                        child: Text(
-                          "Who are we",
-                          style: TextStyle(
-                            fontSize: 22,
-                          ),
-                        )),
+                    DrawerButtonWidget(
+                      buttonName: DrawerButtons.WHO_WE_ARE,
+                      onTap: (){},
+                    ),
                     SizedBox(
                       height: 35,
                     ),
-                    FlatButton(
-                        onPressed: null,
-                        child: Text(
-                          "What are we doing",
-                          style: TextStyle(
-                            fontSize: 22,
-                          ),
-                        )),
+                    DrawerButtonWidget(
+                      buttonName: DrawerButtons.SERVICES,
+                      onTap: (){},
+                    ),
                     SizedBox(
                       height: 35,
                     ),
-                    FlatButton(
-                        onPressed: null,
-                        child: Text(
-                          "Contact us",
-                          style: TextStyle(
-                            fontSize: 22,
-                          ),
-                        )),
+                    DrawerButtonWidget(
+                      buttonName: DrawerButtons.CONTACT_US,
+                      onTap: (){},
+                    ),
+
                   ],
                 ),
               ),
