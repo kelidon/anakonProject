@@ -14,45 +14,38 @@ class _ContentWidgetState extends State<ContentWidget> {
   final servicesKey = new GlobalKey();
   final contactKey = new GlobalKey();
 
-  List<GlobalKey> keysList;
   GlobalKey currentKey;
 
   @override
   void initState() {
     super.initState();
     currentKey = aboutKey;
-    keysList = [aboutKey, servicesKey, contactKey];
+    print("fuck init");
   }
 
   @override
   Widget build(BuildContext context) {
     var _buttonToKey = {
-      DrawerButtons.ANAKON: aboutKey,
-      DrawerButtons.WHO_WE_ARE: aboutKey,
+      DrawerButtons.ABOUT_US: aboutKey,
       DrawerButtons.SERVICES: servicesKey,
       DrawerButtons.CONTACT_US: contactKey
     };
 
+    List<GlobalKey> keysList = _buttonToKey.values.toList();
+    List<DrawerButtons> buttonsList = _buttonToKey.keys.toList();
+
     return Listener(
       onPointerSignal: (PointerSignalEvent event) {
         if (event is PointerScrollEvent) {
-          print("event ok");
           var currentIndex = keysList.indexOf(currentKey);
           var isLastElement = currentIndex == keysList.length - 1;
           var isFirstElement = currentIndex == 0;
+
           if (event.scrollDelta.dy > 0 && !isLastElement) {
-            print("event scroll down");
-            currentKey = keysList[currentIndex + 1];
+            context.bloc<DrawerBloc>().add(buttonsList[currentIndex + 1]);
           } else if (event.scrollDelta.dy < 0 && !isFirstElement) {
-            print("event scroll up");
-            currentKey = keysList[currentIndex - 1];
+            context.bloc<DrawerBloc>().add(buttonsList[currentIndex - 1]);
           }
-          Scrollable.ensureVisible(
-            currentKey.currentContext,
-            alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
-            duration: Duration(seconds: 1),
-            curve: Curves.linear,
-          );
         }
       },
       child: BlocListener<DrawerBloc, DrawerButtons>(
@@ -62,9 +55,8 @@ class _ContentWidgetState extends State<ContentWidget> {
           });
           Scrollable.ensureVisible(
             _buttonToKey[state].currentContext,
-            alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart,
             duration: Duration(seconds: 1),
-            curve: Curves.linear,
+            curve: Curves.easeInOutQuad,
           );
         },
         child: Container(
@@ -78,7 +70,7 @@ class _ContentWidgetState extends State<ContentWidget> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           color: Colors.indigo.withOpacity(0.4),
                         ),
-                        height: 700,
+                        height: MediaQuery.of(context).size.height - 110,
                         margin: EdgeInsets.only(
                             right: 200, left: 280, top: 20, bottom: 20),
                         child: Center(
@@ -90,7 +82,7 @@ class _ContentWidgetState extends State<ContentWidget> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           color: Colors.indigo.withOpacity(0.6),
                         ),
-                        height: 700,
+                        height: MediaQuery.of(context).size.height - 110,
                         margin: EdgeInsets.only(
                             right: 200, left: 280, top: 20, bottom: 20),
                         child: Center(
@@ -102,7 +94,7 @@ class _ContentWidgetState extends State<ContentWidget> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           color: Colors.indigo.withOpacity(0.2),
                         ),
-                        height: 700,
+                        height: MediaQuery.of(context).size.height - 110,
                         margin: EdgeInsets.only(
                             right: 200, left: 280, top: 20, bottom: 20),
                         child: Center(

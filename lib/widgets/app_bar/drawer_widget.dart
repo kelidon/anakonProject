@@ -30,7 +30,7 @@ class DrawerWidget extends StatelessWidget{
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       DrawerButtonWidget(
-                        buttonName: DrawerButtons.ANAKON,
+                        buttonName: DrawerButtons.ABOUT_US,
                         isTitle: true,
                         onTap: (){},
                       ),
@@ -38,7 +38,7 @@ class DrawerWidget extends StatelessWidget{
                         height: 55,
                       ),
                       DrawerButtonWidget(
-                        buttonName: DrawerButtons.WHO_WE_ARE,
+                        buttonName: DrawerButtons.ABOUT_US,
                         onTap: (){},
                       ),
                       SizedBox(
