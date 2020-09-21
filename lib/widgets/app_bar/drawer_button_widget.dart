@@ -15,9 +15,7 @@ class DrawerButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DrawerBloc, DrawerButtons>(
       builder: (context, state) {
-        var _style = isTitle
-            ? AppStyles.DRAWER_TITLE
-            : state == buttonName
+        var _style = state == buttonName
             ? AppStyles.DRAWER_BUTTON_ACTIVE
             : AppStyles.DRAWER_BUTTON;
         return InkWell(
@@ -26,7 +24,10 @@ class DrawerButtonWidget extends StatelessWidget {
             onTap();
             Navigator.of(context).pop();
           },
-          child: Container(
+          child: isTitle?
+          Container(
+            child:  Image.asset("assets/images/logo.png", scale: 2,),
+          ):Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
               drawerButtonLabels[buttonName],

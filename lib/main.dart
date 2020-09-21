@@ -83,7 +83,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
                 backgroundColor: Colors.transparent,
                 drawer: DrawerWidget(),
                 appBar: AppBar(
-                  backgroundColor: Colors.black.withOpacity(0.7),
+                  backgroundColor: Colors.black.withOpacity(0.6),
                   elevation: 0.0,
                   toolbarHeight: 70,
                   leading: Builder(builder: (context) {
