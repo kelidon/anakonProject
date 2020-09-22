@@ -63,20 +63,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
     // We will use all described about setState to change the border color when mouse is hovering widget (like in SoftTeco)
     // Or we could make our widgets move a bit when the user see them first time (like in Google Store) by adding something in initState()
 
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-
-          ///  you could not put color property to the outer Container if you give it decoration property
-          ///  this Container has decoration property, so color is here
-          ///
-          ///  probably we'll change this color or remove it - feel free to change this
-          color: Colors.indigo.withOpacity(0.4),
-        ),
-
-        ///        DO NOT CHANGE !!!
-        ///  this makes Container fit the user's screen on any device
-        height: MediaQuery.of(context).size.height - 110,
+    return C6wwe67h46u456ye6ubrbye56y
         margin: EdgeInsets.only(right: 200, left: 280, top: 20, bottom: 20),
 
         ///  this is a contents of the Container
