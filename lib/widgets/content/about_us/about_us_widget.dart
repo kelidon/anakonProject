@@ -26,15 +26,16 @@ class AboutUsWidget extends StatefulWidget {
 class _AboutUsWidgetState extends State<AboutUsWidget> {
   // For instance, you have some variable (which could be passed here from outer app, by the way, but nevermind for now),
   // let it be:
-  var someNumber;
+  /// var someNumber;
 
   // and you want this variable to be zero that when this widget will be build for the first time
   // you do:
-  @override
-  void initState() {
-    super.initState();
-    someNumber = 0;
-  }
+
+  /// @override
+  /// void initState() {
+  ///   super.initState();
+  ///   someNumber = 0;
+  /// }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
 
     // We will use all described about setState to change the border color when mouse is hovering widget (like in SoftTeco)
     // Or we could make our widgets move a bit when the user see them first time (like in Google Store) by adding something in initState()
-    
+
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
