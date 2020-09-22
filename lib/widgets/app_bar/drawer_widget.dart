@@ -29,17 +29,16 @@ class DrawerWidget extends StatelessWidget{
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
+                      DrawerButtonWidget(
+                        buttonName: DrawerButtons.ABOUT_US,
+                        isTitle: true,
                         onTap: (){},
-                        child: Container(
-                          child:  Image.asset("assets/images/logo.png", scale: 2,),
-                        ),
                       ),
                       SizedBox(
                         height: 55,
                       ),
                       DrawerButtonWidget(
-                        buttonName: DrawerButtons.WHO_WE_ARE,
+                        buttonName: DrawerButtons.ABOUT_US,
                         onTap: (){},
                       ),
                       SizedBox(
