@@ -1,4 +1,7 @@
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
+import 'package:anakonProject/widgets/content/about_us/about_us_widget.dart';
+import 'package:anakonProject/widgets/content/contact_us/contact_us_widget.dart';
+import 'package:anakonProject/widgets/content/services/services_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -65,40 +68,13 @@ class _ContentWidgetState extends State<ContentWidget> {
                   children: [
                     Container(
                         key: aboutKey,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Colors.indigo.withOpacity(0.4),
-                        ),
-                        height: MediaQuery.of(context).size.height - 110,
-                        margin: EdgeInsets.only(
-                            right: 200, left: 280, top: 20, bottom: 20),
-                        child: Center(
-                            child:
-                                Text("about", style: TextStyle(fontSize: 50)))),
+                        child: AboutUsWidget(),),
                     Container(
                         key: servicesKey,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Colors.indigo.withOpacity(0.6),
-                        ),
-                        height: MediaQuery.of(context).size.height - 110,
-                        margin: EdgeInsets.only(
-                            right: 200, left: 280, top: 20, bottom: 20),
-                        child: Center(
-                            child: Text("services",
-                                style: TextStyle(fontSize: 50)))),
+                        child: ServicesWidget()),
                     Container(
                         key: contactKey,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                          color: Colors.indigo.withOpacity(0.2),
-                        ),
-                        height: MediaQuery.of(context).size.height - 110,
-                        margin: EdgeInsets.only(
-                            right: 200, left: 280, top: 20, bottom: 20),
-                        child: Center(
-                            child: Text("contact",
-                                style: TextStyle(fontSize: 50)))),
+                        child: ContactUsWidget(),),
                   ],
                 ))),
       ),
