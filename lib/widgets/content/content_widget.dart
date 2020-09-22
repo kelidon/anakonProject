@@ -20,7 +20,6 @@ class _ContentWidgetState extends State<ContentWidget> {
   void initState() {
     super.initState();
     currentKey = aboutKey;
-    print("fuck init");
   }
 
   @override

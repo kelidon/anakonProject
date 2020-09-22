@@ -4,6 +4,7 @@ import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
 void main() {
   runApp(Application());
 }
@@ -23,6 +24,7 @@ class Application extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.indigo,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'Poppins'
         ),
         home: ApplicationPage(),
       ),
@@ -41,8 +43,8 @@ class _ApplicationPageState extends State<ApplicationPage> {
   ScrollController _towerController;
 
   _mainScrollListener() {
-    _towerController.jumpTo(_mainController.offset*0.1);
-    _blurController.jumpTo(_mainController.offset*0.03);
+    _towerController.jumpTo(_mainController.offset * 0.1);
+    _blurController.jumpTo(_mainController.offset * 0.03);
   }
 
   @override
@@ -83,7 +85,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
                 backgroundColor: Colors.transparent,
                 drawer: DrawerWidget(),
                 appBar: AppBar(
-                  backgroundColor: Colors.black.withOpacity(0.6),
+                  backgroundColor: Colors.black.withOpacity(0.7),
                   elevation: 0.0,
                   toolbarHeight: 70,
                   leading: Builder(builder: (context) {
@@ -115,13 +117,15 @@ class _ApplicationPageState extends State<ApplicationPage> {
                         ))
                   ],
                   title: Text(
-                    "Anakon",
+                    "ANAKON",
                     style: TextStyle(fontSize: 24),
                   ),
                   centerTitle: true,
                 ),
                 body: SingleChildScrollView(
-                    controller: _mainController, child: ContentWidget())),
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: _mainController,
+                    child: ContentWidget())),
           ],
         ),
       ),
