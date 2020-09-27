@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 
 import 'drawer_button_widget.dart';
 
-class DrawerWidget extends StatelessWidget{
+class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +21,11 @@ class DrawerWidget extends StatelessWidget{
                   cursor: SystemMouseCursors.click,
                   child: GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
-                  child: Icon(Icons.clear, size: 30, color: Colors.grey,),
+                    child: Icon(
+                      Icons.clear,
+                      size: 30,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
                 Container(
@@ -32,30 +36,29 @@ class DrawerWidget extends StatelessWidget{
                       ScrollButtonWidget(
                         buttonName: DrawerButtons.ABOUT_US,
                         isTitle: true,
-                        onTap: (){},
+                        onTap: () {},
                       ),
                       SizedBox(
                         height: 55,
                       ),
                       ScrollButtonWidget(
                         buttonName: DrawerButtons.ABOUT_US,
-                        onTap: (){},
+                        onTap: () {},
                       ),
                       SizedBox(
                         height: 35,
                       ),
                       ScrollButtonWidget(
                         buttonName: DrawerButtons.SERVICES,
-                        onTap: (){},
+                        onTap: () {},
                       ),
                       SizedBox(
                         height: 35,
                       ),
                       ScrollButtonWidget(
                         buttonName: DrawerButtons.CONTACT_US,
-                        onTap: (){},
+                        onTap: () {},
                       ),
-
                     ],
                   ),
                 ),
@@ -66,5 +69,4 @@ class DrawerWidget extends StatelessWidget{
       ),
     );
   }
-
 }
