@@ -101,7 +101,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
             controller: _blurController,
             child: Container(
               alignment: Alignment.topRight,
-              child: Image.asset("assets/images/blur.jpg"),
+              child: Image.asset("assets/images/blur.jpg", scale: 2000/MediaQuery.of(context).size.width,),
             ),
           ),
           Scaffold(

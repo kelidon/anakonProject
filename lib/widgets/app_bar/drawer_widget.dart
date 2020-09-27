@@ -13,7 +13,7 @@ class DrawerWidget extends StatelessWidget {
       child: Drawer(
         child: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.only(left: 15, top: 15),
+            margin: EdgeInsets.only(left: 15, top: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
