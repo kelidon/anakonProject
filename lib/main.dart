@@ -5,7 +5,7 @@ import 'package:anakonProject/widgets/app_bar/drawer_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:video_player/video_player.dart';
 
 void main() {
   runApp(Application());
@@ -27,10 +27,9 @@ class Application extends StatelessWidget {
         title: 'Anakon',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.indigo,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          fontFamily: 'Poppins'
-        ),
+            primarySwatch: Colors.indigo,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            fontFamily: 'Poppins'),
         home: ApplicationPage(),
       ),
     );
@@ -47,6 +46,9 @@ class _ApplicationPageState extends State<ApplicationPage> {
   ScrollController _blurController;
   ScrollController _towerController;
 
+  VideoPlayerController _controller;
+  Future<void> _initializeVideoPlayerFuture;
+
   _mainScrollListener() {
     _towerController.jumpTo(_mainController.offset * 0.1);
     _blurController.jumpTo(_mainController.offset * 0.03);
@@ -58,6 +60,13 @@ class _ApplicationPageState extends State<ApplicationPage> {
     _mainController.addListener(_mainScrollListener);
     _towerController = ScrollController();
     _blurController = ScrollController();
+    _controller = VideoPlayerController.asset("assets/video/tower.mp4");
+    _initializeVideoPlayerFuture = _controller.initialize();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _controller.setVolume(0);
+      _controller.play();
+      _controller.setLooping(true);
+    });
     super.initState();
   }
 
@@ -66,74 +75,56 @@ class _ApplicationPageState extends State<ApplicationPage> {
   @override
   Widget build(BuildContext context) {
     isMouse = MediaQuery.of(context).size.shortestSide > 950;
-    context.bloc<MetricsBloc>().add(isMouse?Metrics.BIG:Metrics.SMALL);
-    print("BUILD");
+    context.bloc<MetricsBloc>().add(isMouse ? Metrics.BIG : Metrics.SMALL);
+
     return Scaffold(
       body: Stack(
         children: [
-          SingleChildScrollView(
-            controller: _towerController,
-            child: Container(
-              child: Image.asset(
-                "assets/images/tower.jpg",
-              ),
-            ),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.2,
+            child: SingleChildScrollView(
+                controller: _towerController,
+                child: FutureBuilder(
+                    future: _initializeVideoPlayerFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          child: VideoPlayer(_controller),
+                        );
+                      } else {
+                        return Center(child: Text("anakon logo"));
+                      }
+                    })),
           ),
           SingleChildScrollView(
             controller: _blurController,
             child: Container(
               alignment: Alignment.topRight,
-              child: Image.asset("assets/images/blur.jpg"),
+              child: Image.asset("assets/images/blur.jpg", scale: 2000/MediaQuery.of(context).size.width,),
             ),
           ),
           Scaffold(
               backgroundColor: Colors.transparent,
               appBar: AppBarWidget(),
               drawer: DrawerWidget(),
-              // appBar: AppBar(
-              //   backgroundColor: Colors.white.withOpacity(0.9),
-              //   elevation: 0.0,
-              //   toolbarHeight: 70,
-              //   leading: Builder(builder: (context) {
-              //     return IconButton(
-              //       icon: Icon(
-              //         Icons.menu,
-              //         size: 30,
-              //         color: Colors.black,
-              //       ),
-              //       onPressed: () {
-              //         if (Scaffold.of(context).isDrawerOpen) {
-              //           Scaffold.of(context).openEndDrawer();
-              //         } else {
-              //           Scaffold.of(context).openDrawer();
-              //         }
-              //       },
-              //     );
-              //   }),
-              //   actions: [
-              //     Container(
-              //         margin: EdgeInsets.only(right: 20),
-              //         child: Column(
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           crossAxisAlignment: CrossAxisAlignment.center,
-              //           children: [
-              //             Text("+375 (33) 354-76-45",style: TextStyle(color: Colors.indigo)),
-              //             Text("anakon@gmail.com",style: TextStyle(color: Colors.indigo))
-              //           ],
-              //         ))
-              //   ],
-              //   title: Text(
-              //     "ANAKON",
-              //     style: TextStyle(fontSize: 30, color: Colors.indigo, fontWeight: FontWeight.bold),
-              //   ),
-              //   centerTitle: true,
-              // ),
               body: SingleChildScrollView(
-                  physics: isMouse?NeverScrollableScrollPhysics():BouncingScrollPhysics(),
+                  physics: isMouse
+                      ? NeverScrollableScrollPhysics()
+                      : BouncingScrollPhysics(),
                   controller: _mainController,
                   child: ContentWidget())),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+    _mainController.dispose();
+    _towerController.dispose();
+    _blurController.dispose();
   }
 }

@@ -8,36 +8,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'drawer_button_widget.dart';
 
 class AppBarWidget extends StatefulWidget implements PreferredSizeWidget {
-
-  AppBarWidget({Key key}) : preferredSize = Size.fromHeight(70), super(key: key);
+  AppBarWidget({Key key})
+      : preferredSize = Size.fromHeight(70),
+        super(key: key);
 
   @override
   final Size preferredSize;
 
   @override
   State<StatefulWidget> createState() => _AppBarWidgetState();
-
 }
 
-class _AppBarWidgetState extends State<AppBarWidget>{
+class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (context, state) {
         bool isMouse = state == Metrics.BIG;
         return Container(
-            //padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            padding: EdgeInsets.only(left: 140, top: 7),
+            padding: EdgeInsets.only(left: 9),
             width: MediaQuery.of(context).size.width,
             color: Colors.white.withOpacity(0.8),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                isMouse?Container(width: 30,):Builder(builder: (context) {
+                isMouse?Container(width: 46,):Builder(builder: (context) {
                   return IconButton(
+                    splashRadius: 1,
                     icon: Icon(
                       Icons.menu,
-                      size: 30,
                       color: Colors.black,
                     ),
                     onPressed: () {
@@ -49,6 +48,7 @@ class _AppBarWidgetState extends State<AppBarWidget>{
                     },
                   );
                 }),
+                SizedBox(width: 85,),
                 Spacer(flex: 2,),
                 isMouse?ScrollButtonWidget(
                   buttonName: DrawerButtons.SERVICES,

@@ -45,19 +45,19 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
     //
     //you should cover a function that is changing your variable with setState((){ yourFunction(); }), like this:
     /**
-      return InkWell(
-      onTap: () {
+        return InkWell(
+        onTap: () {
         setState(() {
 
-          // by doing this, variable value will change AND this widget will rebuild
-          // the reason is: if you are using this variable somewhere in your widget (for instance, show the amount of likes under a photo)
-          // you will probably want this widget to rebuild in order to show updated data
+        // by doing this, variable value will change AND this widget will rebuild
+        // the reason is: if you are using this variable somewhere in your widget (for instance, show the amount of likes under a photo)
+        // you will probably want this widget to rebuild in order to show updated data
 
-          someNumber++;
+        someNumber++;
         });
-      },
-      child: SomeWidgetThatCouldBeTapped(),
-    );
+        },
+        child: SomeWidgetThatCouldBeTapped(),
+        );
      **/
 
     // We will use all described about setState to change the border color when mouse is hovering widget (like in SoftTeco)
@@ -77,7 +77,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
         ///        DO NOT CHANGE !!!
         ///  this makes Container fit the user's screen on any device
         height: MediaQuery.of(context).size.height - 110,
-        margin: EdgeInsets.only(right: 200, left: 280, top: 20, bottom: 20),
+        margin: EdgeInsets.only(top: 20, bottom: 20),
 
         ///  this is a contents of the Container
         ///

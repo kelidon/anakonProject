@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContentWidget extends StatefulWidget {
-
   const ContentWidget({Key key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _ContentWidgetState();
 }
@@ -21,7 +21,6 @@ class _ContentWidgetState extends State<ContentWidget> {
   final contactKey = new GlobalKey();
 
   GlobalKey currentKey;
-
 
   @override
   void initState() {
@@ -52,6 +51,9 @@ class _ContentWidgetState extends State<ContentWidget> {
           child: Container(
               child: Container(
                   alignment: Alignment.center,
+                  margin: EdgeInsets.only(
+                      right: 200,
+                      left: MediaQuery.of(context).size.width * 0.2 + 30),
                   child: Column(
                     children: [
                       Container(
@@ -70,28 +72,30 @@ class _ContentWidgetState extends State<ContentWidget> {
     List<GlobalKey> keysList = _buttonToKey.values.toList();
     List<DrawerButtons> buttonsList = _buttonToKey.keys.toList();
 
-    return BlocBuilder<MetricsBloc, Metrics>(
-      builder: (context, state) {
-        bool isMouse = state == Metrics.BIG;
-        return isMouse
-            ? Listener(
-                onPointerSignal: (PointerSignalEvent event) {
-                  if (event is PointerScrollEvent) {
-                    var currentIndex = keysList.indexOf(currentKey);
-                    var isLastElement = currentIndex == keysList.length - 1;
-                    var isFirstElement = currentIndex == 0;
+    return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
+      bool isMouse = state == Metrics.BIG;
+      return isMouse
+          ? Listener(
+              onPointerSignal: (PointerSignalEvent event) {
+                if (event is PointerScrollEvent) {
+                  var currentIndex = keysList.indexOf(currentKey);
+                  var isLastElement = currentIndex == keysList.length - 1;
+                  var isFirstElement = currentIndex == 0;
 
-                    if (event.scrollDelta.dy > 0 && !isLastElement) {
-                      context.bloc<DrawerBloc>().add(buttonsList[currentIndex + 1]);
-                    } else if (event.scrollDelta.dy < 0 && !isFirstElement) {
-                      context.bloc<DrawerBloc>().add(buttonsList[currentIndex - 1]);
-                    }
+                  if (event.scrollDelta.dy > 0 && !isLastElement) {
+                    context
+                        .bloc<DrawerBloc>()
+                        .add(buttonsList[currentIndex + 1]);
+                  } else if (event.scrollDelta.dy < 0 && !isFirstElement) {
+                    context
+                        .bloc<DrawerBloc>()
+                        .add(buttonsList[currentIndex - 1]);
                   }
-                },
-                child: _buildContentBlocks(),
-              )
-            : _buildContentBlocks();
-      }
-    );
+                }
+              },
+              child: _buildContentBlocks(),
+            )
+          : _buildContentBlocks();
+    });
   }
 }

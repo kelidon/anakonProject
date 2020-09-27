@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum DrawerButtons {ABOUT_US, SERVICES, CONTACT_US}
+enum DrawerButtons { ABOUT_US, SERVICES, CONTACT_US }
+
 const Map drawerButtonLabels = {
   DrawerButtons.ABOUT_US: "Who we are",
   DrawerButtons.SERVICES: "Services",
