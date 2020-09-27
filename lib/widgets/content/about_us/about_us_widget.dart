@@ -71,7 +71,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
           ///  this Container has decoration property, so color is here
           ///
           ///  probably we'll change this color or remove it - feel free to change this
-          color: Colors.indigo.withOpacity(0.4),
+          color: Colors.grey.withOpacity(0.4),
         ),
 
         ///        DO NOT CHANGE !!!

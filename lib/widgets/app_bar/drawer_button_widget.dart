@@ -4,12 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DrawerButtonWidget extends StatelessWidget {
+class ScrollButtonWidget extends StatelessWidget {
   final bool isTitle;
   final DrawerButtons buttonName;
   final Function onTap;
+  final bool isDrawer;
 
-  DrawerButtonWidget({this.onTap, this.isTitle = false, this.buttonName});
+  ScrollButtonWidget({this.onTap, this.isTitle = false, this.buttonName, this.isDrawer = true});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class DrawerButtonWidget extends StatelessWidget {
           onTap: () {
             context.bloc<DrawerBloc>().add(buttonName);
             onTap();
-            Navigator.of(context).pop();
+            if(isDrawer) Navigator.of(context).pop();
           },
           child: isTitle?
           Container(

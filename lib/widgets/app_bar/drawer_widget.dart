@@ -29,7 +29,7 @@ class DrawerWidget extends StatelessWidget{
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      DrawerButtonWidget(
+                      ScrollButtonWidget(
                         buttonName: DrawerButtons.ABOUT_US,
                         isTitle: true,
                         onTap: (){},
@@ -37,21 +37,21 @@ class DrawerWidget extends StatelessWidget{
                       SizedBox(
                         height: 55,
                       ),
-                      DrawerButtonWidget(
+                      ScrollButtonWidget(
                         buttonName: DrawerButtons.ABOUT_US,
                         onTap: (){},
                       ),
                       SizedBox(
                         height: 35,
                       ),
-                      DrawerButtonWidget(
+                      ScrollButtonWidget(
                         buttonName: DrawerButtons.SERVICES,
                         onTap: (){},
                       ),
                       SizedBox(
                         height: 35,
                       ),
-                      DrawerButtonWidget(
+                      ScrollButtonWidget(
                         buttonName: DrawerButtons.CONTACT_US,
                         onTap: (){},
                       ),
