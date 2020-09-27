@@ -26,7 +26,8 @@ class _AppBarWidgetState extends State<AppBarWidget>{
       builder: (context, state) {
         bool isMouse = state == Metrics.BIG;
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            //padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            padding: EdgeInsets.only(left: 140, top: 7),
             width: MediaQuery.of(context).size.width,
             color: Colors.white.withOpacity(0.8),
             child: Row(
@@ -69,15 +70,19 @@ class _AppBarWidgetState extends State<AppBarWidget>{
                 ):Container(),
                 Spacer(flex: 2,),
                 Container(
-                    margin: EdgeInsets.only(right: 20),
+                    margin: EdgeInsets.only (right: 5, bottom: 0),
+                    width: 150,
+                    //color: Colors.black.withOpacity(0.5),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("+375 (33) 354-76-45",style: TextStyle(color: Colors.indigo)),
-                        Text("anakon@gmail.com",style: TextStyle(color: Colors.indigo))
+                        Text("ПОЗВОНИТЕ НАМ", style: TextStyle(color: Color(0xFF020E31))),
+                        Text("+375 (33) 354-76-45",style: TextStyle(color: Color(0xFF020E31))),
+                        Text("anakon@gmail.com",style: TextStyle(color: Color(0xFF020E31)))
                       ],
-                    ))
+                    )
+                )
               ],
             )
         );
