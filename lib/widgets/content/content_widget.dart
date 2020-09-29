@@ -52,7 +52,7 @@ class _ContentWidgetState extends State<ContentWidget> {
               child: Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(
-                      right: 200,
+                      right: MediaQuery.of(context).size.width * 0.085 + 30,
                       left: MediaQuery.of(context).size.width * 0.2 + 30),
                   child: Column(
                     children: [

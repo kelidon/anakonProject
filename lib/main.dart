@@ -74,7 +74,8 @@ class _ApplicationPageState extends State<ApplicationPage> {
 
   @override
   Widget build(BuildContext context) {
-    isMouse = MediaQuery.of(context).size.shortestSide > 950;
+    isMouse = MediaQuery.of(context).size.shortestSide > 780;
+    print("width: ${MediaQuery.of(context).size.shortestSide}");
     context.bloc<MetricsBloc>().add(isMouse ? Metrics.BIG : Metrics.SMALL);
 
     return Scaffold(
@@ -82,20 +83,35 @@ class _ApplicationPageState extends State<ApplicationPage> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width * 0.2,
-            child: SingleChildScrollView(
-                controller: _towerController,
-                child: FutureBuilder(
-                    future: _initializeVideoPlayerFuture,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return AspectRatio(
-                          aspectRatio: _controller.value.aspectRatio,
-                          child: VideoPlayer(_controller),
-                        );
-                      } else {
-                        return Center(child: Text("anakon logo"));
-                      }
-                    })),
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                    controller: _towerController,
+                    child: FutureBuilder(
+                        future: _initializeVideoPlayerFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            return AspectRatio(
+                              aspectRatio: _controller.value.aspectRatio,
+                              child: VideoPlayer(_controller),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        })),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 70,
+                      width: MediaQuery.of(context).size.width*0.2,
+                      color: Colors.white,
+                      child: FittedBox(fit:BoxFit.contain,child: Text("ANAKON", style: TextStyle( color: Color(0xFF0B277A)),)),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
           SingleChildScrollView(
             controller: _blurController,

@@ -58,7 +58,9 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
         },
         child: isTitle
             ? Container(
-                child: Image.asset("assets/images/logo.png", scale: 3),
+                child:
+                Image.asset("assets/images/logo_font.jpg", scale: 2),
+                //Image.asset("assets/images/logo.png", scale: 3),
               )
             : Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),

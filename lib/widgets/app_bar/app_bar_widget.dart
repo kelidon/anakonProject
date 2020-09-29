@@ -26,18 +26,21 @@ class _AppBarWidgetState extends State<AppBarWidget> {
       builder: (context, state) {
         bool isMouse = state == Metrics.BIG;
         return Container(
-            padding: EdgeInsets.only(left: 9),
-            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(left: 15),
+            margin: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.085, left: MediaQuery.of(context).size.width*0.2),
+            width: MediaQuery.of(context).size.width - 2000/MediaQuery.of(context).size.width - MediaQuery.of(context).size.width*0.1,
             color: Colors.white.withOpacity(0.8),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                isMouse?Container(width: 46,):Builder(builder: (context) {
+                //SizedBox(width: MediaQuery.of(context).size.width * 0.2,),
+                //isMouse?Container(width: 46,):
+                Builder(builder: (context) {
                   return IconButton(
                     splashRadius: 1,
                     icon: Icon(
                       Icons.menu,
-                      color: Colors.black,
+                      color: Color(0xFF0B277A),
                     ),
                     onPressed: () {
                       if (Scaffold.of(context).isDrawerOpen) {
@@ -48,13 +51,12 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                     },
                   );
                 }),
-                SizedBox(width: 85,),
                 Spacer(flex: 2,),
-                isMouse?ScrollButtonWidget(
-                  buttonName: DrawerButtons.SERVICES,
-                  isDrawer: false,
-                  onTap: (){},
-                ):Container(),
+                // isMouse?ScrollButtonWidget(
+                //   buttonName: DrawerButtons.SERVICES,
+                //   isDrawer: false,
+                //   onTap: (){},
+                // ):Container(),
                 Spacer(flex: 1,),
                 ScrollButtonWidget(
                   buttonName: DrawerButtons.ABOUT_US,
@@ -63,23 +65,22 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                   onTap: (){},
                 ),
                 Spacer(flex: 1,),
-                isMouse?ScrollButtonWidget(
-                  buttonName: DrawerButtons.CONTACT_US,
-                  isDrawer: false,
-                  onTap: (){},
-                ):Container(),
+                // isMouse?ScrollButtonWidget(
+                //   buttonName: DrawerButtons.CONTACT_US,
+                //   isDrawer: false,
+                //   onTap: (){},
+                // ):Container(),
                 Spacer(flex: 2,),
                 Container(
-                    margin: EdgeInsets.only (right: 5, bottom: 0),
+                    margin: EdgeInsets.only (right: 15),
                     width: 150,
-                    //color: Colors.black.withOpacity(0.5),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("ПОЗВОНИТЕ НАМ", style: TextStyle(color: Color(0xFF020E31))),
-                        Text("+375 (33) 354-76-45",style: TextStyle(color: Color(0xFF020E31))),
-                        Text("anakon@gmail.com",style: TextStyle(color: Color(0xFF020E31)))
+                        Text("ПОЗВОНИТЕ НАМ", style: TextStyle(color: Color(0xFF0B277A))),
+                        Text("+375 (33) 354-76-45",style: TextStyle(color: Color(0xFF0B277A))),
+                        Text("anakon@gmail.com",style: TextStyle(color: Color(0xFF0B277A)))
                       ],
                     )
                 )
