@@ -8,9 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'drawer_button_widget.dart';
 
 class AppBarWidget extends StatefulWidget implements PreferredSizeWidget {
-  AppBarWidget({Key key})
-      : preferredSize = Size.fromHeight(70),
-        super(key: key);
+  AppBarWidget({Key key, this.preferredSize})
+      : super(key: key);
 
   @override
   final Size preferredSize;
@@ -26,63 +25,50 @@ class _AppBarWidgetState extends State<AppBarWidget> {
       builder: (context, state) {
         bool isMouse = state == Metrics.BIG;
         return Container(
-            padding: EdgeInsets.only(left: 15),
-            margin: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.085, left: MediaQuery.of(context).size.width*0.2),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+            margin: isMouse?EdgeInsets.only(right: MediaQuery.of(context).size.width*0.1, left: MediaQuery.of(context).size.width*0.2):null,
             width: MediaQuery.of(context).size.width - 2000/MediaQuery.of(context).size.width - MediaQuery.of(context).size.width*0.1,
             color: Colors.white.withOpacity(0.8),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                //SizedBox(width: MediaQuery.of(context).size.width * 0.2,),
-                //isMouse?Container(width: 46,):
                 Builder(builder: (context) {
-                  return IconButton(
-                    splashRadius: 1,
-                    icon: Icon(
-                      Icons.menu,
-                      color: Color(0xFF0B277A),
+                  return Center(
+                    child: InkWell(
+                      child: Icon(
+                        Icons.menu,
+                        color: Color(0xFF0B277A),
+                      ),
+                      onTap: () {
+                        if (Scaffold.of(context).isDrawerOpen) {
+                          Scaffold.of(context).openEndDrawer();
+                        } else {
+                          Scaffold.of(context).openDrawer();
+                        }
+                      },
                     ),
-                    onPressed: () {
-                      if (Scaffold.of(context).isDrawerOpen) {
-                        Scaffold.of(context).openEndDrawer();
-                      } else {
-                        Scaffold.of(context).openDrawer();
-                      }
-                    },
                   );
                 }),
-                Spacer(flex: 2,),
-                // isMouse?ScrollButtonWidget(
-                //   buttonName: DrawerButtons.SERVICES,
-                //   isDrawer: false,
-                //   onTap: (){},
-                // ):Container(),
-                Spacer(flex: 1,),
+                Spacer(),
                 ScrollButtonWidget(
                   buttonName: DrawerButtons.ABOUT_US,
                   isDrawer: false,
                   isTitle: true,
                   onTap: (){},
                 ),
-                Spacer(flex: 1,),
-                // isMouse?ScrollButtonWidget(
-                //   buttonName: DrawerButtons.CONTACT_US,
-                //   isDrawer: false,
-                //   onTap: (){},
-                // ):Container(),
-                Spacer(flex: 2,),
-                Container(
-                    margin: EdgeInsets.only (right: 15),
-                    width: 150,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text("ПОЗВОНИТЕ НАМ", style: TextStyle(color: Color(0xFF0B277A))),
-                        Text("+375 (33) 354-76-45",style: TextStyle(color: Color(0xFF0B277A))),
-                        Text("anakon@gmail.com",style: TextStyle(color: Color(0xFF0B277A)))
-                      ],
-                    )
+                Spacer(),
+                FittedBox(
+                  fit: BoxFit.contain,
+                  child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("+375 (33) 354-76-45",style: TextStyle(color: Color(0xFF0B277A))),
+                          Text("anakon@gmail.com",style: TextStyle(color: Color(0xFF0B277A)))
+                        ],
+                      )
+                  ),
                 )
               ],
             )
