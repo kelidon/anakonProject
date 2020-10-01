@@ -1,4 +1,5 @@
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
+import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,31 +8,30 @@ import 'package:flutter_svg/svg.dart';
 
 class ScrollButtonWidget extends StatefulWidget {
   final bool isTitle;
+  final bool isAppBar;
   final DrawerButtons buttonName;
   final Function onTap;
-  final bool isDrawer;
 
   const ScrollButtonWidget(
       {Key key,
       this.isTitle = false,
       this.buttonName,
-      this.onTap,
-      this.isDrawer = true})
+      this.onTap, this.isAppBar = false})
       : super(key: key);
 
   @override
   State<StatefulWidget> createState() =>
-      _ScrollButtonWidgetState(onTap, isTitle, buttonName, isDrawer);
+      _ScrollButtonWidgetState(onTap, isTitle, buttonName, isAppBar);
 }
 
 class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
   final bool isTitle;
+  final bool isAppBar;
   final DrawerButtons buttonName;
   final Function onTap;
-  final bool isDrawer;
 
   _ScrollButtonWidgetState(
-      this.onTap, this.isTitle, this.buttonName, this.isDrawer);
+      this.onTap, this.isTitle, this.buttonName, this.isAppBar);
 
   Color _color = Colors.transparent;
 
@@ -51,25 +51,22 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
             ..layout())
           .size;
       final String assetName = 'assets/images/anakon_logo.svg';
-      final Widget svg = SvgPicture.asset(assetName,
-          width: 100, height: 20, semanticsLabel: 'Acme Logo');
-      final Widget svg_net = Image.network(
+      final Widget svgLogo = Image.network(
         assetName,
         width: 100,
         height: 20,
       );
 
       return InkWell(
-        onTap: () {
-          context.bloc<DrawerBloc>().add(buttonName);
-          setState(() {});
-          onTap();
-          if (isDrawer) Navigator.of(context).pop();
-        },
+        onTap: context.bloc<MenuBloc>().state || isAppBar?() {
+      context.bloc<DrawerBloc>().add(buttonName);
+      setState(() {});
+      onTap();
+      }:null,
         child: isTitle
             ? Container(
                 child:
-                    svg_net
+                    svgLogo
               )
             : Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),

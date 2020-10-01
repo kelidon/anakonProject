@@ -1,5 +1,6 @@
 
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
+import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,54 +25,58 @@ class _AppBarWidgetState extends State<AppBarWidget> {
     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (context, state) {
         bool isMouse = state == Metrics.BIG;
-        return Container(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-            margin: isMouse?EdgeInsets.only(right: MediaQuery.of(context).size.width*0.1, left: MediaQuery.of(context).size.width*0.2):null,
-            width: MediaQuery.of(context).size.width - 2000/MediaQuery.of(context).size.width - MediaQuery.of(context).size.width*0.1,
-            color: Colors.white.withOpacity(0.8),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Builder(builder: (context) {
-                  return Center(
-                    child: InkWell(
-                      child: Icon(
-                        Icons.menu,
-                        color: Color(0xFF0B277A),
-                      ),
-                      onTap: () {
-                        if (Scaffold.of(context).isDrawerOpen) {
-                          Scaffold.of(context).openEndDrawer();
-                        } else {
-                          Scaffold.of(context).openDrawer();
-                        }
-                      },
+        return BlocBuilder<MenuBloc, bool>(
+          builder: (context, isEnabled) {
+            return Container(
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                margin: isMouse?EdgeInsets.only(right: MediaQuery.of(context).size.width*0.1, left: MediaQuery.of(context).size.width*0.2):null,
+                color: Colors.white.withOpacity(0.8),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Builder(builder: (context) {
+                      return Center(
+                        child: InkWell(
+                          child: Icon(
+                            isEnabled?Icons.clear:Icons.menu,
+                            color: Color(0xFF0B277A),
+                          ),
+                          onTap: () {
+                            // if (Scaffold.of(context).isDrawerOpen) {
+                            //   Scaffold.of(context).openEndDrawer();
+                            // } else {
+                            //   Scaffold.of(context).openDrawer();
+                            // }
+                            context.bloc<MenuBloc>().add(!context.bloc<MenuBloc>().state);
+                          },
+                        ),
+                      );
+                    }),
+                    Spacer(),
+                    ScrollButtonWidget(
+                      buttonName: DrawerButtons.ABOUT_US,
+                      isTitle: true,
+                      isAppBar: true,
+                      onTap: (){},
                     ),
-                  );
-                }),
-                Spacer(),
-                ScrollButtonWidget(
-                  buttonName: DrawerButtons.ABOUT_US,
-                  isDrawer: false,
-                  isTitle: true,
-                  onTap: (){},
-                ),
-                Spacer(),
-                FittedBox(
-                  fit: BoxFit.contain,
-                  child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("+375 (33) 354-76-45",style: TextStyle(color: Color(0xFF0B277A))),
-                          Text("anakon@gmail.com",style: TextStyle(color: Color(0xFF0B277A)))
-                        ],
-                      )
-                  ),
+                    Spacer(),
+                    FittedBox(
+                      fit: BoxFit.contain,
+                      child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("+375 (33) 354-76-45",style: TextStyle(color: Color(0xFF0B277A))),
+                              Text("anakon@gmail.com",style: TextStyle(color: Color(0xFF0B277A)))
+                            ],
+                          )
+                      ),
+                    )
+                  ],
                 )
-              ],
-            )
+            );
+          }
         );
       }
     );
