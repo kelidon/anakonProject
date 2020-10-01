@@ -103,6 +103,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
                 child: BlocBuilder<MetricsBloc, Metrics>(
                   builder: (context, state) {
                     if(state == Metrics.BIG){
+                      _initializeVideoPlayerFuture = null;
                         _initializeVideoPlayerFuture = _controller.initialize();
                         WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                           _controller.setVolume(0);
@@ -144,9 +145,11 @@ class _ApplicationPageState extends State<ApplicationPage> {
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           physics: NeverScrollableScrollPhysics(),
-          child: BlocBuilder<MetricsBloc, Metrics>(
+          child:
+          BlocBuilder<MetricsBloc, Metrics>(
             builder: (context, state) {
               if(state == Metrics.SMALL){
+                _initializeVideoPlayerFutureHorizontal = null;
                 _initializeVideoPlayerFutureHorizontal = _controllerHorizontal.initialize();
                 WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                   _controllerHorizontal.setVolume(0);
@@ -154,13 +157,14 @@ class _ApplicationPageState extends State<ApplicationPage> {
                   _controllerHorizontal.setLooping(true);
                 });
               }
-              return FutureBuilder(
+              return
+                FutureBuilder(
                   future: _initializeVideoPlayerFutureHorizontal,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       return AspectRatio(
                         aspectRatio: _controllerHorizontal.value.aspectRatio,
-                        child: VideoPlayer(_controller),
+                        child: VideoPlayer(_controllerHorizontal),
                       );
                     } else {
                       return Container();

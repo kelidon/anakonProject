@@ -3,6 +3,7 @@ import 'package:anakonProject/constants/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ScrollButtonWidget extends StatefulWidget {
   final bool isTitle;
@@ -49,6 +50,15 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
               textDirection: TextDirection.ltr)
             ..layout())
           .size;
+      final String assetName = 'assets/images/anakon_logo.svg';
+      final Widget svg = SvgPicture.asset(assetName,
+          width: 100, height: 20, semanticsLabel: 'Acme Logo');
+      final Widget svg_net = Image.network(
+        assetName,
+        width: 100,
+        height: 20,
+      );
+
       return InkWell(
         onTap: () {
           context.bloc<DrawerBloc>().add(buttonName);
@@ -59,8 +69,7 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
         child: isTitle
             ? Container(
                 child:
-                Image.asset("assets/images/logo_font.jpg", scale: 2),
-                //Image.asset("assets/images/logo.png", scale: 3),
+                    svg_net
               )
             : Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
