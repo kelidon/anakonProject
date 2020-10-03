@@ -4,7 +4,6 @@ import 'package:anakonProject/constants/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ScrollButtonWidget extends StatefulWidget {
   final bool isTitle;
@@ -16,7 +15,8 @@ class ScrollButtonWidget extends StatefulWidget {
       {Key key,
       this.isTitle = false,
       this.buttonName,
-      this.onTap, this.isAppBar = false})
+      this.onTap,
+      this.isAppBar = false})
       : super(key: key);
 
   @override
@@ -41,7 +41,7 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
       var _style = state == buttonName
           ? AppStyles.DRAWER_BUTTON_ACTIVE
           : AppStyles.DRAWER_BUTTON;
-      _color = state == buttonName ? Color(0xFF020E31) : Colors.transparent;
+      _color = state == buttonName ? Color(0xFF06285A) : Colors.transparent;
       final Size size = (TextPainter(
               text:
                   TextSpan(text: drawerButtonLabels[buttonName], style: _style),
@@ -53,21 +53,19 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
       final String assetName = 'assets/images/anakon_logo.svg';
       final Widget svgLogo = Image.network(
         assetName,
-        width: 100,
-        height: 20,
       );
 
       return InkWell(
-        onTap: context.bloc<MenuBloc>().state || isAppBar?() {
-      context.bloc<DrawerBloc>().add(buttonName);
-      setState(() {});
-      onTap();
-      }:null,
+        hoverColor: Colors.transparent,
+        onTap: context.bloc<MenuBloc>().state || isAppBar
+            ? () {
+                context.bloc<DrawerBloc>().add(buttonName);
+                setState(() {});
+                onTap();
+              }
+            : null,
         child: isTitle
-            ? Container(
-                child:
-                    svgLogo
-              )
+            ? Container(child: svgLogo)
             : Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Column(

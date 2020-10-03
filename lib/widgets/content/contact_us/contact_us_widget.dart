@@ -2,11 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ContactUsWidget extends StatefulWidget {
+  final double height;
+
+  const ContactUsWidget({Key key, this.height}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() => _ContactUsWidgetState();
+  State<StatefulWidget> createState() => _ContactUsWidgetState(height);
 }
 
 class _ContactUsWidgetState extends State<ContactUsWidget> {
+  final double height;
+
+  _ContactUsWidgetState(this.height);
+
   @override
   Widget build(BuildContext context) {
     return Container(

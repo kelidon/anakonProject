@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:html';
 
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
@@ -60,7 +59,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
   Future<void> _initializeVideoPlayerFutureHorizontal;
 
   _mainScrollListener() {
-    if(_towerController.hasClients && _blurController.hasClients) {
+    if (_towerController.hasClients && _blurController.hasClients) {
       _towerController.jumpTo(_mainController.offset * 0.1);
       _blurController.jumpTo(_mainController.offset * 0.03);
     }
@@ -72,11 +71,11 @@ class _ApplicationPageState extends State<ApplicationPage> {
     _mainController.addListener(_mainScrollListener);
     _towerController = ScrollController();
     _blurController = ScrollController();
-    _controller = VideoPlayerController.asset("assets/video/tower.mp4");
+    _controller = VideoPlayerController.asset("assets/video/tower1.mp4");
     _initializeVideoPlayerFuture = _controller.initialize();
 
     _controllerHorizontal =
-        VideoPlayerController.asset("assets/video/tower.mp4");
+        VideoPlayerController.asset("assets/video/tower_horizontal.m4v");
     _initializeVideoPlayerFutureHorizontal = _controller.initialize();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -104,10 +103,11 @@ class _ApplicationPageState extends State<ApplicationPage> {
     Widget _buildTower() {
       return isMouse
           ? Container(
-              width: MediaQuery.of(context).size.width * 0.2,
+              width: MediaQuery.of(context).size.width * 0.15,
               child: Stack(
                 children: [
                   SingleChildScrollView(
+                      physics: NeverScrollableScrollPhysics(),
                       controller: _towerController,
                       child: BlocBuilder<MetricsBloc, Metrics>(
                           builder: (context, state) {
@@ -136,29 +136,12 @@ class _ApplicationPageState extends State<ApplicationPage> {
                               }
                             });
                       })),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        height: 70,
-                        width: MediaQuery.of(context).size.width * 0.2,
-                        color: Colors.white,
-                        child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: Text(
-                              "ANAKON",
-                              style: TextStyle(color: Color(0xFF0B277A)),
-                            )),
-                      ),
-                    ],
-                  )
                 ],
               ),
             )
           : Container(
-              margin: EdgeInsets.only(top: 40),
               alignment: Alignment.topLeft,
-              height: 30,
+              height: 40,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 physics: NeverScrollableScrollPhysics(),
@@ -191,22 +174,32 @@ class _ApplicationPageState extends State<ApplicationPage> {
               ));
     }
 
-    Widget _buildBlur(){
-      return isMouse?Container(
-        alignment: Alignment.topRight,
-        child: SingleChildScrollView(
-          controller: _blurController,
-          child: Image(image: AssetImage("assets/images/blur.jpg"), width: MediaQuery.of(context).size.width * 0.1, fit: BoxFit.fitWidth,),
-        ),
-      ):Container(
-        alignment: Alignment.bottomLeft,
-
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          physics: NeverScrollableScrollPhysics(),
-          child: Image.asset("assets/images/blur.jpg", height: 30,fit: BoxFit.fitHeight,),
-        ),
-      );
+    Widget _buildBlur() {
+      return isMouse
+          ? Container(
+              alignment: Alignment.topRight,
+              child: SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
+                controller: _blurController,
+                child: Image(
+                  image: AssetImage("assets/images/blur.jpg"),
+                  width: MediaQuery.of(context).size.width * 0.065,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+            )
+          : Container(
+              alignment: Alignment.bottomLeft,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                physics: NeverScrollableScrollPhysics(),
+                child: Image.asset(
+                  "assets/images/blur_horizontal.png",
+                  height: 50,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+            );
     }
 
     Widget _buildBackground() {
@@ -236,12 +229,15 @@ class _ApplicationPageState extends State<ApplicationPage> {
               appBar: AppBarWidget(
                 preferredSize: Size.fromHeight(isMouse ? 70 : 40),
               ),
-              body: SingleChildScrollView(
-                  physics: isMouse
-                      ? NeverScrollableScrollPhysics()
-                      : BouncingScrollPhysics(),
-                  controller: _mainController,
-                  child: ContentWidget())),
+              body: Container(
+                margin: isMouse ? null : EdgeInsets.only(bottom: 50),
+                child: SingleChildScrollView(
+                    physics: isMouse
+                        ? NeverScrollableScrollPhysics()
+                        : BouncingScrollPhysics(),
+                    controller: _mainController,
+                    child: ContentWidget()),
+              )),
           MenuWidget()
         ],
       ),

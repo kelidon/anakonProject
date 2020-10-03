@@ -39,7 +39,9 @@ class _ContentWidgetState extends State<ContentWidget> {
     Widget _buildContentBlocks() {
       bool isMouse = context.bloc<MetricsBloc>().state == Metrics.BIG;
       return BlocListener<DrawerBloc, DrawerButtons>(
+          listenWhen: (prev, curr) => true,
           listener: (context, state) {
+            print("content listen $state");
             setState(() {
               currentKey = _buttonToKey[state];
             });
@@ -52,19 +54,29 @@ class _ContentWidgetState extends State<ContentWidget> {
           child: Container(
               child: Container(
                   alignment: Alignment.center,
-                  margin: isMouse?EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width * 0.1 + 30,
-                      left: MediaQuery.of(context).size.width * 0.2 + 30):EdgeInsets.symmetric(horizontal: 20),
+                  margin: isMouse
+                      ? EdgeInsets.only(
+                          right: MediaQuery.of(context).size.width * 0.065 + 30,
+                          left: MediaQuery.of(context).size.width * 0.15 + 30)
+                      : EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
                     children: [
                       Container(
                         key: aboutKey,
-                        child: AboutUsWidget(),
+                        child: AboutUsWidget(
+                          height: MediaQuery.of(context).size.height - 110,
+                        ),
                       ),
-                      Container(key: servicesKey, child: ServicesWidget()),
+                      Container(
+                          key: servicesKey,
+                          child: ServicesWidget(
+                            height: MediaQuery.of(context).size.height - 70,
+                          )),
                       Container(
                         key: contactKey,
-                        child: ContactUsWidget(),
+                        child: ContactUsWidget(
+                          height: MediaQuery.of(context).size.height - 110,
+                        ),
                       ),
                     ],
                   ))));
@@ -96,7 +108,12 @@ class _ContentWidgetState extends State<ContentWidget> {
               },
               child: _buildContentBlocks(),
             )
-          : _buildContentBlocks();
+          : Listener(
+              onPointerMove: (PointerMoveEvent event) {
+                if (context.bloc<DrawerBloc>().state != null)
+                  context.bloc<DrawerBloc>().add(null);
+              },
+              child: _buildContentBlocks());
     });
   }
 }

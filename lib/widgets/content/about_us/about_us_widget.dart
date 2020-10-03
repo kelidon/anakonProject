@@ -2,8 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsWidget extends StatefulWidget {
+  final double height;
+
+  const AboutUsWidget({Key key, this.height}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() => _AboutUsWidgetState();
+  State<StatefulWidget> createState() => _AboutUsWidgetState(height);
 }
 
 //TODO try to do something here
@@ -24,6 +28,10 @@ class AboutUsWidget extends StatefulWidget {
 ///
 
 class _AboutUsWidgetState extends State<AboutUsWidget> {
+  final double height;
+
+  _AboutUsWidgetState(this.height);
+
   // For instance, you have some variable (which could be passed here from outer app, by the way, but nevermind for now),
   // let it be:
   /// var someNumber;
@@ -76,7 +84,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
 
         ///        DO NOT CHANGE !!!
         ///  this makes Container fit the user's screen on any device
-        height: MediaQuery.of(context).size.height - 110,
+        height: height,
         margin: EdgeInsets.only(top: 20, bottom: 20),
 
         ///  this is a contents of the Container
