@@ -1,6 +1,8 @@
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
+import 'package:anakonProject/constants/styles.dart';
+import 'package:anakonProject/constants/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +32,6 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                     right: MediaQuery.of(context).size.width * 0.065,
                     left: MediaQuery.of(context).size.width * 0.15)
                 : null,
-            //color: Colors.white.withOpacity(0.8),
             child: Stack(
               children: [
                 Row(
@@ -57,14 +58,10 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("+375 (33) 354-76-45",
-                              style: TextStyle(
-                                  color: Color(0xFF06285A),
-                                  fontWeight: FontWeight.w600)),
+                          Text(AppText.PHONE,
+                              style: AppStyles.CONTACTS_APPBAR),
                           Text("anakon@gmail.com",
-                              style: TextStyle(
-                                  color: Color(0xFF06285A),
-                                  fontWeight: FontWeight.w600))
+                              style: AppStyles.CONTACTS_APPBAR)
                         ],
                       )),
                     )
@@ -84,13 +81,13 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               ],
             ),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(1),
+              color: Colors.white.withOpacity(0.8),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
+                  //spreadRadius: 5,
                   blurRadius: 7,
-                  offset: Offset(0, 5)
+                  offset: Offset(7, 5)
            ),
           ],// boxShadow
          ),
