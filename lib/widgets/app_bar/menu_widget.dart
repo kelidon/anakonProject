@@ -20,16 +20,28 @@ class MenuWidget extends StatelessWidget {
           child: FittedBox(
             fit: BoxFit.cover,
             child: Container(
+              decoration: BoxDecoration(
+                borderRadius:
+                    BorderRadius.only(bottomRight: Radius.circular(30)),
+                color: isMouse ? Colors.white.withOpacity(1) : Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(1, 3)
+                  ),
+                ],
+              ),
               width: isMouse ? MediaQuery.of(context).size.width * 0.15 : 200,
-              color: Colors.white.withOpacity(0.9),
               margin: EdgeInsets.only(top: isMouse ? 0 : 40),
               child: Container(
-                margin: EdgeInsets.only(left: 15, top: isMouse ? 20 : 0),
+                margin: EdgeInsets.only(top: isMouse ? 20 : 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 25, top: 20),
+                      margin: EdgeInsets.only(top: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -40,29 +52,40 @@ class MenuWidget extends StatelessWidget {
                               onTap: () => context.bloc<MenuBloc>().add(false),
                             ),
                           ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          ScrollButtonWidget(
-                            buttonName: DrawerButtons.ABOUT_US,
-                            onTap: () => context.bloc<MenuBloc>().add(false),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          ScrollButtonWidget(
-                            buttonName: DrawerButtons.SERVICES,
-                            onTap: () => context.bloc<MenuBloc>().add(false),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          ScrollButtonWidget(
-                            buttonName: DrawerButtons.CONTACT_US,
-                            onTap: () => context.bloc<MenuBloc>().add(false),
-                          ),
-                          SizedBox(
-                            height: 20,
+                          Container(
+                            margin: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.03),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 40,
+                                ),
+                                ScrollButtonWidget(
+                                  buttonName: DrawerButtons.ABOUT_US,
+                                  onTap: () =>
+                                      context.bloc<MenuBloc>().add(false),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                ScrollButtonWidget(
+                                  buttonName: DrawerButtons.SERVICES,
+                                  onTap: () =>
+                                      context.bloc<MenuBloc>().add(false),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                ScrollButtonWidget(
+                                  buttonName: DrawerButtons.CONTACT_US,
+                                  onTap: () =>
+                                      context.bloc<MenuBloc>().add(false),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

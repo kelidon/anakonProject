@@ -48,37 +48,41 @@ class _ContentWidgetState extends State<ContentWidget> {
             Scrollable.ensureVisible(
               _buttonToKey[state].currentContext,
               duration: Duration(seconds: 1),
-              curve: Curves.easeInOutQuad,
+              curve: Curves.easeOut,
             );
           },
           child: Container(
               child: Container(
                   alignment: Alignment.center,
+                  color: Colors.white,
                   margin: isMouse
                       ? EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width * 0.065 + 30,
-                          left: MediaQuery.of(context).size.width * 0.15 + 30)
-                      : EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    children: [
-                      Container(
-                        key: aboutKey,
-                        child: AboutUsWidget(
-                          height: MediaQuery.of(context).size.height - 110,
+                          right: MediaQuery.of(context).size.width * 0.065,
+                          left: MediaQuery.of(context).size.width * 0.15)
+                      : null,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 25),
+                    child: Column(
+                      children: [
+                        Container(
+                          key: aboutKey,
+                          child: AboutUsWidget(
+                            height: isMouse?MediaQuery.of(context).size.height - 110:null,
+                          ),
                         ),
-                      ),
-                      Container(
-                          key: servicesKey,
-                          child: ServicesWidget(
-                            height: MediaQuery.of(context).size.height - 70,
-                          )),
-                      Container(
-                        key: contactKey,
-                        child: ContactUsWidget(
-                          height: MediaQuery.of(context).size.height - 110,
+                        Container(
+                            key: servicesKey,
+                            child: ServicesWidget(
+                              height: isMouse?MediaQuery.of(context).size.height - 135:null,
+                            )),
+                        Container(
+                          key: contactKey,
+                          child: ContactUsWidget(
+                            height: isMouse?MediaQuery.of(context).size.height - 110:null,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ))));
     }
 

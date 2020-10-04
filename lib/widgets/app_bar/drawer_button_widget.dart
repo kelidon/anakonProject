@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScrollButtonWidget extends StatefulWidget {
   final bool isTitle;
-  final bool isAppBar;
+  final bool isMenu;
   final DrawerButtons buttonName;
   final Function onTap;
 
@@ -16,31 +16,29 @@ class ScrollButtonWidget extends StatefulWidget {
       this.isTitle = false,
       this.buttonName,
       this.onTap,
-      this.isAppBar = false})
+      this.isMenu = false})
       : super(key: key);
 
   @override
   State<StatefulWidget> createState() =>
-      _ScrollButtonWidgetState(onTap, isTitle, buttonName, isAppBar);
+      _ScrollButtonWidgetState(onTap, isTitle, buttonName, isMenu);
 }
 
 class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
   final bool isTitle;
-  final bool isAppBar;
+  final bool isMenu;
   final DrawerButtons buttonName;
   final Function onTap;
 
   _ScrollButtonWidgetState(
-      this.onTap, this.isTitle, this.buttonName, this.isAppBar);
+      this.onTap, this.isTitle, this.buttonName, this.isMenu);
 
   Color _color = Colors.transparent;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DrawerBloc, DrawerButtons>(builder: (context, state) {
-      var _style = state == buttonName
-          ? AppStyles.DRAWER_BUTTON_ACTIVE
-          : AppStyles.DRAWER_BUTTON;
+      var _style = AppStyles.DRAWER_BUTTON;
       _color = state == buttonName ? Color(0xFF06285A) : Colors.transparent;
       final Size size = (TextPainter(
               text:
@@ -50,14 +48,14 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
               textDirection: TextDirection.ltr)
             ..layout())
           .size;
-      final String assetName = 'assets/images/anakon_logo.svg';
+      final String assetName = isMenu?'assets/images/anakon_logo.svg':'assets/images/logo_2.svg';
       final Widget svgLogo = Image.network(
         assetName,
       );
 
       return InkWell(
         hoverColor: Colors.transparent,
-        onTap: context.bloc<MenuBloc>().state || isAppBar
+        onTap: context.bloc<MenuBloc>().state || isMenu
             ? () {
                 context.bloc<DrawerBloc>().add(buttonName);
                 setState(() {});
@@ -67,7 +65,7 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
         child: isTitle
             ? Container(child: svgLogo)
             : Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -77,8 +75,8 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
                     ),
                     AnimatedContainer(
                         duration: Duration(milliseconds: 300),
-                        width: size.width + 20,
-                        height: 2,
+                        width: size.width + 10,
+                        height: 1,
                         color: _color)
                   ],
                 ),

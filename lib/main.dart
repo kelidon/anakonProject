@@ -103,6 +103,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
     Widget _buildTower() {
       return isMouse
           ? Container(
+        margin: EdgeInsets.only(top: 1),
               width: MediaQuery.of(context).size.width * 0.15,
               child: Stack(
                 children: [

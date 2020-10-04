@@ -9,13 +9,8 @@ class AppStyles {
       fontWeight: FontWeight.bold,
       height: 1.3);
   static const TextStyle DRAWER_BUTTON =
-      TextStyle(fontSize: 22, height: 1.3, color: Color(0xFF06285A));
-  static const TextStyle DRAWER_BUTTON_ACTIVE = TextStyle(
-    fontSize: 22,
-    height: 1.3,
-    color: Color(0xFF06285A),
+      TextStyle(fontSize: 18, height: 1.3, color: Color(0xFF06285A));
 
-  );
   static const TextStyle CONTACTS_APPBAR = TextStyle(
       color: Color(0xFF06285A),
       fontWeight: FontWeight.w600);
