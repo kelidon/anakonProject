@@ -176,30 +176,57 @@ class _ApplicationPageState extends State<ApplicationPage> {
 
     Widget _buildBlur() {
       return isMouse
-          ? Container(
-              alignment: Alignment.topRight,
-              child: SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
-                controller: _blurController,
-                child: Image(
-                  image: AssetImage("assets/images/blur.jpg"),
-                  width: MediaQuery.of(context).size.width * 0.065,
-                  fit: BoxFit.fitWidth,
+          ? Stack(
+            children: [
+              Container(
+                  alignment: Alignment.topRight,
+                  child: SingleChildScrollView(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: _blurController,
+                    child: Image(
+                      image: AssetImage("assets/images/blur.jpg"),
+                      width: MediaQuery.of(context).size.width * 0.065,
+                      fit: BoxFit.fitWidth,
+                    ),
+
+                  ),
+                ),
+             Container(
+               width: MediaQuery.of(context).size.width*0.065,
+               child: Center(
+                   child: FittedBox(
+                       fit: BoxFit.contain,
+                       child: Text("А\nН\nА\nК\nО\nН", style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 100))
+                   )
+               ),
+             ),
+            ],
+          )
+          : Stack(
+        children:[
+             Container(
+                alignment: Alignment.bottomLeft,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: NeverScrollableScrollPhysics(),
+                  child: Image.asset(
+                    "assets/images/blur_horizontal.png",
+                    height: 50,
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
               ),
+            Container(
+                height: 50,
+                  child: Center(
+                    child: FittedBox(
+                     fit: BoxFit.contain,
+                       child: Text("АНАКОН", style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 100, letterSpacing: 40))
+      )
+          )
             )
-          : Container(
-              alignment: Alignment.bottomLeft,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: NeverScrollableScrollPhysics(),
-                child: Image.asset(
-                  "assets/images/blur_horizontal.png",
-                  height: 50,
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-            );
+            ]
+          );
     }
 
     Widget _buildBackground() {

@@ -1,3 +1,5 @@
+import 'package:anakonProject/constants/styles.dart';
+import 'package:anakonProject/constants/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -92,17 +94,71 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
         ///           IN THE GAME, Mr. DEVELOPER, IN THE GAME
         ///
 
-        child: Center(
-            child: RichText(
-              text: TextSpan(
-                text: "",
-                children: <TextSpan>[
-              TextSpan(text:"ПОЧЕМУ МЫ\n",  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, )),
-              TextSpan(text:"Копмания АНАКОН имеет  многолетний успешный  опыт  по управлению и эксплуатации различными объектами недвижимости – бизнес-центрами, офисными зданиями, подземными и наземными паркингами, фитнесс-центрами. Основное направление – управление, техническое обслуживание и эксплуатация зданий, арендаторами или собственниками которых являются ИТ компании.",
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, )),
-               ]
+
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal:40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(
+                  AppText.ABOUT_US_TITLE, style: AppStyles.TITLE,
+                ),
               ),
-            )
+              Text(
+                  AppText.N
+              ),
+               Center(
+                 child: Text(
+                  AppText.ABOUT_US, style: AppStyles.REGULAR,
+              ),
+               ),
+              Text(
+                AppText.N
+              ),
+              Text(
+                AppText.MISSION, style: AppStyles.REGULAR,
+              ),
+              Text(
+                AppText.SLOGAN1, style: AppStyles.REGULAR,
+              ),
+              Text(
+                AppText.SLOGAN2, style: AppStyles.REGULAR,
+              ),
+              Text(
+                  AppText.N
+              ),
+              Center(
+                child: Text(
+                  AppText.SLOGAN3, style: AppStyles.TITLE,
+                ),
+              ),
+              Text(
+                  AppText.N
+              ),
+              Text(
+                AppText.SLOGAN3_1, style: AppStyles.REGULAR,
+              ),
+              Text(
+                AppText.SLOGAN3_2, style: AppStyles.REGULAR,
+              ),
+              Text(
+                AppText.SLOGAN3_3, style: AppStyles.REGULAR,
+              ),
+              Text(
+                AppText.SLOGAN3_4, style: AppStyles.REGULAR,
+              ),
+              Text(
+                  AppText.N
+              ),
+              Center(
+                child: Text(
+                  AppText.SUMMARY, style: AppStyles.TITLE,
+                ),
+              ),
+            ],
+          ),
         )
     );
 

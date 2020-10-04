@@ -19,4 +19,27 @@ class AppStyles {
   static const TextStyle CONTACTS_APPBAR = TextStyle(
       color: Color(0xFF06285A),
       fontWeight: FontWeight.w600);
+
+  static const TextStyle TITLE = TextStyle(
+      decoration: TextDecoration.underline,
+      //color: Color(0xFF06285A),
+      fontSize: 30,
+
+      fontWeight: FontWeight.w600);
+
+
+  static const TextStyle REGULAR = TextStyle(
+
+    //color: Color(0xFF06285A),
+      fontSize: 24,
+
+      fontWeight: FontWeight.w600);
+
+  static const TextStyle REGULAR_CENTER = TextStyle(
+
+    //color: Color(0xFF06285A),
+      fontSize: 24,
+
+      fontWeight: FontWeight.w600);
+
 }
