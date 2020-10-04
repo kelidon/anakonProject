@@ -5,7 +5,7 @@ enum DrawerButtons { ABOUT_US, SERVICES, CONTACT_US }
 const Map drawerButtonLabels = {
   DrawerButtons.ABOUT_US: "О НАС",
   DrawerButtons.SERVICES: "УСЛУГИ",
-  DrawerButtons.CONTACT_US: "СВЯЗАТЬСЯ С НАМИ",
+  DrawerButtons.CONTACT_US: "КОНТАКТЫ",
 };
 
 class DrawerBloc extends Bloc<DrawerButtons, DrawerButtons> {

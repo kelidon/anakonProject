@@ -37,49 +37,59 @@ class _ContentWidgetState extends State<ContentWidget> {
     };
 
     Widget _buildContentBlocks() {
-      bool isMouse = context.bloc<MetricsBloc>().state == Metrics.BIG;
-      return BlocListener<DrawerBloc, DrawerButtons>(
-          listenWhen: (prev, curr) => true,
-          listener: (context, state) {
-            print("content listen $state");
-            setState(() {
-              currentKey = _buttonToKey[state];
-            });
-            Scrollable.ensureVisible(
-              _buttonToKey[state].currentContext,
-              duration: Duration(seconds: 1),
-              curve: Curves.easeInOutQuad,
-            );
-          },
-          child: Container(
+      return BlocBuilder<MetricsBloc, Metrics>(
+        builder: (context, state) {
+          bool isMouse = state == Metrics.BIG;
+          var height1 = isMouse?MediaQuery.of(context).size.height - 110:null;
+          var height2 = isMouse?MediaQuery.of(context).size.height - 135:null;
+          return BlocListener<DrawerBloc, DrawerButtons>(
+              listenWhen: (prev, curr) => true,
+              listener: (context, state) {
+                print("content listen $state");
+                setState(() {
+                  currentKey = _buttonToKey[state];
+                });
+                Scrollable.ensureVisible(
+                  _buttonToKey[state].currentContext,
+                  duration: Duration(seconds: 1),
+                  curve: Curves.easeOut,
+                );
+              },
               child: Container(
-                  alignment: Alignment.center,
-                  margin: isMouse
-                      ? EdgeInsets.only(
-                          right: MediaQuery.of(context).size.width * 0.065 + 30,
-                          left: MediaQuery.of(context).size.width * 0.15 + 30)
-                      : EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    children: [
-                      Container(
-                        key: aboutKey,
-                        child: AboutUsWidget(
-                          height: MediaQuery.of(context).size.height - 110,
+                  child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.white,
+                      margin: isMouse
+                          ? EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.065,
+                              left: MediaQuery.of(context).size.width * 0.15)
+                          : null,
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 25),
+                        child: Column(
+                          children: [
+                            Container(
+                              key: aboutKey,
+                              child: AboutUsWidget(
+                                height: null,
+                              ),
+                            ),
+                            Container(
+                                key: servicesKey,
+                                child: ServicesWidget(
+                                  height: height2,
+                                )),
+                            Container(
+                              key: contactKey,
+                              child: ContactUsWidget(
+                                height: height1,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Container(
-                          key: servicesKey,
-                          child: ServicesWidget(
-                            height: MediaQuery.of(context).size.height - 70,
-                          )),
-                      Container(
-                        key: contactKey,
-                        child: ContactUsWidget(
-                          height: MediaQuery.of(context).size.height - 110,
-                        ),
-                      ),
-                    ],
-                  ))));
+                      ))));
+        }
+      );
     }
 
     List<GlobalKey> keysList = _buttonToKey.values.toList();
