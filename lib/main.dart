@@ -75,7 +75,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
     _initializeVideoPlayerFuture = _controller.initialize();
 
     _controllerHorizontal =
-        VideoPlayerController.asset("assets/video/tower_horizontal.m4v");
+        VideoPlayerController.asset("assets/video/tower_horizontal.mp4");
     _initializeVideoPlayerFutureHorizontal = _controller.initialize();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

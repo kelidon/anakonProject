@@ -79,7 +79,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
           ///  this Container has decoration property, so color is here
           ///
           ///  probably we'll change this color or remove it - feel free to change this
-          color: Colors.grey.withOpacity(0.4),
+          //color: Colors.grey.withOpacity(0.4),
         ),
 
         ///        DO NOT CHANGE !!!
@@ -92,6 +92,19 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
         ///           IN THE GAME, Mr. DEVELOPER, IN THE GAME
         ///
 
-        child: Center(child: Text("about", style: TextStyle(fontSize: 50))));
+        child: Center(
+            child: RichText(
+              text: TextSpan(
+                text: "",
+                children: <TextSpan>[
+              TextSpan(text:"ПОЧЕМУ МЫ\n",  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, )),
+              TextSpan(text:"Копмания АНАКОН имеет  многолетний успешный  опыт  по управлению и эксплуатации различными объектами недвижимости – бизнес-центрами, офисными зданиями, подземными и наземными паркингами, фитнесс-центрами. Основное направление – управление, техническое обслуживание и эксплуатация зданий, арендаторами или собственниками которых являются ИТ компании.",
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, )),
+               ]
+              ),
+            )
+        )
+    );
+
   }
 }

@@ -30,7 +30,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                     right: MediaQuery.of(context).size.width * 0.065,
                     left: MediaQuery.of(context).size.width * 0.15)
                 : null,
-            color: Colors.white.withOpacity(0.8),
+            //color: Colors.white.withOpacity(0.8),
             child: Stack(
               children: [
                 Row(
@@ -82,7 +82,19 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                   ),
                 ),
               ],
-            ));
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(1),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 5)
+           ),
+          ],// boxShadow
+         ),
+        );
       });
     });
   }

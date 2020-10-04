@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 enum DrawerButtons { ABOUT_US, SERVICES, CONTACT_US }
 
 const Map drawerButtonLabels = {
-  DrawerButtons.ABOUT_US: "Who we are",
-  DrawerButtons.SERVICES: "Services",
-  DrawerButtons.CONTACT_US: "Contact us",
+  DrawerButtons.ABOUT_US: "О НАС",
+  DrawerButtons.SERVICES: "УСЛУГИ",
+  DrawerButtons.CONTACT_US: "СВЯЗАТЬСЯ С НАМИ",
 };
 
 class DrawerBloc extends Bloc<DrawerButtons, DrawerButtons> {
