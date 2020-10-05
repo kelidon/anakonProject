@@ -86,14 +86,14 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                 color: Colors.white.withOpacity(0.8),
                 borderRadius:
                 isMouse?BorderRadius.all(Radius.circular(20)):null,
-                boxShadow: [
+                boxShadow: isMouse?[
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 5,
                     blurRadius: 7,
                     offset: Offset(0, 5)
              ),
-            ],// boxShadow
+            ]:[],// boxShadow
            ),
           ),
         );

@@ -17,7 +17,7 @@ class AppStyles {
 
   static const TextStyle TITLE = TextStyle(
       decoration: TextDecoration.underline,
-      //color: Color(0xFF06285A),
+      color: Color(0xFF06285A),
       fontSize: 26,
 
       fontWeight: FontWeight.w600);
@@ -25,16 +25,15 @@ class AppStyles {
 
   static const TextStyle REGULAR = TextStyle(
 
-    //color: Color(0xFF06285A),
       fontSize: 18,
 
-      fontWeight: FontWeight.w600);
+      fontWeight: FontWeight.w600, color: Color(0xFF06285A));
 
   static const TextStyle REGULAR_CENTER = TextStyle(
 
     //color: Color(0xFF06285A),
       fontSize: 24,
 
-      fontWeight: FontWeight.w600);
+      fontWeight: FontWeight.w600, color: Color(0xFF06285A));
 
 }

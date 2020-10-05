@@ -96,7 +96,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
 
 
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal:40),
+          //padding: EdgeInsets.symmetric(horizontal:40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -119,43 +119,6 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
               ),
               Text(
                 AppText.MISSION, style: AppStyles.REGULAR,
-              ),
-              Text(
-                AppText.SLOGAN1, style: AppStyles.REGULAR,
-              ),
-              Text(
-                AppText.SLOGAN2, style: AppStyles.REGULAR,
-              ),
-              Text(
-                  AppText.N
-              ),
-              Center(
-                child: Text(
-                  AppText.SLOGAN3, style: AppStyles.TITLE,
-                ),
-              ),
-              Text(
-                  AppText.N
-              ),
-              Text(
-                AppText.SLOGAN3_1, style: AppStyles.REGULAR,
-              ),
-              Text(
-                AppText.SLOGAN3_2, style: AppStyles.REGULAR,
-              ),
-              Text(
-                AppText.SLOGAN3_3, style: AppStyles.REGULAR,
-              ),
-              Text(
-                AppText.SLOGAN3_4, style: AppStyles.REGULAR,
-              ),
-              Text(
-                  AppText.N
-              ),
-              Center(
-                child: Text(
-                  AppText.SUMMARY, style: AppStyles.TITLE,
-                ),
               ),
             ],
           ),

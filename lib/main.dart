@@ -100,45 +100,80 @@ class _ApplicationPageState extends State<ApplicationPage> {
     print("width: ${MediaQuery.of(context).size.width}");
     context.bloc<MetricsBloc>().add(isMouse ? Metrics.BIG : Metrics.SMALL);
 
+    final String assetName = 'assets/images/logo_on_tower.png';
+    final Widget logoOnTower = Image.asset(
+      assetName,
+    );
+
     Widget _buildTower() {
       return isMouse
-          ? Container(
-        margin: EdgeInsets.only(top: 1),
-              width: MediaQuery.of(context).size.width * 0.15,
-              child: Stack(
-                children: [
-                  SingleChildScrollView(
-                      physics: NeverScrollableScrollPhysics(),
-                      controller: _towerController,
-                      child: BlocBuilder<MetricsBloc, Metrics>(
-                          builder: (context, state) {
-                        if (state == Metrics.BIG) {
-                          _initializeVideoPlayerFuture = null;
-                          _initializeVideoPlayerFuture =
-                              _controller.initialize();
-                          WidgetsBinding.instance
-                              .addPostFrameCallback((timeStamp) {
-                            _controller.setVolume(0);
-                            _controller.play();
-                            _controller.setLooping(true);
-                          });
-                        }
-                        return FutureBuilder(
-                            future: _initializeVideoPlayerFuture,
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                return AspectRatio(
-                                  aspectRatio: _controller.value.aspectRatio,
-                                  child: VideoPlayer(_controller),
-                                );
-                              } else {
-                                return Container();
-                              }
-                            });
-                      })),
-                ],
-              ),
+          ? Stack(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 1),
+                  width: MediaQuery.of(context).size.width * 0.15,
+                  child: Stack(
+                    children: [
+                      SingleChildScrollView(
+                          physics: NeverScrollableScrollPhysics(),
+                          controller: _towerController,
+                          child: BlocBuilder<MetricsBloc, Metrics>(
+                              builder: (context, state) {
+                            if (state == Metrics.BIG) {
+                              _initializeVideoPlayerFuture = null;
+                              _initializeVideoPlayerFuture =
+                                  _controller.initialize();
+                              WidgetsBinding.instance
+                                  .addPostFrameCallback((timeStamp) {
+                                _controller.setVolume(0);
+                                _controller.play();
+                                _controller.setLooping(true);
+                              });
+                            }
+                            return Container(
+                              child: FutureBuilder(
+                                  future: _initializeVideoPlayerFuture,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return AspectRatio(
+                                        aspectRatio:
+                                            _controller.value.aspectRatio,
+                                        child: VideoPlayer(_controller),
+                                      );
+                                    } else {
+                                      return Container();
+                                    }
+                                  }),
+                            );
+                          })),
+                      Column(
+                        children: [
+                          Spacer(),
+                          Container(
+                            child: Container(margin: EdgeInsets.only(bottom: 5),child: logoOnTower),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.white.withOpacity(0.3),
+                                  Colors.white.withOpacity(0.6),
+                                  Colors.white.withOpacity(0.9),
+                                  Colors.white,
+
+                                  Colors.white,
+                                ]
+                              )
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
             )
           : Container(
               alignment: Alignment.topLeft,
@@ -178,8 +213,8 @@ class _ApplicationPageState extends State<ApplicationPage> {
     Widget _buildBlur() {
       return isMouse
           ? Stack(
-            children: [
-              Container(
+              children: [
+                Container(
                   alignment: Alignment.topRight,
                   child: SingleChildScrollView(
                     physics: NeverScrollableScrollPhysics(),
@@ -189,23 +224,22 @@ class _ApplicationPageState extends State<ApplicationPage> {
                       width: MediaQuery.of(context).size.width * 0.065,
                       fit: BoxFit.fitWidth,
                     ),
-
                   ),
                 ),
-             Container(
-               width: MediaQuery.of(context).size.width*0.065,
-               child: Center(
-                   child: FittedBox(
-                       fit: BoxFit.contain,
-                       child: Text("А\nН\nА\nК\nО\nН", style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 100))
-                   )
-               ),
-             ),
-            ],
-          )
-          : Stack(
-        children:[
-             Container(
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.065,
+                  child: Center(
+                      child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text("А\nН\nА\nК\nО\nН",
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.7),
+                                  fontSize: 100)))),
+                ),
+              ],
+            )
+          : Stack(children: [
+              Container(
                 alignment: Alignment.bottomLeft,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -217,17 +251,17 @@ class _ApplicationPageState extends State<ApplicationPage> {
                   ),
                 ),
               ),
-            Container(
-                height: 50,
+              Container(
+                  height: 50,
                   child: Center(
-                    child: FittedBox(
-                     fit: BoxFit.contain,
-                       child: Text("АНАКОН", style: TextStyle(color: Colors.white.withOpacity(0.7), fontSize: 100, letterSpacing: 40))
-      )
-          )
-            )
-            ]
-          );
+                      child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Text("АНАКОН",
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.7),
+                                  fontSize: 100,
+                                  letterSpacing: 40)))))
+            ]);
     }
 
     Widget _buildBackground() {
@@ -241,6 +275,9 @@ class _ApplicationPageState extends State<ApplicationPage> {
             )
           : Column(
               children: [
+                SizedBox(
+                  height: 40,
+                ),
                 _buildTower(),
                 Spacer(),
                 _buildBlur(),
@@ -251,14 +288,13 @@ class _ApplicationPageState extends State<ApplicationPage> {
     return Scaffold(
       body: Stack(
         children: [
-          _buildBackground(),
           Scaffold(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.white,
               appBar: AppBarWidget(
                 preferredSize: Size.fromHeight(isMouse ? 70 : 40),
               ),
               body: Container(
-                margin: isMouse ? null : EdgeInsets.only(bottom: 50),
+                margin: isMouse ? null : EdgeInsets.only(bottom: 50, top: 40),
                 child: SingleChildScrollView(
                     physics: isMouse
                         ? NeverScrollableScrollPhysics()
@@ -266,6 +302,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
                     controller: _mainController,
                     child: ContentWidget()),
               )),
+          _buildBackground(),
           MenuWidget()
         ],
       ),
