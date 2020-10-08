@@ -71,7 +71,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
     _mainController.addListener(_mainScrollListener);
     _towerController = ScrollController();
     _blurController = ScrollController();
-    _controller = VideoPlayerController.asset("assets/video/tower1.mp4");
+    _controller = VideoPlayerController.asset("assets/video/tower.mp4");
     _initializeVideoPlayerFuture = _controller.initialize();
 
     _controllerHorizontal =
@@ -100,7 +100,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
     print("width: ${MediaQuery.of(context).size.width}");
     context.bloc<MetricsBloc>().add(isMouse ? Metrics.BIG : Metrics.SMALL);
 
-    final String assetName = 'assets/images/logo_on_tower.png';
+    final String assetName = 'assets/images/logo_on_tower_2.png';
     final Widget logoOnTower = Image.asset(
       assetName,
     );
@@ -151,21 +151,21 @@ class _ApplicationPageState extends State<ApplicationPage> {
                         children: [
                           Spacer(),
                           Container(
-                            child: Container(margin: EdgeInsets.only(bottom: 5),child: logoOnTower),
+                            child: Container(child: logoOnTower),
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.transparent,
-                                  Colors.white.withOpacity(0.3),
-                                  Colors.white.withOpacity(0.6),
-                                  Colors.white.withOpacity(0.9),
-                                  Colors.white,
-
-                                  Colors.white,
-                                ]
-                              )
+                              // gradient: LinearGradient(
+                              //   begin: Alignment.topCenter,
+                              //   end: Alignment.bottomCenter,
+                              //   colors: [
+                              //     Colors.transparent,
+                              //     Colors.white.withOpacity(0.3),
+                              //     Colors.white.withOpacity(0.6),
+                              //     Colors.white.withOpacity(0.9),
+                              //     Colors.white,
+                              //
+                              //     Colors.white,
+                              //   ]
+                              // )
                             ),
                           ),
                         ],
