@@ -48,7 +48,7 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
               textDirection: TextDirection.ltr)
             ..layout())
           .size;
-      final String assetName = isMenu?'assets/images/anakon_logo_3.svg':'assets/images/logo_2.svg';
+      final String assetName = isMenu?'assets/images/anakon_logo_3.png':'assets/images/logo_2.png';
       final Widget svgLogo = Image.network(
         assetName,
       );

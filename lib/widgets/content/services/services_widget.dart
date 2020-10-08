@@ -127,7 +127,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
             CarouselSlider(
               carouselController: _controller,
               options: CarouselOptions(
-                  height: height,
+                  height: height==null?1339:height,
                   enableInfiniteScroll: false,
                   viewportFraction: 1,
                   onPageChanged: (index, reason) {
