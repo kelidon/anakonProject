@@ -1,3 +1,4 @@
+import 'package:anakonProject/constants/colors.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
@@ -25,13 +26,6 @@ class _ServicesWidgetState extends State<ServicesWidget> {
 
   _buildService(String imagePath, String title, String text) {
     return Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            image: DecorationImage(
-                image: AssetImage(
-                  imagePath,
-                ),
-                fit: BoxFit.cover)),
         margin: EdgeInsets.only(top: 20, bottom: 20, right: 10),
         child: Container(
           color: Colors.white.withOpacity(0.9),
@@ -41,11 +35,9 @@ class _ServicesWidgetState extends State<ServicesWidget> {
               Text(title, style: AppStyles.TITLE),
               BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
                 bool isMouse = state == Metrics.BIG;
-                return isMouse
-                    ? Expanded(
-                        child:
-                            Center(child: Text(text, style: AppStyles.REGULAR)))
-                    : Center(child: Text(text, style: AppStyles.REGULAR));
+                return Expanded(
+                  child: Center(child: Text(text, style: AppStyles.REGULAR)),
+                );
               })
             ],
           ),
@@ -80,6 +72,40 @@ class _ServicesWidgetState extends State<ServicesWidget> {
       _buildService("assets/images/led_lamp.jpg", AppText.SERVICE4_TITLE,
           AppText.SERVICE4_1),
     ];
+
+    Widget _buildContact() {
+      return Container(
+        margin: EdgeInsets.only(bottom: 17),
+        child: Column(
+          children: [
+            Text(
+              AppText.CONTACT_LABEL,
+              style: AppStyles.CONTACT_TEXT,
+            ),
+            FittedBox(
+              fit: BoxFit.cover,
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  margin: EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: AppColors.PRIMARY,
+                  ),
+                  child: Center(
+                      child: Text(
+                    AppText.CONTACT_BUTTON,
+                    style: AppStyles.CONTACT_BUTTON,
+                  )),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     List<Widget> _buildBottom() {
       List<Widget> listWidgets = [];
       listWidgets.add(Container(
@@ -127,7 +153,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
             CarouselSlider(
               carouselController: _controller,
               options: CarouselOptions(
-                  height: height==null?1339:height,
+                  height: height,
                   enableInfiniteScroll: false,
                   viewportFraction: 1,
                   onPageChanged: (index, reason) {
@@ -143,11 +169,10 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                 );
               }).toList(),
             ),
-            isMouse
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: _buildBottom())
-                : Container(),
+            _buildContact(),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _buildBottom())
           ],
         ),
       );

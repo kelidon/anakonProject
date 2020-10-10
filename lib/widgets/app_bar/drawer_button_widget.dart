@@ -1,5 +1,6 @@
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
+import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,9 +49,15 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
               textDirection: TextDirection.ltr)
             ..layout())
           .size;
-      final String assetName = isMenu?'assets/images/anakon_logo_3.png':'assets/images/logo_2.png';
-      final Widget svgLogo = Image.network(
-        assetName,
+      final String assetName = isMenu?'assets/images/logo_menu.png':'assets/images/logo_appbar.png';
+      final Widget logoWidget = BlocBuilder<MetricsBloc, Metrics>(
+        builder: (context, state){
+          bool isMouse = state == Metrics.BIG;
+          return Image.asset(
+            assetName,
+            scale: isMouse?1:isMenu?2:3,
+          );
+        },
       );
 
       return InkWell(
@@ -63,7 +70,7 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
               }
             : null,
         child: isTitle
-            ? Container(child: svgLogo)
+            ? Container(child: logoWidget)
             : Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Column(

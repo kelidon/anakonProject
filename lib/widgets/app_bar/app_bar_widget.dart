@@ -28,12 +28,25 @@ class _AppBarWidgetState extends State<AppBarWidget> {
         return Container(
           margin: isMouse?EdgeInsets.only(top: 5):null,
           child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
+              padding: EdgeInsets.symmetric(horizontal: isMouse?25:15, vertical: 5),
               margin: isMouse
                   ? EdgeInsets.only(
                       right: MediaQuery.of(context).size.width * 0.075,
                       left: MediaQuery.of(context).size.width * 0.16)
                   : null,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius:
+              isMouse?BorderRadius.all(Radius.circular(20)):null,
+              boxShadow: isMouse?[
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 5)
+                ),
+              ]:[],// boxShadow
+            ),
               child: Stack(
                 children: [
                   Row(
@@ -75,26 +88,13 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                       child: ScrollButtonWidget(
                         buttonName: DrawerButtons.ABOUT_US,
                         isTitle: true,
-                        isMenu: true,
+                        isMenu: false,
                         onTap: () {},
                       ),
                     ),
                   ),
                 ],
               ),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.8),
-                borderRadius:
-                isMouse?BorderRadius.all(Radius.circular(20)):null,
-                boxShadow: isMouse?[
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 5)
-             ),
-            ]:[],// boxShadow
-           ),
           ),
         );
       });

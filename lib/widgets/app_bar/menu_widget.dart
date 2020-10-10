@@ -14,16 +14,17 @@ class MenuWidget extends StatelessWidget {
     return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
       bool isMouse = state == Metrics.BIG;
       return BlocBuilder<MenuBloc, bool>(builder: (context, isEnabled) {
-        return AnimatedOpacity(
+        return
+          AnimatedOpacity(
           opacity: isEnabled ? 1 : 0,
           duration: Duration(milliseconds: 300),
           child: FittedBox(
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius:
                     BorderRadius.only(bottomRight: Radius.circular(30)),
-                color: isMouse ? Colors.white.withOpacity(1) : Colors.white,
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
@@ -33,7 +34,7 @@ class MenuWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              width: isMouse ? MediaQuery.of(context).size.width * 0.15 : 200,
+              width: isMouse ? MediaQuery.of(context).size.width * 0.15 : 150,
               margin: EdgeInsets.only(top: isMouse ? 0 : 40),
               child: Container(
                 margin: EdgeInsets.only(top: isMouse ? 20 : 0),
@@ -49,6 +50,7 @@ class MenuWidget extends StatelessWidget {
                             child: ScrollButtonWidget(
                               buttonName: DrawerButtons.ABOUT_US,
                               isTitle: true,
+                              isMenu: true,
                               onTap: () => context.bloc<MenuBloc>().add(false),
                             ),
                           ),

@@ -18,6 +18,18 @@ class AppStyles {
   static const TextStyle TITLE = TextStyle(
       decoration: TextDecoration.underline,
       color: Color(0xFF06285A),
+      fontSize: 22,
+
+      fontWeight: FontWeight.w600);
+
+  static const TextStyle CONTACT_BUTTON = TextStyle(
+      color: Colors.white,
+      fontSize: 26,
+
+      fontWeight: FontWeight.w600);
+
+  static const TextStyle CONTACT_TEXT = TextStyle(
+      color: Color(0xFF06285A),
       fontSize: 26,
 
       fontWeight: FontWeight.w600);
@@ -25,7 +37,7 @@ class AppStyles {
 
   static const TextStyle REGULAR = TextStyle(
 
-      fontSize: 18,
+      fontSize: 16,
 
       fontWeight: FontWeight.w600, color: Color(0xFF06285A));
 
