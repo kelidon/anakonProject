@@ -86,7 +86,7 @@ class _ContentWidgetState extends State<ContentWidget> {
                                 key: servicesKey,
                                 height: isMouse?MediaQuery.of(context).size.height - 70:null,
                                 child: ServicesWidget(
-                                  height: isMouse?MediaQuery.of(context).size.height - 235:null,
+                                  height: isMouse?MediaQuery.of(context).size.height - 180:null,
                                 )),
                             Container(
                               height: isMouse?MediaQuery.of(context).size.height - 70:null,

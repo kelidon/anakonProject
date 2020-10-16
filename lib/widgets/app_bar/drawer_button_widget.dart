@@ -62,7 +62,7 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
 
       return InkWell(
         hoverColor: Colors.transparent,
-        onTap: context.bloc<MenuBloc>().state || isMenu
+        onTap: context.bloc<MenuBloc>().state || isMenu || isTitle
             ? () {
                 context.bloc<DrawerBloc>().add(buttonName);
                 setState(() {});

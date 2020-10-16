@@ -2,6 +2,7 @@ import 'package:anakonProject/constants/colors.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
+import 'package:anakonProject/widgets/content/inner_widgets/service_icon_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
   _ServicesWidgetState(this.height);
 
   int _current = 0;
+  bool condition = false;
   final CarouselController _controller = CarouselController();
 
   _buildService(String imagePath, String title, String text) {
@@ -46,7 +48,135 @@ class _ServicesWidgetState extends State<ServicesWidget> {
 
   @override
   Widget build(BuildContext context) {
+
+    Widget _buildContact() {
+      return Container(
+        margin: EdgeInsets.only(bottom: 17),
+        child: Column(
+          children: [
+            FittedBox(
+              fit: BoxFit.cover,
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  margin: EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: AppColors.PRIMARY,
+                  ),
+                  child: Center(
+                      child: Text(
+                        AppText.CONTACT_LABEL,
+                        style: AppStyles.CONTACT_BUTTON,
+                      )),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
     var list = [
+      Container(
+        margin: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius:BorderRadius.all(Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.6),
+                blurRadius: 10,
+                offset: Offset(1, 3)
+            ),
+          ],// boxShadow
+        ),
+        child: Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ServiceIconWidget(
+                                icon: Icons.opacity,
+                                title: "my fucking fucking fucking title for this fucking shit",
+                                description: "even more words then in that fucking title for this description",
+                              ),
+                              SizedBox(width: 100,),
+                              ServiceIconWidget(
+                                icon: Icons.opacity,
+                                title: "my fucking fucking fucking title for this fucking shit",
+                                description: "even more words then in that fucking title for this description",
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 50,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ServiceIconWidget(
+                                icon: Icons.opacity,
+                                title: "my fucking fucking fucking title for this fucking shit",
+                                description: "even more words then in that fucking title for this description",
+                              ),
+                              SizedBox(width: 100,),
+                              ServiceIconWidget(
+                                icon: Icons.opacity,
+                                title: "my fucking fucking fucking title for this fucking shit",
+                                description: "even more words then in that fucking title for this description",
+                                onTap: (){setState(() {
+                                  condition = true;
+                                });},
+                              ),
+                            ],
+                          ),
+                          Spacer(),
+                          _buildContact(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: condition == true,
+              maintainState: true,
+              maintainAnimation: true,
+              child: InkWell(
+                onTap: (){setState(() {
+                  condition = false;
+                });},
+                child: Column(
+                  children: [
+                    Spacer(),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height*.65,
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(.6),
+                        borderRadius:BorderRadius.all(Radius.circular(20)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
       _buildService(
           "assets/images/documents.jpg",
           AppText.SERVICE1_TITLE,
@@ -72,39 +202,6 @@ class _ServicesWidgetState extends State<ServicesWidget> {
       _buildService("assets/images/led_lamp.jpg", AppText.SERVICE4_TITLE,
           AppText.SERVICE4_1),
     ];
-
-    Widget _buildContact() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 17),
-        child: Column(
-          children: [
-            Text(
-              AppText.CONTACT_LABEL,
-              style: AppStyles.CONTACT_TEXT,
-            ),
-            FittedBox(
-              fit: BoxFit.cover,
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                  margin: EdgeInsets.only(top: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: AppColors.PRIMARY,
-                  ),
-                  child: Center(
-                      child: Text(
-                    AppText.CONTACT_BUTTON,
-                    style: AppStyles.CONTACT_BUTTON,
-                  )),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
 
     List<Widget> _buildBottom() {
       List<Widget> listWidgets = [];
@@ -148,28 +245,36 @@ class _ServicesWidgetState extends State<ServicesWidget> {
     return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
       bool isMouse = state == Metrics.BIG;
       return Container(
+        padding: EdgeInsets.only(top: 20),
         child: Column(
           children: [
-            CarouselSlider(
-              carouselController: _controller,
-              options: CarouselOptions(
-                  height: height,
-                  enableInfiniteScroll: false,
-                  viewportFraction: 1,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
-                  }),
-              items: list.map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return i;
-                  },
-                );
-              }).toList(),
+            Container(
+              margin: EdgeInsets.only(bottom: 10),
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    carouselController: _controller,
+                    options: CarouselOptions(
+                        height: height,
+                        enableInfiniteScroll: false,
+                        viewportFraction: 1,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          });
+                        }),
+                    items: list.map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return i;
+                        },
+                      );
+                    }).toList(),
+                  ),
+                  //_buildContact(),
+                ],
+              ),
             ),
-            _buildContact(),
             Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: _buildBottom())
