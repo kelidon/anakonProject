@@ -18,13 +18,15 @@ enum CollapsingState {
 
 
 class CollapsedHeadersBloc extends Bloc<CollapsingHeadersEvent, MapEntry<CollapsingTitle, CollapsingState>> {
-  CollapsedHeadersBloc() : super(null);
+  CollapsedHeadersBloc() : super(MapEntry(CollapsingTitle.CONS_1, CollapsingState.EXPANDED));
 
   @override
   Stream<MapEntry<CollapsingTitle, CollapsingState>> mapEventToState(CollapsingHeadersEvent event) async* {
     if(event is CollapseEvent){
+      print("COLLAPSE  "+event.title.toString());
       yield MapEntry(event.title, CollapsingState.COLLAPSED);
     } else if(event is ExpandEvent){
+      print("Expand  "+event.title.toString());
       yield MapEntry(event.title, CollapsingState.EXPANDED);
     }
   }

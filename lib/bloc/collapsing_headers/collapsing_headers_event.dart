@@ -6,6 +6,10 @@ class CollapsingHeadersEvent {
   CollapsingHeadersEvent(this.title);
 }
 
-class CollapseEvent{}
+class CollapseEvent extends CollapsingHeadersEvent{
+  CollapseEvent(CollapsingTitle title) : super(title);
+}
 
-class ExpandEvent{}
+class ExpandEvent extends CollapsingHeadersEvent{
+  ExpandEvent(CollapsingTitle title) : super(title);
+}

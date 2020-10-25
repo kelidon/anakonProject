@@ -72,7 +72,7 @@ class _ContentWidgetState extends State<ContentWidget> {
                           children: [
                             Container(
                               key: aboutKey,
-                              height: isMouse?MediaQuery.of(context).size.height - 70:null,
+                              height: 300,
                               child: AboutUsWidget(
                               ),
                             ),

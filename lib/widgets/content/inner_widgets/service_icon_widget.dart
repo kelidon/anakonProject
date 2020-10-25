@@ -11,7 +11,6 @@ class ServiceIconWidget extends StatefulWidget{
   const ServiceIconWidget({Key key, this.icon, this.title, this.description, this.onTap}) : super(key: key);
   @override
   State<StatefulWidget> createState() => _ServiceIconWidgetState(icon, title, description, onTap);
-
 }
 
 class _ServiceIconWidgetState extends State<ServiceIconWidget>{
