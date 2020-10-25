@@ -8,6 +8,7 @@ import 'package:anakonProject/widgets/app_bar/menu_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:video_player/video_player.dart';
 
 import 'bloc/collapsing_headers/collapsing_headers_bloc.dart';
@@ -52,13 +53,15 @@ class ApplicationPage extends StatefulWidget {
   State<StatefulWidget> createState() => _ApplicationPageState();
 }
 
-class _ApplicationPageState extends State<ApplicationPage> {
+class _ApplicationPageState extends State<ApplicationPage> with TickerProviderStateMixin {
   ScrollController _mainController;
   ScrollController _blurController;
   ScrollController _towerController;
 
   VideoPlayerController _controller;
   Future<void> _initializeVideoPlayerFuture;
+
+  GifController controller;
 
   VideoPlayerController _controllerHorizontal;
   Future<void> _initializeVideoPlayerFutureHorizontal;
@@ -78,6 +81,9 @@ class _ApplicationPageState extends State<ApplicationPage> {
     _blurController = ScrollController();
     _controller = VideoPlayerController.asset("assets/video/tower.mp4");
     _initializeVideoPlayerFuture = _controller.initialize();
+
+    controller= GifController(vsync: this);
+    controller.animateTo(0.5, duration: Duration(milliseconds:1000));
 
     _controllerHorizontal =
         VideoPlayerController.asset("assets/video/tower_horizontal.mp4");
@@ -202,11 +208,16 @@ class _ApplicationPageState extends State<ApplicationPage> {
                       future: _initializeVideoPlayerFutureHorizontal,
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
-                          return AspectRatio(
-                            aspectRatio:
-                                _controllerHorizontal.value.aspectRatio,
-                            child: VideoPlayer(_controllerHorizontal),
-                          );
+                          // return AspectRatio(
+                          //   aspectRatio:
+                          //       _controllerHorizontal.value.aspectRatio,
+                          //   child: VideoPlayer(_controllerHorizontal),
+                          // );
+                          return
+                            GifImage(
+                              controller: controller,
+                              image: AssetImage("assets/video/tower_horizontal.gif"),
+                            );
                         } else {
                           return Container();
                         }
