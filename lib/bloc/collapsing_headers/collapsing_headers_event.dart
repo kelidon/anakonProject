@@ -2,10 +2,10 @@ part of 'collapsing_headers_bloc.dart';
 
 class CollapsingHeadersEvent {
   CollapsingTitle title;
+
+  CollapsingHeadersEvent(this.title);
 }
 
-class CollapseEvent{
-}
+class CollapseEvent{}
 
-class ExtendEvent{
-}
+class ExpandEvent{}

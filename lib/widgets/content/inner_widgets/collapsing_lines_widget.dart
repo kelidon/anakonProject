@@ -1,6 +1,8 @@
+import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
 import 'package:flutter/cupertino.dart';
 
 class CollapsingLinesWidget extends StatefulWidget{
+  final CollapsingTitle titleType;
   @override
   State<StatefulWidget> createState() => _CollapsingWidgetState();
 

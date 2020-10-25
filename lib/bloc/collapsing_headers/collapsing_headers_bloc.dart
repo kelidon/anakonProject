@@ -6,6 +6,9 @@ enum CollapsingTitle{
   CONS_2,
   CONS_3,
   CONS_4,
+  HOW_WORK_1,
+  HOW_WORK_2,
+  HOW_WORK_3,
 }
 
 enum CollapsingState {
@@ -14,13 +17,15 @@ enum CollapsingState {
 }
 
 
-class DrawerBloc extends Bloc<CollapsingHeadersEvent, Map<CollapsingHeadersEvent, bool>> {
-  DrawerBloc() : super(null);
+class CollapsedHeadersBloc extends Bloc<CollapsingHeadersEvent, MapEntry<CollapsingTitle, CollapsingState>> {
+  CollapsedHeadersBloc() : super(null);
 
   @override
-  Stream<Map<CollapsingHeadersEvent, bool>> mapEventToState(CollapsingHeadersEvent event) async* {
+  Stream<MapEntry<CollapsingTitle, CollapsingState>> mapEventToState(CollapsingHeadersEvent event) async* {
     if(event is CollapseEvent){
-
-    } e
+      yield MapEntry(event.title, CollapsingState.COLLAPSED);
+    } else if(event is ExpandEvent){
+      yield MapEntry(event.title, CollapsingState.EXPANDED);
+    }
   }
 }

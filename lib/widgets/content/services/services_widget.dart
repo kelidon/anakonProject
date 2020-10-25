@@ -26,7 +26,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
   bool condition = false;
   final CarouselController _controller = CarouselController();
 
-  _buildService(String imagePath, String title, String text) {
+  _buildService(String title, String text) {
     return Container(
         margin: EdgeInsets.only(top: 20, bottom: 20, right: 10),
         child: Container(
@@ -178,7 +178,6 @@ class _ServicesWidgetState extends State<ServicesWidget> {
         ),
       ),
       _buildService(
-          "assets/images/documents.jpg",
           AppText.SERVICE1_TITLE,
           AppText.SERVICE1_1 +
               "\n\n" +
@@ -188,7 +187,6 @@ class _ServicesWidgetState extends State<ServicesWidget> {
               "\n\n" +
               AppText.SERVICE1_4),
       _buildService(
-          "assets/images/technical.jpg",
           AppText.SERVICE2_TITLE,
           AppText.SERVICE2_1 +
               "\n\n" +
@@ -197,9 +195,9 @@ class _ServicesWidgetState extends State<ServicesWidget> {
               AppText.SERVICE2_3 +
               "\n\n" +
               AppText.SERVICE2_4),
-      _buildService("assets/images/renewal.jpg", AppText.SERVICE3_TITLE,
+      _buildService(AppText.SERVICE3_TITLE,
           AppText.SERVICE3_1),
-      _buildService("assets/images/led_lamp.jpg", AppText.SERVICE4_TITLE,
+      _buildService(AppText.SERVICE4_TITLE,
           AppText.SERVICE4_1),
     ];
 

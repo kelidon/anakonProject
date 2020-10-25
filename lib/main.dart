@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
 
+import 'bloc/collapsing_headers/collapsing_headers_bloc.dart';
+
 void main() {
   runApp(Application());
 }
@@ -27,6 +29,9 @@ class Application extends StatelessWidget {
         ),
         BlocProvider<MenuBloc>(
           create: (_) => MenuBloc(),
+        ),
+        BlocProvider<CollapsedHeadersBloc>(
+          create: (_) => CollapsedHeadersBloc(),
         ),
       ],
       child: MaterialApp(
