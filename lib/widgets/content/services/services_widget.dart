@@ -1,4 +1,6 @@
+import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
 import 'package:anakonProject/bloc/servises_items/services_items_bloc.dart';
+import 'package:anakonProject/bloc/servises_items/services_type_to_state_mapper.dart';
 import 'package:anakonProject/constants/colors.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
@@ -24,28 +26,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
   _ServicesWidgetState(this.height);
 
   int _current = 0;
-  bool condition = false;
   final CarouselController _controller = CarouselController();
-
-  _buildService(String title, String text) {
-    return Container(
-        margin: EdgeInsets.only(top: 20, bottom: 20, right: 10),
-        child: Container(
-          color: Colors.white.withOpacity(0.9),
-          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-          child: Column(
-            children: [
-              Text(title, style: AppStyles.TITLE),
-              BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-                bool isMouse = state == Metrics.BIG;
-                return Expanded(
-                  child: Center(child: Text(text, style: AppStyles.REGULAR)),
-                );
-              })
-            ],
-          ),
-        ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,79 +74,51 @@ class _ServicesWidgetState extends State<ServicesWidget> {
             ),
           ],// boxShadow
         ),
-        child: Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
-                  Expanded(
-                    child: Center(
-                      child: Column(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
+              Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Spacer(),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Spacer(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ServiceIconWidget(
-                                serviceType: ServicesPageType.FIRST_PAGE_1,
-                              ),
-                              SizedBox(width: 100,),
-                              ServiceIconWidget(
-                                serviceType: ServicesPageType.FIRST_PAGE_2,
-                              ),
-                            ],
+                          ServiceIconWidget(
+                            serviceType: ServicesPageType.FIRST_PAGE_1,
                           ),
-                          SizedBox(height: 50,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ServiceIconWidget(
-                                serviceType: ServicesPageType.FIRST_PAGE_3,
-                              ),
-                              SizedBox(width: 100,),
-                              ServiceIconWidget(
-                                serviceType: ServicesPageType.FIRST_PAGE_4,
-                              ),
-                            ],
+                          SizedBox(width: 80,),
+                          ServiceIconWidget(
+                            serviceType: ServicesPageType.FIRST_PAGE_2,
                           ),
-                          Spacer(),
-                          _buildContact(),
                         ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Visibility(
-              visible: condition == true,
-              maintainState: true,
-              maintainAnimation: true,
-              child: InkWell(
-                onTap: (){
-                  setState(() {
-                    condition = false;
-                  });},
-                child: Column(
-                  children: [
-                    Spacer(),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height*.65,
-                      decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(.6),
-                        borderRadius:BorderRadius.all(Radius.circular(20)),
+                      SizedBox(height: 50,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ServiceIconWidget(
+                            serviceType: ServicesPageType.FIRST_PAGE_3,
+                          ),
+                          SizedBox(width: 80,),
+                          ServiceIconWidget(
+                            serviceType: ServicesPageType.FIRST_PAGE_4,
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      Spacer(),
+                      _buildContact(),
+                    ],
+                  ),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
       Container(
@@ -181,79 +134,51 @@ class _ServicesWidgetState extends State<ServicesWidget> {
             ),
           ],// boxShadow
         ),
-        child: Stack(
-          children: [
-            Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
-                  Expanded(
-                    child: Center(
-                      child: Column(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
+              Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Spacer(),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Spacer(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ServiceIconWidget(
-                                serviceType: ServicesPageType.SECOND_PAGE_1,
-                              ),
-                              SizedBox(width: 100,),
-                              ServiceIconWidget(
-                                serviceType: ServicesPageType.SECOND_PAGE_2,
-                              ),
-                            ],
+                          ServiceIconWidget(
+                            serviceType: ServicesPageType.SECOND_PAGE_1,
                           ),
-                          SizedBox(height: 50,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ServiceIconWidget(
-                                serviceType: ServicesPageType.SECOND_PAGE_3,
-                              ),
-                              SizedBox(width: 100,),
-                              ServiceIconWidget(
-                                serviceType: ServicesPageType.SECOND_PAGE_4,
-                              ),
-                            ],
+                          SizedBox(width: 80,),
+                          ServiceIconWidget(
+                            serviceType: ServicesPageType.SECOND_PAGE_2,
                           ),
-                          Spacer(),
-                          _buildContact(),
                         ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Visibility(
-              visible: condition == true,
-              maintainState: true,
-              maintainAnimation: true,
-              child: InkWell(
-                onTap: (){
-                  setState(() {
-                    condition = false;
-                  });},
-                child: Column(
-                  children: [
-                    Spacer(),
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height*.65,
-                      decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(.6),
-                        borderRadius:BorderRadius.all(Radius.circular(20)),
+                      SizedBox(height: 50,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ServiceIconWidget(
+                            serviceType: ServicesPageType.SECOND_PAGE_3,
+                          ),
+                          SizedBox(width: 80,),
+                          ServiceIconWidget(
+                            serviceType: ServicesPageType.SECOND_PAGE_4,
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      Spacer(),
+                      _buildContact(),
+                    ],
+                  ),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     ];
@@ -299,17 +224,18 @@ class _ServicesWidgetState extends State<ServicesWidget> {
 
     return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
       bool isMouse = state == Metrics.BIG;
-      return Container(
-        padding: EdgeInsets.only(top: 20),
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: Column(
-                children: [
-                  CarouselSlider(
+      return BlocBuilder<ServicesItemsBloc, MapEntry<ServicesPageType, CollapsingState>>(
+        builder: (_, state) {
+          return Container(
+            padding: EdgeInsets.only(top: 20),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: CarouselSlider(
                     carouselController: _controller,
                     options: CarouselOptions(
+                        scrollPhysics: NeverScrollableScrollPhysics(),
                         height: height,
                         enableInfiniteScroll: false,
                         viewportFraction: 1,
@@ -321,20 +247,56 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                     items: list.map((i) {
                       return Builder(
                         builder: (BuildContext context) {
-                          return i;
+                          return Stack(
+                            children: [
+                              i,
+                              Container(
+                                alignment: Alignment.bottomCenter,
+                                child: Visibility(
+                                  visible: state.value == CollapsingState.EXPANDED,
+                                  maintainState: true,
+                                  maintainAnimation: true,
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    onTap: (){
+                                      context.bloc<ServicesItemsBloc>().add(CollapseServiceEvent(context.bloc<ServicesItemsBloc>().state.key));
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: MediaQuery.of(context).size.height*.65,
+                                      margin: EdgeInsets.all(15),
+                                      padding: EdgeInsets.symmetric(horizontal: 30),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:BorderRadius.all(Radius.circular(20)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey.withOpacity(0.6),
+                                                blurRadius: 10,
+                                                offset: Offset(1, 3)
+                                            ),
+                                          ],
+                                      ),
+                                      child: Center(child: Text(ServicesTypeToStateMapper.typeToStateMap[state.key].value)),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
                         },
                       );
                     }).toList(),
                   ),
-                  //_buildContact(),
-                ],
-              ),
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: _buildBottom())
+              ],
             ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: _buildBottom())
-          ],
-        ),
+          );
+        }
       );
     });
   }

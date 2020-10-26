@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
+import 'package:anakonProject/bloc/servises_items/services_items_bloc.dart';
 import 'package:anakonProject/widgets/app_bar/app_bar_widget.dart';
 import 'package:anakonProject/widgets/app_bar/menu_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
@@ -33,6 +34,12 @@ class Application extends StatelessWidget {
         ),
         BlocProvider<CollapsedHeadersConsBloc>(
           create: (_) => CollapsedHeadersConsBloc(),
+        ),
+        BlocProvider<CollapsedHeadersHowWorkBloc>(
+          create: (_) => CollapsedHeadersHowWorkBloc(),
+        ),
+        BlocProvider<ServicesItemsBloc>(
+          create: (_) => ServicesItemsBloc(),
         ),
       ],
       child: MaterialApp(

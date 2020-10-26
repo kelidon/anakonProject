@@ -1,9 +1,9 @@
 part of 'services_items_bloc.dart';
 
 class ServicesItemsEvent {
-  ServicesPageType title;
+  ServicesPageType serviceType;
 
-  ServicesItemsEvent(this.title);
+  ServicesItemsEvent(this.serviceType);
 }
 
 class CollapseServiceEvent extends ServicesItemsEvent{

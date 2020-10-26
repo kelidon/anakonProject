@@ -18,12 +18,12 @@ class ServicesItemsBloc extends Bloc<ServicesItemsEvent, MapEntry<ServicesPageTy
 
   @override
   Stream<MapEntry<ServicesPageType, CollapsingState>> mapEventToState(ServicesItemsEvent event) async* {
-    if(event is CollapseEvent){
-      print("COLLAPSE  "+event.title.toString());
-      yield MapEntry(event.title, CollapsingState.COLLAPSED);
-    } else if(event is ExpandEvent){
-      print("Expand  "+event.title.toString());
-      yield MapEntry(event.title, CollapsingState.EXPANDED);
+    if(event is CollapseServiceEvent){
+      print("COLLAPSE  "+event.serviceType.toString());
+      yield MapEntry(event.serviceType, CollapsingState.COLLAPSED);
+    } else if(event is ExpandServiceEvent){
+      print("Expand  "+event.serviceType.toString());
+      yield MapEntry(event.serviceType, CollapsingState.EXPANDED);
     }
   }
 }

@@ -33,12 +33,12 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget>{
             }
           },
           child: Container(
-            width: MediaQuery.of(context).size.width*0.15,
-            height: MediaQuery.of(context).size.width*0.1,
+            width: MediaQuery.of(context).size.width*0.2,
+            height: MediaQuery.of(context).size.height*0.18,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius:BorderRadius.all(Radius.circular(20)),
+              borderRadius:BorderRadius.all(Radius.circular(10)),
               boxShadow: [
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
