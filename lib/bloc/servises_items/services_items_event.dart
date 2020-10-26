@@ -1,15 +1,15 @@
 part of 'services_items_bloc.dart';
 
-class CollapsingHeadersEvent {
+class ServicesItemsEvent {
   CollapsingTitle title;
 
-  CollapsingHeadersEvent(this.title);
+  ServicesItemsEvent(this.title);
 }
 
-class CollapseEvent extends CollapsingHeadersEvent{
+class CollapseServiceEvent extends ServicesItemsEvent{
   CollapseEvent(CollapsingTitle title) : super(title);
 }
 
-class ExpandEvent extends CollapsingHeadersEvent{
+class ExpandEvent extends ServicesItemsEvent{
   ExpandEvent(CollapsingTitle title) : super(title);
 }
