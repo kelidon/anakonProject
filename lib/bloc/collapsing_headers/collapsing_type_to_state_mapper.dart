@@ -1,6 +1,6 @@
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
 import 'package:anakonProject/fonts_icons/anakon_greek.dart';
-class TypeToStateMapper{
+class CollapsingTypeToStateMapper{
   static const typeToStateMap={
     CollapsingTitle.CONS_1: MapEntry(AnakonGreek.greek_epsilon, MapEntry("ОПЫТ", "     Компания АНАКОН имеет  многолетний успешный  опыт  по управлению и эксплуатации различных объектов недвижимости: бизнес-центры, офисные здания, жилые комплексы,  подземные и наземные паркинги, фитнесс-центры.  Наши специалисты работают в этой сфере более десяти лет. Используйте наш опыт для реализации своих желаний.")),
     CollapsingTitle.CONS_2: MapEntry(AnakonGreek.greek_alpha, MapEntry("ИНДИВИДУАЛЬНОСТЬ", "     Организуем свою работу таким образом, чтобы ваши сотрудники не отвлекались от выполнения своих задач. Компания АНАКОН учитывает график работы клиента, что особенно важно для IT-компаний.  Вы не замечаете нас, но чувствуете результат нашей работы.")),

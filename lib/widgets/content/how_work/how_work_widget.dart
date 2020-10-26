@@ -1,5 +1,5 @@
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
-import 'package:anakonProject/bloc/collapsing_headers/type_to_state_mapper.dart';
+import 'package:anakonProject/bloc/collapsing_headers/collapsing_type_to_state_mapper.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:flutter/cupertino.dart';
@@ -63,7 +63,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                     child: Container(margin: EdgeInsets.only(left: 60), color: Colors.yellow, height: 60.0*3 - 10,padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Center(
                           child: Text(
-                              TypeToStateMapper.typeToStateMap[state.key].value.value),
+                              CollapsingTypeToStateMapper.typeToStateMap[state.key].value.value),
                         )),
                   ):Container();
                 })

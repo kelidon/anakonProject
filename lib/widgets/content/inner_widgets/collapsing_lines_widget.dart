@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
-import 'package:anakonProject/bloc/collapsing_headers/type_to_state_mapper.dart';
+import 'package:anakonProject/bloc/collapsing_headers/collapsing_type_to_state_mapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +19,7 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget> {
   _CollapsingWidgetState(this.titleType);
   @override
   Widget build(BuildContext context) {
-    bool isConsBloc = TypeToStateMapper.consTypes.contains(titleType);
+    bool isConsBloc = CollapsingTypeToStateMapper.consTypes.contains(titleType);
     return InkWell(onTap: () {
       if (isConsBloc) {
         if (context.bloc<CollapsedHeadersConsBloc>().state.key == titleType) {
@@ -61,7 +61,7 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget> {
                 color: isCurrent ? Colors.blue : Colors.green,
                 child: Center(
                     child: Icon(
-                  TypeToStateMapper.typeToStateMap[titleType].key,
+                  CollapsingTypeToStateMapper.typeToStateMap[titleType].key,
                   color: isCurrent ? Colors.white : Colors.blue,
                 )),
               )
@@ -76,12 +76,12 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget> {
                         width: 50,
                         height: 50,
                         child: Center(
-                            child: Icon(TypeToStateMapper
+                            child: Icon(CollapsingTypeToStateMapper
                                 .typeToStateMap[titleType].key))),
                     SizedBox(
                       width: 10,
                     ),
-                    Text(TypeToStateMapper.typeToStateMap[titleType].value.key),
+                    Text(CollapsingTypeToStateMapper.typeToStateMap[titleType].value.key),
                   ],
                 ),
               );
