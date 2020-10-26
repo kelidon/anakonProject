@@ -31,8 +31,8 @@ class Application extends StatelessWidget {
         BlocProvider<MenuBloc>(
           create: (_) => MenuBloc(),
         ),
-        BlocProvider<CollapsedHeadersBloc>(
-          create: (_) => CollapsedHeadersBloc(),
+        BlocProvider<CollapsedHeadersConsBloc>(
+          create: (_) => CollapsedHeadersConsBloc(),
         ),
       ],
       child: MaterialApp(

@@ -1,5 +1,4 @@
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:anakonProject/fonts_icons/anakon_greek.dart';
 class TypeToStateMapper{
   static const typeToStateMap={
@@ -11,5 +10,10 @@ class TypeToStateMapper{
     CollapsingTitle.HOW_WORK_2: MapEntry(AnakonGreek.greek_epsilon, MapEntry("ОНЛАЙН ПОДДЕРЖКА", "     Внедряемся в существующие системы контроля здания. Поддержка онлайн, прием заявок через мессенджеры. Оперативно реагируем на срочные вызовы. Круглосуточная аварийная служба. Отчеты о выполненных работах.")),
     CollapsingTitle.HOW_WORK_3: MapEntry(AnakonGreek.greek_sigma, MapEntry("АУТСТАФФИНГ", "     Аутстаффинг (outstaffing) - юридический перевод сотрудников из штата компании-заказчика в штат нашей компании с передачей статуса работодателя (нанимателя). Такая услуга необходима для модернизации, улучшения бизнес-развития Вашей организации. Мы официально оформляем трудовые отношения с сотрудниками, выводимыми за штат, не меняя их рабочего места, обязанностей, распорядка дня.")),
 };
-
+  static const consTypes = [
+    CollapsingTitle.CONS_1,
+    CollapsingTitle.CONS_2,
+    CollapsingTitle.CONS_3,
+    CollapsingTitle.CONS_4
+  ];
 }

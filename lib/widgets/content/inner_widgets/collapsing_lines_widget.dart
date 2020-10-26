@@ -19,18 +19,36 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget> {
   _CollapsingWidgetState(this.titleType);
   @override
   Widget build(BuildContext context) {
+    bool isConsBloc = TypeToStateMapper.consTypes.contains(titleType);
     return InkWell(onTap: () {
-      if (context.bloc<CollapsedHeadersBloc>().state.key == titleType) {
-        if (context.bloc<CollapsedHeadersBloc>().state.value ==
-            CollapsingState.COLLAPSED)
-          context.bloc<CollapsedHeadersBloc>().add(ExpandEvent(titleType));
-        else {
-          context.bloc<CollapsedHeadersBloc>().add(CollapseEvent(titleType));
+      if (isConsBloc) {
+        if (context.bloc<CollapsedHeadersConsBloc>().state.key == titleType) {
+          if (context.bloc<CollapsedHeadersConsBloc>().state.value ==
+              CollapsingState.COLLAPSED)
+            context.bloc<CollapsedHeadersConsBloc>().add(ExpandEvent(titleType));
+          else {
+            context
+                .bloc<CollapsedHeadersConsBloc>()
+                .add(CollapseEvent(titleType));
+          }
+        } else {
+          context.bloc<CollapsedHeadersConsBloc>().add(CollapseEvent(titleType));
         }
       } else {
-        context.bloc<CollapsedHeadersBloc>().add(CollapseEvent(titleType));
+        if (context.bloc<CollapsedHeadersHowWorkBloc>().state.key == titleType) {
+          if (context.bloc<CollapsedHeadersHowWorkBloc>().state.value ==
+              CollapsingState.COLLAPSED)
+            context.bloc<CollapsedHeadersHowWorkBloc>().add(ExpandEvent(titleType));
+          else {
+            context
+                .bloc<CollapsedHeadersHowWorkBloc>()
+                .add(CollapseEvent(titleType));
+          }
+        } else {
+          context.bloc<CollapsedHeadersHowWorkBloc>().add(CollapseEvent(titleType));
+        }
       }
-    }, child: BlocBuilder<CollapsedHeadersBloc,
+    }, child: BlocBuilder<CollapsedHeadersConsBloc,
         MapEntry<CollapsingTitle, CollapsingState>>(
       builder: (_, state) {
         bool isCollapsed = !(state.value == CollapsingState.EXPANDED);

@@ -53,9 +53,12 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                     CollapsingLinesWidget(
                       titleType: CollapsingTitle.CONS_3,
                     ),
+                    CollapsingLinesWidget(
+                      titleType: CollapsingTitle.CONS_4,
+                    ),
                   ],
                 ),
-                BlocBuilder<CollapsedHeadersBloc,
+                BlocBuilder<CollapsedHeadersConsBloc,
                     MapEntry<CollapsingTitle, CollapsingState>>(builder: (_, state) {
                   return state.value==CollapsingState.COLLAPSED?Center(
                     child: Container(margin: EdgeInsets.only(left: 60), color: Colors.yellow, height: 60.0*3 - 10,padding: EdgeInsets.symmetric(horizontal: 20),
