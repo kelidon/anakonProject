@@ -1,7 +1,7 @@
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
 import 'package:anakonProject/bloc/servises_items/services_items_bloc.dart';
 import 'package:anakonProject/fonts_icons/anakon_greek.dart';
-class CollapsingTypeToStateMapper{
+class ServicesTypeToStateMapper{
   static const typeToStateMap={
     ServicesPageType.FIRST_PAGE_1: MapEntry("КОМПЛЕКСНОЕ УПРАВЛЕНИЕ ОБЪЕКТОМ", """Компания АНАКОН берет на себя все функции по управлению, начиная от сдачи объекта в эксплуатацию, передачи инженерных сетей и подписания договоров с поставщиками услуг.
     Организация работы объекта недвижимости с нуля: приемка и запуск в эксплуатацию зданий, передача сетей теплоснабжения, водоснабжения, электроснабжения городу. Претензионная работа с подрядчиками и субподрядчиками по гарантии.

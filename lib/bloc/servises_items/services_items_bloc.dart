@@ -13,8 +13,6 @@ enum ServicesPageType{
   SECOND_PAGE_4,
 }
 
-
-
 class ServicesItemsBloc extends Bloc<ServicesItemsEvent, MapEntry<ServicesPageType, CollapsingState>> {
   ServicesItemsBloc() : super(MapEntry(ServicesPageType.FIRST_PAGE_1, CollapsingState.COLLAPSED));
 

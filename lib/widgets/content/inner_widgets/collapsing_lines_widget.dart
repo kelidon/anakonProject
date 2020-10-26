@@ -51,7 +51,7 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget> {
     }, child: BlocBuilder<CollapsedHeadersConsBloc,
         MapEntry<CollapsingTitle, CollapsingState>>(
       builder: (_, state) {
-        bool isCollapsed = !(state.value == CollapsingState.EXPANDED);
+        bool isCollapsed = state.value == CollapsingState.COLLAPSED;
         bool isCurrent = state.key == titleType;
         return isCollapsed
             ? Container(

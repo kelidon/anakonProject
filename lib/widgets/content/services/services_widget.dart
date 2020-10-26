@@ -1,3 +1,4 @@
+import 'package:anakonProject/bloc/servises_items/services_items_bloc.dart';
 import 'package:anakonProject/constants/colors.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
@@ -110,15 +111,11 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ServiceIconWidget(
-                                icon: Icons.opacity,
-                                title: "my fucking fucking fucking title for this fucking shit",
-                                description: "even more words then in that fucking title for this description",
+                                serviceType: ServicesPageType.FIRST_PAGE_1,
                               ),
                               SizedBox(width: 100,),
                               ServiceIconWidget(
-                                icon: Icons.opacity,
-                                title: "my fucking fucking fucking title for this fucking shit",
-                                description: "even more words then in that fucking title for this description",
+                                serviceType: ServicesPageType.FIRST_PAGE_2,
                               ),
                             ],
                           ),
@@ -127,18 +124,11 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ServiceIconWidget(
-                                icon: Icons.opacity,
-                                title: "my fucking fucking fucking title for this fucking shit",
-                                description: "even more words then in that fucking title for this description",
+                                serviceType: ServicesPageType.FIRST_PAGE_3,
                               ),
                               SizedBox(width: 100,),
                               ServiceIconWidget(
-                                icon: Icons.opacity,
-                                title: "my fucking fucking fucking title for this fucking shit",
-                                description: "even more words then in that fucking title for this description",
-                                onTap: (){setState(() {
-                                  condition = true;
-                                });},
+                                serviceType: ServicesPageType.FIRST_PAGE_4,
                               ),
                             ],
                           ),
@@ -156,9 +146,10 @@ class _ServicesWidgetState extends State<ServicesWidget> {
               maintainState: true,
               maintainAnimation: true,
               child: InkWell(
-                onTap: (){setState(() {
-                  condition = false;
-                });},
+                onTap: (){
+                  setState(() {
+                    condition = false;
+                  });},
                 child: Column(
                   children: [
                     Spacer(),
@@ -177,28 +168,94 @@ class _ServicesWidgetState extends State<ServicesWidget> {
           ],
         ),
       ),
-      _buildService(
-          AppText.SERVICE1_TITLE,
-          AppText.SERVICE1_1 +
-              "\n\n" +
-              AppText.SERVICE1_2 +
-              "\n\n" +
-              AppText.SERVICE1_3 +
-              "\n\n" +
-              AppText.SERVICE1_4),
-      _buildService(
-          AppText.SERVICE2_TITLE,
-          AppText.SERVICE2_1 +
-              "\n\n" +
-              AppText.SERVICE2_2 +
-              "\n\n" +
-              AppText.SERVICE2_3 +
-              "\n\n" +
-              AppText.SERVICE2_4),
-      _buildService(AppText.SERVICE3_TITLE,
-          AppText.SERVICE3_1),
-      _buildService(AppText.SERVICE4_TITLE,
-          AppText.SERVICE4_1),
+      Container(
+        margin: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius:BorderRadius.all(Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.6),
+                blurRadius: 10,
+                offset: Offset(1, 3)
+            ),
+          ],// boxShadow
+        ),
+        child: Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ServiceIconWidget(
+                                serviceType: ServicesPageType.SECOND_PAGE_1,
+                              ),
+                              SizedBox(width: 100,),
+                              ServiceIconWidget(
+                                serviceType: ServicesPageType.SECOND_PAGE_2,
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 50,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ServiceIconWidget(
+                                serviceType: ServicesPageType.SECOND_PAGE_3,
+                              ),
+                              SizedBox(width: 100,),
+                              ServiceIconWidget(
+                                serviceType: ServicesPageType.SECOND_PAGE_4,
+                              ),
+                            ],
+                          ),
+                          Spacer(),
+                          _buildContact(),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: condition == true,
+              maintainState: true,
+              maintainAnimation: true,
+              child: InkWell(
+                onTap: (){
+                  setState(() {
+                    condition = false;
+                  });},
+                child: Column(
+                  children: [
+                    Spacer(),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height*.65,
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(.6),
+                        borderRadius:BorderRadius.all(Radius.circular(20)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     ];
 
     List<Widget> _buildBottom() {
