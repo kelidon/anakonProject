@@ -171,21 +171,6 @@ class _ApplicationPageState extends State<ApplicationPage> with TickerProviderSt
                           Spacer(),
                           Container(
                             child: Container(child: logoOnTower),
-                            decoration: BoxDecoration(
-                              // gradient: LinearGradient(
-                              //   begin: Alignment.topCenter,
-                              //   end: Alignment.bottomCenter,
-                              //   colors: [
-                              //     Colors.transparent,
-                              //     Colors.white.withOpacity(0.3),
-                              //     Colors.white.withOpacity(0.6),
-                              //     Colors.white.withOpacity(0.9),
-                              //     Colors.white,
-                              //
-                              //     Colors.white,
-                              //   ]
-                              // )
-                            ),
                           ),
                         ],
                       )

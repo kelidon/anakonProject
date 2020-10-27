@@ -63,6 +63,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
     var list = [
       Container(
         margin: EdgeInsets.all(15),
+        padding: EdgeInsets.only(top: 15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius:BorderRadius.all(Radius.circular(20)),
@@ -123,6 +124,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
       ),
       Container(
         margin: EdgeInsets.all(15),
+        padding: EdgeInsets.only(top: 15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius:BorderRadius.all(Radius.circular(20)),

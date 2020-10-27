@@ -71,14 +71,6 @@ class MenuWidget extends StatelessWidget {
                                   height: 20,
                                 ),
                                 ScrollButtonWidget(
-                                  buttonName: DrawerButtons.HOW_WORK,
-                                  onTap: () =>
-                                      context.bloc<MenuBloc>().add(false),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                ScrollButtonWidget(
                                   buttonName: DrawerButtons.SERVICES,
                                   onTap: () =>
                                       context.bloc<MenuBloc>().add(false),
@@ -87,7 +79,7 @@ class MenuWidget extends StatelessWidget {
                                   height: 20,
                                 ),
                                 ScrollButtonWidget(
-                                  buttonName: DrawerButtons.CONTACT_US,
+                                  buttonName: DrawerButtons.HOW_WORK,
                                   onTap: () =>
                                       context.bloc<MenuBloc>().add(false),
                                 ),

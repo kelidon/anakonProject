@@ -1,7 +1,6 @@
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/widgets/content/about_us/about_us_widget.dart';
-import 'package:anakonProject/widgets/content/contact_us/contact_us_widget.dart';
 import 'package:anakonProject/widgets/content/how_work/how_work_widget.dart';
 import 'package:anakonProject/widgets/content/services/services_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,9 +33,8 @@ class _ContentWidgetState extends State<ContentWidget> {
   Widget build(BuildContext context) {
     var _buttonToKey = {
       DrawerButtons.ABOUT_US: aboutKey,
-      DrawerButtons.HOW_WORK: howWorkWidget,
       DrawerButtons.SERVICES: servicesKey,
-      DrawerButtons.CONTACT_US: contactKey
+      DrawerButtons.HOW_WORK: howWorkWidget
     };
 
     Widget _buildContentBlocks() {
@@ -72,14 +70,8 @@ class _ContentWidgetState extends State<ContentWidget> {
                           children: [
                             Container(
                               key: aboutKey,
-                              height: 300,
                               child: AboutUsWidget(
-                              ),
-                            ),
-                            Container(
-                              key: howWorkWidget,
-                              height: isMouse?MediaQuery.of(context).size.height - 70:null,
-                              child: HowWorkWidget(
+                                height: isMouse?MediaQuery.of(context).size.height - 135:null,
                               ),
                             ),
                             Container(
@@ -89,9 +81,9 @@ class _ContentWidgetState extends State<ContentWidget> {
                                   height: isMouse?MediaQuery.of(context).size.height - 180:null,
                                 )),
                             Container(
-                              height: isMouse?MediaQuery.of(context).size.height - 70:null,
-                              key: contactKey,
-                              child: ContactUsWidget(
+                              key: howWorkWidget,
+                              child: HowWorkWidget(
+                                height: isMouse?MediaQuery.of(context).size.height - 135:null,
                               ),
                             ),
                           ],
