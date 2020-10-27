@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_type_to_state_mapper.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +44,6 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
 
   @override
   Widget build(BuildContext context) {
-
     _buildCollapsingWidget(MapEntry<CollapsingTitle, CollapsingState> state) {
       bool isCollapsed = !(state.value == CollapsingState.EXPANDED);
       bool isCurrent = state.key == titleType;
@@ -59,21 +56,19 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
             color: isCurrent ? Colors.blue : Colors.green,
             child: Center(
                 child: Icon(
-                  CollapsingTypeToStateMapper.typeToStateMap[titleType].key,
-                  color: isCurrent ? Colors.white : Colors.blue,
-                )),
+              CollapsingTypeToStateMapper.typeToStateMap[titleType].key,
+              color: isCurrent ? Colors.white : Colors.blue,
+            )),
           ),
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
-                boxShadow:[
+                boxShadow: [
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
                       blurRadius: 4,
-                      offset: Offset(1, 3)
-                  ),
-                ]
-            ),
+                      offset: Offset(1, 3)),
+                ]),
             child: SizeTransition(
                 axis: Axis.horizontal,
                 axisAlignment: 0,

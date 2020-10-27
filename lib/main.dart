@@ -7,6 +7,7 @@ import 'package:anakonProject/bloc/servises_items/services_items_bloc.dart';
 import 'package:anakonProject/widgets/app_bar/app_bar_widget.dart';
 import 'package:anakonProject/widgets/app_bar/menu_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
+import 'package:anakonProject/widgets/content/inner_widgets/contacts_overlay_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
@@ -61,7 +62,11 @@ class ApplicationPage extends StatefulWidget {
   State<StatefulWidget> createState() => _ApplicationPageState();
 }
 
-class _ApplicationPageState extends State<ApplicationPage> with TickerProviderStateMixin {
+class _ApplicationPageState extends State<ApplicationPage>
+    with TickerProviderStateMixin {
+
+  bool isOverlayVisible = false;
+
   ScrollController _mainController;
   ScrollController _blurController;
   ScrollController _towerController;
@@ -90,8 +95,8 @@ class _ApplicationPageState extends State<ApplicationPage> with TickerProviderSt
     _controller = VideoPlayerController.asset("assets/video/tower.mp4");
     _initializeVideoPlayerFuture = _controller.initialize();
 
-    controller= GifController(vsync: this);
-    controller.animateTo(0.5, duration: Duration(milliseconds:1000));
+    controller = GifController(vsync: this);
+    controller.animateTo(0.5, duration: Duration(milliseconds: 1000));
 
     _controllerHorizontal =
         VideoPlayerController.asset("assets/video/tower_horizontal.mp4");
@@ -171,21 +176,6 @@ class _ApplicationPageState extends State<ApplicationPage> with TickerProviderSt
                           Spacer(),
                           Container(
                             child: Container(child: logoOnTower),
-                            decoration: BoxDecoration(
-                              // gradient: LinearGradient(
-                              //   begin: Alignment.topCenter,
-                              //   end: Alignment.bottomCenter,
-                              //   colors: [
-                              //     Colors.transparent,
-                              //     Colors.white.withOpacity(0.3),
-                              //     Colors.white.withOpacity(0.6),
-                              //     Colors.white.withOpacity(0.9),
-                              //     Colors.white,
-                              //
-                              //     Colors.white,
-                              //   ]
-                              // )
-                            ),
                           ),
                         ],
                       )
@@ -221,11 +211,11 @@ class _ApplicationPageState extends State<ApplicationPage> with TickerProviderSt
                           //       _controllerHorizontal.value.aspectRatio,
                           //   child: VideoPlayer(_controllerHorizontal),
                           // );
-                          return
-                            GifImage(
-                              controller: controller,
-                              image: AssetImage("assets/video/tower_horizontal.gif"),
-                            );
+                          return GifImage(
+                            controller: controller,
+                            image:
+                                AssetImage("assets/video/tower_horizontal.gif"),
+                          );
                         } else {
                           return Container();
                         }
@@ -309,6 +299,7 @@ class _ApplicationPageState extends State<ApplicationPage> with TickerProviderSt
             );
     }
 
+
     return Scaffold(
       body: Stack(
         children: [
@@ -317,17 +308,40 @@ class _ApplicationPageState extends State<ApplicationPage> with TickerProviderSt
               appBar: AppBarWidget(
                 preferredSize: Size.fromHeight(isMouse ? 70 : 40),
               ),
-              body: Container(
-                margin: isMouse ? null : EdgeInsets.only(bottom: 50, top: 40),
-                child: SingleChildScrollView(
-                    physics: isMouse
-                        ? NeverScrollableScrollPhysics()
-                        : BouncingScrollPhysics(),
-                    controller: _mainController,
-                    child: ContentWidget()),
+              body: InkWell(
+                onTap: () {
+                  setState(() {
+                    isOverlayVisible = true;
+                  });
+                },
+                child: Container(
+                  margin: isMouse ? null : EdgeInsets.only(bottom: 50, top: 40),
+                  child: SingleChildScrollView(
+                      physics: isMouse
+                          ? NeverScrollableScrollPhysics()
+                          : BouncingScrollPhysics(),
+                      controller: _mainController,
+                      child: ContentWidget()),
+                ),
               )),
           _buildBackground(),
-          MenuWidget()
+          MenuWidget(),
+          Visibility(
+              visible: isOverlayVisible,
+              child: Container(
+                color: Colors.black.withOpacity(0.5),
+                child: InkWell(
+
+                    onTap: () {
+                      setState(() {
+                        isOverlayVisible = false;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.3, vertical: MediaQuery.of(context).size.height*0.3),
+                        child: ContactsOverlayWidget())
+                ),
+              ))
         ],
       ),
     );
