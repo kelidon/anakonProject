@@ -13,6 +13,7 @@ import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:video_player/video_player.dart';
 
 import 'bloc/collapsing_headers/collapsing_headers_bloc.dart';
+import 'bloc/servises_items/services_items_bloc.dart';
 
 void main() {
   runApp(Application());

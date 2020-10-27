@@ -59,13 +59,15 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                 ),
                 BlocBuilder<CollapsedHeadersHowWorkBloc,
                     MapEntry<CollapsingTitle, CollapsingState>>(builder: (_, state) {
-                  return state.value==CollapsingState.COLLAPSED?Center(
-                    child: Container(margin: EdgeInsets.only(left: 60), color: Colors.yellow, height: 60.0*3 - 10,padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Center(
-                          child: Text(
-                              CollapsingTypeToStateMapper.typeToStateMap[state.key].value.value),
-                        )),
-                  ):Container();
+                  return
+                  //   state.value==CollapsingState.COLLAPSED?Center(
+                  //   child: Container(margin: EdgeInsets.only(left: 60), color: Colors.yellow, height: 60.0*3 - 10,padding: EdgeInsets.symmetric(horizontal: 20),
+                  //       child: Center(
+                  //         child: Text(
+                  //             CollapsingTypeToStateMapper.typeToStateMap[state.key].value.value),
+                  //       )),
+                  // ):
+                    Container();
                 })
               ],
             ),

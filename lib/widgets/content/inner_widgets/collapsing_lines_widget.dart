@@ -9,53 +9,87 @@ class CollapsingLinesWidget extends StatefulWidget {
   final CollapsingTitle titleType;
 
   const CollapsingLinesWidget({Key key, this.titleType}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _CollapsingWidgetState(this.titleType);
 }
 
-class _CollapsingWidgetState extends State<CollapsingLinesWidget> {
+class _CollapsingWidgetState extends State<CollapsingLinesWidget>
+    with SingleTickerProviderStateMixin {
   final CollapsingTitle titleType;
 
+  AnimationController expandController;
+  Animation<double> animation;
+
   _CollapsingWidgetState(this.titleType);
+
+  @override
+  void initState() {
+    super.initState();
+    prepareAnimations();
+  }
+
+  void prepareAnimations() {
+    expandController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    animation = CurvedAnimation(
+      parent: expandController,
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  @override
+  void dispose() {
+    expandController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
 
     _buildCollapsingWidget(MapEntry<CollapsingTitle, CollapsingState> state) {
       bool isCollapsed = !(state.value == CollapsingState.EXPANDED);
       bool isCurrent = state.key == titleType;
-      return isCollapsed
-          ? Container(
-              margin: EdgeInsets.only(bottom: 10),
-              width: 50,
-              height: 50,
-              color: isCurrent ? Colors.blue : Colors.green,
-              child: Center(
-                  child: Icon(
-                CollapsingTypeToStateMapper.typeToStateMap[titleType].key,
-                color: isCurrent ? Colors.white : Colors.blue,
-              )),
-            )
-          : Container(
-              margin: EdgeInsets.only(bottom: 10),
-              width: double.maxFinite,
-              height: 50,
-              color: Colors.red,
-              child: Row(
-                children: [
-                  Container(
-                      width: 50,
-                      height: 50,
-                      child: Center(
-                          child: Icon(CollapsingTypeToStateMapper
-                              .typeToStateMap[titleType].key))),
-                  SizedBox(
-                    width: 10,
+      return Row(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            width: 50,
+            height: 50,
+            color: isCurrent ? Colors.blue : Colors.green,
+            child: Center(
+                child: Icon(
+                  CollapsingTypeToStateMapper.typeToStateMap[titleType].key,
+                  color: isCurrent ? Colors.white : Colors.blue,
+                )),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                boxShadow:[
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      blurRadius: 4,
+                      offset: Offset(1, 3)
                   ),
-                  Text(CollapsingTypeToStateMapper
-                      .typeToStateMap[titleType].value.key),
-                ],
-              ),
-            );
+                ]
+            ),
+            child: SizeTransition(
+                axis: Axis.horizontal,
+                axisAlignment: 0,
+                sizeFactor: animation,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(CollapsingTypeToStateMapper
+                        .typeToStateMap[titleType].value.key),
+                  ],
+                )),
+          ),
+        ],
+      );
     }
 
     bool isConsBloc = CollapsingTypeToStateMapper.consTypes.contains(titleType);
