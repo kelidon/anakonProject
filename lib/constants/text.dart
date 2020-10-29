@@ -55,5 +55,12 @@ class AppText{
 
   static const String CONTACT_BUTTON = "СВЯЗАТЬСЯ С НАМИ";
   static const String CONTACT_LABEL = "ДАВАЙТЕ ОБСУДИМ ВАШ ПРОЕКТ";
+
+
+//contacts
+
+  static const String CONTACTS_TEXT = """ООО "АНАКОН" """;
+  static const String CONTACTS_NUMBER = "+375-44-570-57-57";
+  static const String CONTACTS_GMAIL = "ANAKONBY@GMAIL.COM";
 }
 
