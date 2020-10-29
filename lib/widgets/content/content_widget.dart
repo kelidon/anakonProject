@@ -71,19 +71,19 @@ class _ContentWidgetState extends State<ContentWidget> {
                             Container(
                               key: aboutKey,
                               child: AboutUsWidget(
-                                height: isMouse?MediaQuery.of(context).size.height - 135:null,
+                                height: MediaQuery.of(context).size.height - 135,
                               ),
                             ),
                             Container(
                                 key: servicesKey,
-                                height: isMouse?MediaQuery.of(context).size.height - 70:null,
+                                height: MediaQuery.of(context).size.height - 70,
                                 child: ServicesWidget(
-                                  height: isMouse?MediaQuery.of(context).size.height - 180:null,
+                                  height: MediaQuery.of(context).size.height - 180,
                                 )),
                             Container(
                               key: howWorkWidget,
                               child: HowWorkWidget(
-                                height: isMouse?MediaQuery.of(context).size.height - 135:null,
+                                height: MediaQuery.of(context).size.height - 135,
                               ),
                             ),
                           ],

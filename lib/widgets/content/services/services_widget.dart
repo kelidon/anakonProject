@@ -1,4 +1,5 @@
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
+import 'package:anakonProject/bloc/contacts_overlay/contacts_overlay_bloc.dart';
 import 'package:anakonProject/bloc/servises_items/services_items_bloc.dart';
 import 'package:anakonProject/bloc/servises_items/services_type_to_state_mapper.dart';
 import 'package:anakonProject/constants/colors.dart';
@@ -39,7 +40,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
             FittedBox(
               fit: BoxFit.cover,
               child: InkWell(
-                onTap: () {},
+                onTap: () => context.bloc<ContactsOverlayBloc>().add(true),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   margin: EdgeInsets.only(top: 10),

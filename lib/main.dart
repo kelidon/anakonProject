@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:anakonProject/bloc/contacts_overlay/contacts_overlay_bloc.dart';
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
@@ -43,6 +44,9 @@ class Application extends StatelessWidget {
         BlocProvider<ServicesItemsBloc>(
           create: (_) => ServicesItemsBloc(),
         ),
+        BlocProvider<ContactsOverlayBloc>(
+          create: (_) => ContactsOverlayBloc(),
+        ),
       ],
       child: MaterialApp(
         title: 'Anakon',
@@ -64,8 +68,6 @@ class ApplicationPage extends StatefulWidget {
 
 class _ApplicationPageState extends State<ApplicationPage>
     with TickerProviderStateMixin {
-
-  bool isOverlayVisible = false;
 
   ScrollController _mainController;
   ScrollController _blurController;
@@ -308,40 +310,18 @@ class _ApplicationPageState extends State<ApplicationPage>
               appBar: AppBarWidget(
                 preferredSize: Size.fromHeight(isMouse ? 70 : 40),
               ),
-              body: InkWell(
-                onTap: () {
-                  setState(() {
-                    isOverlayVisible = true;
-                  });
-                },
-                child: Container(
-                  margin: isMouse ? null : EdgeInsets.only(bottom: 50, top: 40),
-                  child: SingleChildScrollView(
-                      physics: isMouse
-                          ? NeverScrollableScrollPhysics()
-                          : BouncingScrollPhysics(),
-                      controller: _mainController,
-                      child: ContentWidget()),
-                ),
+              body: Container(
+                margin: isMouse ? null : EdgeInsets.only(bottom: 50, top: 40),
+                child: SingleChildScrollView(
+                    physics: isMouse
+                        ? NeverScrollableScrollPhysics()
+                        : BouncingScrollPhysics(),
+                    controller: _mainController,
+                    child: ContentWidget()),
               )),
           _buildBackground(),
           MenuWidget(),
-          Visibility(
-              visible: isOverlayVisible,
-              child: Container(
-                color: Colors.black.withOpacity(0.5),
-                child: InkWell(
-
-                    onTap: () {
-                      setState(() {
-                        isOverlayVisible = false;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.3, vertical: MediaQuery.of(context).size.height*0.3),
-                        child: ContactsOverlayWidget())
-                ),
-              ))
+          ContactsOverlayWidget()
         ],
       ),
     );

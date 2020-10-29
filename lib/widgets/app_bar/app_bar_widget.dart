@@ -1,3 +1,4 @@
+import 'package:anakonProject/bloc/contacts_overlay/contacts_overlay_bloc.dart';
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
@@ -68,17 +69,26 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                       Spacer(),
                       FittedBox(
                         fit: BoxFit.contain,
-                        child: Container(
-                            child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(AppText.PHONE,
-                                style: AppStyles.CONTACTS_APPBAR),
-                            Text("anakon@gmail.com",
-                                style: AppStyles.CONTACTS_APPBAR)
-                          ],
-                        )),
+                        child: InkWell(
+                          onTap: () {
+                            if(context.bloc<ContactsOverlayBloc>().state) {
+                              context.bloc<ContactsOverlayBloc>().add(false);
+                            } else {
+                              context.bloc<ContactsOverlayBloc>().add(true);
+                            }
+                          },
+                          child: Container(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(AppText.PHONE,
+                                  style: AppStyles.CONTACTS_APPBAR),
+                              Text("anakon@gmail.com",
+                                  style: AppStyles.CONTACTS_APPBAR)
+                            ],
+                          )),
+                        ),
                       )
                     ],
                   ),

@@ -176,7 +176,7 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                               color: isCurrent && isCollapsed
-                                  ? Colors.blue
+                                  ? AppColors.PRIMARY
                                   : Colors.white,
                               boxShadow: [
                                 BoxShadow(
@@ -190,21 +190,18 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
                                 .typeToStateMap[titleType].key,
                             color: isCurrent && isCollapsed
                                 ? Colors.white
-                                : Colors.blue,
+                                : AppColors.PRIMARY,
                           )),
                         ),
-                        Container(
-                          color: Colors.red,
-                          child: SizeTransition(
-                              axis: Axis.horizontal,
-                              axisAlignment: 1,
-                              sizeFactor: animation,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 20),
-                                child: Text(CollapsingTypeToStateMapper
-                                        .typeToStateMap[titleType].value.key),
-                              )),
-                        ),
+                        SizeTransition(
+                            axis: Axis.horizontal,
+                            axisAlignment: 1,
+                            sizeFactor: animation,
+                            child: Container(
+                              margin: EdgeInsets.only(left: 20),
+                              child: Text(CollapsingTypeToStateMapper
+                                      .typeToStateMap[titleType].value.key),
+                            )),
                       ],
                     ),
                   );

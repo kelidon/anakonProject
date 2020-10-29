@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
@@ -8,16 +10,47 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'drawer_button_widget.dart';
 
-class MenuWidget extends StatelessWidget {
+class MenuWidget extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _MenuWidgetState();
+}
+
+class _MenuWidgetState extends State<MenuWidget>
+    with SingleTickerProviderStateMixin {
+  AnimationController expandController;
+  Animation<double> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    prepareAnimations();
+  }
+
+  void prepareAnimations() {
+    expandController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    animation = CurvedAnimation(
+      parent: expandController,
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
+  @override
+  void dispose() {
+    expandController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
       bool isMouse = state == Metrics.BIG;
       return BlocBuilder<MenuBloc, bool>(builder: (context, isEnabled) {
-        return
-          AnimatedOpacity(
-          opacity: isEnabled ? 1 : 0,
-          duration: Duration(milliseconds: 300),
+        isEnabled ? expandController.forward() : expandController.reverse();
+        return SizeTransition(
+          axis: Axis.vertical,
+          axisAlignment: 1,
+          sizeFactor: animation,
           child: FittedBox(
             fit: BoxFit.contain,
             child: Container(
@@ -30,8 +63,7 @@ class MenuWidget extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 3,
                       blurRadius: 5,
-                      offset: Offset(1, 3)
-                  ),
+                      offset: Offset(1, 3)),
                 ],
               ),
               width: isMouse ? MediaQuery.of(context).size.width * 0.15 : 150,
@@ -55,7 +87,8 @@ class MenuWidget extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: MediaQuery.of(context).size.width*0.03),
+                            margin: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.03),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

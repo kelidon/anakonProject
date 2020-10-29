@@ -25,7 +25,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius:BorderRadius.all(Radius.circular(20)),
@@ -53,16 +53,18 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
                       CollapsingLinesWidget(
                         titleType: CollapsingTitle.CONS_1,
                       ),
+                      SizedBox(height: 40,),
                       CollapsingLinesWidget(
                         titleType: CollapsingTitle.CONS_2,
                       ),
+                      SizedBox(height: 40,),
                       CollapsingLinesWidget(
                         titleType: CollapsingTitle.CONS_3,
                       ),
+                      SizedBox(height: 40,),
                       CollapsingLinesWidget(
                         titleType: CollapsingTitle.CONS_4,
                       ),

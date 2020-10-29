@@ -27,7 +27,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius:BorderRadius.all(Radius.circular(20)),
@@ -51,20 +51,25 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
             Expanded(
               child: Stack(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CollapsingLinesWidget(
-                        titleType: CollapsingTitle.HOW_WORK_1,
-                      ),
-                      CollapsingLinesWidget(
-                        titleType: CollapsingTitle.HOW_WORK_2,
-                      ),
-                      CollapsingLinesWidget(
-                        titleType: CollapsingTitle.HOW_WORK_3,
-                      ),
-                    ],
+                  Container(
+                    color: Colors.green,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CollapsingLinesWidget(
+                          titleType: CollapsingTitle.HOW_WORK_1,
+                        ),
+                        SizedBox(height: 40,),
+                        CollapsingLinesWidget(
+                          titleType: CollapsingTitle.HOW_WORK_2,
+                        ),
+                        SizedBox(height: 40,),
+                        CollapsingLinesWidget(
+                          titleType: CollapsingTitle.HOW_WORK_3,
+                        ),
+                      ],
+                    ),
                   ),
                   BlocBuilder<CollapsedHeadersHowWorkBloc,
                       MapEntry<CollapsingTitle, CollapsingState>>(builder: (_, state) {
