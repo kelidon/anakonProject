@@ -42,8 +42,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
               boxShadow: isMouse?[
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
+                    blurRadius: 5,
                     offset: Offset(0, 5)
                 ),
               ]:[],// boxShadow

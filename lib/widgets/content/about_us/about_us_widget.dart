@@ -49,37 +49,58 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
             Expanded(
               child: Stack(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
                     children: [
-                      CollapsingLinesWidget(
-                        titleType: CollapsingTitle.CONS_1,
-                      ),
-                      SizedBox(height: 40,),
-                      CollapsingLinesWidget(
-                        titleType: CollapsingTitle.CONS_2,
-                      ),
-                      SizedBox(height: 40,),
-                      CollapsingLinesWidget(
-                        titleType: CollapsingTitle.CONS_3,
-                      ),
-                      SizedBox(height: 40,),
-                      CollapsingLinesWidget(
-                        titleType: CollapsingTitle.CONS_4,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CollapsingLinesWidget(
+                            titleType: CollapsingTitle.CONS_1,
+                          ),
+                          SizedBox(height: 40,),
+                          CollapsingLinesWidget(
+                            titleType: CollapsingTitle.CONS_2,
+                          ),
+                          SizedBox(height: 40,),
+                          CollapsingLinesWidget(
+                            titleType: CollapsingTitle.CONS_3,
+                          ),
+                          SizedBox(height: 40,),
+                          CollapsingLinesWidget(
+                            titleType: CollapsingTitle.CONS_4,
+                          ),
+                        ],
                       ),
                     ],
                   ),
                   BlocBuilder<CollapsedHeadersConsBloc,
-                      MapEntry<CollapsingTitle, CollapsingState>>(builder: (_, state) {
-                    return state.value==CollapsingState.COLLAPSED?Center(
-                      child: Container(margin: EdgeInsets.only(left: 60), color: Colors.yellow, height: 60.0*3 - 10,padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Center(
-                            child: Text(
-                                CollapsingTypeToStateMapper.typeToStateMap[state.key].value.value),
-                          )),
-                    ):Container();
-                  })
+                      MapEntry<CollapsingTitle, CollapsingState>>(
+                      builder: (_, state) {
+                        return state.value == CollapsingState.COLLAPSED
+                            ? FutureBuilder(
+                            future: Future.delayed(Duration(milliseconds: 0), () {}),
+                            builder: (context, snapshot) {
+                              if(snapshot.connectionState == ConnectionState.done) {
+                                return Center(
+                                  child: Container(
+                                      margin: EdgeInsets.only(left: 60),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 60),
+                                      child: Center(
+                                        child: Text(
+                                          CollapsingTypeToStateMapper
+                                              .typeToStateMap[state.key].value
+                                              .value,
+                                          style: AppStyles.REGULAR,
+                                        ),
+                                      )),
+                                );
+                              } else return Container();
+                            }
+                        )
+                            : Container();
+                      })
                 ],
               ),
             ),

@@ -16,12 +16,10 @@ class HowWorkWidget extends StatefulWidget {
   State<StatefulWidget> createState() => _HowWorkWidgetState(height);
 }
 
-
 class _HowWorkWidgetState extends State<HowWorkWidget> {
   final double height;
 
   _HowWorkWidgetState(this.height);
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +28,13 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
         padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius:BorderRadius.all(Radius.circular(20)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(
                 color: Colors.grey.withOpacity(0.6),
                 blurRadius: 10,
-                offset: Offset(1, 3)
-            ),
-          ],// boxShadow
+                offset: Offset(1, 3)),
+          ], // boxShadow
         ),
         height: height,
         child: Column(
@@ -52,7 +49,6 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
               child: Stack(
                 children: [
                   Container(
-                    color: Colors.green,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -60,11 +56,15 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                         CollapsingLinesWidget(
                           titleType: CollapsingTitle.HOW_WORK_1,
                         ),
-                        SizedBox(height: 40,),
+                        SizedBox(
+                          height: 40,
+                        ),
                         CollapsingLinesWidget(
                           titleType: CollapsingTitle.HOW_WORK_2,
                         ),
-                        SizedBox(height: 40,),
+                        SizedBox(
+                          height: 40,
+                        ),
                         CollapsingLinesWidget(
                           titleType: CollapsingTitle.HOW_WORK_3,
                         ),
@@ -72,16 +72,31 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                     ),
                   ),
                   BlocBuilder<CollapsedHeadersHowWorkBloc,
-                      MapEntry<CollapsingTitle, CollapsingState>>(builder: (_, state) {
-                    return
-                      state.value==CollapsingState.COLLAPSED?Center(
-                      child: Container(margin: EdgeInsets.only(left: 60), color: Colors.yellow, height: 60.0*3 - 10,padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Center(
-                            child: Text(
-                                CollapsingTypeToStateMapper.typeToStateMap[state.key].value.value),
-                          )),
-                    ):
-                      Container();
+                          MapEntry<CollapsingTitle, CollapsingState>>(
+                      builder: (_, state) {
+                    return state.value == CollapsingState.COLLAPSED
+                        ? FutureBuilder(
+                          future: Future.delayed(Duration(milliseconds: 0), () {}),
+                          builder: (context, snapshot) {
+                            if(snapshot.connectionState == ConnectionState.done) {
+                              return Center(
+                                child: Container(
+                                    margin: EdgeInsets.only(left: 60),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 60),
+                                    child: Center(
+                                      child: Text(
+                                        CollapsingTypeToStateMapper
+                                            .typeToStateMap[state.key].value
+                                            .value,
+                                        style: AppStyles.REGULAR,
+                                      ),
+                                    )),
+                              );
+                            } else return Container();
+                          }
+                        )
+                        : Container();
                   })
                 ],
               ),

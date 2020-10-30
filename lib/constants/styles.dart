@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:anakonProject/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class AppStyles {
@@ -38,7 +39,7 @@ class AppStyles {
 
       fontSize: 16,
 
-      fontWeight: FontWeight.w600, color: Color(0xFF06285A));
+      fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
 
   static const TextStyle REGULAR_CENTER = TextStyle(
 

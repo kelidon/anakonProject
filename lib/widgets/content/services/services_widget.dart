@@ -31,7 +31,6 @@ class _ServicesWidgetState extends State<ServicesWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     Widget _buildContact() {
       return Container(
         margin: EdgeInsets.only(bottom: 17),
@@ -50,9 +49,9 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                   ),
                   child: Center(
                       child: Text(
-                        AppText.CONTACT_LABEL,
-                        style: AppStyles.CONTACT_BUTTON,
-                      )),
+                    AppText.CONTACT_LABEL,
+                    style: AppStyles.CONTACT_BUTTON,
+                  )),
                 ),
               ),
             ),
@@ -67,14 +66,13 @@ class _ServicesWidgetState extends State<ServicesWidget> {
         padding: EdgeInsets.only(top: 15),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius:BorderRadius.all(Radius.circular(20)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(
                 color: Colors.grey.withOpacity(0.6),
                 blurRadius: 10,
-                offset: Offset(1, 3)
-            ),
-          ],// boxShadow
+                offset: Offset(1, 3)),
+          ], // boxShadow
         ),
         child: Container(
           padding: EdgeInsets.all(10),
@@ -94,20 +92,26 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                           ServiceIconWidget(
                             serviceType: ServicesPageType.FIRST_PAGE_1,
                           ),
-                          SizedBox(width: 80,),
+                          SizedBox(
+                            width: 80,
+                          ),
                           ServiceIconWidget(
                             serviceType: ServicesPageType.FIRST_PAGE_2,
                           ),
                         ],
                       ),
-                      SizedBox(height: 50,),
+                      SizedBox(
+                        height: 50,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ServiceIconWidget(
                             serviceType: ServicesPageType.FIRST_PAGE_3,
                           ),
-                          SizedBox(width: 80,),
+                          SizedBox(
+                            width: 80,
+                          ),
                           ServiceIconWidget(
                             serviceType: ServicesPageType.FIRST_PAGE_4,
                           ),
@@ -128,14 +132,13 @@ class _ServicesWidgetState extends State<ServicesWidget> {
         padding: EdgeInsets.only(top: 15),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius:BorderRadius.all(Radius.circular(20)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(
                 color: Colors.grey.withOpacity(0.6),
                 blurRadius: 10,
-                offset: Offset(1, 3)
-            ),
-          ],// boxShadow
+                offset: Offset(1, 3)),
+          ], // boxShadow
         ),
         child: Container(
           padding: EdgeInsets.all(10),
@@ -155,20 +158,26 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                           ServiceIconWidget(
                             serviceType: ServicesPageType.SECOND_PAGE_1,
                           ),
-                          SizedBox(width: 80,),
+                          SizedBox(
+                            width: 80,
+                          ),
                           ServiceIconWidget(
                             serviceType: ServicesPageType.SECOND_PAGE_2,
                           ),
                         ],
                       ),
-                      SizedBox(height: 50,),
+                      SizedBox(
+                        height: 50,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ServiceIconWidget(
                             serviceType: ServicesPageType.SECOND_PAGE_3,
                           ),
-                          SizedBox(width: 80,),
+                          SizedBox(
+                            width: 80,
+                          ),
                           ServiceIconWidget(
                             serviceType: ServicesPageType.SECOND_PAGE_4,
                           ),
@@ -194,8 +203,12 @@ class _ServicesWidgetState extends State<ServicesWidget> {
           padding: EdgeInsets.all(0),
           iconSize: 50,
           icon: Icon(Icons.chevron_left),
-          onPressed: () => _controller.previousPage(
-              duration: Duration(milliseconds: 800), curve: Curves.easeOut),
+          onPressed: () {
+            context.bloc<ServicesItemsBloc>().add(CollapseServiceEvent(
+                context.bloc<ServicesItemsBloc>().state.key));
+            _controller.previousPage(
+                duration: Duration(milliseconds: 800), curve: Curves.easeOut);
+          },
         ),
       ));
       listWidgets.addAll(list.map((e) {
@@ -213,94 +226,143 @@ class _ServicesWidgetState extends State<ServicesWidget> {
         );
       }).toList());
       listWidgets.add(Container(
-        margin: EdgeInsets.only(left: 20),
-        child: IconButton(
-          padding: EdgeInsets.all(0),
-          iconSize: 50,
-          icon: Icon(Icons.chevron_right),
-          onPressed: () => _controller.nextPage(
-              duration: Duration(milliseconds: 800), curve: Curves.easeOut),
-        ),
-      ));
+          margin: EdgeInsets.only(left: 20),
+          child: IconButton(
+            padding: EdgeInsets.all(0),
+            iconSize: 50,
+            icon: Icon(Icons.chevron_right),
+            onPressed: () {
+              context.bloc<ServicesItemsBloc>().add(CollapseServiceEvent(
+                  context.bloc<ServicesItemsBloc>().state.key));
+              _controller.nextPage(
+                  duration: Duration(milliseconds: 800), curve: Curves.easeOut);
+            },
+          )));
       return listWidgets;
     }
 
     return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
       bool isMouse = state == Metrics.BIG;
-      return BlocBuilder<ServicesItemsBloc, MapEntry<ServicesPageType, CollapsingState>>(
-        builder: (_, state) {
-          return Container(
-            padding: EdgeInsets.only(top: 20),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  child: CarouselSlider(
-                    carouselController: _controller,
-                    options: CarouselOptions(
-                        scrollPhysics: NeverScrollableScrollPhysics(),
-                        height: height,
-                        enableInfiniteScroll: false,
-                        viewportFraction: 1,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            _current = index;
-                          });
-                        }),
-                    items: list.map((i) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Stack(
-                            children: [
-                              i,
-                              Container(
+      return BlocBuilder<ServicesItemsBloc,
+          MapEntry<ServicesPageType, CollapsingState>>(builder: (_, state) {
+        return Container(
+          padding: EdgeInsets.only(top: 20),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 10),
+                child: CarouselSlider(
+                  carouselController: _controller,
+                  options: CarouselOptions(
+                      scrollPhysics: NeverScrollableScrollPhysics(),
+                      height: height,
+                      enableInfiniteScroll: false,
+                      viewportFraction: 1,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _current = index;
+                        });
+                      }),
+                  items: list.map((i) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Stack(
+                          children: [
+                            i,
+                            AnimatedOpacity(
+                              opacity: state.value == CollapsingState.EXPANDED?1:0,
+                              duration: Duration(milliseconds: 200),
+                              child: Container(
                                 alignment: Alignment.bottomCenter,
                                 child: Visibility(
-                                  visible: state.value == CollapsingState.EXPANDED,
+                                  visible:
+                                      state.value == CollapsingState.EXPANDED,
                                   maintainState: true,
                                   maintainAnimation: true,
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     hoverColor: Colors.transparent,
-                                    onTap: (){
-                                      context.bloc<ServicesItemsBloc>().add(CollapseServiceEvent(context.bloc<ServicesItemsBloc>().state.key));
+                                    onTap: () {
+                                      context.bloc<ServicesItemsBloc>().add(
+                                          CollapseServiceEvent(context
+                                              .bloc<ServicesItemsBloc>()
+                                              .state
+                                              .key));
                                     },
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: MediaQuery.of(context).size.height*.65,
-                                      margin: EdgeInsets.all(15),
-                                      padding: EdgeInsets.symmetric(horizontal: 30),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:BorderRadius.all(Radius.circular(20)),
+                                        height:
+                                        height-110,
+                                        margin: EdgeInsets.all(15),
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 30),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
                                           boxShadow: [
                                             BoxShadow(
-                                                color: Colors.grey.withOpacity(0.6),
+                                                color:
+                                                    Colors.grey.withOpacity(0.6),
                                                 blurRadius: 10,
-                                                offset: Offset(1, 3)
-                                            ),
+                                                offset: Offset(1, 3)),
                                           ],
-                                      ),
-                                      child: Center(child: Text(ServicesTypeToStateMapper.typeToStateMap[state.key].value)),
-                                    ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                                padding:
+                                                    EdgeInsets.only(right: 30),
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    7,
+                                                child: Text(
+                                                  ServicesTypeToStateMapper
+                                                      .typeToStateMap[state.key]
+                                                      .key,
+                                                  style: AppStyles.TITLE,
+                                                  textAlign: TextAlign.center,
+                                                )),
+                                            Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  vertical: 20),
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                              width: 2,
+                                              color: AppColors.PRIMARY,
+                                            ),
+                                            Flexible(
+                                              child: Container(
+                                                  padding:
+                                                      EdgeInsets.only(left: 30),
+                                                  child: Text(
+                                                    ServicesTypeToStateMapper
+                                                        .typeToStateMap[state.key]
+                                                        .value,
+                                                    style: AppStyles.REGULAR,
+                                                  )),
+                                            )
+                                          ],
+                                        )),
                                   ),
                                 ),
-                              )
-                            ],
-                          );
-                        },
-                      );
-                    }).toList(),
-                  ),
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  }).toList(),
                 ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: _buildBottom())
-              ],
-            ),
-          );
-        }
-      );
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: _buildBottom())
+            ],
+          ),
+        );
+      });
     });
   }
 }

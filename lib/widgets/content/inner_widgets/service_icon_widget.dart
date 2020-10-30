@@ -48,12 +48,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget>{
               ],// boxShadow
             ),
             child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(ServicesTypeToStateMapper.typeToStateMap[serviceType].key, style: AppStyles.REGULAR,softWrap: true,)
-                ],
-              ),
+              child: Text(ServicesTypeToStateMapper.typeToStateMap[serviceType].key, style: AppStyles.REGULAR, textAlign: TextAlign.center,),
             ),
           ),
         );

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_type_to_state_mapper.dart';
 import 'package:anakonProject/constants/colors.dart';
+import 'package:anakonProject/constants/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,31 +20,71 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
     with SingleTickerProviderStateMixin {
   final CollapsingTitle titleType;
 
-  AnimationController expandController;
-  Animation<double> animation;
-
   _CollapsingWidgetState(this.titleType);
+
+  Widget lineWidget;
 
   @override
   void initState() {
     super.initState();
-    prepareAnimations();
-  }
-
-  void prepareAnimations() {
-    expandController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    animation = CurvedAnimation(
-      parent: expandController,
-      curve: Curves.fastOutSlowIn,
-    );
-    expandController.forward();
+    lineWidget = _buildExpandedLine();
   }
 
   @override
   void dispose() {
-    expandController.dispose();
     super.dispose();
+  }
+
+  bool isConsTextVisible = true;
+  bool isHowWorkVisible = true;
+
+  _buildLineIcon(MapEntry<CollapsingTitle, CollapsingState> state) {
+    bool isCollapsed = state.value == CollapsingState.COLLAPSED;
+    bool isCurrent = state.key != null && state.key == titleType;
+    var isCurrentCollapsed = isCurrent && isCollapsed;
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      width: 65,
+      height: 50,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          color: isCurrentCollapsed ? AppColors.PRIMARY : Colors.white,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                blurRadius: 4,
+                offset: Offset(1, 3)),
+          ]),
+      child: Center(
+          child: Icon(
+        CollapsingTypeToStateMapper.typeToStateMap[titleType].key,
+        color: isCurrentCollapsed ? Colors.white : AppColors.PRIMARY,
+      )),
+    );
+  }
+
+  _buildExpandedLine() {
+    return Container(
+      margin: EdgeInsets.only(left: 20),
+      child: Text(
+        CollapsingTypeToStateMapper.typeToStateMap[titleType].value.key,
+        style: AppStyles.TITLE,
+      ),
+    );
+  }
+
+  _buildCollapsingLine(MapEntry<CollapsingTitle, CollapsingState> state) {
+    if(state.value == CollapsingState.COLLAPSED){
+      lineWidget = Container();
+    } else {
+      lineWidget = _buildExpandedLine();
+    }
+
+        return AnimatedSwitcher(
+          duration: Duration(milliseconds: 2000),
+          transitionBuilder: (child, animation) => SizeTransition(sizeFactor: animation, child: child, axis: Axis.horizontal,),
+          child: lineWidget,
+        );
   }
 
   @override
@@ -51,160 +92,31 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
     bool isConsBloc = CollapsingTypeToStateMapper.consTypes.contains(titleType);
     return InkWell(
         onTap: () {
-          if (isConsBloc) {
+          var bloc = isConsBloc? context.bloc<CollapsedHeadersConsBloc>():context.bloc<CollapsedHeadersHowWorkBloc>();
             var isCurrent =
-                context.bloc<CollapsedHeadersConsBloc>().state.key == titleType;
-            if (context.bloc<CollapsedHeadersConsBloc>().state.value ==
+                bloc.state.key == titleType;
+            if (bloc.state.value ==
                 CollapsingState.COLLAPSED) {
               if (isCurrent) {
-                context
-                    .bloc<CollapsedHeadersConsBloc>()
-                    .add(ExpandEvent(titleType));
+                bloc.add(ExpandEvent(titleType));
               } else {
-                context
-                    .bloc<CollapsedHeadersConsBloc>()
-                    .add(CollapseEvent(titleType));
+                bloc.add(CollapseEvent(titleType));
               }
             } else {
-              context
-                  .bloc<CollapsedHeadersConsBloc>()
-                  .add(CollapseEvent(titleType));
+              bloc.add(CollapseEvent(titleType));
             }
-          } else {
-            var isCurrent =
-                context.bloc<CollapsedHeadersHowWorkBloc>().state.key ==
-                    titleType;
-            if (context.bloc<CollapsedHeadersHowWorkBloc>().state.value ==
-                CollapsingState.COLLAPSED) {
-              if (isCurrent) {
-                context
-                    .bloc<CollapsedHeadersHowWorkBloc>()
-                    .add(ExpandEvent(titleType));
-              } else {
-                context
-                    .bloc<CollapsedHeadersHowWorkBloc>()
-                    .add(CollapseEvent(titleType));
-              }
-            } else {
-              context
-                  .bloc<CollapsedHeadersHowWorkBloc>()
-                  .add(CollapseEvent(titleType));
-            }
-          }
         },
         child: isConsBloc
             ? BlocBuilder<CollapsedHeadersConsBloc,
                 MapEntry<CollapsingTitle, CollapsingState>>(
                 builder: (_, state) {
-                  bool isCollapsed = state.value == CollapsingState.COLLAPSED;
-                  bool isCurrent = state.key != null && state.key == titleType;
-                  if (!isCollapsed) {
-                    expandController.forward();
-                  } else {
-                    expandController.reverse();
-                  }
-                  return Container(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: isCurrent && isCollapsed
-                                  ? AppColors.PRIMARY
-                                  : Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    blurRadius: 4,
-                                    offset: Offset(1, 3)),
-                              ]),
-                          child: Center(
-                              child: Icon(
-                            CollapsingTypeToStateMapper
-                                .typeToStateMap[titleType].key,
-                            color: isCurrent && isCollapsed
-                                ? Colors.white
-                                : AppColors.PRIMARY,
-                          )),
-                        ),
-                        // decoration: BoxDecoration(
-                        //     borderRadius: BorderRadius.all(Radius.circular(20)),
-                        //     boxShadow: [
-                        //       BoxShadow(
-                        //           color: Colors.grey.withOpacity(0.5),
-                        //           blurRadius: 4,
-                        //           offset: Offset(1, 3)),
-                        //     ]),
-                        SizeTransition(
-                            axis: Axis.horizontal,
-                            axisAlignment: 1,
-                            sizeFactor: animation,
-                            child: Container(
-                              margin: EdgeInsets.only(left: 20),
-                              child: Text(CollapsingTypeToStateMapper
-                                      .typeToStateMap[titleType].value.key),
-                            )),
-                      ],
-                    ),
-                  );
+                  return Row(children: [_buildLineIcon(state), _buildCollapsingLine(state)],);
                 },
               )
             : BlocBuilder<CollapsedHeadersHowWorkBloc,
                 MapEntry<CollapsingTitle, CollapsingState>>(
                 builder: (_, state) {
-                  bool isCollapsed = state.value == CollapsingState.COLLAPSED;
-                  bool isCurrent = state.key != null && state.key == titleType;
-                  if (!isCollapsed) {
-                    expandController.forward();
-                  } else {
-                    expandController.reverse();
-                  }
-                  return Container(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: isCurrent && isCollapsed
-                                  ? AppColors.PRIMARY
-                                  : Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    blurRadius: 4,
-                                    offset: Offset(1, 3)),
-                              ]),
-                          child: Center(
-                              child: Icon(
-                            CollapsingTypeToStateMapper
-                                .typeToStateMap[titleType].key,
-                            color: isCurrent && isCollapsed
-                                ? Colors.white
-                                : AppColors.PRIMARY,
-                          )),
-                        ),
-                        SizeTransition(
-                            axis: Axis.horizontal,
-                            axisAlignment: 1,
-                            sizeFactor: animation,
-                            child: Container(
-                              margin: EdgeInsets.only(left: 20),
-                              child: Text(CollapsingTypeToStateMapper
-                                      .typeToStateMap[titleType].value.key),
-                            )),
-                      ],
-                    ),
-                  );
+                  return Row(children: [_buildLineIcon(state), _buildCollapsingLine(state)],);
                 },
               ));
   }

@@ -28,7 +28,7 @@ class _MenuWidgetState extends State<MenuWidget>
 
   void prepareAnimations() {
     expandController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
     animation = CurvedAnimation(
       parent: expandController,
       curve: Curves.fastOutSlowIn,
@@ -61,13 +61,12 @@ class _MenuWidgetState extends State<MenuWidget>
                 boxShadow: [
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 3,
                       blurRadius: 5,
                       offset: Offset(1, 3)),
                 ],
               ),
               width: isMouse ? MediaQuery.of(context).size.width * 0.15 : 150,
-              margin: EdgeInsets.only(top: isMouse ? 0 : 40),
+              margin: EdgeInsets.only(top: isMouse ? 0 : 40, bottom: 10),
               child: Container(
                 margin: EdgeInsets.only(top: isMouse ? 20 : 0),
                 child: Column(
