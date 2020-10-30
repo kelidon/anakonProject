@@ -60,139 +60,108 @@ class _ServicesWidgetState extends State<ServicesWidget> {
       );
     }
 
+    _buildServicesLayout(serviceTypes){
+      return BlocBuilder<MetricsBloc, Metrics>(
+        builder: (_, state) {
+          bool isMouse = state == Metrics.BIG;
+          return Container(
+            margin: EdgeInsets.all(15),
+            padding: EdgeInsets.only(top: 15),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.6),
+                    blurRadius: 10,
+                    offset: Offset(1, 3)),
+              ], // boxShadow
+            ),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Spacer(),
+                        isMouse?Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ServiceIconWidget(
+                                  serviceType: serviceTypes[0],
+                                ),
+                                SizedBox(
+                                  width: 80,
+                                ),
+                                ServiceIconWidget(
+                                  serviceType: serviceTypes[1],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ServiceIconWidget(
+                                  serviceType: serviceTypes[2],
+                                ),
+                                SizedBox(
+                                  width: 80,
+                                ),
+                                ServiceIconWidget(
+                                  serviceType: serviceTypes[3],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ):Column(
+                          children: [
+                            ServiceIconWidget(
+                              serviceType: serviceTypes[0],
+                            ),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            ServiceIconWidget(
+                              serviceType: serviceTypes[1],
+                            ),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            ServiceIconWidget(
+                              serviceType: serviceTypes[2],
+                            ),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            ServiceIconWidget(
+                              serviceType: serviceTypes[3],
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        _buildContact(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      );
+    }
     var list = [
-      Container(
-        margin: EdgeInsets.all(15),
-        padding: EdgeInsets.only(top: 15),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.6),
-                blurRadius: 10,
-                offset: Offset(1, 3)),
-          ], // boxShadow
-        ),
-        child: Container(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
-              Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ServiceIconWidget(
-                            serviceType: ServicesPageType.FIRST_PAGE_1,
-                          ),
-                          SizedBox(
-                            width: 80,
-                          ),
-                          ServiceIconWidget(
-                            serviceType: ServicesPageType.FIRST_PAGE_2,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ServiceIconWidget(
-                            serviceType: ServicesPageType.FIRST_PAGE_3,
-                          ),
-                          SizedBox(
-                            width: 80,
-                          ),
-                          ServiceIconWidget(
-                            serviceType: ServicesPageType.FIRST_PAGE_4,
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      _buildContact(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      Container(
-        margin: EdgeInsets.all(15),
-        padding: EdgeInsets.only(top: 15),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.6),
-                blurRadius: 10,
-                offset: Offset(1, 3)),
-          ], // boxShadow
-        ),
-        child: Container(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
-              Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ServiceIconWidget(
-                            serviceType: ServicesPageType.SECOND_PAGE_1,
-                          ),
-                          SizedBox(
-                            width: 80,
-                          ),
-                          ServiceIconWidget(
-                            serviceType: ServicesPageType.SECOND_PAGE_2,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ServiceIconWidget(
-                            serviceType: ServicesPageType.SECOND_PAGE_3,
-                          ),
-                          SizedBox(
-                            width: 80,
-                          ),
-                          ServiceIconWidget(
-                            serviceType: ServicesPageType.SECOND_PAGE_4,
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      _buildContact(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      _buildServicesLayout([ServicesPageType.FIRST_PAGE_1,ServicesPageType.FIRST_PAGE_2,ServicesPageType.FIRST_PAGE_3,ServicesPageType.FIRST_PAGE_4,]),
+      _buildServicesLayout([ServicesPageType.SECOND_PAGE_1,ServicesPageType.SECOND_PAGE_2,ServicesPageType.SECOND_PAGE_3,ServicesPageType.SECOND_PAGE_4]),
     ];
 
     List<Widget> _buildBottom() {
