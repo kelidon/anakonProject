@@ -59,6 +59,7 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
           child: Icon(
         CollapsingTypeToStateMapper.typeToStateMap[titleType].key,
         color: isCurrentCollapsed ? Colors.white : AppColors.PRIMARY,
+            size: 35,
       )),
     );
   }

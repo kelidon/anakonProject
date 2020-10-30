@@ -23,85 +23,96 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.6),
-                blurRadius: 10,
-                offset: Offset(1, 3)),
-          ], // boxShadow
+    return Column(
+      children: [
+        Container(
+          //padding: EdgeInsets.symmetric(vertical: 40),
+          child: Text(
+            AppText.TAGLINE_3,
+            style: AppStyles.TITLE,
+          ),
         ),
-        height: height,
-        child: Column(
-          children: [
-            Center(
-              child: Text(
-                AppText.HOW_WORK_TITLE,
-                style: AppStyles.TITLE,
-              ),
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.6),
+                    blurRadius: 10,
+                    offset: Offset(1, 3)),
+              ], // boxShadow
             ),
-            Expanded(
-              child: Stack(
-                children: [
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CollapsingLinesWidget(
-                          titleType: CollapsingTitle.HOW_WORK_1,
-                        ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        CollapsingLinesWidget(
-                          titleType: CollapsingTitle.HOW_WORK_2,
-                        ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        CollapsingLinesWidget(
-                          titleType: CollapsingTitle.HOW_WORK_3,
-                        ),
-                      ],
-                    ),
+            height: height,
+            child: Column(
+              children: [
+                Center(
+                  child: Text(
+                    AppText.HOW_WORK_TITLE,
+                    style: AppStyles.TITLE,
                   ),
-                  BlocBuilder<CollapsedHeadersHowWorkBloc,
-                          MapEntry<CollapsingTitle, CollapsingState>>(
-                      builder: (_, state) {
-                    return state.value == CollapsingState.COLLAPSED
-                        ? FutureBuilder(
-                          future: Future.delayed(Duration(milliseconds: 0), () {}),
-                          builder: (context, snapshot) {
-                            if(snapshot.connectionState == ConnectionState.done) {
-                              return Center(
-                                child: Container(
-                                    margin: EdgeInsets.only(left: 60),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 60),
-                                    child: Center(
-                                      child: Text(
-                                        CollapsingTypeToStateMapper
-                                            .typeToStateMap[state.key].value
-                                            .value,
-                                        style: AppStyles.REGULAR,
-                                      ),
-                                    )),
-                              );
-                            } else return Container();
-                          }
-                        )
-                        : Container();
-                  })
-                ],
-              ),
-            ),
-          ],
-        ));
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CollapsingLinesWidget(
+                              titleType: CollapsingTitle.HOW_WORK_1,
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            CollapsingLinesWidget(
+                              titleType: CollapsingTitle.HOW_WORK_2,
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            CollapsingLinesWidget(
+                              titleType: CollapsingTitle.HOW_WORK_3,
+                            ),
+                          ],
+                        ),
+                      ),
+                      BlocBuilder<CollapsedHeadersHowWorkBloc,
+                              MapEntry<CollapsingTitle, CollapsingState>>(
+                          builder: (_, state) {
+                        return state.value == CollapsingState.COLLAPSED
+                            ? FutureBuilder(
+                              future: Future.delayed(Duration(milliseconds: 0), () {}),
+                              builder: (context, snapshot) {
+                                if(snapshot.connectionState == ConnectionState.done) {
+                                  return Center(
+                                    child: Container(
+                                        margin: EdgeInsets.only(left: 60),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 60),
+                                        child: Center(
+                                          child: Text(
+                                            CollapsingTypeToStateMapper
+                                                .typeToStateMap[state.key].value
+                                                .value,
+                                            style: AppStyles.REGULAR,
+                                          ),
+                                        )),
+                                  );
+                                } else return Container();
+                              }
+                            )
+                            : Container();
+                      })
+                    ],
+                  ),
+                ),
+              ],
+            )),
+      ],
+    );
   }
 }

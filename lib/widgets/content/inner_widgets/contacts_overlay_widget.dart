@@ -4,6 +4,8 @@ import 'package:anakonProject/bloc/contacts_overlay/contacts_overlay_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/fonts_icons/anakon_greek_icons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -84,19 +86,22 @@ class _ContactsOverlayWidgetState extends State<ContactsOverlayWidget> {
                                           Row(
                                             children: [
                                               Icon(
-                                                  Icons.circle,
+                                                  AnakonGreek.telegram,
                                                   color: Color(0xFF06285A),
-                                                  size: 70
+                                                  size: 40
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(horizontal: 50),
+                                                child: Icon(
+                                                    AnakonGreek.viber,
+                                                    color: Color(0xFF06285A),
+                                                    size: 40
+                                                ),
                                               ),
                                               Icon(
-                                                  Icons.circle,
+                                                  AnakonGreek.wattsapp,
                                                   color: Color(0xFF06285A),
-                                                  size: 70
-                                              ),
-                                              Icon(
-                                                  Icons.circle,
-                                                  color: Color(0xFF06285A),
-                                                  size: 70
+                                                  size: 40
                                               ),
                                             ],
                                           ),

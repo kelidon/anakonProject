@@ -35,6 +35,14 @@ class AppStyles {
       fontWeight: FontWeight.w600);
 
 
+  static const TextStyle REGULAR_SERVICES = TextStyle(
+
+      fontSize: 20,
+
+
+
+      fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
+
   static const TextStyle REGULAR = TextStyle(
 
       fontSize: 16,

@@ -35,7 +35,7 @@ flutter:
   fonts:
     - family:  AnakonGreek
       fonts:
-       - asset: assets/fonts/anakon_greek.ttf
+       - asset: assets/fonts/anakonGreek.ttf
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf

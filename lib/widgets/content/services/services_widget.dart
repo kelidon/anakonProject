@@ -32,31 +32,36 @@ class _ServicesWidgetState extends State<ServicesWidget> {
   @override
   Widget build(BuildContext context) {
     Widget _buildContact() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 17),
-        child: Column(
-          children: [
-            FittedBox(
-              fit: BoxFit.cover,
-              child: InkWell(
-                onTap: () => context.bloc<ContactsOverlayBloc>().add(true),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  margin: EdgeInsets.only(top: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: AppColors.PRIMARY,
+      return Column(
+        children: [
+
+          Container(
+            margin: EdgeInsets.only(bottom: 17),
+            child: Column(
+              children: [
+                FittedBox(
+                  fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () => context.bloc<ContactsOverlayBloc>().add(true),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      margin: EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: AppColors.PRIMARY,
+                      ),
+                      child: Center(
+                          child: Text(
+                        AppText.CONTACT_LABEL,
+                        style: AppStyles.CONTACT_BUTTON,
+                      )),
+                    ),
                   ),
-                  child: Center(
-                      child: Text(
-                    AppText.CONTACT_LABEL,
-                    style: AppStyles.CONTACT_BUTTON,
-                  )),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       );
     }
 
@@ -81,7 +86,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
               padding: EdgeInsets.all(10),
               child: Column(
                 children: [
-                  Text(AppText.SERVICE1_TITLE, style: AppStyles.TITLE),
+                  Text(AppText.SERVICE_TITLE, style: AppStyles.TITLE),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -214,122 +219,134 @@ class _ServicesWidgetState extends State<ServicesWidget> {
       bool isMouse = state == Metrics.BIG;
       return BlocBuilder<ServicesItemsBloc,
           MapEntry<ServicesPageType, CollapsingState>>(builder: (_, state) {
-        return Container(
-          padding: EdgeInsets.only(top: 20),
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(bottom: 10),
-                child: CarouselSlider(
-                  carouselController: _controller,
-                  options: CarouselOptions(
-                      scrollPhysics: NeverScrollableScrollPhysics(),
-                      height: height,
-                      enableInfiniteScroll: false,
-                      viewportFraction: 1,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _current = index;
-                        });
-                      }),
-                  items: list.map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Stack(
-                          children: [
-                            i,
-                            AnimatedOpacity(
-                              opacity: state.value == CollapsingState.EXPANDED?1:0,
-                              duration: Duration(milliseconds: 200),
-                              child: Container(
-                                alignment: Alignment.bottomCenter,
-                                child: Visibility(
-                                  visible:
-                                      state.value == CollapsingState.EXPANDED,
-                                  maintainState: true,
-                                  maintainAnimation: true,
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    onTap: () {
-                                      context.bloc<ServicesItemsBloc>().add(
-                                          CollapseServiceEvent(context
-                                              .bloc<ServicesItemsBloc>()
-                                              .state
-                                              .key));
-                                    },
-                                    child: Container(
-                                        height:
-                                        height-110,
-                                        margin: EdgeInsets.all(15),
-                                        padding:
-                                            EdgeInsets.symmetric(horizontal: 30),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color:
-                                                    Colors.grey.withOpacity(0.6),
-                                                blurRadius: 10,
-                                                offset: Offset(1, 3)),
-                                          ],
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                                padding:
-                                                    EdgeInsets.only(right: 30),
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    7,
-                                                child: Text(
-                                                  ServicesTypeToStateMapper
-                                                      .typeToStateMap[state.key]
-                                                      .key,
-                                                  style: AppStyles.TITLE,
-                                                  textAlign: TextAlign.center,
-                                                )),
-                                            Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 20),
-                                              height: MediaQuery.of(context)
-                                                  .size
-                                                  .height,
-                                              width: 2,
-                                              color: AppColors.PRIMARY,
-                                            ),
-                                            Flexible(
-                                              child: Container(
-                                                  padding:
-                                                      EdgeInsets.only(left: 30),
-                                                  child: Text(
-                                                    ServicesTypeToStateMapper
-                                                        .typeToStateMap[state.key]
-                                                        .value,
-                                                    style: AppStyles.REGULAR,
-                                                  )),
-                                            )
-                                          ],
-                                        )),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        );
-                      },
-                    );
-                  }).toList(),
-                ),
+        return Column(
+          children: [
+            Container(
+              //padding: EdgeInsets.symmetric(vertical: 40),
+              child: Text(
+                AppText.TAGLINE_1,
+                style: AppStyles.TITLE,
               ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: _buildBottom())
-            ],
-          ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 20),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    child: CarouselSlider(
+                      carouselController: _controller,
+                      options: CarouselOptions(
+                          scrollPhysics: NeverScrollableScrollPhysics(),
+                          height: height,
+                          enableInfiniteScroll: false,
+                          viewportFraction: 1,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _current = index;
+                            });
+                          }),
+                      items: list.map((i) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Stack(
+                              children: [
+                                i,
+                                AnimatedOpacity(
+                                  opacity: state.value == CollapsingState.EXPANDED?1:0,
+                                  duration: Duration(milliseconds: 200),
+                                  child: Container(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Visibility(
+                                      visible:
+                                          state.value == CollapsingState.EXPANDED,
+                                      maintainState: true,
+                                      maintainAnimation: true,
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        onTap: () {
+                                          context.bloc<ServicesItemsBloc>().add(
+                                              CollapseServiceEvent(context
+                                                  .bloc<ServicesItemsBloc>()
+                                                  .state
+                                                  .key));
+                                        },
+                                        child: Container(
+                                            height:
+                                            height-110,
+                                            margin: EdgeInsets.all(15),
+                                            padding:
+                                                EdgeInsets.symmetric(horizontal: 30),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20)),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color:
+                                                        Colors.grey.withOpacity(0.6),
+                                                    blurRadius: 10,
+                                                    offset: Offset(1, 3)),
+                                              ],
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                    padding:
+                                                        EdgeInsets.only(right: 30),
+                                                    width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        7,
+                                                    child: Text(
+                                                      ServicesTypeToStateMapper
+                                                          .typeToStateMap[state.key]
+                                                          .key,
+                                                      style: AppStyles.TITLE,
+                                                      textAlign: TextAlign.center,
+                                                    )),
+                                                Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 20),
+                                                  height: MediaQuery.of(context)
+                                                      .size
+                                                      .height,
+                                                  width: 2,
+                                                  color: AppColors.PRIMARY,
+                                                ),
+                                                Flexible(
+                                                  child: Container(
+                                                      padding:
+                                                          EdgeInsets.only(left: 30),
+                                                      child: Text(
+                                                        ServicesTypeToStateMapper
+                                                            .typeToStateMap[state.key]
+                                                            .value,
+                                                        style: AppStyles.REGULAR_SERVICES,
+                                                        textAlign: TextAlign.justify,
+                                                      )),
+                                                )
+                                              ],
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: _buildBottom())
+                ],
+              ),
+            ),
+          ],
         );
       });
     });

@@ -83,7 +83,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                             children: [
                               Text(AppText.PHONE,
                                   style: AppStyles.CONTACTS_APPBAR),
-                              Text("anakon@gmail.com",
+                              Text(AppText.CONTACTS_GMAIL,
                                   style: AppStyles.CONTACTS_APPBAR)
                             ],
                           )),
