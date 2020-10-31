@@ -51,7 +51,6 @@ class _ContentWidgetState extends State<ContentWidget> {
                 Scrollable.ensureVisible(
                   _buttonToKey[state].currentContext,
                   duration: Duration(milliseconds: 600),
-                  curve: Curves.easeOut,
                 );
               },
               child: Container(
