@@ -25,15 +25,19 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          //padding: EdgeInsets.symmetric(vertical: 40),
-          child: Text(
-            AppText.TAGLINE_1,
-            style: AppStyles.TITLE,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Text(
+              AppText.TAGLINE_1,
+              style: AppStyles.TITLE,
+              maxLines: 1,
+            ),
           ),
         ),
         Container(
-            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 30),
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -58,28 +62,24 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                 Expanded(
                   child: Stack(
                     children: [
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CollapsingLinesWidget(
-                                titleType: CollapsingTitle.CONS_1,
-                              ),
-                              SizedBox(height: 40,),
-                              CollapsingLinesWidget(
-                                titleType: CollapsingTitle.CONS_2,
-                              ),
-                              SizedBox(height: 40,),
-                              CollapsingLinesWidget(
-                                titleType: CollapsingTitle.CONS_3,
-                              ),
-                              SizedBox(height: 40,),
-                              CollapsingLinesWidget(
-                                titleType: CollapsingTitle.CONS_4,
-                              ),
-                            ],
+                          CollapsingLinesWidget(
+                            titleType: CollapsingTitle.CONS_1,
+                          ),
+                          SizedBox(height: 40,),
+                          CollapsingLinesWidget(
+                            titleType: CollapsingTitle.CONS_2,
+                          ),
+                          SizedBox(height: 40,),
+                          CollapsingLinesWidget(
+                            titleType: CollapsingTitle.CONS_3,
+                          ),
+                          SizedBox(height: 40,),
+                          CollapsingLinesWidget(
+                            titleType: CollapsingTitle.CONS_4,
                           ),
                         ],
                       ),
@@ -94,8 +94,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                                     return Center(
                                       child: Container(
                                           margin: EdgeInsets.only(left: 60),
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 60),
+                                          padding: EdgeInsets.only(left: 40, right: 10),
                                           child: Center(
                                             child: Text(
                                               CollapsingTypeToStateMapper

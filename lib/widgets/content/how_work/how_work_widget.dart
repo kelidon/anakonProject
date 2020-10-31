@@ -25,15 +25,19 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          //padding: EdgeInsets.symmetric(vertical: 40),
-          child: Text(
-            AppText.TAGLINE_3,
-            style: AppStyles.TITLE,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            child: Text(
+              AppText.TAGLINE_3,
+              style: AppStyles.TITLE,
+              maxLines: 1,
+            ),
           ),
         ),
         Container(
-            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+            margin: EdgeInsets.fromLTRB(15, 0, 15, 30),
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -91,8 +95,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                                   return Center(
                                     child: Container(
                                         margin: EdgeInsets.only(left: 60),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 60),
+                                        padding: EdgeInsets.only(left: 40, right: 10),
                                         child: Center(
                                           child: Text(
                                             CollapsingTypeToStateMapper

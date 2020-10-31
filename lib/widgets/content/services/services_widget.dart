@@ -71,7 +71,6 @@ class _ServicesWidgetState extends State<ServicesWidget> {
           bool isMouse = state == Metrics.BIG;
           return Container(
             margin: EdgeInsets.all(15),
-            padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -137,9 +136,6 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                             ),
                             ServiceIconWidget(
                               serviceType: serviceTypes[1],
-                            ),
-                            SizedBox(
-                              height: 50,
                             ),
                             ServiceIconWidget(
                               serviceType: serviceTypes[2],
@@ -221,15 +217,18 @@ class _ServicesWidgetState extends State<ServicesWidget> {
           MapEntry<ServicesPageType, CollapsingState>>(builder: (_, state) {
         return Column(
           children: [
-            Container(
-              //padding: EdgeInsets.symmetric(vertical: 40),
-              child: Text(
-                AppText.TAGLINE_1,
-                style: AppStyles.TITLE,
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Container(
+                padding: EdgeInsets.only(top: 20),
+                child: Text(
+                  AppText.TAGLINE_2,
+                  style: AppStyles.TITLE,
+                  maxLines: 1,
+                ),
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top: 20),
               child: Column(
                 children: [
                   Container(
@@ -292,7 +291,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                             ),
                                             child: Row(
                                               children: [
-                                                Container(
+                                                if(isMouse)Container(
                                                     padding:
                                                         EdgeInsets.only(right: 30),
                                                     width: MediaQuery.of(context)
@@ -306,7 +305,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                                       style: AppStyles.TITLE,
                                                       textAlign: TextAlign.center,
                                                     )),
-                                                Container(
+                                                if(isMouse)Container(
                                                   margin: EdgeInsets.symmetric(
                                                       vertical: 20),
                                                   height: MediaQuery.of(context)
@@ -315,7 +314,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                                   width: 2,
                                                   color: AppColors.PRIMARY,
                                                 ),
-                                                Flexible(
+                                                isMouse?Flexible(
                                                   child: Container(
                                                       padding:
                                                           EdgeInsets.only(left: 30),
@@ -326,6 +325,14 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                                         style: AppStyles.REGULAR_SERVICES,
                                                         textAlign: TextAlign.justify,
                                                       )),
+                                                ):Flexible(
+                                                  child: Text(
+                                                    ServicesTypeToStateMapper
+                                                        .typeToStateMap[state.key]
+                                                        .value,
+                                                    style: AppStyles.REGULAR_SERVICES,
+                                                    textAlign: TextAlign.justify,
+                                                  ),
                                                 )
                                               ],
                                             )),
