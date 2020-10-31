@@ -79,9 +79,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                           child: Container(
                               child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(AppText.PHONE,
+                              Text(AppText.CONTACTS_NUMBER,
                                   style: AppStyles.CONTACTS_APPBAR),
                               Text(AppText.CONTACTS_GMAIL,
                                   style: AppStyles.CONTACTS_APPBAR)

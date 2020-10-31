@@ -126,7 +126,7 @@ class _ApplicationPageState extends State<ApplicationPage>
     print("width: ${MediaQuery.of(context).size.width}");
     context.bloc<MetricsBloc>().add(isMouse ? Metrics.BIG : Metrics.SMALL);
 
-    final String assetName = 'assets/images/logo_on_tower_2.png';
+    final String assetName = 'assets/images/logo_on_tower.png';
     final Widget logoOnTower = Image.asset(
       assetName,
     );
