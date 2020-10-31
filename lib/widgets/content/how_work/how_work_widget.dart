@@ -101,7 +101,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                                             CollapsingTypeToStateMapper
                                                 .typeToStateMap[state.key].value
                                                 .value,
-                                            style: AppStyles.REGULAR,
+                                            style: AppStyles.REGULAR_SERVICES,
                                           ),
                                         )),
                                   );

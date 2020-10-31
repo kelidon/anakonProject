@@ -100,7 +100,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                                               CollapsingTypeToStateMapper
                                                   .typeToStateMap[state.key].value
                                                   .value,
-                                              style: AppStyles.REGULAR,
+                                              style: AppStyles.REGULAR_SERVICES,
                                             ),
                                           )),
                                     );
