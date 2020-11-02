@@ -2,9 +2,9 @@ import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.da
 import 'package:anakonProject/bloc/collapsing_headers/collapsing_type_to_state_mapper.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/widgets/content/inner_widgets/collapsing_lines_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:anakonProject/widgets/content/inner_widgets/collapsing_lines_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HowWorkWidget extends StatefulWidget {
@@ -89,25 +89,29 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                           builder: (_, state) {
                         return state.value == CollapsingState.COLLAPSED
                             ? FutureBuilder(
-                              future: Future.delayed(Duration(milliseconds: 0), () {}),
-                              builder: (context, snapshot) {
-                                if(snapshot.connectionState == ConnectionState.done) {
-                                  return Center(
-                                    child: Container(
-                                        margin: EdgeInsets.only(left: 60),
-                                        padding: EdgeInsets.only(left: 40, right: 10),
-                                        child: Center(
-                                          child: Text(
-                                            CollapsingTypeToStateMapper
-                                                .typeToStateMap[state.key].value
-                                                .value,
-                                            style: AppStyles.REGULAR_SERVICES,
-                                          ),
-                                        )),
-                                  );
-                                } else return Container();
-                              }
-                            )
+                                future: Future.delayed(
+                                    Duration(milliseconds: 0), () {}),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    return Center(
+                                      child: Container(
+                                          margin: EdgeInsets.only(left: 60),
+                                          padding: EdgeInsets.only(
+                                              left: 40, right: 10),
+                                          child: Center(
+                                            child: Text(
+                                              CollapsingTypeToStateMapper
+                                                  .typeToStateMap[state.key]
+                                                  .value
+                                                  .value,
+                                              style: AppStyles.REGULAR_SERVICES,
+                                            ),
+                                          )),
+                                    );
+                                  } else
+                                    return Container();
+                                })
                             : Container();
                       })
                     ],

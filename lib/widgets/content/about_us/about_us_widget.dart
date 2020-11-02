@@ -41,14 +41,13 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
             padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius:BorderRadius.all(Radius.circular(20)),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
               boxShadow: [
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.6),
                     blurRadius: 10,
-                    offset: Offset(1, 3)
-                ),
-              ],// boxShadow
+                    offset: Offset(1, 3)),
+              ], // boxShadow
             ),
             height: height,
             child: Column(
@@ -69,46 +68,56 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                           CollapsingLinesWidget(
                             titleType: CollapsingTitle.CONS_1,
                           ),
-                          SizedBox(height: 40,),
+                          SizedBox(
+                            height: 40,
+                          ),
                           CollapsingLinesWidget(
                             titleType: CollapsingTitle.CONS_2,
                           ),
-                          SizedBox(height: 40,),
+                          SizedBox(
+                            height: 40,
+                          ),
                           CollapsingLinesWidget(
                             titleType: CollapsingTitle.CONS_3,
                           ),
-                          SizedBox(height: 40,),
+                          SizedBox(
+                            height: 40,
+                          ),
                           CollapsingLinesWidget(
                             titleType: CollapsingTitle.CONS_4,
                           ),
                         ],
                       ),
                       BlocBuilder<CollapsedHeadersConsBloc,
-                          MapEntry<CollapsingTitle, CollapsingState>>(
+                              MapEntry<CollapsingTitle, CollapsingState>>(
                           builder: (_, state) {
-                            return state.value == CollapsingState.COLLAPSED
-                                ? FutureBuilder(
-                                future: Future.delayed(Duration(milliseconds: 0), () {}),
+                        return state.value == CollapsingState.COLLAPSED
+                            ? FutureBuilder(
+                                future: Future.delayed(
+                                    Duration(milliseconds: 0), () {}),
                                 builder: (context, snapshot) {
-                                  if(snapshot.connectionState == ConnectionState.done) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
                                     return Center(
                                       child: Container(
                                           margin: EdgeInsets.only(left: 60),
-                                          padding: EdgeInsets.only(left: 40, right: 10),
+                                          padding: EdgeInsets.only(
+                                              left: 40, right: 10),
                                           child: Center(
                                             child: Text(
                                               CollapsingTypeToStateMapper
-                                                  .typeToStateMap[state.key].value
+                                                  .typeToStateMap[state.key]
+                                                  .value
                                                   .value,
                                               style: AppStyles.REGULAR_SERVICES,
                                             ),
                                           )),
                                     );
-                                  } else return Container();
-                                }
-                            )
-                                : Container();
-                          })
+                                  } else
+                                    return Container();
+                                })
+                            : Container();
+                      })
                     ],
                   ),
                 ),

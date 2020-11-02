@@ -59,7 +59,7 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
           child: Icon(
         CollapsingTypeToStateMapper.typeToStateMap[titleType].key,
         color: isCurrentCollapsed ? Colors.white : AppColors.PRIMARY,
-            size: 35,
+        size: 35,
       )),
     );
   }
@@ -75,17 +75,21 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
   }
 
   _buildCollapsingLine(MapEntry<CollapsingTitle, CollapsingState> state) {
-    if(state.value == CollapsingState.COLLAPSED){
+    if (state.value == CollapsingState.COLLAPSED) {
       lineWidget = Container();
     } else {
       lineWidget = _buildExpandedLine();
     }
 
-        return AnimatedSwitcher(
-          duration: Duration(milliseconds: 2000),
-          transitionBuilder: (child, animation) => SizeTransition(sizeFactor: animation, child: child, axis: Axis.horizontal,),
-          child: lineWidget,
-        );
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 2000),
+      transitionBuilder: (child, animation) => SizeTransition(
+        sizeFactor: animation,
+        child: child,
+        axis: Axis.horizontal,
+      ),
+      child: lineWidget,
+    );
   }
 
   @override
@@ -93,31 +97,41 @@ class _CollapsingWidgetState extends State<CollapsingLinesWidget>
     bool isConsBloc = CollapsingTypeToStateMapper.consTypes.contains(titleType);
     return InkWell(
         onTap: () {
-          var bloc = isConsBloc? context.bloc<CollapsedHeadersConsBloc>():context.bloc<CollapsedHeadersHowWorkBloc>();
-            var isCurrent =
-                bloc.state.key == titleType;
-            if (bloc.state.value ==
-                CollapsingState.COLLAPSED) {
-              if (isCurrent) {
-                bloc.add(ExpandEvent(titleType));
-              } else {
-                bloc.add(CollapseEvent(titleType));
-              }
+          var bloc = isConsBloc
+              ? context.bloc<CollapsedHeadersConsBloc>()
+              : context.bloc<CollapsedHeadersHowWorkBloc>();
+          var isCurrent = bloc.state.key == titleType;
+          if (bloc.state.value == CollapsingState.COLLAPSED) {
+            if (isCurrent) {
+              bloc.add(ExpandEvent(titleType));
             } else {
               bloc.add(CollapseEvent(titleType));
             }
+          } else {
+            bloc.add(CollapseEvent(titleType));
+          }
         },
         child: isConsBloc
             ? BlocBuilder<CollapsedHeadersConsBloc,
                 MapEntry<CollapsingTitle, CollapsingState>>(
                 builder: (_, state) {
-                  return Row(children: [_buildLineIcon(state), _buildCollapsingLine(state)],);
+                  return Row(
+                    children: [
+                      _buildLineIcon(state),
+                      _buildCollapsingLine(state)
+                    ],
+                  );
                 },
               )
             : BlocBuilder<CollapsedHeadersHowWorkBloc,
                 MapEntry<CollapsingTitle, CollapsingState>>(
                 builder: (_, state) {
-                  return Row(children: [_buildLineIcon(state), _buildCollapsingLine(state)],);
+                  return Row(
+                    children: [
+                      _buildLineIcon(state),
+                      _buildCollapsingLine(state)
+                    ],
+                  );
                 },
               ));
   }
