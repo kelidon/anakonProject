@@ -4,6 +4,7 @@ import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/fonts_icons/anakon_greek_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +56,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                       Center(
                         child: InkWell(
                           child: Icon(
-                            isEnabled ? Icons.clear : Icons.menu,
+                            isEnabled ? AnakonGreek.menu_exp : AnakonGreek.menu_col,
                             color: Color(0xFF06285A),
                           ),
                           onTap: () {

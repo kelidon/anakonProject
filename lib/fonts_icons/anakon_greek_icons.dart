@@ -30,5 +30,6 @@ class AnakonGreek {
   static const IconData wattsapp = IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData a = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData e = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData e_big = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData menu_exp = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData menu_col = IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
