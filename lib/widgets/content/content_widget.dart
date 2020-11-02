@@ -8,6 +8,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../picture_check.dart';
+
 class ContentWidget extends StatefulWidget {
   const ContentWidget({Key key}) : super(key: key);
 
@@ -66,7 +68,9 @@ class _ContentWidgetState extends State<ContentWidget> {
                         children: [
                           Container(
                             key: aboutKey,
-                            child: AboutUsWidget(
+                            child:
+                            //PictureCheck()
+                            AboutUsWidget(
                               height: MediaQuery.of(context).size.height - 160,
                             ),
                           ),
