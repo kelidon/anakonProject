@@ -82,10 +82,10 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                             builder: (_) => Container(
                                 alignment: Alignment.center,
                                 child: HeroTableWidget(
-                                    aboutNavKey: howWorkNavigatorKey,
+                                    navKey: howWorkNavigatorKey,
                                     mainContext: _,
                                     bloc: context
-                                        .bloc<AnimatedPicturesSecondBloc>())));
+                                        .bloc<AnimatedPicturesSecondBloc>(), title: AppText.HOW_WORK_TITLE,)));
                       },
                     )),
               ],

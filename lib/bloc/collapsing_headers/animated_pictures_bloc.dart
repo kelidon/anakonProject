@@ -16,15 +16,13 @@ enum CollapsingState {
   EXPANDED
 }
 
-abstract class AnimatedPicturesBloc extends Bloc<CollapsingHeadersEvent, MapEntry<AnimatedTitle, CollapsingState>> {
-  AnimatedPicturesBloc(MapEntry entry) : super(entry);
+abstract class AnimatedPicturesBloc extends Bloc<AnimatedPicturesEvent, AnimatedTitle> {
+  AnimatedPicturesBloc(MapEntry entry) : super(null);
 
   @override
-  Stream<MapEntry<AnimatedTitle, CollapsingState>> mapEventToState(CollapsingHeadersEvent event) async* {
-    if(event is CollapseEvent){
-      yield MapEntry(event.title, CollapsingState.COLLAPSED);
-    } else if(event is ExpandEvent){
-      yield MapEntry(event.title, CollapsingState.EXPANDED);
+  Stream<AnimatedTitle> mapEventToState(AnimatedPicturesEvent event) async* {
+    if(event is ChangePictureEvent){
+      yield event.pictureTitle;
     }
   }
 }

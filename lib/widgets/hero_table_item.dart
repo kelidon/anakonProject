@@ -8,14 +8,29 @@ class HeroTableItem extends StatelessWidget {
   final GlobalKey<NavigatorState> navKey;
   final BuildContext mainContext;
   final AnimatedTitle tag;
+  final String titleTag;
+  final AnimatedPicturesBloc bloc;
 
-  const HeroTableItem({Key key, this.navKey, this.mainContext, this.tag}) : super(key: key);
+  const HeroTableItem(
+      {Key key, this.navKey, this.mainContext, this.tag, this.titleTag, this.bloc})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Navigator.push(mainContext, MaterialPageRoute(builder: (context) => HeroTargetWidget(navKey: navKey, tag: tag, color: Colors.red, mainContext: mainContext,)));
+      onTap: () {
+        //bloc.add(ChangePictureEvent(tag));
+        Navigator.push(
+            mainContext,
+            MaterialPageRoute(
+                builder: (context) => HeroTargetWidget(
+                      navKey: navKey,
+                      tag: tag,
+                      titleTag: titleTag,
+                      color: Colors.red,
+                      mainContext: mainContext,
+                  bloc:bloc
+                    )));
       },
       child: Hero(
         tag: tag,
@@ -27,5 +42,4 @@ class HeroTableItem extends StatelessWidget {
       ),
     );
   }
-
 }

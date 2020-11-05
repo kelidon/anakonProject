@@ -81,10 +81,10 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                         builder: (_) => Container(
                             alignment: Alignment.center,
                             child: HeroTableWidget(
-                                aboutNavKey: aboutNavigatorKey,
+                                navKey: aboutNavigatorKey,
                                 mainContext: _,
                                 bloc: context
-                                    .bloc<AnimatedPicturesFirstBloc>())));
+                                    .bloc<AnimatedPicturesFirstBloc>(), title: AppText.ABOUT_US_TITLE,)));
                   },
                 )),
               ],

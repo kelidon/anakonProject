@@ -1,110 +1,81 @@
 import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/widgets/hero_table_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'hero_target.dart';
-
 class HeroTableWidget extends StatefulWidget {
-  final GlobalKey<NavigatorState> aboutNavKey;
-  final BuildContext mainContext;
-  final AnimatedPicturesBloc bloc;
-
-  const HeroTableWidget({Key key, this.aboutNavKey, this.mainContext, this.bloc}) : super(key: key);
-  @override
-  State<StatefulWidget> createState() => _HeroTableWidgetState(aboutNavKey, mainContext);
-
-}
-class _HeroTableWidgetState extends State<HeroTableWidget> {
   final GlobalKey<NavigatorState> navKey;
   final BuildContext mainContext;
+  final AnimatedPicturesBloc bloc;
+  final String title;
 
-  _HeroTableWidgetState(this.navKey, this.mainContext);
+  const HeroTableWidget(
+      {Key key, this.navKey, this.mainContext, this.bloc, this.title})
+      : super(key: key);
+  @override
+  State<StatefulWidget> createState() => _HeroTableWidgetState();
+}
 
+class _HeroTableWidgetState extends State<HeroTableWidget> {
   @override
   Widget build(BuildContext context) {
+    _buildTableRows() {
+      List<AnimatedTitle> titles;
+      if (widget.bloc is AnimatedPicturesFirstBloc) {
+        titles = [
+          AnimatedTitle.CONS_1,
+          AnimatedTitle.CONS_2,
+          AnimatedTitle.CONS_3,
+          AnimatedTitle.CONS_4
+        ];
+      } else if (widget.bloc is AnimatedPicturesSecondBloc) {
+        titles = [
+          AnimatedTitle.HOW_WORK_1,
+          AnimatedTitle.HOW_WORK_2,
+          AnimatedTitle.HOW_WORK_3,
+          null
+        ];
+      }
+      List<TableRow> tableRows;
+      for (int i = 0; i < titles.length; i += 2) {
+        var row = TableRow(children: [
+          HeroTableItem(
+            navKey: widget.navKey,
+            mainContext: widget.mainContext,
+            tag: titles[i],
+            titleTag: widget.title,
+          ),
+          titles[i + 1] == null
+              ? Container()
+              : HeroTableItem(
+                  navKey: widget.navKey,
+                  mainContext: widget.mainContext,
+                  tag: titles[i + 1],
+                  titleTag: widget.title,
+                )
+        ]);
+        tableRows.add(row);
+      }
+    }
+
     return Row(
       children: [
         Hero(
-          tag: 'aboutTitle',
+          tag: widget.title,
           child: Center(
-            child: Text(AppText.ABOUT_US_TITLE, style: AppStyles.TITLE,),
+            child: Text(
+              widget.title,
+              style: AppStyles.TITLE,
+            ),
           ),
         ),
         Table(
-          defaultColumnWidth: FixedColumnWidth(MediaQuery.of(context).size.width/4),
-          children: [
-            TableRow(
-              children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.push(mainContext, MaterialPageRoute(builder: (context) => HeroTargetWidget(navKey: navKey, tag: 'redcont', color: Colors.red, mainContext: mainContext,)));
-                  },
-                  child: Hero(
-                    tag: 'redcont',
-                    child: Container(
-                      width: 100,
-                      height: 200,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: (){
-                    navKey.currentState.push(
-                        MaterialPageRoute(builder: (context) => HeroTargetWidget(navKey: navKey, tag: 'ycont', color: Colors.yellow, mainContext: mainContext))
-                    );
-                  },
-                  child: Hero(
-                    tag: 'ycont',
-                    child: Container(
-                      width: 100,
-                      height: 200,
-                      color: Colors.yellow,
-                    ),
-                  ),
-                ),
-              ]
-            ),
-            TableRow(
-                children: [
-                  InkWell(
-                    onTap: (){
-                      navKey.currentState.push(
-                          MaterialPageRoute(builder: (context) => HeroTargetWidget(navKey: navKey, tag: 'bcont', color: Colors.blue, mainContext: mainContext))
-                      );
-                    },
-                    child: Hero(
-                      tag: 'bcont',
-                      child: Container(
-                        width: 100,
-                        height: 200,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: (){
-                      navKey.currentState.push(
-                          MaterialPageRoute(builder: (context) => HeroTargetWidget(navKey: navKey, tag: 'gcont', color: Colors.green, mainContext: mainContext))
-                      );
-                    },
-                    child: Hero(
-                      tag: 'gcont',
-                      child: Container(
-                        width: 100,
-                        height: 200,
-                        color: Colors.green,
-                      ),
-                    ),
-                  ),
-                ]
-            )
-          ],
-        ),
+            defaultColumnWidth:
+                FixedColumnWidth(MediaQuery.of(context).size.width / 4),
+            children: _buildTableRows()),
       ],
     );
   }
-
 }

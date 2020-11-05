@@ -1,15 +1,11 @@
 part of 'animated_pictures_bloc.dart';
 
-class CollapsingHeadersEvent {
-  AnimatedTitle title;
+class AnimatedPicturesEvent {
+  AnimatedTitle pictureTitle;
 
-  CollapsingHeadersEvent(this.title);
+  AnimatedPicturesEvent(this.pictureTitle);
 }
 
-class CollapseEvent extends CollapsingHeadersEvent{
-  CollapseEvent(AnimatedTitle title) : super(title);
-}
-
-class ExpandEvent extends CollapsingHeadersEvent{
-  ExpandEvent(AnimatedTitle title) : super(title);
+class ChangePictureEvent extends AnimatedPicturesEvent{
+  ChangePictureEvent(AnimatedTitle title) : super(title);
 }
