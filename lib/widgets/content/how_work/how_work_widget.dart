@@ -1,11 +1,12 @@
-import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
-import 'package:anakonProject/bloc/collapsing_headers/collapsing_type_to_state_mapper.dart';
+import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
+import 'package:anakonProject/bloc/collapsing_headers/animated_type_to_state_mapper.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:anakonProject/widgets/content/inner_widgets/collapsing_lines_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../hero_table.dart';
 
 class HowWorkWidget extends StatefulWidget {
   final double height;
@@ -16,10 +17,24 @@ class HowWorkWidget extends StatefulWidget {
   State<StatefulWidget> createState() => _HowWorkWidgetState(height);
 }
 
+var howWorkNavigatorKey = GlobalKey<NavigatorState>();
+
 class _HowWorkWidgetState extends State<HowWorkWidget> {
   final double height;
 
   _HowWorkWidgetState(this.height);
+
+  HeroController _heroController;
+
+  @override
+  void initState() {
+    super.initState();
+    _heroController = HeroController(createRectTween: _createRectTween);
+  }
+
+  RectTween _createRectTween(Rect begin, Rect end) {
+    return MaterialRectArcTween(begin: begin, end: end);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,60 +74,20 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                   ),
                 ),
                 Expanded(
-                  child: Stack(
-                    children: [
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CollapsingLinesWidget(
-                              titleType: CollapsingTitle.HOW_WORK_1,
-                            ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            CollapsingLinesWidget(
-                              titleType: CollapsingTitle.HOW_WORK_2,
-                            ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            CollapsingLinesWidget(
-                              titleType: CollapsingTitle.HOW_WORK_3,
-                            ),
-                          ],
-                        ),
-                      ),
-                      BlocBuilder<CollapsedHeadersHowWorkBloc,
-                              MapEntry<CollapsingTitle, CollapsingState>>(
-                          builder: (_, state) {
-                        return state.value == CollapsingState.COLLAPSED
-                            ? FutureBuilder(
-                              future: Future.delayed(Duration(milliseconds: 0), () {}),
-                              builder: (context, snapshot) {
-                                if(snapshot.connectionState == ConnectionState.done) {
-                                  return Center(
-                                    child: Container(
-                                        margin: EdgeInsets.only(left: 60),
-                                        padding: EdgeInsets.only(left: 40, right: 10),
-                                        child: Center(
-                                          child: Text(
-                                            CollapsingTypeToStateMapper
-                                                .typeToStateMap[state.key].value
-                                                .value,
-                                            style: AppStyles.REGULAR_SERVICES,
-                                          ),
-                                        )),
-                                  );
-                                } else return Container();
-                              }
-                            )
-                            : Container();
-                      })
-                    ],
-                  ),
-                ),
+                    child: Navigator(
+                      observers: [_heroController],
+                      key: howWorkNavigatorKey,
+                      onGenerateRoute: (settings) {
+                        return MaterialPageRoute(
+                            builder: (_) => Container(
+                                alignment: Alignment.center,
+                                child: HeroTableWidget(
+                                    aboutNavKey: howWorkNavigatorKey,
+                                    mainContext: _,
+                                    bloc: context
+                                        .bloc<AnimatedPicturesSecondBloc>())));
+                      },
+                    )),
               ],
             )),
       ],

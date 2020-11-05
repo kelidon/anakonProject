@@ -1,4 +1,4 @@
-import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
+import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'services_items_event.dart';
 

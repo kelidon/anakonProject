@@ -1,3 +1,4 @@
+import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,17 +9,18 @@ import 'hero_target.dart';
 class HeroTableWidget extends StatefulWidget {
   final GlobalKey<NavigatorState> aboutNavKey;
   final BuildContext mainContext;
+  final AnimatedPicturesBloc bloc;
 
-  const HeroTableWidget({Key key, this.aboutNavKey, this.mainContext}) : super(key: key);
+  const HeroTableWidget({Key key, this.aboutNavKey, this.mainContext, this.bloc}) : super(key: key);
   @override
   State<StatefulWidget> createState() => _HeroTableWidgetState(aboutNavKey, mainContext);
 
 }
 class _HeroTableWidgetState extends State<HeroTableWidget> {
-  final GlobalKey<NavigatorState> aboutNavKey;
+  final GlobalKey<NavigatorState> navKey;
   final BuildContext mainContext;
 
-  _HeroTableWidgetState(this.aboutNavKey, this.mainContext);
+  _HeroTableWidgetState(this.navKey, this.mainContext);
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +39,7 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
               children: [
                 InkWell(
                   onTap: (){
-                    // aboutNavKey.currentState.push(
-                    //     MaterialPageRoute(builder: (context) => HeroTargetWidget(aboutNavKey: aboutNavKey, tag: 'redcont', color: Colors.red, mainContext: mainContext,))
-                    //);
-                    Navigator.push(mainContext, MaterialPageRoute(builder: (context) => HeroTargetWidget(aboutNavKey: aboutNavKey, tag: 'redcont', color: Colors.red, mainContext: mainContext,)));
+                    Navigator.push(mainContext, MaterialPageRoute(builder: (context) => HeroTargetWidget(navKey: navKey, tag: 'redcont', color: Colors.red, mainContext: mainContext,)));
                   },
                   child: Hero(
                     tag: 'redcont',
@@ -53,8 +52,8 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
                 ),
                 InkWell(
                   onTap: (){
-                    aboutNavKey.currentState.push(
-                        MaterialPageRoute(builder: (context) => HeroTargetWidget(aboutNavKey: aboutNavKey, tag: 'ycont', color: Colors.yellow, mainContext: mainContext))
+                    navKey.currentState.push(
+                        MaterialPageRoute(builder: (context) => HeroTargetWidget(navKey: navKey, tag: 'ycont', color: Colors.yellow, mainContext: mainContext))
                     );
                   },
                   child: Hero(
@@ -72,8 +71,8 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
                 children: [
                   InkWell(
                     onTap: (){
-                      aboutNavKey.currentState.push(
-                          MaterialPageRoute(builder: (context) => HeroTargetWidget(aboutNavKey: aboutNavKey, tag: 'bcont', color: Colors.blue, mainContext: mainContext))
+                      navKey.currentState.push(
+                          MaterialPageRoute(builder: (context) => HeroTargetWidget(navKey: navKey, tag: 'bcont', color: Colors.blue, mainContext: mainContext))
                       );
                     },
                     child: Hero(
@@ -87,8 +86,8 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
                   ),
                   InkWell(
                     onTap: (){
-                      aboutNavKey.currentState.push(
-                          MaterialPageRoute(builder: (context) => HeroTargetWidget(aboutNavKey: aboutNavKey, tag: 'gcont', color: Colors.green, mainContext: mainContext))
+                      navKey.currentState.push(
+                          MaterialPageRoute(builder: (context) => HeroTargetWidget(navKey: navKey, tag: 'gcont', color: Colors.green, mainContext: mainContext))
                       );
                     },
                     child: Hero(

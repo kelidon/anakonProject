@@ -1,4 +1,4 @@
-import 'package:anakonProject/bloc/collapsing_headers/collapsing_headers_bloc.dart';
+import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/bloc/servises_items/services_items_bloc.dart';
 import 'package:anakonProject/bloc/servises_items/services_type_to_state_mapper.dart';

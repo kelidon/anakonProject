@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HeroTargetWidget extends StatelessWidget{
-  final GlobalKey<NavigatorState> aboutNavKey;
+  final GlobalKey<NavigatorState> navKey;
   final BuildContext mainContext;
   final tag;
   final Color color;
 
-  const HeroTargetWidget({Key key, this.aboutNavKey, this.tag, this.color, this.mainContext}) : super(key: key);
+  const HeroTargetWidget({Key key, this.navKey, this.tag, this.color, this.mainContext}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

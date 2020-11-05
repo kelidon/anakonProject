@@ -1,15 +1,15 @@
-part of 'collapsing_headers_bloc.dart';
+part of 'animated_pictures_bloc.dart';
 
 class CollapsingHeadersEvent {
-  CollapsingTitle title;
+  AnimatedTitle title;
 
   CollapsingHeadersEvent(this.title);
 }
 
 class CollapseEvent extends CollapsingHeadersEvent{
-  CollapseEvent(CollapsingTitle title) : super(title);
+  CollapseEvent(AnimatedTitle title) : super(title);
 }
 
 class ExpandEvent extends CollapsingHeadersEvent{
-  ExpandEvent(CollapsingTitle title) : super(title);
+  ExpandEvent(AnimatedTitle title) : super(title);
 }
