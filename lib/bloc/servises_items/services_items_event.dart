@@ -6,10 +6,10 @@ class ServicesItemsEvent {
   ServicesItemsEvent(this.serviceType);
 }
 
-class CollapseServiceEvent extends ServicesItemsEvent{
+class CollapseServiceEvent extends ServicesItemsEvent {
   CollapseServiceEvent(ServicesPageType title) : super(title);
 }
 
-class ExpandServiceEvent extends ServicesItemsEvent{
+class ExpandServiceEvent extends ServicesItemsEvent {
   ExpandServiceEvent(ServicesPageType title) : super(title);
 }

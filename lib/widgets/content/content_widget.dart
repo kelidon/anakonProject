@@ -38,94 +38,91 @@ class _ContentWidgetState extends State<ContentWidget> {
     };
 
     Widget _buildContentBlocks() {
-      return BlocBuilder<MetricsBloc, Metrics>(
-        builder: (context, state) {
-          bool isMouse = state == Metrics.BIG;
-          return BlocListener<DrawerBloc, DrawerButtons>(
-              listenWhen: (prev, curr) => true,
-              listener: (context, state) {
-                print("content listen $state");
-                setState(() {
-                  currentKey = _buttonToKey[state];
-                });
-                Scrollable.ensureVisible(
-                  _buttonToKey[state].currentContext,
-                  duration: Duration(milliseconds: 600),
-                );
-              },
-              child: Container(
-                  child: Container(
-                      alignment: Alignment.center,
-                      margin: isMouse
-                          ? EdgeInsets.only(
-                              right: MediaQuery.of(context).size.width * 0.065,
-                              left: MediaQuery.of(context).size.width * 0.15)
-                          : null,
-                      child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 25),
-                        child: Column(
-                          children: [
-                            Container(
-                              key: aboutKey,
-                              child: AboutUsWidget(
-                                height: MediaQuery.of(context).size.height - 160,
-                              ),
+      return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
+        bool isMouse = state == Metrics.BIG;
+        return BlocListener<DrawerBloc, DrawerButtons>(
+            listenWhen: (prev, curr) => true,
+            listener: (context, state) {
+              print("content listen $state");
+              setState(() {
+                currentKey = _buttonToKey[state];
+              });
+              Scrollable.ensureVisible(
+                _buttonToKey[state].currentContext,
+                duration: Duration(milliseconds: 600),
+              );
+            },
+            child: Container(
+                child: Container(
+                    alignment: Alignment.center,
+                    margin: isMouse
+                        ? EdgeInsets.only(
+                            right: MediaQuery.of(context).size.width * 0.065,
+                            left: MediaQuery.of(context).size.width * 0.15)
+                        : null,
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 25),
+                      child: Column(
+                        children: [
+                          Container(
+                            key: aboutKey,
+                            child: AboutUsWidget(
+                              height: MediaQuery.of(context).size.height - 160,
                             ),
-                            Container(
-                                key: servicesKey,
-                                height: MediaQuery.of(context).size.height - 95,
-                                child: ServicesWidget(
-                                  height: MediaQuery.of(context).size.height - 210,
-                                )),
-                            Container(
-                              key: howWorkWidget,
-                              child: HowWorkWidget(
-                                height: MediaQuery.of(context).size.height - 160,
-                              ),
+                          ),
+                          Container(
+                              key: servicesKey,
+                              height: MediaQuery.of(context).size.height - 95,
+                              child: ServicesWidget(
+                                height:
+                                    MediaQuery.of(context).size.height - 210,
+                              )),
+                          Container(
+                            key: howWorkWidget,
+                            child: HowWorkWidget(
+                              height: MediaQuery.of(context).size.height - 160,
                             ),
-                          ],
-                        ),
-                      ))));
-        }
-      );
+                          ),
+                        ],
+                      ),
+                    ))));
+      });
     }
 
     List<GlobalKey> keysList = _buttonToKey.values.toList();
     List<DrawerButtons> buttonsList = _buttonToKey.keys.toList();
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-          bool isMouse = state == Metrics.BIG;
-          return isMouse
-              ? Listener(
-                  onPointerSignal: (PointerSignalEvent event) {
-                    if (event is PointerScrollEvent) {
-                      var currentIndex = keysList.indexOf(currentKey);
-                      var isLastElement = currentIndex == keysList.length - 1;
-                      var isFirstElement = currentIndex == 0;
+    return LayoutBuilder(builder: (context, constraints) {
+      return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
+        bool isMouse = state == Metrics.BIG;
+        return isMouse
+            ? Listener(
+                onPointerSignal: (PointerSignalEvent event) {
+                  if (event is PointerScrollEvent) {
+                    var currentIndex = keysList.indexOf(currentKey);
+                    var isLastElement = currentIndex == keysList.length - 1;
+                    var isFirstElement = currentIndex == 0;
 
-                      if (event.scrollDelta.dy > 0 && !isLastElement) {
-                        context
-                            .bloc<DrawerBloc>()
-                            .add(buttonsList[currentIndex + 1]);
-                      } else if (event.scrollDelta.dy < 0 && !isFirstElement) {
-                        context
-                            .bloc<DrawerBloc>()
-                            .add(buttonsList[currentIndex - 1]);
-                      }
+                    if (event.scrollDelta.dy > 0 && !isLastElement) {
+                      context
+                          .bloc<DrawerBloc>()
+                          .add(buttonsList[currentIndex + 1]);
+                    } else if (event.scrollDelta.dy < 0 && !isFirstElement) {
+                      context
+                          .bloc<DrawerBloc>()
+                          .add(buttonsList[currentIndex - 1]);
                     }
-                  },
-                  child: _buildContentBlocks(),
-                )
-              : Listener(
-                  onPointerMove: (PointerMoveEvent event) {
-                    if (context.bloc<DrawerBloc>().state != null)
-                      context.bloc<DrawerBloc>().add(null);
-                  },
-                  child: _buildContentBlocks());
-        });
-      }
-    );
+                  }
+                },
+                child: _buildContentBlocks(),
+              )
+            : Listener(
+                onPointerMove: (PointerMoveEvent event) {
+                  if (context.bloc<DrawerBloc>().state != null)
+                    context.bloc<DrawerBloc>().add(null);
+                },
+                child: _buildContentBlocks());
+      });
+    });
   }
 }
