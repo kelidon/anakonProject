@@ -84,8 +84,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                                 child: HeroTableWidget(
                                     navKey: howWorkNavigatorKey,
                                     mainContext: _,
-                                    bloc: context
-                                        .bloc<AnimatedPicturesSecondBloc>(), title: AppText.HOW_WORK_TITLE,)));
+                                    title: AppText.HOW_WORK_TITLE,)));
                       },
                     )),
               ],

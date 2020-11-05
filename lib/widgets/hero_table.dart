@@ -1,6 +1,8 @@
 import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/constants/text.dart';
 import 'package:anakonProject/widgets/hero_table_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +10,10 @@ import 'package:flutter/material.dart';
 class HeroTableWidget extends StatefulWidget {
   final GlobalKey<NavigatorState> navKey;
   final BuildContext mainContext;
-  final AnimatedPicturesBloc bloc;
   final String title;
 
   const HeroTableWidget(
-      {Key key, this.navKey, this.mainContext, this.bloc, this.title})
+      {Key key, this.navKey, this.mainContext, this.title})
       : super(key: key);
   @override
   State<StatefulWidget> createState() => _HeroTableWidgetState();
@@ -23,14 +24,14 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
   Widget build(BuildContext context) {
     _buildTableRows() {
       List<AnimatedTitle> titles;
-      if (widget.bloc is AnimatedPicturesFirstBloc) {
+      if (widget.title == AppText.ABOUT_US_TITLE) {
         titles = [
           AnimatedTitle.CONS_1,
           AnimatedTitle.CONS_2,
           AnimatedTitle.CONS_3,
           AnimatedTitle.CONS_4
         ];
-      } else if (widget.bloc is AnimatedPicturesSecondBloc) {
+      } else if (widget.title == AppText.HOW_WORK_TITLE) {
         titles = [
           AnimatedTitle.HOW_WORK_1,
           AnimatedTitle.HOW_WORK_2,
@@ -38,7 +39,7 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
           null
         ];
       }
-      List<TableRow> tableRows;
+      List<TableRow> tableRows = [];
       for (int i = 0; i < titles.length; i += 2) {
         var row = TableRow(children: [
           HeroTableItem(
@@ -58,6 +59,7 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
         ]);
         tableRows.add(row);
       }
+      return tableRows;
     }
 
     return Row(

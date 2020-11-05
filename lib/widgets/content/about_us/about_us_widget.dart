@@ -83,8 +83,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                             child: HeroTableWidget(
                                 navKey: aboutNavigatorKey,
                                 mainContext: _,
-                                bloc: context
-                                    .bloc<AnimatedPicturesFirstBloc>(), title: AppText.ABOUT_US_TITLE,)));
+                                title: AppText.ABOUT_US_TITLE,)));
                   },
                 )),
               ],

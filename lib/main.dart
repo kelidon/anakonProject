@@ -35,12 +35,12 @@ class Application extends StatelessWidget {
         BlocProvider<MenuBloc>(
           create: (_) => MenuBloc(),
         ),
-        BlocProvider<AnimatedPicturesFirstBloc>(
-          create: (_) => AnimatedPicturesFirstBloc(),
-        ),
-        BlocProvider<AnimatedPicturesSecondBloc>(
-          create: (_) => AnimatedPicturesSecondBloc(),
-        ),
+        // BlocProvider<AnimatedPicturesFirstBloc>(
+        //   create: (_) => AnimatedPicturesFirstBloc(),
+        // ),
+        // BlocProvider<AnimatedPicturesSecondBloc>(
+        //   create: (_) => AnimatedPicturesSecondBloc(),
+        // ),
         BlocProvider<ServicesItemsBloc>(
           create: (_) => ServicesItemsBloc(),
         ),

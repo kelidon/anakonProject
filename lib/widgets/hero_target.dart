@@ -12,7 +12,6 @@ class HeroTargetWidget extends StatelessWidget {
   final AnimatedTitle tag;
   final String titleTag;
   final Color color;
-  final AnimatedPicturesBloc bloc;
 
   const HeroTargetWidget(
       {Key key,
@@ -20,52 +19,69 @@ class HeroTargetWidget extends StatelessWidget {
       this.tag,
       this.color,
       this.mainContext,
-      this.titleTag, this.bloc})
+      this.titleTag})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Hero(
-          tag: titleTag,
-          child: Center(
-            child: Text(
-              titleTag,
-              style: AppStyles.TITLE,
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      child: Column(
+        children: [
+          Hero(
+            tag: titleTag,
+            child: Center(
+              child: Text(
+                titleTag,
+                style: AppStyles.TITLE,
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  //bloc.add(ChangePictureEvent(null));
-                  Navigator.pop(mainContext);
-                },
-                child: Hero(
-                  tag: tag,
-                  child: Container(
-                    width: 400,
-                    height: 400,
-                    color: color,
-                    child: Image(
-                      image: AssetImage(AnimatedTypeToStateMapper.typeToStateMap[tag].key),
-                    )
+          Expanded(
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(mainContext);
+                  },
+                  child: Hero(
+                    tag: tag,
+                    child: Container(
+                      width: 400,
+                      height: 400,
+                        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          image: DecorationImage(image:  AssetImage(AnimatedTypeToStateMapper.typeToStateMap[tag].key), fit: BoxFit.cover
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.6),
+                                blurRadius: 5,
+                                offset: Offset(1, 3)),
+                          ], // boxShadow
+                        ),
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.teal,
-                  child: Text(AnimatedTypeToStateMapper.typeToStateMap[tag].value.value),
-                ),
-              )
-            ],
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(AnimatedTypeToStateMapper.typeToStateMap[tag].value.key, style: AppStyles.TITLE,),
+                        SizedBox(height: 50,),
+                        Text(AnimatedTypeToStateMapper.typeToStateMap[tag].value.value, style: AppStyles.REGULAR_SERVICES,)
+                      ],
+                    )
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
