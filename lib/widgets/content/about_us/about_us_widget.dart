@@ -1,11 +1,8 @@
-import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
-import 'package:anakonProject/bloc/collapsing_headers/animated_type_to_state_mapper.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:anakonProject/widgets/hero_table.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AboutUsWidget extends StatefulWidget {
   final double height;
@@ -68,7 +65,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
               children: [
                 Center(
                   child: Text(
-                    AppText.ABOUT_US_TITLE,
+                    AppText.COMPANY_TAG,
                     style: AppStyles.TITLE,
                   ),
                 ),
@@ -81,9 +78,10 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                         builder: (_) => Container(
                             alignment: Alignment.center,
                             child: HeroTableWidget(
-                                navKey: aboutNavigatorKey,
-                                mainContext: _,
-                                title: AppText.ABOUT_US_TITLE,)));
+                              navKey: aboutNavigatorKey,
+                              mainContext: _,
+                              title: AppText.ABOUT_US_TITLE,
+                            )));
                   },
                 )),
               ],

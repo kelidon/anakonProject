@@ -1,8 +1,6 @@
 import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
-import 'package:anakonProject/constants/text.dart';
-import 'package:anakonProject/constants/text.dart';
 import 'package:anakonProject/widgets/hero_table_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +10,9 @@ class HeroTableWidget extends StatefulWidget {
   final BuildContext mainContext;
   final String title;
 
-  const HeroTableWidget(
-      {Key key, this.navKey, this.mainContext, this.title})
+  const HeroTableWidget({Key key, this.navKey, this.mainContext, this.title})
       : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _HeroTableWidgetState();
 }

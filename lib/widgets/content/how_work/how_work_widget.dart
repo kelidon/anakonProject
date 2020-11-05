@@ -1,10 +1,7 @@
-import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
-import 'package:anakonProject/bloc/collapsing_headers/animated_type_to_state_mapper.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../hero_table.dart';
 
@@ -75,18 +72,19 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                 ),
                 Expanded(
                     child: Navigator(
-                      observers: [_heroController],
-                      key: howWorkNavigatorKey,
-                      onGenerateRoute: (settings) {
-                        return MaterialPageRoute(
-                            builder: (_) => Container(
-                                alignment: Alignment.center,
-                                child: HeroTableWidget(
-                                    navKey: howWorkNavigatorKey,
-                                    mainContext: _,
-                                    title: AppText.HOW_WORK_TITLE,)));
-                      },
-                    )),
+                  observers: [_heroController],
+                  key: howWorkNavigatorKey,
+                  onGenerateRoute: (settings) {
+                    return MaterialPageRoute(
+                        builder: (_) => Container(
+                            alignment: Alignment.center,
+                            child: HeroTableWidget(
+                              navKey: howWorkNavigatorKey,
+                              mainContext: _,
+                              title: AppText.HOW_WORK_TITLE,
+                            )));
+                  },
+                )),
               ],
             )),
       ],

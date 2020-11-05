@@ -12,48 +12,28 @@ class AppStyles {
   static const TextStyle DRAWER_BUTTON =
       TextStyle(fontSize: 18, height: 1.3, color: Color(0xFF06285A));
 
-  static const TextStyle CONTACTS_APPBAR = TextStyle(
-      color: Color(0xFF06285A),
-      fontWeight: FontWeight.w600);
+  static const TextStyle CONTACTS_APPBAR =
+      TextStyle(color: Color(0xFF06285A), fontWeight: FontWeight.w600);
 
   static const TextStyle TITLE = TextStyle(
-      color: Color(0xFF06285A),
-      fontSize: 22,
+      color: Color(0xFF06285A), fontSize: 22, fontWeight: FontWeight.w600);
 
-      fontWeight: FontWeight.w600);
-
-  static const TextStyle CONTACT_BUTTON = TextStyle(
-      color: Colors.white,
-      fontSize: 20,
-
-      fontWeight: FontWeight.w600);
+  static const TextStyle CONTACT_BUTTON =
+      TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600);
 
   static const TextStyle CONTACT_TEXT = TextStyle(
-      color: Color(0xFF06285A),
-      fontSize: 22,
-
-      fontWeight: FontWeight.w600);
-
+      color: Color(0xFF06285A), fontSize: 22, fontWeight: FontWeight.w600);
 
   static const TextStyle REGULAR_SERVICES = TextStyle(
-
-      fontSize: 20,
-
-
-
-      fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
+      fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
 
   static const TextStyle REGULAR = TextStyle(
-
-      fontSize: 16,
-
-      fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
+      fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
 
   static const TextStyle REGULAR_CENTER = TextStyle(
 
-    //color: Color(0xFF06285A),
+      //color: Color(0xFF06285A),
       fontSize: 24,
-
-      fontWeight: FontWeight.w600, color: Color(0xFF06285A));
-
+      fontWeight: FontWeight.w600,
+      color: Color(0xFF06285A));
 }

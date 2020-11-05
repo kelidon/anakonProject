@@ -1,7 +1,7 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 part 'animated_pictures_event.dart';
 
-enum AnimatedTitle{
+enum AnimatedTitle {
   CONS_1,
   CONS_2,
   CONS_3,
@@ -11,10 +11,7 @@ enum AnimatedTitle{
   HOW_WORK_3,
 }
 
-enum CollapsingState {
-  COLLAPSED,
-  EXPANDED
-}
+enum CollapsingState { COLLAPSED, EXPANDED }
 
 // abstract class AnimatedPicturesBloc extends Bloc<AnimatedPicturesEvent, AnimatedTitle> {
 //   AnimatedPicturesBloc(MapEntry entry) : super(null);

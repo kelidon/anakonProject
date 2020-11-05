@@ -14,7 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:video_player/video_player.dart';
 
-import 'bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'bloc/servises_items/services_items_bloc.dart';
 
 void main() {
@@ -68,7 +67,6 @@ class ApplicationPage extends StatefulWidget {
 
 class _ApplicationPageState extends State<ApplicationPage>
     with TickerProviderStateMixin {
-
   ScrollController _mainController;
   ScrollController _blurController;
   ScrollController _towerController;
@@ -300,7 +298,6 @@ class _ApplicationPageState extends State<ApplicationPage>
               ],
             );
     }
-
 
     return Scaffold(
       body: Stack(

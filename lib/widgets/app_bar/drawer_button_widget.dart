@@ -49,13 +49,19 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
               textDirection: TextDirection.ltr)
             ..layout())
           .size;
-      final String assetName = isMenu?'assets/images/logo_menu.png':'assets/images/logo_appbar.png';
+      final String assetName = isMenu
+          ? 'assets/images/logo_menu.png'
+          : 'assets/images/logo_appbar.png';
       final Widget logoWidget = BlocBuilder<MetricsBloc, Metrics>(
-        builder: (context, state){
+        builder: (context, state) {
           bool isMouse = state == Metrics.BIG;
           return Image.asset(
             assetName,
-            scale: isMouse?1:isMenu?2:3,
+            scale: isMouse
+                ? 1
+                : isMenu
+                    ? 2
+                    : 3,
           );
         },
       );

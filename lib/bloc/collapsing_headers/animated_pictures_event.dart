@@ -6,6 +6,6 @@ class AnimatedPicturesEvent {
   AnimatedPicturesEvent(this.pictureTitle);
 }
 
-class ChangePictureEvent extends AnimatedPicturesEvent{
+class ChangePictureEvent extends AnimatedPicturesEvent {
   ChangePictureEvent(AnimatedTitle title) : super(title);
 }
