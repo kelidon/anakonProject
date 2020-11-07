@@ -1,6 +1,6 @@
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
-import 'file:///C:/Users/vshch/Downloads/anakonProject/lib/widgets/content/hero_table.dart';
+import 'package:anakonProject/widgets/hero_table.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -78,6 +78,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                         builder: (_) => Container(
                             alignment: Alignment.center,
                             child: HeroTableWidget(
+                              navKey: aboutNavigatorKey,
                               mainContext: _,
                               title: AppText.ABOUT_US_TITLE,
                             )));
