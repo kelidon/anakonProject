@@ -24,7 +24,7 @@ class HeroTargetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      margin: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.only(top: 20),
       child: Column(
         children: [
           Hero(

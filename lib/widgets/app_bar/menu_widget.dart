@@ -28,7 +28,7 @@ class _MenuWidgetState extends State<MenuWidget>
 
   void prepareAnimations() {
     expandController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 400));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 700));
     animation = CurvedAnimation(
       parent: expandController,
       curve: Curves.fastOutSlowIn,
