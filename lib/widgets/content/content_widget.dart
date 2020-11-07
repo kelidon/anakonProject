@@ -61,7 +61,7 @@ class _ContentWidgetState extends State<ContentWidget> {
                             left: MediaQuery.of(context).size.width * 0.15)
                         : null,
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 25),
+                      margin: EdgeInsets.symmetric(horizontal: isMouse?25:10),
                       child: Column(
                         children: [
                           Container(
@@ -72,10 +72,9 @@ class _ContentWidgetState extends State<ContentWidget> {
                           ),
                           Container(
                               key: servicesKey,
-                              height: MediaQuery.of(context).size.height - 95,
                               child: ServicesWidget(
                                 height:
-                                    MediaQuery.of(context).size.height - 210,
+                                    MediaQuery.of(context).size.height - 150,
                               )),
                           Container(
                             key: howWorkWidget,

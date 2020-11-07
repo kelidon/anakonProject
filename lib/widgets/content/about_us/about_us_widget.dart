@@ -1,6 +1,10 @@
+import 'dart:developer';
+
+import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
-import 'file:///C:/Users/vshch/Downloads/anakonProject/lib/widgets/content/hero_table.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../hero_table.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -47,44 +51,49 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
             ),
           ),
         ),
-        Container(
-            margin: EdgeInsets.fromLTRB(15, 0, 15, 30),
-            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.6),
-                    blurRadius: 10,
-                    offset: Offset(1, 3)),
-              ], // boxShadow
-            ),
-            height: height,
-            child: Column(
-              children: [
-                Center(
-                  child: Text(
-                    AppText.COMPANY_TAG,
-                    style: AppStyles.TITLE,
-                  ),
+        BlocBuilder<MetricsBloc, Metrics>(
+          builder: (_, state) {
+            bool isMouse = state == Metrics.BIG;
+            return Container(
+                margin: EdgeInsets.fromLTRB(isMouse?15:0, 0, isMouse?15:0, 30),
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.6),
+                        blurRadius: 10,
+                        offset: Offset(1, 3)),
+                  ], // boxShadow
                 ),
-                Expanded(
-                    child: Navigator(
-                  observers: [_heroController],
-                  key: aboutNavigatorKey,
-                  onGenerateRoute: (settings) {
-                    return MaterialPageRoute(
-                        builder: (_) => Container(
-                            alignment: Alignment.center,
-                            child: HeroTableWidget(
-                              mainContext: _,
-                              title: AppText.ABOUT_US_TITLE,
-                            )));
-                  },
-                )),
-              ],
-            )),
+                height: height,
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        AppText.COMPANY_TAG,
+                        style: AppStyles.TITLE,
+                      ),
+                    ),
+                    Expanded(
+                        child: Navigator(
+                      observers: [_heroController],
+                      key: aboutNavigatorKey,
+                      onGenerateRoute: (settings) {
+                        return MaterialPageRoute(
+                            builder: (_) => Container(
+                                alignment: Alignment.center,
+                                child: HeroTableWidget(
+                                  mainContext: _,
+                                  title: AppText.ABOUT_US_TITLE,
+                                )));
+                      },
+                    )),
+                  ],
+                ));
+          }
+        ),
       ],
     );
   }

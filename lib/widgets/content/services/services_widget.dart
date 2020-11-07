@@ -26,147 +26,176 @@ class _ServicesWidgetState extends State<ServicesWidget> {
 
   _ServicesWidgetState(this.height);
 
+  HeroController _heroController1;
+  HeroController _heroController2;
+
+  @override
+  void initState() {
+    super.initState();
+    _heroController1 = HeroController(createRectTween: _createRectTween);
+    _heroController2 = HeroController(createRectTween: _createRectTween);
+  }
+
+  RectTween _createRectTween(Rect begin, Rect end) {
+    return MaterialRectArcTween(begin: begin, end: end);
+  }
+
   int _current = 0;
   final CarouselController _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
     Widget _buildContact() {
-      return Column(
-        children: [
-
-          Container(
-            margin: EdgeInsets.only(bottom: 17),
-            child: Column(
-              children: [
-                FittedBox(
-                  fit: BoxFit.cover,
-                  child: InkWell(
-                    onTap: () => context.bloc<ContactsOverlayBloc>().add(true),
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                      margin: EdgeInsets.only(top: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: AppColors.PRIMARY,
-                      ),
-                      child: Center(
-                          child: Text(
-                        AppText.CONTACT_LABEL,
-                        style: AppStyles.CONTACT_BUTTON,
-                      )),
-                    ),
+      return Container(
+        margin: EdgeInsets.only(bottom: 17),
+        child: Column(
+          children: [
+            FittedBox(
+              fit: BoxFit.cover,
+              child: InkWell(
+                onTap: () => context.bloc<ContactsOverlayBloc>().add(true),
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  margin: EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: AppColors.PRIMARY,
                   ),
+                  child: Center(
+                      child: Text(
+                    AppText.CONTACT_LABEL,
+                    style: AppStyles.CONTACT_BUTTON,
+                  )),
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     }
 
-    _buildServicesLayout(serviceTypes){
+    _buildServicesLayout(serviceTypes, heroController){
       return BlocBuilder<MetricsBloc, Metrics>(
         builder: (_, state) {
           bool isMouse = state == Metrics.BIG;
           return Container(
-            margin: EdgeInsets.all(15),
+            margin: EdgeInsets.all(isMouse?15:8),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
               boxShadow: [
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.6),
-                    blurRadius: 10,
+                    blurRadius: 5,
                     offset: Offset(1, 3)),
               ], // boxShadow
             ),
             child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Text(AppText.SERVICE_TITLE, style: AppStyles.TITLE),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Spacer(),
-                        isMouse?Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ServiceIconWidget(
-                                  serviceType: serviceTypes[0],
+                        alignment: Alignment.center,
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              Text(AppText.SERVICE_TITLE, style: AppStyles.TITLE),
+                              Expanded(
+                                child: Navigator(
+                                  observers: [heroController],
+                                  onGenerateRoute: (settings){
+                                    return MaterialPageRoute(
+                                      builder: (_) => BlocBuilder<MetricsBloc, Metrics>(
+                                        builder: (_, state) {
+                                          bool isMouse = state == Metrics.BIG;
+                                          return Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Spacer(),
+                                              isMouse?Column(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      ServiceIconWidget(
+                                                        serviceType: serviceTypes[0],
+                                                        mainContext: _,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 80,
+                                                      ),
+                                                      ServiceIconWidget(
+                                                        serviceType: serviceTypes[1],
+                                                        mainContext: _,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: 50,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      ServiceIconWidget(
+                                                        serviceType: serviceTypes[2],
+                                                        mainContext: _,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 80,
+                                                      ),
+                                                      ServiceIconWidget(
+                                                        serviceType: serviceTypes[3],
+                                                        mainContext: _,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ):
+                                              Column(
+                                                children: [
+                                                  ServiceIconWidget(
+                                                    serviceType: serviceTypes[0],
+                                                    mainContext: _,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 50,
+                                                  ),
+                                                  ServiceIconWidget(
+                                                    serviceType: serviceTypes[1],
+                                                    mainContext: _,
+                                                  ),
+                                                  ServiceIconWidget(
+                                                    serviceType: serviceTypes[2],
+                                                    mainContext: _,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 50,
+                                                  ),
+                                                  ServiceIconWidget(
+                                                    serviceType: serviceTypes[3],
+                                                    mainContext: _,
+                                                  ),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              _buildContact(),
+                                            ],
+                                          );
+                                        }
+                                      ),
+                                    );
+                                  },
                                 ),
-                                SizedBox(
-                                  width: 80,
-                                ),
-                                ServiceIconWidget(
-                                  serviceType: serviceTypes[1],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 50,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ServiceIconWidget(
-                                  serviceType: serviceTypes[2],
-                                ),
-                                SizedBox(
-                                  width: 80,
-                                ),
-                                ServiceIconWidget(
-                                  serviceType: serviceTypes[3],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ):Column(
-                          children: [
-                            ServiceIconWidget(
-                              serviceType: serviceTypes[0],
-                            ),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            ServiceIconWidget(
-                              serviceType: serviceTypes[1],
-                            ),
-                            ServiceIconWidget(
-                              serviceType: serviceTypes[2],
-                            ),
-                            SizedBox(
-                              width: 50,
-                            ),
-                            ServiceIconWidget(
-                              serviceType: serviceTypes[3],
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        _buildContact(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+                              ),
+                            ],
+                          ),
+                        ),));
+
+
         }
       );
     }
-    var list = [
-      _buildServicesLayout([ServicesPageType.FIRST_PAGE_1,ServicesPageType.FIRST_PAGE_2,ServicesPageType.FIRST_PAGE_3,ServicesPageType.FIRST_PAGE_4,]),
-      _buildServicesLayout([ServicesPageType.SECOND_PAGE_1,ServicesPageType.SECOND_PAGE_2,ServicesPageType.SECOND_PAGE_3,ServicesPageType.SECOND_PAGE_4]),
-    ];
 
-    List<Widget> _buildBottom() {
+    List<Widget> _buildBottom(List list) {
       List<Widget> listWidgets = [];
       listWidgets.add(Container(
         margin: EdgeInsets.only(right: 20),
@@ -212,6 +241,11 @@ class _ServicesWidgetState extends State<ServicesWidget> {
       return listWidgets;
     }
 
+    final list = [
+      _buildServicesLayout([ServicesPageType.FIRST_PAGE_1,ServicesPageType.FIRST_PAGE_2,ServicesPageType.FIRST_PAGE_3,ServicesPageType.FIRST_PAGE_4,], _heroController1),
+      _buildServicesLayout([ServicesPageType.SECOND_PAGE_1,ServicesPageType.SECOND_PAGE_2,ServicesPageType.SECOND_PAGE_3,ServicesPageType.SECOND_PAGE_4], _heroController2),
+    ];
+
     return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
       bool isMouse = state == Metrics.BIG;
       return BlocBuilder<ServicesItemsBloc,
@@ -229,130 +263,35 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                 ),
               ),
             ),
-            Container(
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    child: CarouselSlider(
-                      carouselController: _controller,
-                      options: CarouselOptions(
-                          scrollPhysics: NeverScrollableScrollPhysics(),
-                          height: height,
-                          enableInfiniteScroll: false,
-                          viewportFraction: 1,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              _current = index;
-                            });
-                          }),
-                      items: list.map((i) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Stack(
-                              children: [
-                                i,
-                                AnimatedOpacity(
-                                  opacity: state.value == CollapsingState.EXPANDED?1:0,
-                                  duration: Duration(milliseconds: 200),
-                                  child: Container(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Visibility(
-                                      visible:
-                                          state.value == CollapsingState.EXPANDED,
-                                      maintainState: true,
-                                      maintainAnimation: true,
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        onTap: () {
-                                          context.bloc<ServicesItemsBloc>().add(
-                                              CollapseServiceEvent(context
-                                                  .bloc<ServicesItemsBloc>()
-                                                  .state
-                                                  .key));
-                                        },
-                                        child: Container(
-                                            height:
-                                            height-110,
-                                            margin: EdgeInsets.all(15),
-                                            padding:
-                                                EdgeInsets.symmetric(horizontal: 30),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20)),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color:
-                                                        Colors.grey.withOpacity(0.6),
-                                                    blurRadius: 10,
-                                                    offset: Offset(1, 3)),
-                                              ],
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                if(isMouse)Container(
-                                                    padding:
-                                                        EdgeInsets.only(right: 30),
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        7,
-                                                    child: Text(
-                                                      ServicesTypeToStateMapper
-                                                          .typeToStateMap[state.key]
-                                                          .key,
-                                                      style: AppStyles.TITLE,
-                                                      textAlign: TextAlign.center,
-                                                    )),
-                                                if(isMouse)Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: 20),
-                                                  height: MediaQuery.of(context)
-                                                      .size
-                                                      .height,
-                                                  width: 2,
-                                                  color: AppColors.PRIMARY,
-                                                ),
-                                                isMouse?Flexible(
-                                                  child: Container(
-                                                      padding:
-                                                          EdgeInsets.only(left: 30),
-                                                      child: Text(
-                                                        ServicesTypeToStateMapper
-                                                            .typeToStateMap[state.key]
-                                                            .value,
-                                                        style: AppStyles.REGULAR_SERVICES,
-                                                        textAlign: TextAlign.justify,
-                                                      )),
-                                                ):Flexible(
-                                                  child: Text(
-                                                    ServicesTypeToStateMapper
-                                                        .typeToStateMap[state.key]
-                                                        .value,
-                                                    style: AppStyles.REGULAR_SERVICES,
-                                                    textAlign: TextAlign.justify,
-                                                  ),
-                                                )
-                                              ],
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            );
-                          },
-                        );
-                      }).toList(),
-                    ),
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: CarouselSlider(
+                    carouselController: _controller,
+                    options: CarouselOptions(
+                        height: height-50,
+                        scrollPhysics: NeverScrollableScrollPhysics(),
+                        enableInfiniteScroll: false,
+                        viewportFraction: 1,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          });
+                        }),
+                    items: list.map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return i;
+                        },
+                      );
+                    }).toList(),
                   ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: _buildBottom())
-                ],
-              ),
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: _buildBottom(list))
+              ],
             ),
           ],
         );

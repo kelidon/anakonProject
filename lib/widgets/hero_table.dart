@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
+import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'hero_table_item.dart';
 
@@ -72,7 +76,6 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
           AnimatedTitle.HOW_WORK_1,
           AnimatedTitle.HOW_WORK_2,
           AnimatedTitle.HOW_WORK_3,
-          null
         ];
       }
       List<TableRow> tableRows = [];
@@ -88,30 +91,36 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
       }
       return tableRows;
     }
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+    return BlocBuilder<MetricsBloc, Metrics>(
+      builder: (_, state) {
+        bool isMouse = state == Metrics.BIG;
+        return isMouse?Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Hero(
-              tag: widget.title,
-              child: Container(
-                padding: EdgeInsets.only(top: 100),
-                child: Text(
-                  widget.title.split(" ").join("\n"),
-                  style: AppStyles.TITLE,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Hero(
+                  tag: widget.title,
+                  child: Container(
+                    padding: EdgeInsets.only(top: 100),
+                    child: Text(
+                      widget.title.split(" ").join("\n"),
+                      style: AppStyles.TITLE,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
+            Table(
+                defaultColumnWidth:
+                    FixedColumnWidth(MediaQuery.of(context).size.width / 4),
+                children: _buildTableRows()),
           ],
-        ),
-        Table(
-            defaultColumnWidth:
-                FixedColumnWidth(MediaQuery.of(context).size.width / 4),
-            children: _buildTableRows()),
-      ],
+        ):Table(
+            children: _buildTableRowsMobile());
+      }
     );
   }
 }

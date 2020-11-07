@@ -9,6 +9,7 @@ import 'package:anakonProject/widgets/app_bar/app_bar_widget.dart';
 import 'package:anakonProject/widgets/app_bar/menu_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:anakonProject/widgets/content/inner_widgets/contacts_overlay_widget.dart';
+import 'package:anakonProject/widgets/content/services/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
@@ -299,6 +300,8 @@ class _ApplicationPageState extends State<ApplicationPage>
             );
     }
 
+    BottomSheetWidget().setContext(context);
+
     return Scaffold(
       body: Stack(
         children: [
@@ -312,7 +315,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                 child: SingleChildScrollView(
                     physics: isMouse
                         ? NeverScrollableScrollPhysics()
-                        : BouncingScrollPhysics(),
+                        : null,
                     controller: _mainController,
                     child: ContentWidget()),
               )),
