@@ -34,6 +34,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
     Widget _buildContact() {
       return Column(
         children: [
+
           Container(
             margin: EdgeInsets.only(bottom: 17),
             child: Column(
@@ -65,115 +66,104 @@ class _ServicesWidgetState extends State<ServicesWidget> {
       );
     }
 
-    _buildServicesLayout(serviceTypes) {
-      return BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
-        bool isMouse = state == Metrics.BIG;
-        return Container(
-          margin: EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.6),
-                  blurRadius: 10,
-                  offset: Offset(1, 3)),
-            ], // boxShadow
-          ),
-          child: Container(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              children: [
-                Text(AppText.SERVICE_TITLE, style: AppStyles.TITLE),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Spacer(),
-                      isMouse
-                          ? Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ServiceIconWidget(
-                                      serviceType: serviceTypes[0],
-                                    ),
-                                    SizedBox(
-                                      width: 80,
-                                    ),
-                                    ServiceIconWidget(
-                                      serviceType: serviceTypes[1],
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ServiceIconWidget(
-                                      serviceType: serviceTypes[2],
-                                    ),
-                                    SizedBox(
-                                      width: 80,
-                                    ),
-                                    ServiceIconWidget(
-                                      serviceType: serviceTypes[3],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          : Column(
+    _buildServicesLayout(serviceTypes){
+      return BlocBuilder<MetricsBloc, Metrics>(
+        builder: (_, state) {
+          bool isMouse = state == Metrics.BIG;
+          return Container(
+            margin: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.6),
+                    blurRadius: 10,
+                    offset: Offset(1, 3)),
+              ], // boxShadow
+            ),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Text(AppText.SERVICE_TITLE, style: AppStyles.TITLE),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Spacer(),
+                        isMouse?Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 ServiceIconWidget(
                                   serviceType: serviceTypes[0],
                                 ),
                                 SizedBox(
-                                  width: 50,
+                                  width: 80,
                                 ),
                                 ServiceIconWidget(
                                   serviceType: serviceTypes[1],
                                 ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
                                 ServiceIconWidget(
                                   serviceType: serviceTypes[2],
                                 ),
                                 SizedBox(
-                                  width: 50,
+                                  width: 80,
                                 ),
                                 ServiceIconWidget(
                                   serviceType: serviceTypes[3],
                                 ),
                               ],
                             ),
-                      Spacer(),
-                      _buildContact(),
-                    ],
+                          ],
+                        ):Column(
+                          children: [
+                            ServiceIconWidget(
+                              serviceType: serviceTypes[0],
+                            ),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            ServiceIconWidget(
+                              serviceType: serviceTypes[1],
+                            ),
+                            ServiceIconWidget(
+                              serviceType: serviceTypes[2],
+                            ),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            ServiceIconWidget(
+                              serviceType: serviceTypes[3],
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        _buildContact(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        );
-      });
+          );
+        }
+      );
     }
-
     var list = [
-      _buildServicesLayout([
-        ServicesPageType.FIRST_PAGE_1,
-        ServicesPageType.FIRST_PAGE_2,
-        ServicesPageType.FIRST_PAGE_3,
-        ServicesPageType.FIRST_PAGE_4,
-      ]),
-      _buildServicesLayout([
-        ServicesPageType.SECOND_PAGE_1,
-        ServicesPageType.SECOND_PAGE_2,
-        ServicesPageType.SECOND_PAGE_3,
-        ServicesPageType.SECOND_PAGE_4
-      ]),
+      _buildServicesLayout([ServicesPageType.FIRST_PAGE_1,ServicesPageType.FIRST_PAGE_2,ServicesPageType.FIRST_PAGE_3,ServicesPageType.FIRST_PAGE_4,]),
+      _buildServicesLayout([ServicesPageType.SECOND_PAGE_1,ServicesPageType.SECOND_PAGE_2,ServicesPageType.SECOND_PAGE_3,ServicesPageType.SECOND_PAGE_4]),
     ];
 
     List<Widget> _buildBottom() {
@@ -263,16 +253,13 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                               children: [
                                 i,
                                 AnimatedOpacity(
-                                  opacity:
-                                      state.value == CollapsingState.EXPANDED
-                                          ? 1
-                                          : 0,
+                                  opacity: state.value == CollapsingState.EXPANDED?1:0,
                                   duration: Duration(milliseconds: 200),
                                   child: Container(
                                     alignment: Alignment.bottomCenter,
                                     child: Visibility(
-                                      visible: state.value ==
-                                          CollapsingState.EXPANDED,
+                                      visible:
+                                          state.value == CollapsingState.EXPANDED,
                                       maintainState: true,
                                       maintainAnimation: true,
                                       child: InkWell(
@@ -286,84 +273,68 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                                   .key));
                                         },
                                         child: Container(
-                                            height: height - 110,
+                                            height:
+                                            height-110,
                                             margin: EdgeInsets.all(15),
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 30),
+                                            padding:
+                                                EdgeInsets.symmetric(horizontal: 30),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20)),
                                               boxShadow: [
                                                 BoxShadow(
-                                                    color: Colors.grey
-                                                        .withOpacity(0.6),
+                                                    color:
+                                                        Colors.grey.withOpacity(0.6),
                                                     blurRadius: 10,
                                                     offset: Offset(1, 3)),
                                               ],
                                             ),
                                             child: Row(
                                               children: [
-                                                if (isMouse)
-                                                  Container(
-                                                      padding: EdgeInsets.only(
-                                                          right: 30),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              7,
+                                                if(isMouse)Container(
+                                                    padding:
+                                                        EdgeInsets.only(right: 30),
+                                                    width: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        7,
+                                                    child: Text(
+                                                      ServicesTypeToStateMapper
+                                                          .typeToStateMap[state.key]
+                                                          .key,
+                                                      style: AppStyles.TITLE,
+                                                      textAlign: TextAlign.center,
+                                                    )),
+                                                if(isMouse)Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 20),
+                                                  height: MediaQuery.of(context)
+                                                      .size
+                                                      .height,
+                                                  width: 2,
+                                                  color: AppColors.PRIMARY,
+                                                ),
+                                                isMouse?Flexible(
+                                                  child: Container(
+                                                      padding:
+                                                          EdgeInsets.only(left: 30),
                                                       child: Text(
                                                         ServicesTypeToStateMapper
-                                                            .typeToStateMap[
-                                                                state.key]
-                                                            .key,
-                                                        style: AppStyles.TITLE,
-                                                        textAlign:
-                                                            TextAlign.center,
+                                                            .typeToStateMap[state.key]
+                                                            .value,
+                                                        style: AppStyles.REGULAR_SERVICES,
+                                                        textAlign: TextAlign.justify,
                                                       )),
-                                                if (isMouse)
-                                                  Container(
-                                                    margin:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 20),
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .height,
-                                                    width: 2,
-                                                    color: AppColors.PRIMARY,
+                                                ):Flexible(
+                                                  child: Text(
+                                                    ServicesTypeToStateMapper
+                                                        .typeToStateMap[state.key]
+                                                        .value,
+                                                    style: AppStyles.REGULAR_SERVICES,
+                                                    textAlign: TextAlign.justify,
                                                   ),
-                                                isMouse
-                                                    ? Flexible(
-                                                        child: Container(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 30),
-                                                            child: Text(
-                                                              ServicesTypeToStateMapper
-                                                                  .typeToStateMap[
-                                                                      state.key]
-                                                                  .value,
-                                                              style: AppStyles
-                                                                  .REGULAR_SERVICES,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .justify,
-                                                            )),
-                                                      )
-                                                    : Flexible(
-                                                        child: Text(
-                                                          ServicesTypeToStateMapper
-                                                              .typeToStateMap[
-                                                                  state.key]
-                                                              .value,
-                                                          style: AppStyles
-                                                              .REGULAR_SERVICES,
-                                                          textAlign:
-                                                              TextAlign.justify,
-                                                        ),
-                                                      )
+                                                )
                                               ],
                                             )),
                                       ),
