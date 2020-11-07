@@ -5,17 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HeroTargetWidget extends StatelessWidget {
-  final GlobalKey<NavigatorState> navKey;
   final BuildContext mainContext;
   final AnimatedTitle tag;
   final String titleTag;
-  final Color color;
 
   const HeroTargetWidget(
       {Key key,
-      this.navKey,
       this.tag,
-      this.color,
       this.mainContext,
       this.titleTag})
       : super(key: key);

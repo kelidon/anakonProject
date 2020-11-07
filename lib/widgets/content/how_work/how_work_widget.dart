@@ -3,7 +3,7 @@ import 'package:anakonProject/constants/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../hero_table.dart';
+import '../hero_table.dart';
 
 class HowWorkWidget extends StatefulWidget {
   final double height;
@@ -79,7 +79,6 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                         builder: (_) => Container(
                             alignment: Alignment.center,
                             child: HeroTableWidget(
-                              navKey: howWorkNavigatorKey,
                               mainContext: _,
                               title: AppText.HOW_WORK_TITLE,
                             )));
