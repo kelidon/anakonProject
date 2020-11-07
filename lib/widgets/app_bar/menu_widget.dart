@@ -86,39 +86,43 @@ class _MenuWidgetState extends State<MenuWidget>
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width * 0.03),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 40,
+                            margin: EdgeInsets.only(left: 10),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Center(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 40,
+                                    ),
+                                    ScrollButtonWidget(
+                                      buttonName: DrawerButtons.ABOUT_US,
+                                      onTap: () =>
+                                          context.bloc<MenuBloc>().add(false),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    ScrollButtonWidget(
+                                      buttonName: DrawerButtons.SERVICES,
+                                      onTap: () =>
+                                          context.bloc<MenuBloc>().add(false),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    ScrollButtonWidget(
+                                      buttonName: DrawerButtons.HOW_WORK,
+                                      onTap: () =>
+                                          context.bloc<MenuBloc>().add(false),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                  ],
                                 ),
-                                ScrollButtonWidget(
-                                  buttonName: DrawerButtons.ABOUT_US,
-                                  onTap: () =>
-                                      context.bloc<MenuBloc>().add(false),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                ScrollButtonWidget(
-                                  buttonName: DrawerButtons.SERVICES,
-                                  onTap: () =>
-                                      context.bloc<MenuBloc>().add(false),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                ScrollButtonWidget(
-                                  buttonName: DrawerButtons.HOW_WORK,
-                                  onTap: () =>
-                                      context.bloc<MenuBloc>().add(false),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         ],

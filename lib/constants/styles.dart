@@ -27,6 +27,14 @@ class AppStyles {
   static const TextStyle REGULAR_SERVICES = TextStyle(
       fontSize: 20, fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
 
+  static const TextStyle REGULAR_SERVICES_MOBILE = TextStyle(
+
+      fontSize: 14,
+
+
+
+      fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
+
   static const TextStyle REGULAR = TextStyle(
       fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
 
