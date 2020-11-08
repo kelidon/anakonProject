@@ -118,6 +118,13 @@ class _ApplicationPageState extends State<ApplicationPage>
   }
 
   bool isMouse = true;
+  int currentPictureIndex = 0;
+  int currentPictureMobileIndex = 0;
+  var pictures = ["assets/images/blur.jpg", "assets/images/logo_on_tower.png"];
+  var picturesMobile = [
+    "assets/images/blur_horizontal.png",
+    "assets/images/logo_on_tower.png"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -235,7 +242,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                     physics: NeverScrollableScrollPhysics(),
                     controller: _blurController,
                     child: Image(
-                      image: AssetImage("assets/images/blur.jpg"),
+                      image: AssetImage(pictures[currentPictureIndex]),
                       width: MediaQuery.of(context).size.width * 0.065,
                       fit: BoxFit.fitWidth,
                     ),
@@ -251,6 +258,17 @@ class _ApplicationPageState extends State<ApplicationPage>
                                   color: Colors.white.withOpacity(0.7),
                                   fontSize: 100)))),
                 ),
+                IconButton(
+                  icon: Icon(Icons.refresh),
+                  onPressed: () {
+                    setState(() {
+                      currentPictureIndex =
+                          currentPictureIndex == pictures.length - 1
+                              ? 0
+                              : currentPictureIndex + 1;
+                    });
+                  },
+                )
               ],
             )
           : Stack(children: [
@@ -260,7 +278,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                   scrollDirection: Axis.horizontal,
                   physics: NeverScrollableScrollPhysics(),
                   child: Image.asset(
-                    "assets/images/blur_horizontal.png",
+                    picturesMobile[currentPictureMobileIndex],
                     height: 50,
                     fit: BoxFit.fitHeight,
                   ),
@@ -275,7 +293,18 @@ class _ApplicationPageState extends State<ApplicationPage>
                               style: TextStyle(
                                   color: Colors.white.withOpacity(0.7),
                                   fontSize: 100,
-                                  letterSpacing: 40)))))
+                                  letterSpacing: 40))))),
+              IconButton(
+                icon: Icon(Icons.refresh),
+                onPressed: () {
+                  setState(() {
+                    currentPictureMobileIndex =
+                        currentPictureMobileIndex == picturesMobile.length - 1
+                            ? 0
+                            : currentPictureMobileIndex + 1;
+                  });
+                },
+              )
             ]);
     }
 
@@ -313,9 +342,7 @@ class _ApplicationPageState extends State<ApplicationPage>
               body: Container(
                 margin: isMouse ? null : EdgeInsets.only(bottom: 50, top: 40),
                 child: SingleChildScrollView(
-                    physics: isMouse
-                        ? NeverScrollableScrollPhysics()
-                        : null,
+                    physics: isMouse ? NeverScrollableScrollPhysics() : null,
                     controller: _mainController,
                     child: ContentWidget()),
               )),
