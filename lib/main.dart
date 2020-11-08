@@ -120,7 +120,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   bool isMouse = true;
   int currentPictureIndex = 0;
   int currentPictureMobileIndex = 0;
-  var pictures = ["assets/images/blur.jpg", "images/blurs/new_blur_1.jpg", "images/blurs/new_blur_1_blur.jpg", "images/blurs/new_blur_2.jpg", "images/blurs/new_blur_2_blur.jpg", "images/blurs/new_blur_3.jpg", "images/blurs/new_blur_3_blur.jpg"];
+  var pictures = ["assets/images/blur.jpg", "assets/images/new_blur_1.jpg", "assets/images/new_blur_1_blur.jpg", "assets/images/new_blur_2.jpg", "assets/images/new_blur_2_blur.jpg", "assets/images/new_blur_3.jpg", "assets/images/new_blur_3_blur.jpg"];
   var picturesMobile = [
     "assets/images/blur_horizontal.png",
     "assets/images/logo_on_tower.png"
