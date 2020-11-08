@@ -19,7 +19,7 @@ class AppStyles {
       color: Color(0xFF06285A), fontSize: 22, fontWeight: FontWeight.w600);
 
   static const TextStyle CONTACT_BUTTON =
-      TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600);
+      TextStyle(color: AppColors.PRIMARY, fontSize: 20, fontWeight: FontWeight.w600);
 
   static const TextStyle CONTACT_TEXT = TextStyle(
       color: Color(0xFF06285A), fontSize: 22, fontWeight: FontWeight.w600);

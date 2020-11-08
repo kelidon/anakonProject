@@ -69,12 +69,12 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                 height: height,
                 child: Column(
                   children: [
-                    Center(
-                      child: Text(
-                        AppText.HOW_WORK_TITLE,
-                        style: AppStyles.TITLE,
-                      ),
-                    ),
+                    // Center(
+                    //   child: Text(
+                    //     AppText.HOW_WORK_TITLE,
+                    //     style: AppStyles.TITLE,
+                    //   ),
+                    // ),
                     Expanded(
                         child: Navigator(
                       observers: [_heroController],

@@ -60,7 +60,13 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                   margin: EdgeInsets.only(top: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: AppColors.PRIMARY,
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey.withOpacity(0.8),
+                          blurRadius: 7,
+                          offset: Offset(1, 3)),
+                    ], // boxShadow
                   ),
                   child: Center(
                       child: Text(

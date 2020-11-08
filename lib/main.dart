@@ -120,7 +120,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   bool isMouse = true;
   int currentPictureIndex = 0;
   int currentPictureMobileIndex = 0;
-  var pictures = ["assets/images/blur.jpg", "assets/images/logo_on_tower.png"];
+  var pictures = ["assets/images/blur.jpg", "images/blurs/new_blur_1.jpg", "images/blurs/new_blur_1_blur.jpg", "images/blurs/new_blur_2.jpg", "images/blurs/new_blur_2_blur.jpg", "images/blurs/new_blur_3.jpg", "images/blurs/new_blur_3_blur.jpg"];
   var picturesMobile = [
     "assets/images/blur_horizontal.png",
     "assets/images/logo_on_tower.png"
@@ -260,6 +260,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                 ),
                 IconButton(
                   icon: Icon(Icons.refresh),
+                  color: Colors.white,
                   onPressed: () {
                     setState(() {
                       currentPictureIndex =
@@ -294,17 +295,17 @@ class _ApplicationPageState extends State<ApplicationPage>
                                   color: Colors.white.withOpacity(0.7),
                                   fontSize: 100,
                                   letterSpacing: 40))))),
-              IconButton(
-                icon: Icon(Icons.refresh),
-                onPressed: () {
-                  setState(() {
-                    currentPictureMobileIndex =
-                        currentPictureMobileIndex == picturesMobile.length - 1
-                            ? 0
-                            : currentPictureMobileIndex + 1;
-                  });
-                },
-              )
+              // IconButton(
+              //   icon: Icon(Icons.refresh),
+              //   onPressed: () {
+              //     setState(() {
+              //       currentPictureMobileIndex =
+              //           currentPictureMobileIndex == picturesMobile.length - 1
+              //               ? 0
+              //               : currentPictureMobileIndex + 1;
+              //     });
+              //   },
+             // )
             ]);
     }
 

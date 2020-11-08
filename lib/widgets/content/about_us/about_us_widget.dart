@@ -56,7 +56,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
             bool isMouse = state == Metrics.BIG;
             return Container(
                 margin: EdgeInsets.fromLTRB(isMouse?15:0, 0, isMouse?15:0, 30),
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+                padding: EdgeInsets.symmetric(horizontal: 70, vertical: 30),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
