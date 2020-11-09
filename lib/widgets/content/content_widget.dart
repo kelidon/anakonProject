@@ -1,4 +1,5 @@
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
+import 'package:anakonProject/bloc/inner_scrolling/inner_scrolling_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/widgets/content/about_us/about_us_widget.dart';
 import 'package:anakonProject/widgets/content/how_work/how_work_widget.dart';
@@ -90,12 +91,16 @@ class _ContentWidgetState extends State<ContentWidget> {
 
     List<GlobalKey> keysList = _buttonToKey.values.toList();
     List<DrawerButtons> buttonsList = _buttonToKey.keys.toList();
-
     return LayoutBuilder(builder: (context, constraints) {
       return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
         bool isMouse = state == Metrics.BIG;
-        return isMouse
-            ? Listener(
+        return BlocBuilder<InnerScrollingBloc, bool>(
+          builder: (_, scrollState){
+              print("inner scroll?: $scrollState");
+            if(isMouse
+                //&& !scrollState
+            ){
+              return Listener(
                 onPointerSignal: (PointerSignalEvent event) {
                   if (event is PointerScrollEvent) {
                     var currentIndex = keysList.indexOf(currentKey);
@@ -114,13 +119,19 @@ class _ContentWidgetState extends State<ContentWidget> {
                   }
                 },
                 child: _buildContentBlocks(),
-              )
-            : Listener(
-                onPointerMove: (PointerMoveEvent event) {
-                  if (context.bloc<DrawerBloc>().state != null)
-                    context.bloc<DrawerBloc>().add(null);
-                },
-                child: _buildContentBlocks());
+              );
+            } else if(!isMouse){
+              return Listener(
+                  onPointerMove: (PointerMoveEvent event) {
+                    if (context.bloc<DrawerBloc>().state != null)
+                      context.bloc<DrawerBloc>().add(null);
+                  },
+                  child: _buildContentBlocks());
+            } else {
+              return _buildContentBlocks();
+            }
+          },
+        );
       });
     });
   }
