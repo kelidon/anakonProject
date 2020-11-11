@@ -62,7 +62,6 @@ class ServicesTargetWidget extends StatelessWidget {
                             .typeToStateMap[tag]
                             .value,
                         style: AppStyles.REGULAR_SERVICES,
-                        textAlign: TextAlign.justify,
                       )),
                 )
               ],

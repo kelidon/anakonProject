@@ -1,5 +1,6 @@
 import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:anakonProject/bloc/collapsing_headers/animated_type_to_state_mapper.dart';
+import 'package:anakonProject/constants/colors.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,12 @@ class HeroTargetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    _buildText(String text){
+      var lines = text.split("\n");
+      return lines.map((el)=>Text(el, style: AppStyles.REGULAR_SERVICES, textAlign: TextAlign.justify,));
+
+    }
     return Container(
       color: Colors.white,
       padding: EdgeInsets.only(top: 20),
@@ -42,7 +49,7 @@ class HeroTargetWidget extends StatelessWidget {
                   child: Hero(
                     tag: tag,
                     child: Container(
-                      width: MediaQuery.of(context).size.width / 3,
+                      width: MediaQuery.of(context).size.width / 4,
                       height: MediaQuery.of(context).size.height * 0.6,
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -65,7 +72,7 @@ class HeroTargetWidget extends StatelessWidget {
                 Expanded(
                   child: Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -75,13 +82,28 @@ class HeroTargetWidget extends StatelessWidget {
                             style: AppStyles.TITLE,
                           ),
                           SizedBox(
-                            height: 50,
+                            height: 20,
                           ),
-                          Text(
-                            AnimatedTypeToStateMapper
-                                .typeToStateMap[tag].value.value,
-                            style: AppStyles.REGULAR_SERVICES,
-                          )
+                          // FittedBox(
+                          //   fit: BoxFit.contain,
+                          //   child: Column(
+                          //     children: _buildText(AnimatedTypeToStateMapper
+                          //                .typeToStateMap[tag].value.value).toList(),
+                          //   ),
+                              SelectableText(
+                                    AnimatedTypeToStateMapper
+                                        .typeToStateMap[tag].value.value,
+                                    style: AppStyles.REGULAR_SERVICES, textAlign: TextAlign.justify
+                                  ),
+                          //)
+                          // FittedBox(
+                          //   fit: BoxFit.contain,
+                          //   child: Text(
+                          //     AnimatedTypeToStateMapper
+                          //         .typeToStateMap[tag].value.value,
+                          //     style: AppStyles.REGULAR_SERVICES, textAlign: TextAlign.justify,
+                          //   ),
+                          // )
                         ],
                       )),
                 )
