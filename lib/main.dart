@@ -15,7 +15,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:video_player/video_player.dart';
 
-import 'bloc/inner_scrolling/inner_scrolling_bloc.dart';
 import 'bloc/servises_items/services_items_bloc.dart';
 
 void main() {
@@ -41,10 +40,7 @@ class Application extends StatelessWidget {
         // ),
         // BlocProvider<AnimatedPicturesSecondBloc>(
         //   create: (_) => AnimatedPicturesSecondBloc(),
-        // ),InnerScrollingBloc
-        BlocProvider<InnerScrollingBloc>(
-          create: (_) => InnerScrollingBloc(),
-        ),
+        // ),
         BlocProvider<ServicesItemsBloc>(
           create: (_) => ServicesItemsBloc(),
         ),
