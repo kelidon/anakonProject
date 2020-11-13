@@ -65,17 +65,17 @@ class _ContactsOverlayWidgetState extends State<ContactsOverlayWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(AppText.CONTACTS_TEXT,
-                                    style: AppStyles.TITLE),
+                                    style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M),
                                 SizedBox(
                                   height: 20,
                                 ),
                                 Text(AppText.CONTACTS_NUMBER,
-                                    style: AppStyles.TITLE),
+                                    style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M),
                                 SizedBox(
                                   height: 20,
                                 ),
                                 Text(AppText.CONTACTS_GMAIL,
-                                    style: AppStyles.TITLE),
+                                    style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M),
                                 SizedBox(
                                   height: 30,
                                 ),

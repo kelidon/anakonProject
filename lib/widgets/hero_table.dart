@@ -107,7 +107,7 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
                     padding: EdgeInsets.only(top: 100),
                     child: Text(
                       widget.title.split(" ").join("\n"),
-                      style: AppStyles.TITLE,
+                      style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
                     ),
                   ),
                 ),

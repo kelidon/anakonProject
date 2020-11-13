@@ -57,7 +57,7 @@ class HeroTableItem extends StatelessWidget {
               ),
               Text(
                 AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
-                style: AppStyles.TITLE,
+                style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
               ),
             ],
           ):Container(
@@ -94,7 +94,7 @@ class HeroTableItem extends StatelessWidget {
                 Expanded(
                   child: Text(
                     AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
-                    style: AppStyles.TITLE,
+                    style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
                   ),
                 ),
               ],

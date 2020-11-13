@@ -133,9 +133,15 @@ class _ApplicationPageState extends State<ApplicationPage>
   @override
   Widget build(BuildContext context) {
     isMouse = MediaQuery.of(context).size.width > 1000;
-    print("width: ${MediaQuery.of(context).size.width}");
-    context.bloc<MetricsBloc>().add(isMouse ? Metrics.BIG : Metrics.SMALL);
-
+    if (MediaQuery.of(context).size.width > 1400) {
+      context.bloc<MetricsBloc>().add(Metrics.BIG);
+          }
+    else if(MediaQuery.of(context).size.width > 1000){
+      context.bloc<MetricsBloc>().add(Metrics.MEDIUM);
+    }
+    else if(MediaQuery.of(context).size.width <= 1000) {
+      context.bloc<MetricsBloc>().add(Metrics.SMALL);
+    }
     final String assetName = 'assets/images/logo_on_tower.png';
     final Widget logoOnTower = Image.asset(
       assetName,

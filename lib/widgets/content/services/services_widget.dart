@@ -46,38 +46,43 @@ class _ServicesWidgetState extends State<ServicesWidget> {
   @override
   Widget build(BuildContext context) {
     Widget _buildContact() {
-      return Container(
-        margin: EdgeInsets.only(bottom: 17),
-        child: Column(
-          children: [
-            FittedBox(
-              fit: BoxFit.cover,
-              child: InkWell(
-                onTap: () => context.bloc<ContactsOverlayBloc>().add(true),
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  margin: EdgeInsets.only(top: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.8),
-                          blurRadius: 7,
-                          offset: Offset(1, 3)),
-                    ], // boxShadow
+      return  BlocBuilder<MetricsBloc, Metrics>(
+          builder: (_, state) {
+            bool isMouse = state == Metrics.BIG;
+          return Container(
+            margin: EdgeInsets.only(bottom: 17),
+            child: Column(
+              children: [
+                FittedBox(
+                  fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () => context.bloc<ContactsOverlayBloc>().add(true),
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                      margin: EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(0.8),
+                              blurRadius: 7,
+                              offset: Offset(1, 3)),
+                        ], // boxShadow
+                      ),
+                      child: Center(
+                          child: Text(
+                        AppText.CONTACT_LABEL,
+                        style: isMouse? AppStyles.CONTACT_BUTTON:AppStyles.CONTACT_BUTTON_M,
+                      )),
+                    ),
                   ),
-                  child: Center(
-                      child: Text(
-                    AppText.CONTACT_LABEL,
-                    style: AppStyles.CONTACT_BUTTON,
-                  )),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          );
+        }
       );
     }
 
@@ -264,7 +269,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                 padding: EdgeInsets.only(top: 20),
                 child: Text(
                   AppText.TAGLINE_2,
-                  style: AppStyles.TITLE,
+                  style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
                   maxLines: 1,
                 ),
               ),

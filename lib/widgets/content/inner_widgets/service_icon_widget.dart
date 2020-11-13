@@ -66,7 +66,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                   child: Text(
                     ServicesTypeToStateMapper
                         .typeToStateMapMobile[widget.serviceType].key,
-                    style: AppStyles.REGULAR,
+                    style: isMouse? AppStyles.REGULAR:AppStyles.REGULAR_M,
                     textAlign: TextAlign.center,
                   ),
                 ),

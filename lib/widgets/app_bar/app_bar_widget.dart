@@ -87,9 +87,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(AppText.CONTACTS_NUMBER,
-                                style: AppStyles.CONTACTS_APPBAR),
+                                style: isMouse? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M),
                             Text(AppText.CONTACTS_GMAIL,
-                                style: AppStyles.CONTACTS_APPBAR)
+                                style: isMouse? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M)
                           ],
                         )),
                       ),
