@@ -25,7 +25,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-      bool isMouse = state == Metrics.BIG;
+      bool isMouse = state != Metrics.SMALL;
       return BlocBuilder<MenuBloc, bool>(builder: (context, isEnabled) {
         return Container(
           margin: isMouse ? EdgeInsets.only(top: 5) : null,
@@ -87,9 +87,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(AppText.CONTACTS_NUMBER,
-                                style: isMouse? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M),
+                                style: state == Metrics.BIG? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M),
                             Text(AppText.CONTACTS_GMAIL,
-                                style: isMouse? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M)
+                                style: state == Metrics.BIG? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M)
                           ],
                         )),
                       ),

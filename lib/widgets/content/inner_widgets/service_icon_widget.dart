@@ -29,7 +29,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
 
     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (_, state) {
-        bool isMouse = state == Metrics.BIG;
+        bool isMouse = state != Metrics.SMALL;
         return BlocBuilder<ServicesItemsBloc,
             MapEntry<ServicesPageType, CollapsingState>>(builder: (_, state) {
           return InkWell(
@@ -52,7 +52,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
               }
             },
             child: BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
-              bool isMouse = state == Metrics.BIG;
+              bool isMouse = state != Metrics.SMALL;
               return Container(
                 width: isMouse ? MediaQuery.of(context).size.width * 0.2 : null,
                 height:
@@ -73,7 +73,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                   child: Text(
                     ServicesTypeToStateMapper
                         .typeToStateMapMobile[widget.serviceType].key,
-                    style: isMouse? AppStyles.REGULAR:AppStyles.REGULAR_M,
+                    style: state == Metrics.BIG? AppStyles.REGULAR:AppStyles.REGULAR_M,
                     textAlign: TextAlign.center,
                   ),
                 ),

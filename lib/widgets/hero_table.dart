@@ -91,7 +91,7 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
     }
     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (_, state) {
-        bool isMouse = state == Metrics.BIG;
+        bool isMouse = state != Metrics.SMALL;
         return isMouse?Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,7 +105,7 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
                     padding: EdgeInsets.only(top: 100),
                     child: Text(
                       widget.title.split(" ").join("\n"),
-                      style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
+                      style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M,
                     ),
                   ),
                 ),

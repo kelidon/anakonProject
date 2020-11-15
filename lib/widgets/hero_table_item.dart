@@ -22,7 +22,7 @@ class HeroTableItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-    bool isMouse = state == Metrics.BIG;
+    bool isMouse = state != Metrics.SMALL;
       return InkWell(
         onTap: () {
           if (isMouse) {
@@ -46,7 +46,7 @@ class HeroTableItem extends StatelessWidget {
         },
         child: BlocBuilder<MetricsBloc, Metrics>(
           builder: (_, state) {
-            bool isMouse = state == Metrics.BIG;
+            bool isMouse = state != Metrics.SMALL;
             return isMouse?Column(
               children: [
                 Hero(
@@ -72,7 +72,7 @@ class HeroTableItem extends StatelessWidget {
                 ),
                 Text(
                   AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
-                  style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
+                  style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M,
                 ),
               ],
             ):Container(
@@ -112,7 +112,7 @@ class HeroTableItem extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
-                        style: isMouse?AppStyles.TITLE:AppStyles.TITLE,
+                        style: state == Metrics.BIG?AppStyles.TITLE:AppStyles.TITLE_M,
                       ))
                   ),
                 ],

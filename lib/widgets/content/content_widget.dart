@@ -39,7 +39,7 @@ class _ContentWidgetState extends State<ContentWidget> {
 
     Widget _buildContentBlocks() {
       return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-        bool isMouse = state == Metrics.BIG;
+        bool isMouse = state != Metrics.SMALL;
         return BlocListener<DrawerBloc, DrawerButtons>(
             listenWhen: (prev, curr) => true,
             listener: (context, state) {
@@ -66,21 +66,14 @@ class _ContentWidgetState extends State<ContentWidget> {
                         children: [
                           Container(
                             key: aboutKey,
-                            child: AboutUsWidget(
-                              height: MediaQuery.of(context).size.height - 160,
-                            ),
+                            child: AboutUsWidget(),
                           ),
                           Container(
                               key: servicesKey,
-                              child: ServicesWidget(
-                                height:
-                                    MediaQuery.of(context).size.height - 150,
-                              )),
+                              child: ServicesWidget()),
                           Container(
                             key: howWorkWidget,
-                            child: HowWorkWidget(
-                              height: MediaQuery.of(context).size.height - 160,
-                            ),
+                            child: HowWorkWidget(),
                           ),
                         ],
                       ),
@@ -93,7 +86,7 @@ class _ContentWidgetState extends State<ContentWidget> {
 
     return LayoutBuilder(builder: (context, constraints) {
       return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-        bool isMouse = state == Metrics.BIG;
+        bool isMouse = state != Metrics.SMALL;
         return isMouse
             ? Listener(
                 onPointerSignal: (PointerSignalEvent event) {

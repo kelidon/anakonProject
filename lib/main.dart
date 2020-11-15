@@ -128,14 +128,15 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   @override
   Widget build(BuildContext context) {
+    print("width: ${MediaQuery.of(context).size.width}, height: ${MediaQuery.of(context).size.height}");
     isMouse = MediaQuery.of(context).size.width > 1000;
     if (MediaQuery.of(context).size.width > 1400) {
       context.bloc<MetricsBloc>().add(Metrics.BIG);
-          }
-    else if(MediaQuery.of(context).size.width > 1000){
+    }
+    else if(MediaQuery.of(context).size.width > 1000) {
       context.bloc<MetricsBloc>().add(Metrics.MEDIUM);
     }
-    else if(MediaQuery.of(context).size.width <= 1000) {
+    else {
       context.bloc<MetricsBloc>().add(Metrics.SMALL);
     }
     final String assetName = 'assets/images/logo_on_tower.png';
@@ -157,7 +158,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                           controller: _towerController,
                           child: BlocBuilder<MetricsBloc, Metrics>(
                               builder: (context, state) {
-                            if (state == Metrics.BIG) {
+                            if (state != Metrics.SMALL) {
                               _initializeVideoPlayerFuture = null;
                               _initializeVideoPlayerFuture =
                                   _controller.initialize();

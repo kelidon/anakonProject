@@ -9,20 +9,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsWidget extends StatefulWidget {
-  final double height;
-
-  const AboutUsWidget({Key key, this.height}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _AboutUsWidgetState(height);
+  State<StatefulWidget> createState() => _AboutUsWidgetState();
 }
 
 var aboutNavigatorKey = GlobalKey<NavigatorState>();
 
 class _AboutUsWidgetState extends State<AboutUsWidget> {
-  final double height;
-
-  _AboutUsWidgetState(this.height);
 
   HeroController _heroController;
 
@@ -56,7 +50,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
             ),
             BlocBuilder<MetricsBloc, Metrics>(
               builder: (_, state) {
-                bool isMouse = state == Metrics.BIG;
+                bool isMouse = state != Metrics.SMALL;
                 return Container(
                     margin: EdgeInsets.fromLTRB(isMouse?15:0, 0, isMouse?15:0, 30),
                     padding: EdgeInsets.symmetric(horizontal: isMouse?40:25, vertical: 30),
@@ -70,13 +64,13 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                             offset: Offset(1, 3)),
                       ], // boxShadow
                     ),
-                    height: height,
+                    height: MediaQuery.of(context).size.height - 160,
                     child: Column(
                       children: [
                         Center(
                           child: Text(
                             AppText.COMPANY_TAG,
-                            style: isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
+                            style: state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M,
                           ),
                         ),
                         Expanded(

@@ -26,7 +26,7 @@ class _ContactsOverlayWidgetState extends State<ContactsOverlayWidget> {
             child: InkWell(onTap: () {
               context.bloc<ContactsOverlayBloc>().add(false);
             }, child: BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
-              bool isMouse = state == Metrics.BIG;
+              bool isMouse = state != Metrics.SMALL;
               return Container(
                 padding: EdgeInsets.symmetric(
                     horizontal:
@@ -65,17 +65,17 @@ class _ContactsOverlayWidgetState extends State<ContactsOverlayWidget> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(AppText.CONTACTS_TEXT,
-                                    style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M),
+                                    style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M),
                                 SizedBox(
                                   height: 20,
                                 ),
                                 Text(AppText.CONTACTS_NUMBER,
-                                    style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M),
+                                    style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M),
                                 SizedBox(
                                   height: 20,
                                 ),
                                 Text(AppText.CONTACTS_GMAIL,
-                                    style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M),
+                                    style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M),
                                 SizedBox(
                                   height: 30,
                                 ),

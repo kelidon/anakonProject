@@ -13,18 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ServicesWidget extends StatefulWidget {
-  final double height;
-
-  const ServicesWidget({Key key, this.height}) : super(key: key);
-
   @override
-  State<StatefulWidget> createState() => _ServicesWidgetState(height);
+  State<StatefulWidget> createState() => _ServicesWidgetState();
 }
 
 class _ServicesWidgetState extends State<ServicesWidget> {
-  final double height;
-
-  _ServicesWidgetState(this.height);
 
   HeroController _heroController1;
   HeroController _heroController2;
@@ -89,7 +82,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
     _buildServicesLayout(serviceTypes, heroController){
       return BlocBuilder<MetricsBloc, Metrics>(
         builder: (_, state) {
-          bool isMouse = state == Metrics.BIG;
+          bool isMouse = state != Metrics.SMALL;
           return Container(
             margin: EdgeInsets.all(isMouse?15:8),
             decoration: BoxDecoration(
@@ -108,7 +101,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                           padding: EdgeInsets.all(10),
                           child: Column(
                             children: [
-                              Text(AppText.SERVICE_TITLE, style: AppStyles.TITLE),
+                              Text(AppText.SERVICE_TITLE, style: state == Metrics.BIG?AppStyles.TITLE:AppStyles.TITLE_M),
                               Expanded(
                                 child: Navigator(
                                   observers: [heroController],
@@ -116,7 +109,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                     return MaterialPageRoute(
                                       builder: (_) => BlocBuilder<MetricsBloc, Metrics>(
                                         builder: (_, state) {
-                                          bool isMouse = state == Metrics.BIG;
+                                          bool isMouse = state != Metrics.SMALL;
                                           return Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.center,

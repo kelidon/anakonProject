@@ -8,20 +8,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../hero_table.dart';
 
 class HowWorkWidget extends StatefulWidget {
-  final double height;
-
-  const HowWorkWidget({Key key, this.height}) : super(key: key);
-
   @override
-  State<StatefulWidget> createState() => _HowWorkWidgetState(height);
+  State<StatefulWidget> createState() => _HowWorkWidgetState();
 }
 
 var howWorkNavigatorKey = GlobalKey<NavigatorState>();
 
 class _HowWorkWidgetState extends State<HowWorkWidget> {
-  final double height;
-
-  _HowWorkWidgetState(this.height);
 
   HeroController _heroController;
 
@@ -38,7 +31,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
-      bool isMouse = state == Metrics.BIG;
+      bool isMouse = state != Metrics.SMALL;
       return Column(children: [
         FittedBox(
           fit: BoxFit.scaleDown,
@@ -46,7 +39,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
             padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(
               AppText.TAGLINE_3,
-              style: isMouse ? AppStyles.TITLE : AppStyles.TITLE_M,
+              style: state == Metrics.BIG ? AppStyles.TITLE : AppStyles.TITLE_M,
               maxLines: 1,
             ),
           ),
@@ -65,15 +58,15 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                     offset: Offset(1, 3)),
               ], // boxShadow
             ),
-            height: height,
+            height: MediaQuery.of(context).size.height - 160,
             child: Column(
               children: [
-                // Center(
-                //   child: Text(
-                //     AppText.HOW_WORK_TITLE,
-                //     style: AppStyles.TITLE,
-                //   ),
-                // ),
+                if(!isMouse)Center(
+                  child: Text(
+                    AppText.HOW_WORK_TITLE,
+                    style: AppStyles.TITLE_M,
+                  ),
+                ),
                 Expanded(
                     child: Navigator(
                   observers: [_heroController],
