@@ -43,7 +43,7 @@ class _MenuWidgetState extends State<MenuWidget>
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-      bool isMouse = state == Metrics.BIG;
+      bool isMouse = state != Metrics.SMALL;
       return BlocBuilder<MenuBloc, bool>(builder: (context, isEnabled) {
         isEnabled ? expandController.forward() : expandController.reverse();
         return SizeTransition(
