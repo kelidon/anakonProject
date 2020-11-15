@@ -27,7 +27,7 @@ class ServicesTargetWidget extends StatelessWidget {
             },
             child: Container(
                 padding:
-                EdgeInsets.symmetric(horizontal: 30),
+                EdgeInsets.symmetric(horizontal: 20),
                   color: Colors.white,
                 child: Row(
                   children: [
@@ -35,16 +35,16 @@ class ServicesTargetWidget extends StatelessWidget {
                       tag: tag,
                       child: Container(
                           padding:
-                          EdgeInsets.only(right: 30),
+                          EdgeInsets.only(right: 20),
                           width: MediaQuery.of(context)
                               .size
                               .width /
-                              7,
+                              5,
                           child: Text(
                             ServicesTypeToStateMapper
                                 .typeToStateMap[tag]
                                 .key,
-                            style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
+                            style:  isMouse? AppStyles.SERVICES_TITLE:AppStyles.TITLE_M,
                             textAlign: TextAlign.center,
                             softWrap: true,
                           )),
@@ -66,8 +66,7 @@ class ServicesTargetWidget extends StatelessWidget {
                             ServicesTypeToStateMapper
                                 .typeToStateMap[tag]
                                 .value,
-                            style: isMouse? AppStyles.REGULAR_SERVICES:AppStyles.REGULAR_SERVICES_M,
-                            textAlign: TextAlign.justify,
+                            style: AppStyles.SERVICES_REGULAR, textAlign: TextAlign.justify,
                           )),
                     )
                   ],

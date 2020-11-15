@@ -41,7 +41,8 @@ class HeroTableItem extends StatelessWidget {
                 AnimatedTypeToStateMapper
                     .typeToStateMap[tag]
                     .value.value,
-                "");
+                AnimatedTypeToStateMapper
+                    .typeToStateMap[tag].key);
           }
         },
         child: BlocBuilder<MetricsBloc, Metrics>(

@@ -48,7 +48,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                   ServicesTypeToStateMapper
                       .typeToStateMap[widget.serviceType]
                   .value,
-                "");
+                    "assets/images/new_blur_3.jpg");
               }
             },
             child: BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
@@ -73,7 +73,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                   child: Text(
                     ServicesTypeToStateMapper
                         .typeToStateMapMobile[widget.serviceType].key,
-                    style: state == Metrics.BIG? AppStyles.REGULAR_SERVICES:AppStyles.REGULAR_SERVICES_M,
+                    style: state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M,
                     textAlign: TextAlign.center,
                   ),
                 ),

@@ -10,6 +10,7 @@ import 'package:anakonProject/widgets/app_bar/menu_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:anakonProject/widgets/content/inner_widgets/contacts_overlay_widget.dart';
 import 'package:anakonProject/widgets/content/services/bottom_sheet.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
@@ -258,12 +259,46 @@ class _ApplicationPageState extends State<ApplicationPage>
                 Container(
                   width: MediaQuery.of(context).size.width * 0.065,
                   child: Center(
-                      child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Text("А\nН\nА\nК\nО\nН",
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.7),
-                                  fontSize: 100)))),
+                      child: Column(
+                        children: [
+                          FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text("А",
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 100))),
+                          FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text("Н",
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 100))),
+                          FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text("А",
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 100))),
+                          FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text("К",
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 100))),
+                          FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text("О",
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 100))),
+                          FittedBox(
+                              fit: BoxFit.contain,
+                              child: Text("Н",
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 100))),
+                        ],
+                      )),
                 ),
                 IconButton(
                   icon: Icon(Icons.refresh),
