@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'content/services/bottom_sheet.dart';
 import 'custom_page_route.dart';
 import 'hero_target.dart';
 
@@ -20,88 +21,103 @@ class HeroTableItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            mainContext,
-            CustomPageRoute(HeroTargetWidget(
-                tag: tag,
-                titleTag: titleTag,
-                mainContext: mainContext)));
-      },
-      child: BlocBuilder<MetricsBloc, Metrics>(
-        builder: (_, state) {
-          bool isMouse = state == Metrics.BIG;
-          return isMouse?Column(
-            children: [
-              Hero(
-                tag: tag,
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    image: DecorationImage(
-                        image: AssetImage(
-                            AnimatedTypeToStateMapper.typeToStateMap[tag].key),
-                        fit: BoxFit.cover),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.6),
-                          blurRadius: 5,
-                          offset: Offset(1, 3)),
-                    ], // boxShadow
-                  ),
-                  width: MediaQuery.of(context).size.width / 4,
-                  height: MediaQuery.of(context).size.height / 3.8,
-                ),
-              ),
-              Text(
-                AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
-                style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
-              ),
-            ],
-          ):Container(
-            height: MediaQuery.of(context).size.height/15,
-            margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.6),
-                    blurRadius: 5,
-                    offset: Offset(1, 3)),
-              ], // boxShadow
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
+    bool isMouse = state == Metrics.BIG;
+      return InkWell(
+        onTap: () {
+          if (isMouse) {
+            Navigator.push(
+                mainContext,
+                CustomPageRoute(HeroTargetWidget(
+                    tag: tag,
+                    titleTag: titleTag,
+                    mainContext: mainContext)));
+          }
+          else{
+            BottomSheetWidget().showBottomSheet(
+                AnimatedTypeToStateMapper
+                    .typeToStateMap[tag]
+                    .value.key,
+                AnimatedTypeToStateMapper
+                    .typeToStateMap[tag]
+                    .value.value,
+                "");
+          }
+        },
+        child: BlocBuilder<MetricsBloc, Metrics>(
+          builder: (_, state) {
+            bool isMouse = state == Metrics.BIG;
+            return isMouse?Column(
               children: [
                 Hero(
                   tag: tag,
                   child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       image: DecorationImage(
                           image: AssetImage(
                               AnimatedTypeToStateMapper.typeToStateMap[tag].key),
-                          fit: BoxFit.cover
-                      )
+                          fit: BoxFit.cover),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.6),
+                            blurRadius: 5,
+                            offset: Offset(1, 3)),
+                      ], // boxShadow
                     ),
-                    width: 50,
-                    ),
-                  ),
-                Expanded(
-                  child: Text(
-                    AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
-                    style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
+                    width: MediaQuery.of(context).size.width / 4,
+                    height: MediaQuery.of(context).size.height / 3.8,
                   ),
                 ),
+                Text(
+                  AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
+                  style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
+                ),
               ],
-            ),
-          );
-        }
-      ),
-    );
+            ):Container(
+              height: MediaQuery.of(context).size.height/15,
+              margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.6),
+                      blurRadius: 5,
+                      offset: Offset(1, 3)),
+                ], // boxShadow
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Hero(
+                    tag: tag,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        image: DecorationImage(
+                            image: AssetImage(
+                                AnimatedTypeToStateMapper.typeToStateMap[tag].key),
+                            fit: BoxFit.cover
+                        )
+                      ),
+                      width: 50,
+                      ),
+                    ),
+                  Expanded(
+                    child: Text(
+                      AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
+                      style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        ),
+      );});
+
   }
 }

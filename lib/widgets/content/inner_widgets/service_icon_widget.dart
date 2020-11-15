@@ -41,7 +41,14 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                         tag: widget.serviceType,
                         mainContext: widget.mainContext)));
               } else {
-                BottomSheetWidget().showBottomSheet();
+                BottomSheetWidget().showBottomSheet(
+                  ServicesTypeToStateMapper
+                    .typeToStateMap[widget.serviceType]
+                    .key,
+                  ServicesTypeToStateMapper
+                      .typeToStateMap[widget.serviceType]
+                  .value,
+                "");
               }
             },
             child: BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {

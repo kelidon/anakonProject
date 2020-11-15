@@ -19,7 +19,7 @@ class BottomSheetWidget {
 
   BottomSheetWidget._internal();
 
-  showBottomSheet(){
+  showBottomSheet(String title, String text,  String imageLink){
     showModalBottomSheet(
         context: context,
         builder: (context) {
@@ -31,12 +31,12 @@ class BottomSheetWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    // image:DecorationImage(
-                    //  image: AssetImage("assets/images/blur.jpg"),
-                    //    fit:BoxFit.cover,
+                   fit:BoxFit.cover,
                     // ),
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
+                        topLeft: Radius.circular // image:DecorationImage(
+                        //  image: AssetImage("assets/images/blur.jpg"),
+                        //    (20),
                         topRight: Radius.circular(20)),
                   ),
                   child: DraggableScrollableSheet(
@@ -50,9 +50,9 @@ class BottomSheetWidget {
                               padding: EdgeInsets.all(10),
                               child: Column(
                                 children: [
-                                  Text(AppText.ABOUT_US_TITLE,
+                                  Text(title,
                                       style: isMouse? AppStyles.REGULAR_SERVICES:AppStyles.REGULAR_SERVICES_M),
-                                  Text(AppText.ABOUT_US_1_CONTENT,
+                                  Text(text,
                                       style: isMouse? AppStyles.REGULAR_SERVICES:AppStyles.REGULAR_SERVICES_M),
                                 ],
                               ),
