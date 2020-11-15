@@ -78,18 +78,16 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
           AnimatedTitle.HOW_WORK_3,
         ];
       }
-      List<TableRow> tableRows = [];
+      List<Widget> items = [];
       for (int i = 0; i < titles.length; i++) {
-        var row = TableRow(children: [
+        items.add(
           HeroTableItem(
             mainContext: widget.mainContext,
             tag: titles[i],
             titleTag: widget.title,
-          ),
-        ]);
-        tableRows.add(row);
+          ));
       }
-      return tableRows;
+      return items;
     }
     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (_, state) {
@@ -118,7 +116,8 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
                     FixedColumnWidth(MediaQuery.of(context).size.width / 4),
                 children: _buildTableRows()),
           ],
-        ):Table(
+        ):Column(
+          mainAxisAlignment: MainAxisAlignment.center,
             children: _buildTableRowsMobile());
       }
     );

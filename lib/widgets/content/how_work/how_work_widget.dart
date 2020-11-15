@@ -66,7 +66,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                         offset: Offset(1, 3)),
                   ], // boxShadow
                 ),
-                height: height,
+                height: MediaQuery.of(context).size.height-160,
                 child: Column(
                   children: [
                     // Center(

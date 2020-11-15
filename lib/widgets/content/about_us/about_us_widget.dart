@@ -56,7 +56,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
             bool isMouse = state == Metrics.BIG;
             return Container(
                 margin: EdgeInsets.fromLTRB(isMouse?15:0, 0, isMouse?15:0, 30),
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+                padding: EdgeInsets.symmetric(horizontal: isMouse?40:10, vertical: 30),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -67,7 +67,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                         offset: Offset(1, 3)),
                   ], // boxShadow
                 ),
-                height: height,
+                height: MediaQuery.of(context).size.height-160,
                 child: Column(
                   children: [
                     Center(

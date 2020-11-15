@@ -92,9 +92,13 @@ class HeroTableItem extends StatelessWidget {
                     ),
                   ),
                 Expanded(
-                  child: Text(
-                    AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
-                    style: AppStyles.TITLE,
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
+                      style: isMouse?AppStyles.TITLE:AppStyles.TITLE,
+                    ),
                   ),
                 ),
               ],
