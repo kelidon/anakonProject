@@ -10,6 +10,7 @@ import 'package:anakonProject/widgets/app_bar/menu_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:anakonProject/widgets/content/inner_widgets/contacts_overlay_widget.dart';
 import 'package:anakonProject/widgets/content/services/bottom_sheet.dart';
+import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -304,18 +305,6 @@ class _ApplicationPageState extends State<ApplicationPage>
                         ),
                       )),
                 ),
-                IconButton(
-                  icon: Icon(Icons.refresh),
-                  color: Colors.white,
-                  onPressed: () {
-                    setState(() {
-                      currentPictureIndex =
-                          currentPictureIndex == pictures.length - 1
-                              ? 0
-                              : currentPictureIndex + 1;
-                    });
-                  },
-                )
               ],
             )
           : Stack(children: [
@@ -377,23 +366,61 @@ class _ApplicationPageState extends State<ApplicationPage>
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
+          _buildBackground(),
           Scaffold(
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.transparent,
               appBar: AppBarWidget(
                 preferredSize: Size.fromHeight(isMouse ? 70 : 40),
               ),
               body: Container(
-                margin: isMouse ? null : EdgeInsets.only(bottom: 50, top: 40),
-                child: SingleChildScrollView(
-                    //physics: isMouse && MediaQuery.of(context).size.height>750 ? NeverScrollableScrollPhysics() : null,
-                    controller: _mainController,
-                    child: ContentWidget()),
+                margin: isMouse ? EdgeInsets.only(bottom: 5) : EdgeInsets.only(bottom: 50, top: 40),
+                child: DraggableScrollbar(
+                    heightScrollThumb: 60,
+                  alwaysVisibleScrollThumb: true,
+                  controller: _mainController,
+                  scrollThumbBuilder: (Color backgroundColor, Animation<double> thumbAnimation, Animation<double> labelAnimation, double height, {BoxConstraints labelConstraints, Text labelText}) {
+                    final scrollThumb = Material(
+                      elevation: 4.0,
+                      child: Container(
+                        constraints: BoxConstraints.tight(
+                          Size(MediaQuery.of(context).size.width*0.007 + 3, height),
+                        ),
+                      ),
+                      color: backgroundColor,
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    );
+                    return scrollThumb;
+                  },
+                  backgroundColor: Colors.white,
+                  child: ListView.builder(
+                      physics: isMouse ? NeverScrollableScrollPhysics() : null,
+                      controller: _mainController,
+                      itemCount: 1,
+                      itemBuilder: (_, i){
+                        return ContentWidget();
+                      },),
+                ),
               )),
-          _buildBackground(),
           MenuWidget(),
-          ContactsOverlayWidget()
+          ContactsOverlayWidget(),
+          Container(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              icon: Icon(Icons.refresh),
+              color: Colors.white,
+              onPressed: () {
+                setState(() {
+                  currentPictureIndex =
+                  currentPictureIndex == pictures.length - 1
+                      ? 0
+                      : currentPictureIndex + 1;
+                });
+              },
+            ),
+          )
         ],
       ),
     );

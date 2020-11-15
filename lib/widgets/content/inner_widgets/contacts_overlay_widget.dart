@@ -79,9 +79,6 @@ class _ContactsOverlayWidgetState extends State<ContactsOverlayWidget> {
                                           final Uri _telLaunchUri = Uri(
                                               scheme: 'tel',
                                               path: '+375-44-570-57-57',
-                                              queryParameters: {
-                                                'subject': 'Example Subject & Symbols are allowed!'
-                                              }
                                           );
 
                                           if (await canLaunch(_telLaunchUri.toString())) {
@@ -102,10 +99,7 @@ class _ContactsOverlayWidgetState extends State<ContactsOverlayWidget> {
                                       recognizer: new TapGestureRecognizer()..onTap = () async {
                                         final Uri _emailLaunchUri = Uri(
                                             scheme: 'mailto',
-                                            path: 'smith@example.com',
-                                            queryParameters: {
-                                              'subject': 'Example Subject & Symbols are allowed!'
-                                            }
+                                            path: 'anakonby@gmail.com',
                                         );
 
                                         if (await canLaunch(_emailLaunchUri.toString())) {
