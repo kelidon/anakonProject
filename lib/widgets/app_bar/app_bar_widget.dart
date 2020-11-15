@@ -87,9 +87,9 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(AppText.CONTACTS_NUMBER,
-                                style: state == Metrics.BIG? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M),
+                                style: state != Metrics.SMALL? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M),
                             Text(AppText.CONTACTS_GMAIL,
-                                style: state == Metrics.BIG? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M)
+                                style: state != Metrics.SMALL? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M)
                           ],
                         )),
                       ),

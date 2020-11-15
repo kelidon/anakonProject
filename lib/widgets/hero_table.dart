@@ -94,9 +94,10 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
         bool isMouse = state != Metrics.SMALL;
         return isMouse?Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Hero(

@@ -77,8 +77,8 @@ class HeroTableItem extends StatelessWidget {
                 ),
               ],
             ):Container(
-              height: MediaQuery.of(context).size.height/15,
-              margin: EdgeInsets.symmetric(vertical: 20),
+              height: 70,
+              margin: EdgeInsets.symmetric(vertical: 5),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
