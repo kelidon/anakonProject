@@ -56,7 +56,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
               return Container(
                 width: isMouse ? MediaQuery.of(context).size.width * 0.2 : null,
                 height:
-                    isMouse ? MediaQuery.of(context).size.height>670?MediaQuery.of(context).size.height * 0.18:120 : 50,
+                    isMouse ? MediaQuery.of(context).size.height>670?MediaQuery.of(context).size.height * 0.18:120 : 70,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 decoration: BoxDecoration(
