@@ -137,21 +137,21 @@ class _ContactsOverlayWidgetState extends State<ContactsOverlayWidget> {
                                     ),
                                     Container(
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 50),
-                                      child: IconButton(
-                                        icon:Icon(AnakonGreek.viber),
-                                        iconSize: 40,
-                                        color: Color(0xFF06285A),
-                                        onPressed: () async {
-                                          const _viberLaunchUri = 'https://viber://chat?number=79119998877';
-
-                                          if (await canLaunch(_viberLaunchUri.toString())) {
-                                      await launch(_viberLaunchUri.toString());
-                                      } else {
-                                      throw 'Could not launch $_viberLaunchUri';
-                                      }
-                                      }
-                                      ),
+                                          EdgeInsets.symmetric(horizontal: 15),
+                                      // child: IconButton(
+                                      //   icon:Icon(AnakonGreek.viber),
+                                      //   iconSize: 40,
+                                      //   color: Color(0xFF06285A),
+                                      //   onPressed: () async {
+                                      //     const _viberLaunchUri = 'https://viber://chat?number=79119998877';
+                                      //
+                                      //     if (await canLaunch(_viberLaunchUri.toString())) {
+                                      // await launch(_viberLaunchUri.toString());
+                                      // } else {
+                                      // throw 'Could not launch $_viberLaunchUri';
+                                      // }
+                                      // }
+                                      // ),
                                     ),
                                     IconButton(
                                       iconSize: 40,
