@@ -66,7 +66,7 @@ class ServicesTargetWidget extends StatelessWidget {
                             ServicesTypeToStateMapper
                                 .typeToStateMap[tag]
                                 .value,
-                            style: AppStyles.SERVICES_REGULAR, textAlign: TextAlign.justify,
+                            style: isMouse? AppStyles.SERVICES_REGULAR : AppStyles.SERVICES_REGULAR_M, textAlign: TextAlign.justify,
                           )),
                     )
                   ],

@@ -66,8 +66,8 @@ class AppStyles {
   static const TextStyle REGULAR_SERVICES_M =
   TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
 
-  // static const TextStyle REGULAR_SERVICES_MOBILE_M =
-  // TextStyle(fontSize: 6, fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
+  static const TextStyle SERVICES_REGULAR_M =
+  TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.PRIMARY);
 
   static const TextStyle BS_TITLE =
   TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.PRIMARY);

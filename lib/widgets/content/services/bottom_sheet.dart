@@ -52,7 +52,7 @@ class BottomSheetWidget {
                           padding: EdgeInsets.all(30),
                           child: Column(
                             children: [
-                              Text(title, style: AppStyles.BS_TITLE, textAlign: TextAlign.justify),
+                              Text(title, style: AppStyles.BS_TITLE, textAlign: TextAlign.center),
                               SizedBox(
                                 height: 30,
                               ),

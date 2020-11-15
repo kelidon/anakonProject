@@ -48,7 +48,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                   ServicesTypeToStateMapper
                       .typeToStateMap[widget.serviceType]
                   .value,
-                    "assets/images/new_blur_3.jpg");
+                    "assets/images/blur_for_bs.jpg");
               }
             },
             child: BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {

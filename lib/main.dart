@@ -259,45 +259,48 @@ class _ApplicationPageState extends State<ApplicationPage>
                 Container(
                   width: MediaQuery.of(context).size.width * 0.065,
                   child: Center(
-                      child: Column(
-                        children: [
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("А",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("Н",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("А",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("К",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("О",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("Н",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                        ],
+                      child: FittedBox(
+                        fit:  BoxFit.fitHeight,
+                        child: Column(
+                          children: [
+                            FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text("А",
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.7),
+                                        fontSize: 100))),
+                            FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text("Н",
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.7),
+                                        fontSize: 100))),
+                            FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text("А",
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.7),
+                                        fontSize: 100))),
+                            FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text("К",
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.7),
+                                        fontSize: 100))),
+                            FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text("О",
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.7),
+                                        fontSize: 100))),
+                            FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text("Н",
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.7),
+                                        fontSize: 100))),
+                          ],
+                        ),
                       )),
                 ),
                 IconButton(
