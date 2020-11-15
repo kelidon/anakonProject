@@ -129,6 +129,7 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   @override
   Widget build(BuildContext context) {
+    BottomSheetWidget().setContext(context);
     print("width: ${MediaQuery.of(context).size.width}, height: ${MediaQuery.of(context).size.height}");
     isMouse = MediaQuery.of(context).size.width > 1000;
     if (MediaQuery.of(context).size.width > 1400) {
@@ -375,8 +376,6 @@ class _ApplicationPageState extends State<ApplicationPage>
             );
     }
 
-    BottomSheetWidget().setContext(context);
-
     return Scaffold(
       body: Stack(
         children: [
@@ -388,7 +387,7 @@ class _ApplicationPageState extends State<ApplicationPage>
               body: Container(
                 margin: isMouse ? null : EdgeInsets.only(bottom: 50, top: 40),
                 child: SingleChildScrollView(
-                    physics: isMouse && MediaQuery.of(context).size.height>670 ? NeverScrollableScrollPhysics() : null,
+                    physics: isMouse && MediaQuery.of(context).size.height>750 ? NeverScrollableScrollPhysics() : null,
                     controller: _mainController,
                     child: ContentWidget()),
               )),

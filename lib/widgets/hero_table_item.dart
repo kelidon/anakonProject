@@ -67,8 +67,8 @@ class HeroTableItem extends StatelessWidget {
                             offset: Offset(1, 3)),
                       ], // boxShadow
                     ),
-                    width: MediaQuery.of(context).size.width / 4,
-                    height: MediaQuery.of(context).size.height>670?MediaQuery.of(context).size.height / 3.8:175,
+                    width: MediaQuery.of(context).size.width / 4.1,
+                    height: MediaQuery.of(context).size.height>750?MediaQuery.of(context).size.height / 4.3:174,
                   ),
                 ),
                 Text(

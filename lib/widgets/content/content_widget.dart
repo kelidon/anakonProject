@@ -87,7 +87,7 @@ class _ContentWidgetState extends State<ContentWidget> {
     return LayoutBuilder(builder: (context, constraints) {
       return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
         bool isMouse = state != Metrics.SMALL;
-        return isMouse && MediaQuery.of(context).size.height>670
+        return isMouse && MediaQuery.of(context).size.height>750
             ? Listener(
                 onPointerSignal: (PointerSignalEvent event) {
                   if (event is PointerScrollEvent) {

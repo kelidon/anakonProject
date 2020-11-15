@@ -48,7 +48,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                   ServicesTypeToStateMapper
                       .typeToStateMap[widget.serviceType]
                   .value,
-                    "assets/images/blur_for_bs.jpg");
+                    "");
               }
             },
             child: BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
@@ -56,7 +56,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
               return Container(
                 width: isMouse ? MediaQuery.of(context).size.width * 0.2 : null,
                 height:
-                    isMouse ? MediaQuery.of(context).size.height>670?MediaQuery.of(context).size.height * 0.18:120 : 70,
+                    isMouse ? MediaQuery.of(context).size.height>750?MediaQuery.of(context).size.height * 0.18:135 : 70,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 decoration: BoxDecoration(
@@ -73,7 +73,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                   child: Text(
                     ServicesTypeToStateMapper
                         .typeToStateMapMobile[widget.serviceType].key,
-                    style: state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M,
+                    style: state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_S_M,
                     textAlign: TextAlign.center,
                   ),
                 ),

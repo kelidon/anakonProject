@@ -57,6 +57,9 @@ class AppStyles {
   static const TextStyle TITLE_M =
   TextStyle(color: Color(0xFF06285A), fontSize: 16, fontWeight: FontWeight.w600);
 
+  static const TextStyle TITLE_S_M =
+  TextStyle(color: Color(0xFF06285A), fontSize: 14, fontWeight: FontWeight.w600);
+
   static const TextStyle CONTACT_BUTTON_M =
   TextStyle(color: AppColors.PRIMARY, fontSize: 16, fontWeight: FontWeight.w600);
 

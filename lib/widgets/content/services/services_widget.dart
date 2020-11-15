@@ -6,6 +6,7 @@ import 'package:anakonProject/bloc/servises_items/services_type_to_state_mapper.
 import 'package:anakonProject/constants/colors.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/widgets/content/inner_widgets/contact_button_widget.dart';
 import 'package:anakonProject/widgets/content/inner_widgets/service_icon_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,46 +39,6 @@ class _ServicesWidgetState extends State<ServicesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _buildContact() {
-      return  BlocBuilder<MetricsBloc, Metrics>(
-          builder: (_, state) {
-            bool isMouse = state == Metrics.BIG;
-          return Container(
-            margin: EdgeInsets.only(bottom: 17),
-            child: Column(
-              children: [
-                FittedBox(
-                  fit: BoxFit.cover,
-                  child: InkWell(
-                    onTap: () => context.bloc<ContactsOverlayBloc>().add(true),
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                      margin: EdgeInsets.only(top: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.withOpacity(0.8),
-                              blurRadius: 7,
-                              offset: Offset(1, 3)),
-                        ], // boxShadow
-                      ),
-                      child: Center(
-                          child: Text(
-                        AppText.CONTACT_LABEL,
-                        style: isMouse? AppStyles.CONTACT_BUTTON:AppStyles.CONTACT_BUTTON_M,
-                      )),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-      );
-    }
 
     _buildServicesLayout(serviceTypes, heroController){
       return BlocBuilder<MetricsBloc, Metrics>(
@@ -101,7 +62,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                           padding: EdgeInsets.all(10),
                           child: Column(
                             children: [
-                              Text(AppText.SERVICE_TITLE, style: state == Metrics.BIG?AppStyles.TITLE:AppStyles.TITLE_M),
+                              Text(AppText.SERVICE_TITLE, style: state == Metrics.BIG?AppStyles.TITLE:AppStyles.TITLE_M, textAlign: TextAlign.center),
                               Expanded(
                                 child: Navigator(
                                   observers: [heroController],
@@ -181,7 +142,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                                 ],
                                               ),
                                               Spacer(),
-                                              _buildContact(),
+                                              ContactButtonWidget(),
                                             ],
                                           );
                                         }
@@ -274,7 +235,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                   child: CarouselSlider(
                     carouselController: _controller,
                     options: CarouselOptions(
-                        height: MediaQuery.of(context).size.height > 670? MediaQuery.of(context).size.height - 190:480,
+                        height: MediaQuery.of(context).size.height > 750? MediaQuery.of(context).size.height - 190:560,
                         scrollPhysics: NeverScrollableScrollPhysics(),
                         enableInfiniteScroll: false,
                         viewportFraction: 1,

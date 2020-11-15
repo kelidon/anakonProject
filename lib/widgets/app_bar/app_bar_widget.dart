@@ -31,7 +31,7 @@ class _AppBarWidgetState extends State<AppBarWidget> {
           margin: isMouse ? EdgeInsets.only(top: 5) : null,
           child: Container(
             padding: EdgeInsets.symmetric(
-                horizontal: isMouse ? 25 : 15, vertical: 5),
+                horizontal: isMouse ? 25 : 10, vertical: 5),
             margin: isMouse
                 ? EdgeInsets.only(
                     right: MediaQuery.of(context).size.width * 0.075,
@@ -71,27 +71,31 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                       ),
                     ),
                     Spacer(),
-                    FittedBox(
-                      fit: BoxFit.contain,
-                      child: InkWell(
-                        onTap: () {
-                          if (context.bloc<ContactsOverlayBloc>().state) {
-                            context.bloc<ContactsOverlayBloc>().add(false);
-                          } else {
-                            context.bloc<ContactsOverlayBloc>().add(true);
-                          }
-                        },
-                        child: Container(
-                            child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(AppText.CONTACTS_NUMBER,
-                                style: state != Metrics.SMALL? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M),
-                            Text(AppText.CONTACTS_GMAIL,
-                                style: state != Metrics.SMALL? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M)
-                          ],
-                        )),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 4,
+                      alignment: Alignment.centerRight,
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: InkWell(
+                          onTap: () {
+                            if (context.bloc<ContactsOverlayBloc>().state) {
+                              context.bloc<ContactsOverlayBloc>().add(false);
+                            } else {
+                              context.bloc<ContactsOverlayBloc>().add(true);
+                            }
+                          },
+                          child: Container(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(AppText.CONTACTS_NUMBER,
+                                  style: state != Metrics.SMALL? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M),
+                              Text(AppText.CONTACTS_GMAIL,
+                                  style: state != Metrics.SMALL? AppStyles.CONTACTS_APPBAR:AppStyles.CONTACTS_APPBAR_M)
+                            ],
+                          )),
+                        ),
                       ),
                     )
                   ],

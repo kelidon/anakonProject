@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/widgets/content/inner_widgets/contact_button_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../hero_table.dart';
 import 'package:flutter/cupertino.dart';
@@ -53,7 +54,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                 bool isMouse = state != Metrics.SMALL;
                 return Container(
                     margin: EdgeInsets.fromLTRB(isMouse?15:0, 0, isMouse?15:0, 30),
-                    padding: EdgeInsets.symmetric(horizontal: isMouse?40:25, vertical: 30),
+                    padding: EdgeInsets.symmetric(horizontal: isMouse?40:25, vertical: 10),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -64,13 +65,14 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                             offset: Offset(1, 3)),
                       ], // boxShadow
                     ),
-                    height: MediaQuery.of(context).size.height > 670? MediaQuery.of(context).size.height - 160:510,
+                    height: MediaQuery.of(context).size.height > 750? MediaQuery.of(context).size.height - 160:590,
                     child: Column(
                       children: [
                         Center(
                           child: Text(
                             AppText.COMPANY_TAG,
                             style: state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M,
+                            textAlign: TextAlign.center
                           ),
                         ),
                         Expanded(
@@ -87,6 +89,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                                     )));
                           },
                         )),
+                        ContactButtonWidget()
                       ],
                     ));
               }

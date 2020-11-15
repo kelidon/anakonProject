@@ -1,6 +1,7 @@
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/widgets/content/inner_widgets/contact_button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,7 +48,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
         Container(
             margin:
                 EdgeInsets.fromLTRB(isMouse ? 15 : 0, 0, isMouse ? 15 : 0, 30),
-            padding: EdgeInsets.symmetric(horizontal: isMouse?40:25, vertical: 30),
+            padding: EdgeInsets.symmetric(horizontal: isMouse?40:25, vertical: 10),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -58,13 +59,14 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                     offset: Offset(1, 3)),
               ], // boxShadow
             ),
-            height: MediaQuery.of(context).size.height > 670? MediaQuery.of(context).size.height - 160:510,
+            height: MediaQuery.of(context).size.height > 750? MediaQuery.of(context).size.height - 160:590,
             child: Column(
               children: [
                 if(!isMouse)Center(
                   child: Text(
                     AppText.HOW_WORK_TITLE,
                     style: AppStyles.TITLE_M,
+                    textAlign: TextAlign.center
                   ),
                 ),
                 Expanded(
@@ -81,6 +83,7 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                             )));
                   },
                 )),
+                ContactButtonWidget()
               ],
             ))
       ]);
