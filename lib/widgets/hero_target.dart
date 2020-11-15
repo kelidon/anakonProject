@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:anakonProject/bloc/collapsing_headers/animated_type_to_state_mapper.dart';
-import 'package:anakonProject/bloc/inner_scrolling/inner_scrolling_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,30 +20,6 @@ class HeroTargetWidget extends StatefulWidget {
 }
 
 class _HeroTargetWidgetState extends State<HeroTargetWidget> {
-  ScrollController _controller;
-  bool stopInnerScroll = false;
-
-  _scrollListener() {
-    if(stopInnerScroll){
-      context.bloc<InnerScrollingBloc>().add(false);
-    }
-    if (_controller.position.outOfRange ||
-        _controller.offset >= _controller.position.maxScrollExtent ||
-        _controller.offset <= _controller.position.minScrollExtent) {
-      setState(() {
-        stopInnerScroll = true;
-      });
-    } else {
-      context.bloc<InnerScrollingBloc>().add(true);
-    }
-  }
-
-  @override
-  void initState() {
-    _controller = ScrollController();
-    _controller.addListener(_scrollListener);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +45,6 @@ class _HeroTargetWidgetState extends State<HeroTargetWidget> {
                   children: [
                     InkWell(
                       onTap: () {
-                        context.bloc<InnerScrollingBloc>().add(false);
                         Navigator.pop(widget.mainContext);
                       },
                       child: Hero(
@@ -102,7 +76,6 @@ class _HeroTargetWidgetState extends State<HeroTargetWidget> {
                               EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                           child: Scrollbar(
                             child: SingleChildScrollView(
-                              controller: _controller,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

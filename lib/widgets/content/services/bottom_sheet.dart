@@ -31,10 +31,10 @@ class BottomSheetWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                   fit:BoxFit.cover,
-                    // ),
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular // image:DecorationImage(
+                        topLeft: Radius.circular(20),
+                        // image:DecorationImage(
+                        // fit:BoxFit.cover,
                         //  image: AssetImage("assets/images/blur.jpg"),
                         //    (20),
                         topRight: Radius.circular(20)),

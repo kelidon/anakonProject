@@ -77,7 +77,7 @@ class HeroTableItem extends StatelessWidget {
               ],
             ):Container(
               height: MediaQuery.of(context).size.height/15,
-              margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              margin: EdgeInsets.symmetric(vertical: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -107,10 +107,13 @@ class HeroTableItem extends StatelessWidget {
                       ),
                     ),
                   Expanded(
-                    child: Text(
-                      AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
-                      style:  isMouse? AppStyles.TITLE:AppStyles.TITLE_M,
-                    ),
+                    child: Container(
+                      margin: EdgeInsets.only(left: 20),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
+                        style: isMouse?AppStyles.TITLE:AppStyles.TITLE,
+                      ))
                   ),
                 ],
               ),
