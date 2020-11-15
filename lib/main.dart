@@ -350,7 +350,7 @@ class _ApplicationPageState extends State<ApplicationPage>
               body: Container(
                 margin: isMouse ? null : EdgeInsets.only(bottom: 50, top: 40),
                 child: SingleChildScrollView(
-                    physics: isMouse ? NeverScrollableScrollPhysics() : null,
+                    physics: isMouse && MediaQuery.of(context).size.height>670 ? NeverScrollableScrollPhysics() : null,
                     controller: _mainController,
                     child: ContentWidget()),
               )),

@@ -56,8 +56,8 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
               return Container(
                 width: isMouse ? MediaQuery.of(context).size.width * 0.2 : null,
                 height:
-                    isMouse ? MediaQuery.of(context).size.height * 0.18 : 80,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    isMouse ? MediaQuery.of(context).size.height>670?MediaQuery.of(context).size.height * 0.18:120 : 50,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -73,7 +73,7 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                   child: Text(
                     ServicesTypeToStateMapper
                         .typeToStateMapMobile[widget.serviceType].key,
-                    style: state == Metrics.BIG? AppStyles.REGULAR:AppStyles.REGULAR_M,
+                    style: state == Metrics.BIG? AppStyles.REGULAR_SERVICES:AppStyles.REGULAR_SERVICES_M,
                     textAlign: TextAlign.center,
                   ),
                 ),

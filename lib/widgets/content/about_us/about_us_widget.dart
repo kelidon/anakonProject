@@ -64,7 +64,7 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                             offset: Offset(1, 3)),
                       ], // boxShadow
                     ),
-                    height: MediaQuery.of(context).size.height - 160,
+                    height: MediaQuery.of(context).size.height > 670? MediaQuery.of(context).size.height - 160:510,
                     child: Column(
                       children: [
                         Center(

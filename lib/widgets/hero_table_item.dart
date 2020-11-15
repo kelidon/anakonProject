@@ -67,7 +67,7 @@ class HeroTableItem extends StatelessWidget {
                       ], // boxShadow
                     ),
                     width: MediaQuery.of(context).size.width / 4,
-                    height: MediaQuery.of(context).size.height / 3.8,
+                    height: MediaQuery.of(context).size.height>670?MediaQuery.of(context).size.height / 3.8:175,
                   ),
                 ),
                 Text(

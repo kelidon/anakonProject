@@ -51,7 +51,7 @@ class _HeroTargetWidgetState extends State<HeroTargetWidget> {
                         tag: widget.tag,
                         child: Container(
                           width: MediaQuery.of(context).size.width / 3,
-                          height: MediaQuery.of(context).size.height * 0.6,
+                          height: MediaQuery.of(context).size.height>670?MediaQuery.of(context).size.height * 0.6:400,
                           margin:
                               EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                           decoration: BoxDecoration(
