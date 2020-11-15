@@ -4,8 +4,10 @@ import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:anakonProject/fonts_icons/anakon_greek_icons.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactsOverlayWidget extends StatefulWidget {
   @override
@@ -69,28 +71,102 @@ class _ContactsOverlayWidgetState extends State<ContactsOverlayWidget> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text(AppText.CONTACTS_NUMBER,
-                                    style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M),
+                                RichText(
+                                  text:
+                                  new TextSpan(
+                                      text: AppText.CONTACTS_NUMBER,
+                                      recognizer: new TapGestureRecognizer()..onTap = () async {
+                                          final Uri _telLaunchUri = Uri(
+                                              scheme: 'tel',
+                                              path: '+375-44-570-57-57',
+                                              queryParameters: {
+                                                'subject': 'Example Subject & Symbols are allowed!'
+                                              }
+                                          );
+
+                                          if (await canLaunch(_telLaunchUri.toString())) {
+                                            await launch(_telLaunchUri.toString());
+                                          } else {
+                                            throw 'Could not launch $_telLaunchUri';
+                                          }
+                                      },
+                                      style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M),
+                                ),
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text(AppText.CONTACTS_GMAIL,
-                                    style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M),
+                                RichText(
+                                  text:
+                                  new TextSpan(
+                                      text: AppText.CONTACTS_GMAIL,
+                                      recognizer: new TapGestureRecognizer()..onTap = () async {
+                                        final Uri _emailLaunchUri = Uri(
+                                            scheme: 'mailto',
+                                            path: 'smith@example.com',
+                                            queryParameters: {
+                                              'subject': 'Example Subject & Symbols are allowed!'
+                                            }
+                                        );
+
+                                        if (await canLaunch(_emailLaunchUri.toString())) {
+                                        await launch(_emailLaunchUri.toString());
+                                        } else {
+                                        throw 'Could not launch $_emailLaunchUri';
+                                        }
+                                      },
+                                      style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M),
+                                ),
                                 SizedBox(
                                   height: 30,
                                 ),
                                 Row(
                                   children: [
-                                    Icon(AnakonGreek.telegram,
-                                        color: Color(0xFF06285A), size: 40),
+                                    IconButton(
+                                    iconSize: 40,
+                                      icon: Icon(AnakonGreek.telegram),
+                                      color: Color(0xFF06285A),
+                                      onPressed: () async {
+                                        const _tgLaunchUri = 'https://t.me/Appolon_13';
+
+                                        if (await canLaunch(_tgLaunchUri.toString())) {
+                                          await launch(_tgLaunchUri.toString());
+                                        } else {
+                                          throw 'Could not launch $_tgLaunchUri';
+                                        }
+                                      } ,
+                                    ),
                                     Container(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 50),
-                                      child: Icon(AnakonGreek.viber,
-                                          color: Color(0xFF06285A), size: 40),
+                                      child: IconButton(
+                                        icon:Icon(AnakonGreek.viber),
+                                        iconSize: 40,
+                                        color: Color(0xFF06285A),
+                                        onPressed: () async {
+                                          const _viberLaunchUri = 'https://viber://chat?number=79119998877';
+
+                                          if (await canLaunch(_viberLaunchUri.toString())) {
+                                      await launch(_viberLaunchUri.toString());
+                                      } else {
+                                      throw 'Could not launch $_viberLaunchUri';
+                                      }
+                                      }
+                                      ),
                                     ),
-                                    Icon(AnakonGreek.wattsapp,
-                                        color: Color(0xFF06285A), size: 40),
+                                    IconButton(
+                                      iconSize: 40,
+                                      icon: Icon(AnakonGreek.wattsapp),
+                                      color: Color(0xFF06285A),
+                                        onPressed: () async {
+                                          const _waLaunchUri = 'https://wa.me/375445705757';
+
+                                          if (await canLaunch(_waLaunchUri.toString())) {
+                                            await launch(_waLaunchUri.toString());
+                                          } else {
+                                            throw 'Could not launch $_waLaunchUri';
+                                          }
+                                        } ,
+                                    ),
                                   ],
                                 ),
                               ],
