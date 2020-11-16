@@ -24,6 +24,7 @@ dependencies:
   draggable_scrollbar: ^0.0.4
 
 dev_dependencies:
+  flutter_native_splash:
   flutter_test:
     sdk: flutter
 
