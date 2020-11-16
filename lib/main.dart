@@ -9,6 +9,7 @@ import 'package:anakonProject/widgets/app_bar/app_bar_widget.dart';
 import 'package:anakonProject/widgets/app_bar/menu_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:anakonProject/widgets/content/inner_widgets/contacts_overlay_widget.dart';
+import 'package:anakonProject/widgets/content/inner_widgets/custom_scroll_bar.dart';
 import 'package:anakonProject/widgets/content/services/bottom_sheet.dart';
 import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -83,6 +84,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   Future<void> _initializeVideoPlayerFutureHorizontal;
 
   _mainScrollListener() {
+    print("00000\n${_mainController.position.pixels}");
     if (_towerController.hasClients && _blurController.hasClients) {
       _towerController.jumpTo(_mainController.offset * 0.1);
       _blurController.jumpTo(_mainController.offset * 0.03);
@@ -122,7 +124,15 @@ class _ApplicationPageState extends State<ApplicationPage>
   bool isMouse = true;
   int currentPictureIndex = 0;
   int currentPictureMobileIndex = 0;
-  var pictures = ["assets/images/blur.jpg", "assets/images/new_blur_1.jpg", "assets/images/new_blur_1_blur.jpg", "assets/images/new_blur_2.jpg", "assets/images/new_blur_2_blur.jpg", "assets/images/new_blur_3.jpg", "assets/images/new_blur_3_blur.jpg"];
+  var pictures = [
+    "assets/images/blur.jpg",
+    "assets/images/new_blur_1.jpg",
+    "assets/images/new_blur_1_blur.jpg",
+    "assets/images/new_blur_2.jpg",
+    "assets/images/new_blur_2_blur.jpg",
+    "assets/images/new_blur_3.jpg",
+    "assets/images/new_blur_3_blur.jpg"
+  ];
   var picturesMobile = [
     "assets/images/blur_horizontal.png",
     "assets/images/logo_on_tower.png"
@@ -131,15 +141,14 @@ class _ApplicationPageState extends State<ApplicationPage>
   @override
   Widget build(BuildContext context) {
     BottomSheetWidget().setContext(context);
-    print("width: ${MediaQuery.of(context).size.width}, height: ${MediaQuery.of(context).size.height}");
+    print(
+        "width: ${MediaQuery.of(context).size.width}, height: ${MediaQuery.of(context).size.height}");
     isMouse = MediaQuery.of(context).size.width > 1000;
     if (MediaQuery.of(context).size.width > 1400) {
       context.bloc<MetricsBloc>().add(Metrics.BIG);
-    }
-    else if(MediaQuery.of(context).size.width > 1000) {
+    } else if (MediaQuery.of(context).size.width > 1000) {
       context.bloc<MetricsBloc>().add(Metrics.MEDIUM);
-    }
-    else {
+    } else {
       context.bloc<MetricsBloc>().add(Metrics.SMALL);
     }
     final String assetName = 'assets/images/logo_on_tower.png';
@@ -262,48 +271,48 @@ class _ApplicationPageState extends State<ApplicationPage>
                   width: MediaQuery.of(context).size.width * 0.065,
                   child: Center(
                       child: FittedBox(
-                        fit:  BoxFit.fitHeight,
-                        child: Column(
-                          children: [
-                            FittedBox(
-                                fit: BoxFit.contain,
-                                child: Text("А",
-                                    style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
-                                        fontSize: 100))),
-                            FittedBox(
-                                fit: BoxFit.contain,
-                                child: Text("Н",
-                                    style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
-                                        fontSize: 100))),
-                            FittedBox(
-                                fit: BoxFit.contain,
-                                child: Text("А",
-                                    style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
-                                        fontSize: 100))),
-                            FittedBox(
-                                fit: BoxFit.contain,
-                                child: Text("К",
-                                    style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
-                                        fontSize: 100))),
-                            FittedBox(
-                                fit: BoxFit.contain,
-                                child: Text("О",
-                                    style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
-                                        fontSize: 100))),
-                            FittedBox(
-                                fit: BoxFit.contain,
-                                child: Text("Н",
-                                    style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
-                                        fontSize: 100))),
-                          ],
-                        ),
-                      )),
+                    fit: BoxFit.fitHeight,
+                    child: Column(
+                      children: [
+                        FittedBox(
+                            fit: BoxFit.contain,
+                            child: Text("А",
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontSize: 100))),
+                        FittedBox(
+                            fit: BoxFit.contain,
+                            child: Text("Н",
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontSize: 100))),
+                        FittedBox(
+                            fit: BoxFit.contain,
+                            child: Text("А",
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontSize: 100))),
+                        FittedBox(
+                            fit: BoxFit.contain,
+                            child: Text("К",
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontSize: 100))),
+                        FittedBox(
+                            fit: BoxFit.contain,
+                            child: Text("О",
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontSize: 100))),
+                        FittedBox(
+                            fit: BoxFit.contain,
+                            child: Text("Н",
+                                style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontSize: 100))),
+                      ],
+                    ),
+                  )),
                 ),
               ],
             )
@@ -340,7 +349,7 @@ class _ApplicationPageState extends State<ApplicationPage>
               //               : currentPictureMobileIndex + 1;
               //     });
               //   },
-             // )
+              // )
             ]);
     }
 
@@ -376,17 +385,25 @@ class _ApplicationPageState extends State<ApplicationPage>
                 preferredSize: Size.fromHeight(isMouse ? 70 : 40),
               ),
               body: Container(
-                margin: isMouse ? EdgeInsets.only(bottom: 5) : EdgeInsets.only(bottom: 50, top: 40),
-                child: DraggableScrollbar(
-                    heightScrollThumb: 60,
+                margin: isMouse
+                    ? EdgeInsets.only(bottom: 5)
+                    : EdgeInsets.only(bottom: 50, top: 40),
+                child: CustomDraggableScrollbar(
+                  heightScrollThumb: 60,
                   alwaysVisibleScrollThumb: true,
                   controller: _mainController,
-                  scrollThumbBuilder: (Color backgroundColor, Animation<double> thumbAnimation, Animation<double> labelAnimation, double height, {BoxConstraints labelConstraints, Text labelText}) {
+                  scrollThumbBuilder: (Color backgroundColor,
+                      Animation<double> thumbAnimation,
+                      Animation<double> labelAnimation,
+                      double height,
+                      {BoxConstraints labelConstraints,
+                      Text labelText}) {
                     final scrollThumb = Material(
                       elevation: 4.0,
                       child: Container(
                         constraints: BoxConstraints.tight(
-                          Size(MediaQuery.of(context).size.width*0.007 + 3, height),
+                          Size(MediaQuery.of(context).size.width * 0.007 + 3,
+                              height),
                         ),
                       ),
                       color: backgroundColor,
@@ -396,12 +413,13 @@ class _ApplicationPageState extends State<ApplicationPage>
                   },
                   backgroundColor: Colors.white,
                   child: ListView.builder(
-                      physics: isMouse ? NeverScrollableScrollPhysics() : null,
-                      controller: _mainController,
-                      itemCount: 1,
-                      itemBuilder: (_, i){
-                        return ContentWidget();
-                      },),
+                    physics: isMouse ? NeverScrollableScrollPhysics() : null,
+                    controller: _mainController,
+                    itemCount: 1,
+                    itemBuilder: (_, i) {
+                      return ContentWidget();
+                    },
+                  ),
                 ),
               )),
           MenuWidget(),
@@ -414,9 +432,9 @@ class _ApplicationPageState extends State<ApplicationPage>
               onPressed: () {
                 setState(() {
                   currentPictureIndex =
-                  currentPictureIndex == pictures.length - 1
-                      ? 0
-                      : currentPictureIndex + 1;
+                      currentPictureIndex == pictures.length - 1
+                          ? 0
+                          : currentPictureIndex + 1;
                 });
               },
             ),
