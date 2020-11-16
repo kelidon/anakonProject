@@ -13,7 +13,6 @@ class DrawerBloc extends Bloc<DrawerButtons, DrawerButtons> {
 
   @override
   Stream<DrawerButtons> mapEventToState(DrawerButtons buttonName) async* {
-    print("bloc get ${buttonName.toString()}");
     yield buttonName;
   }
 }

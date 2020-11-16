@@ -27,8 +27,10 @@ class HeroTableItem extends StatelessWidget {
           if (isMouse) {
             Navigator.push(
                 mainContext,
-                CustomPageRoute(HeroTargetWidget(
-                    tag: tag, titleTag: titleTag, mainContext: mainContext)));
+                CustomPageRoute(
+                    HeroTargetWidget(
+                        tag: tag, titleTag: titleTag, mainContext: mainContext),
+                    Duration(milliseconds: 600)));
           } else {
             BottomSheetWidget().showBottomSheet(
                 AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,

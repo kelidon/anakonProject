@@ -43,14 +43,12 @@ class _ContentWidgetState extends State<ContentWidget> {
         return BlocListener<DrawerBloc, DrawerButtons>(
             listenWhen: (prev, curr) => true,
             listener: (context, state) {
-              print("content listen $state");
               setState(() {
                 currentKey = _buttonToKey[state];
               });
-              Scrollable.ensureVisible(
-                _buttonToKey[state].currentContext,
-                duration: Duration(milliseconds: 600),
-              );
+              Scrollable.ensureVisible(_buttonToKey[state].currentContext,
+                  duration: Duration(milliseconds: 1500),
+                  curve: Curves.easeInOutSine);
             },
             child: Container(
                 child: Container(

@@ -31,7 +31,7 @@ class _MenuWidgetState extends State<MenuWidget>
         AnimationController(vsync: this, duration: Duration(milliseconds: 700));
     animation = CurvedAnimation(
       parent: expandController,
-      curve: Curves.fastOutSlowIn,
+      curve: Curves.easeInOutSine,
     );
   }
 

@@ -376,8 +376,6 @@ class _CustomDraggableScrollbarState extends State<CustomDraggableScrollbar>
 
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      //print("LayoutBuilder constraints=$constraints");
-
       return NotificationListener<ScrollNotification>(
         onNotification: (ScrollNotification notification) {
           if (notification.metrics.axisDirection == AxisDirection.up ||

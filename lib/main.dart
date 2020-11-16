@@ -84,7 +84,6 @@ class _ApplicationPageState extends State<ApplicationPage>
   Future<void> _initializeVideoPlayerFutureHorizontal;
 
   _mainScrollListener() {
-    print("00000\n${_mainController.position.pixels}");
     if (_towerController.hasClients && _blurController.hasClients) {
       _towerController.jumpTo(_mainController.offset * 0.1);
       _blurController.jumpTo(_mainController.offset * 0.03);
@@ -391,7 +390,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                 child: CustomDraggableScrollbar(
                   heightScrollThumb: 60,
                   alwaysVisibleScrollThumb: true,
-                  backgroundColor: AppColors.PRIMARY.withOpacity(0.8),
+                  backgroundColor: AppColors.PRIMARY,
                   controller: _mainController,
                   scrollThumbBuilder: (Color backgroundColor,
                       Animation<double> thumbAnimation,

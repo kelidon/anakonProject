@@ -35,9 +35,11 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
               if (isMouse) {
                 Navigator.push(
                     widget.mainContext,
-                    CustomPageRoute(ServicesTargetWidget(
-                        tag: widget.serviceType,
-                        mainContext: widget.mainContext)));
+                    CustomPageRoute(
+                        ServicesTargetWidget(
+                            tag: widget.serviceType,
+                            mainContext: widget.mainContext),
+                        Duration(milliseconds: 400)));
               } else {
                 BottomSheetWidget().showBottomSheet(
                     ServicesTypeToStateMapper
