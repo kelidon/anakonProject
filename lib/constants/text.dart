@@ -115,7 +115,7 @@ class AppText {
 
   static const String CONTACT_LABEL = "ДАВАЙТЕ ОБСУДИМ ВАШ ПРОЕКТ";
 
-  static const String CONTACTS_TEXT = """ ООО "АНАКОН" """;
+  static const String CONTACTS_COMPANY_NAME = """ ООО "АНАКОН" """;
 
   static const String CONTACTS_NUMBER = "+375-44-570-57-57";
 
