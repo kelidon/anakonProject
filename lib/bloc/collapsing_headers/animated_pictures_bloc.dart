@@ -1,4 +1,3 @@
-
 part 'animated_pictures_event.dart';
 
 enum AnimatedTitle {

@@ -61,16 +61,15 @@ class _ContentWidgetState extends State<ContentWidget> {
                             left: MediaQuery.of(context).size.width * 0.15)
                         : null,
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: isMouse?25:10),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: isMouse ? 25 : 10),
                       child: Column(
                         children: [
                           Container(
                             key: aboutKey,
                             child: AboutUsWidget(),
                           ),
-                          Container(
-                              key: servicesKey,
-                              child: ServicesWidget()),
+                          Container(key: servicesKey, child: ServicesWidget()),
                           Container(
                             key: howWorkWidget,
                             child: HowWorkWidget(),
@@ -87,7 +86,7 @@ class _ContentWidgetState extends State<ContentWidget> {
     return LayoutBuilder(builder: (context, constraints) {
       return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
         bool isMouse = state != Metrics.SMALL;
-        return isMouse && MediaQuery.of(context).size.height>750
+        return isMouse && MediaQuery.of(context).size.height > 750
             ? Listener(
                 onPointerSignal: (PointerSignalEvent event) {
                   if (event is PointerScrollEvent) {

@@ -3,7 +3,6 @@ import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/bloc/servises_items/services_items_bloc.dart';
 import 'package:anakonProject/bloc/servises_items/services_type_to_state_mapper.dart';
 import 'package:anakonProject/constants/styles.dart';
-import 'package:anakonProject/constants/text.dart';
 import 'package:anakonProject/widgets/content/services/bottom_sheet.dart';
 import 'package:anakonProject/widgets/content/services/services_target.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,6 @@ class ServiceIconWidget extends StatefulWidget {
 class _ServiceIconWidgetState extends State<ServiceIconWidget> {
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (_, state) {
         bool isMouse = state != Metrics.SMALL;
@@ -42,12 +40,10 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                         mainContext: widget.mainContext)));
               } else {
                 BottomSheetWidget().showBottomSheet(
-                  ServicesTypeToStateMapper
-                    .typeToStateMap[widget.serviceType]
-                    .key,
-                  ServicesTypeToStateMapper
-                      .typeToStateMap[widget.serviceType]
-                  .value,
+                    ServicesTypeToStateMapper
+                        .typeToStateMap[widget.serviceType].key,
+                    ServicesTypeToStateMapper
+                        .typeToStateMap[widget.serviceType].value,
                     "");
               }
             },
@@ -55,8 +51,11 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
               bool isMouse = state != Metrics.SMALL;
               return Container(
                 width: isMouse ? MediaQuery.of(context).size.width * 0.2 : null,
-                height:
-                    isMouse ? MediaQuery.of(context).size.height>750?MediaQuery.of(context).size.height * 0.18:135 : 70,
+                height: isMouse
+                    ? MediaQuery.of(context).size.height > 750
+                        ? MediaQuery.of(context).size.height * 0.18
+                        : 135
+                    : 70,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 decoration: BoxDecoration(
@@ -73,7 +72,9 @@ class _ServiceIconWidgetState extends State<ServiceIconWidget> {
                   child: Text(
                     ServicesTypeToStateMapper
                         .typeToStateMapMobile[widget.serviceType].key,
-                    style: state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_S_M,
+                    style: state == Metrics.BIG
+                        ? AppStyles.TITLE
+                        : AppStyles.TITLE_S_M,
                     textAlign: TextAlign.center,
                   ),
                 ),

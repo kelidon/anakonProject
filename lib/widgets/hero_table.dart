@@ -80,47 +80,49 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
       }
       List<Widget> items = [];
       for (int i = 0; i < titles.length; i++) {
-        items.add(
-          HeroTableItem(
-            mainContext: widget.mainContext,
-            tag: titles[i],
-            titleTag: widget.title,
-          ));
+        items.add(HeroTableItem(
+          mainContext: widget.mainContext,
+          tag: titles[i],
+          titleTag: widget.title,
+        ));
       }
       return items;
     }
-    return BlocBuilder<MetricsBloc, Metrics>(
-      builder: (_, state) {
-        bool isMouse = state != Metrics.SMALL;
-        return isMouse?Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
+
+    return BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
+      bool isMouse = state != Metrics.SMALL;
+      return isMouse
+          ? Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Hero(
-                  tag: widget.title,
-                  child: Container(
-                    padding: EdgeInsets.only(top: 100),
-                    child: Text(
-                      widget.title.split(" ").join("\n"),
-                      style:  state == Metrics.BIG? AppStyles.TITLE:AppStyles.TITLE_M,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Hero(
+                      tag: widget.title,
+                      child: Container(
+                        padding: EdgeInsets.only(top: 100),
+                        child: Text(
+                          widget.title.split(" ").join("\n"),
+                          style: state == Metrics.BIG
+                              ? AppStyles.TITLE
+                              : AppStyles.TITLE_M,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
+                Table(
+                    defaultColumnWidth:
+                        FixedColumnWidth(MediaQuery.of(context).size.width / 4),
+                    children: _buildTableRows()),
               ],
-            ),
-            Table(
-                defaultColumnWidth:
-                    FixedColumnWidth(MediaQuery.of(context).size.width / 4),
-                children: _buildTableRows()),
-          ],
-        ):Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-            children: _buildTableRowsMobile());
-      }
-    );
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _buildTableRowsMobile());
+    });
   }
 }

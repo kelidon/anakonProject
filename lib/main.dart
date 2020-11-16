@@ -5,13 +5,13 @@ import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/bloc/servises_items/services_items_bloc.dart';
+import 'package:anakonProject/constants/colors.dart';
 import 'package:anakonProject/widgets/app_bar/app_bar_widget.dart';
 import 'package:anakonProject/widgets/app_bar/menu_widget.dart';
 import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:anakonProject/widgets/content/inner_widgets/contacts_overlay_widget.dart';
 import 'package:anakonProject/widgets/content/inner_widgets/custom_scroll_bar.dart';
 import 'package:anakonProject/widgets/content/services/bottom_sheet.dart';
-import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -391,6 +391,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                 child: CustomDraggableScrollbar(
                   heightScrollThumb: 60,
                   alwaysVisibleScrollThumb: true,
+                  backgroundColor: AppColors.PRIMARY.withOpacity(0.8),
                   controller: _mainController,
                   scrollThumbBuilder: (Color backgroundColor,
                       Animation<double> thumbAnimation,
@@ -402,16 +403,20 @@ class _ApplicationPageState extends State<ApplicationPage>
                       elevation: 4.0,
                       child: Container(
                         constraints: BoxConstraints.tight(
-                          Size(MediaQuery.of(context).size.width * 0.007 + 3,
+                          Size(MediaQuery.of(context).size.width * 0.006 + 3,
                               height),
                         ),
                       ),
                       color: backgroundColor,
                       borderRadius: BorderRadius.all(Radius.circular(5.0)),
                     );
-                    return scrollThumb;
+                    return Container(
+                        margin: EdgeInsets.only(
+                            right: isMouse
+                                ? MediaQuery.of(context).size.width * 0.065 + 3
+                                : 0),
+                        child: scrollThumb);
                   },
-                  backgroundColor: Colors.white,
                   child: ListView.builder(
                     physics: isMouse ? NeverScrollableScrollPhysics() : null,
                     controller: _mainController,

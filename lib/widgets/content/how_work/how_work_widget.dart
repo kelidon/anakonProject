@@ -16,7 +16,6 @@ class HowWorkWidget extends StatefulWidget {
 var howWorkNavigatorKey = GlobalKey<NavigatorState>();
 
 class _HowWorkWidgetState extends State<HowWorkWidget> {
-
   HeroController _heroController;
 
   @override
@@ -48,7 +47,8 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
         Container(
             margin:
                 EdgeInsets.fromLTRB(isMouse ? 15 : 0, 0, isMouse ? 15 : 0, 30),
-            padding: EdgeInsets.symmetric(horizontal: isMouse?40:25, vertical: 10),
+            padding: EdgeInsets.symmetric(
+                horizontal: isMouse ? 40 : 25, vertical: 10),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -59,16 +59,16 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                     offset: Offset(1, 3)),
               ], // boxShadow
             ),
-            height: MediaQuery.of(context).size.height > 750? MediaQuery.of(context).size.height - 160:590,
+            height: MediaQuery.of(context).size.height > 750
+                ? MediaQuery.of(context).size.height - 160
+                : 590,
             child: Column(
               children: [
-                if(!isMouse)Center(
-                  child: Text(
-                    AppText.HOW_WORK_TITLE,
-                    style: AppStyles.TITLE_M,
-                    textAlign: TextAlign.center
+                if (!isMouse)
+                  Center(
+                    child: Text(AppText.HOW_WORK_TITLE,
+                        style: AppStyles.TITLE_M, textAlign: TextAlign.center),
                   ),
-                ),
                 Expanded(
                     child: Navigator(
                   observers: [_heroController],
