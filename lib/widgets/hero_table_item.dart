@@ -1,6 +1,7 @@
 import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:anakonProject/bloc/collapsing_headers/animated_type_to_state_mapper.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
+import 'package:anakonProject/constants/image_utils.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class HeroTableItem extends StatelessWidget {
                 CustomPageRoute(
                     HeroTargetWidget(
                         tag: tag, titleTag: titleTag, mainContext: mainContext),
-                    Duration(milliseconds: 600)));
+                    Duration(milliseconds: 700)));
           } else {
             BottomSheetWidget().showBottomSheet(
                 AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
@@ -50,10 +51,11 @@ class HeroTableItem extends StatelessWidget {
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                          image: DecorationImage(
-                              image: AssetImage(AnimatedTypeToStateMapper
-                                  .typeToStateMap[tag].key),
-                              fit: BoxFit.cover),
+                          // image: DecorationImage(
+                          //     image: AssetImage(AnimatedTypeToStateMapper
+                          //         .typeToStateMap[tag].key),
+                          //     fit: BoxFit.cover),
+                          color: Colors.white,
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.grey.withOpacity(0.6),
@@ -65,6 +67,15 @@ class HeroTableItem extends StatelessWidget {
                         height: MediaQuery.of(context).size.height > 750
                             ? MediaQuery.of(context).size.height / 4.3
                             : 174,
+                        child: ImageUtils.heroImagesMap[tag],
+                        // child: ClipRRect(
+                        //     borderRadius: BorderRadius.all(Radius.circular(20)),
+                        //   child: FadeInImage.assetNetwork(
+                        //       placeholder: "",
+                        //       image: AnimatedTypeToStateMapper
+                        //           .typeToStateMap[tag].key,
+                        //       fit: BoxFit.cover),
+                        // ),
                       ),
                     ),
                     Text(

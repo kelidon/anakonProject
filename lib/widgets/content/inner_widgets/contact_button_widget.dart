@@ -23,7 +23,7 @@ class ContactButtonWidget extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   margin: EdgeInsets.only(top: 10),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(

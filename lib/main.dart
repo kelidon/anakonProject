@@ -12,11 +12,10 @@ import 'package:anakonProject/widgets/content/content_widget.dart';
 import 'package:anakonProject/widgets/content/inner_widgets/contacts_overlay_widget.dart';
 import 'package:anakonProject/widgets/content/inner_widgets/custom_scroll_bar.dart';
 import 'package:anakonProject/widgets/content/services/bottom_sheet.dart';
+import 'package:anakonProject/widgets/tower_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gifimage/flutter_gifimage.dart';
-import 'package:video_player/video_player.dart';
 
 import 'bloc/servises_items/services_items_bloc.dart';
 
@@ -38,12 +37,6 @@ class Application extends StatelessWidget {
         BlocProvider<MenuBloc>(
           create: (_) => MenuBloc(),
         ),
-        // BlocProvider<AnimatedPicturesFirstBloc>(
-        //   create: (_) => AnimatedPicturesFirstBloc(),
-        // ),
-        // BlocProvider<AnimatedPicturesSecondBloc>(
-        //   create: (_) => AnimatedPicturesSecondBloc(),
-        // ),
         BlocProvider<ServicesItemsBloc>(
           create: (_) => ServicesItemsBloc(),
         ),
@@ -75,14 +68,6 @@ class _ApplicationPageState extends State<ApplicationPage>
   ScrollController _blurController;
   ScrollController _towerController;
 
-  VideoPlayerController _controller;
-  Future<void> _initializeVideoPlayerFuture;
-
-  GifController controller;
-
-  VideoPlayerController _controllerHorizontal;
-  Future<void> _initializeVideoPlayerFutureHorizontal;
-
   _mainScrollListener() {
     if (_towerController.hasClients && _blurController.hasClients) {
       _towerController.jumpTo(_mainController.offset * 0.1);
@@ -96,27 +81,6 @@ class _ApplicationPageState extends State<ApplicationPage>
     _mainController.addListener(_mainScrollListener);
     _towerController = ScrollController();
     _blurController = ScrollController();
-    _controller = VideoPlayerController.asset("assets/video/tower.mp4");
-    _initializeVideoPlayerFuture = _controller.initialize();
-
-    controller = GifController(vsync: this);
-    controller.animateTo(0.5, duration: Duration(milliseconds: 1000));
-
-    _controllerHorizontal =
-        VideoPlayerController.asset("assets/video/tower_horizontal.mp4");
-    _initializeVideoPlayerFutureHorizontal = _controller.initialize();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _controller.setVolume(0);
-      _controller.play();
-      _controller.setLooping(true);
-    });
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _controllerHorizontal.setVolume(0);
-      _controllerHorizontal.play();
-      _controllerHorizontal.setLooping(true);
-    });
     super.initState();
   }
 
@@ -149,105 +113,6 @@ class _ApplicationPageState extends State<ApplicationPage>
       context.bloc<MetricsBloc>().add(Metrics.MEDIUM);
     } else {
       context.bloc<MetricsBloc>().add(Metrics.SMALL);
-    }
-    final String assetName = 'assets/images/logo_on_tower.png';
-    final Widget logoOnTower = Image.asset(
-      assetName,
-    );
-
-    Widget _buildTower() {
-      return isMouse
-          ? Stack(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 1),
-                  width: MediaQuery.of(context).size.width * 0.15,
-                  child: Stack(
-                    children: [
-                      SingleChildScrollView(
-                          physics: NeverScrollableScrollPhysics(),
-                          controller: _towerController,
-                          child: BlocBuilder<MetricsBloc, Metrics>(
-                              builder: (context, state) {
-                            if (state != Metrics.SMALL) {
-                              _initializeVideoPlayerFuture = null;
-                              _initializeVideoPlayerFuture =
-                                  _controller.initialize();
-                              WidgetsBinding.instance
-                                  .addPostFrameCallback((timeStamp) {
-                                _controller.setVolume(0);
-                                _controller.play();
-                                _controller.setLooping(true);
-                              });
-                            }
-                            return Container(
-                              child: FutureBuilder(
-                                  future: _initializeVideoPlayerFuture,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      return AspectRatio(
-                                        aspectRatio:
-                                            _controller.value.aspectRatio,
-                                        child: VideoPlayer(_controller),
-                                      );
-                                    } else {
-                                      return Container();
-                                    }
-                                  }),
-                            );
-                          })),
-                      Column(
-                        children: [
-                          Spacer(),
-                          Container(
-                            child: Container(child: logoOnTower),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            )
-          : Container(
-              alignment: Alignment.topLeft,
-              height: 40,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: NeverScrollableScrollPhysics(),
-                child: BlocBuilder<MetricsBloc, Metrics>(
-                    builder: (context, state) {
-                  if (state == Metrics.SMALL) {
-                    _initializeVideoPlayerFutureHorizontal = null;
-                    _initializeVideoPlayerFutureHorizontal =
-                        _controllerHorizontal.initialize();
-                    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-                      _controllerHorizontal.setVolume(0);
-                      _controllerHorizontal.play();
-                      _controllerHorizontal.setLooping(true);
-                    });
-                  }
-                  return FutureBuilder(
-                      future: _initializeVideoPlayerFutureHorizontal,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          // return AspectRatio(
-                          //   aspectRatio:
-                          //       _controllerHorizontal.value.aspectRatio,
-                          //   child: VideoPlayer(_controllerHorizontal),
-                          // );
-                          return GifImage(
-                            controller: controller,
-                            image:
-                                AssetImage("assets/video/tower_horizontal.gif"),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      });
-                }),
-              ));
     }
 
     Widget _buildBlur() {
@@ -338,17 +203,6 @@ class _ApplicationPageState extends State<ApplicationPage>
                                   color: Colors.white.withOpacity(0.7),
                                   fontSize: 100,
                                   letterSpacing: 40))))),
-              // IconButton(
-              //   icon: Icon(Icons.refresh),
-              //   onPressed: () {
-              //     setState(() {
-              //       currentPictureMobileIndex =
-              //           currentPictureMobileIndex == picturesMobile.length - 1
-              //               ? 0
-              //               : currentPictureMobileIndex + 1;
-              //     });
-              //   },
-              // )
             ]);
     }
 
@@ -356,7 +210,7 @@ class _ApplicationPageState extends State<ApplicationPage>
       return isMouse
           ? Row(
               children: [
-                _buildTower(),
+                TowerWidget(towerController: _towerController,),
                 Spacer(),
                 _buildBlur(),
               ],
@@ -366,7 +220,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                 SizedBox(
                   height: 40,
                 ),
-                _buildTower(),
+                TowerWidget(towerController: _towerController,),
                 Spacer(),
                 _buildBlur(),
               ],
@@ -451,7 +305,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    //_desktopVideoController.dispose();
     _mainController.dispose();
     _towerController.dispose();
     _blurController.dispose();

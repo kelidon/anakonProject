@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
 import 'package:anakonProject/bloc/collapsing_headers/animated_type_to_state_mapper.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
+import 'package:anakonProject/constants/image_utils.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,11 +57,11 @@ class _HeroTargetWidgetState extends State<HeroTargetWidget> {
                         margin:
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          image: DecorationImage(
-                              image: AssetImage(AnimatedTypeToStateMapper
-                                  .typeToStateMap[widget.tag].key),
-                              fit: BoxFit.cover),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          // image: DecorationImage(
+                          //     image: AssetImage(AnimatedTypeToStateMapper
+                          //         .typeToStateMap[widget.tag].key),
+                          //     fit: BoxFit.cover),
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.grey.withOpacity(0.6),
@@ -68,6 +69,7 @@ class _HeroTargetWidgetState extends State<HeroTargetWidget> {
                                 offset: Offset(1, 3)),
                           ], // boxShadow
                         ),
+                        child: ImageUtils.heroImagesMap[widget.tag],
                       ),
                     ),
                   ),
