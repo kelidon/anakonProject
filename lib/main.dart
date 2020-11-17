@@ -210,7 +210,9 @@ class _ApplicationPageState extends State<ApplicationPage>
       return isMouse
           ? Row(
               children: [
-                TowerWidget(towerController: _towerController,),
+                TowerWidget(
+                  towerController: _towerController,
+                ),
                 Spacer(),
                 _buildBlur(),
               ],
@@ -220,7 +222,9 @@ class _ApplicationPageState extends State<ApplicationPage>
                 SizedBox(
                   height: 40,
                 ),
-                TowerWidget(towerController: _towerController,),
+                TowerWidget(
+                  towerController: _towerController,
+                ),
                 Spacer(),
                 _buildBlur(),
               ],

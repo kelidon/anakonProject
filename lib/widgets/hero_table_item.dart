@@ -36,7 +36,7 @@ class HeroTableItem extends StatelessWidget {
             BottomSheetWidget().showBottomSheet(
                 AnimatedTypeToStateMapper.typeToStateMap[tag].value.key,
                 AnimatedTypeToStateMapper.typeToStateMap[tag].value.value,
-                AnimatedTypeToStateMapper.typeToStateMap[tag].key);
+                tag);
           }
         },
         child: BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
@@ -51,10 +51,6 @@ class HeroTableItem extends StatelessWidget {
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                          // image: DecorationImage(
-                          //     image: AssetImage(AnimatedTypeToStateMapper
-                          //         .typeToStateMap[tag].key),
-                          //     fit: BoxFit.cover),
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
@@ -68,14 +64,6 @@ class HeroTableItem extends StatelessWidget {
                             ? MediaQuery.of(context).size.height / 4.3
                             : 174,
                         child: ImageUtils.heroImagesMap[tag],
-                        // child: ClipRRect(
-                        //     borderRadius: BorderRadius.all(Radius.circular(20)),
-                        //   child: FadeInImage.assetNetwork(
-                        //       placeholder: "",
-                        //       image: AnimatedTypeToStateMapper
-                        //           .typeToStateMap[tag].key,
-                        //       fit: BoxFit.cover),
-                        // ),
                       ),
                     ),
                     Text(
@@ -107,13 +95,14 @@ class HeroTableItem extends StatelessWidget {
                         tag: tag,
                         child: Container(
                           decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              image: DecorationImage(
-                                  image: AssetImage(AnimatedTypeToStateMapper
-                                      .typeToStateMap[tag].key),
-                                  fit: BoxFit.cover)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
                           width: 50,
+                          height: 70,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: ImageUtils.heroImagesMobileMap[tag],
+                          ),
                         ),
                       ),
                       Expanded(

@@ -58,10 +58,6 @@ class _HeroTargetWidgetState extends State<HeroTargetWidget> {
                             EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
-                          // image: DecorationImage(
-                          //     image: AssetImage(AnimatedTypeToStateMapper
-                          //         .typeToStateMap[widget.tag].key),
-                          //     fit: BoxFit.cover),
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.grey.withOpacity(0.6),

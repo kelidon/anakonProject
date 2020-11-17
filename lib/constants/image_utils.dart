@@ -7,12 +7,22 @@ class ImageUtils {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(20)),
       child: FadeInImage.assetNetwork(
-          placeholder: "",
+          placeholder: "assets/images/null.png",
           image: image,
           fit: BoxFit.cover),
     );
   }
-  static final heroImagesMap = Map.fromEntries(AnimatedTitle.values.map((e) => MapEntry(e, buildHeroImage(AnimatedTypeToStateMapper.typeToStateMap[e].key))));
+
+  static final heroImagesMap = Map.fromEntries(AnimatedTitle.values.map((e) =>
+      MapEntry(
+          e, buildHeroImage(AnimatedTypeToStateMapper.typeToStateMap[e].key))));
+  static final heroImagesMobileMap = Map.fromEntries(AnimatedTitle.values.map(
+      (e) => MapEntry(
+          e,
+          FadeInImage.assetNetwork(
+              placeholder: "assets/images/null.png",
+              image: AnimatedTypeToStateMapper.typeToStateMap[e].key,
+              fit: BoxFit.cover))));
 
   static final towerLogo = Image.asset(
     "assets/images/logo_on_tower.png",
@@ -20,7 +30,4 @@ class ImageUtils {
   );
 
   static final mobileGif = AssetImage("assets/video/tower_horizontal.gif");
-
 }
-
-
