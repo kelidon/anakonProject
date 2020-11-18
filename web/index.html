@@ -1,92 +1,130 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <script defer src="index.dart.js" type="application/javascript"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script defer src="index.dart.js" type="application/javascript"></script>
 
-  <style>
-    .loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
+    <style>
 
-    .loader {
-      border: 16px solid #f3f3f3;
-      border-radius: 50%;
-      border-top: 16px solid #06285A;
-      border-right: 16px solid #06285A;
-      border-bottom: 16px solid #06285A;
-      border-left: 16px solid #06285A;
-      width: 120px;
-      height: 120px;
-      -webkit-animation: spin 2s linear infinite;
-      animation: spin 2s linear infinite;
-    }
+        video{
+            preload: true;
+            autoplay: true;
+            loop: true;
+            autobuffer: true;
+        }
 
-    .pulse {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 150px;
-      height: 150px;
-      color: #06285A;
-      background: white;
-      /*border: 16px solid #f3f3f3*/
-      border-radius: 50%;
-      border-top: 16px solid #06285A;
-      border-right: 16px solid #06285A;
-      border-bottom: 16px solid #06285A;
-      border-left: 16px solid #06285A;
-      animation: radial-pulse 1s infinite;
-    }
+        @font-face {
+            font-family: Poppins;
+            src: url(fonts/Poppins-Bold.ttf);
+        }
 
-    @-webkit-keyframes spin {
-      0% {
-        -webkit-transform: rotate(0deg);
-      }
 
-      100% {
-        -webkit-transform: rotate(360deg);
-      }
-    }
+        .p-center {
+            position: absolute;
+            margin-top: 500px;
+            color: #06285A;
+            animation: text-focus-in 3s infinite alternate;
+            font-family: Tahoma;
+            font-weight: normal;
+        }
 
-    @keyframes radial-pulse {
-      0% {
-        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.5);
-      }
+        .image-wrap {
+            width: 100%;
+            height: 100%;
+        }
 
-      100% {
-        box-shadow: 0 0 0 40px rgba(0, 0, 0, 0);
-      }
-    }
+        .animation {
+            animation: scale-up-center 1s infinite alternate;
+        }
 
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
+        .image-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
+        /*animation*/
+
+        @-webkit-keyframes scale-up-center {
+            0% {
+                -webkit-transform: scale(0.9);
+                transform: scale(0.9);
+
+            }
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+
+            }
+        }
+
+        @keyframes scale-up-center {
+            0% {
+                -webkit-transform: scale(0.9);
+                transform: scale(0.9);
+
+            }
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+
+            }
+        }
+
+        @-webkit-keyframes text-focus-in {
+            0% {
+                -webkit-filter: blur(12px);
+                filter: blur(12px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-filter: blur(0px);
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes text-focus-in {
+            0% {
+                -webkit-filter: blur(12px);
+                filter: blur(12px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-filter: blur(0px);
+                filter: blur(0px);
+                opacity: 1;
+            }
+        }
+
+
+    </style>
 </head>
 
 <body>
-<div class="loading">
-<!--  <div class="loader"></div>-->
-  <div class="pulse"></div>
-</div>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('flutter_service_worker.js');
+        });
+    }
+</script>
+
 
 <script src="main.dart.js" type="application/javascript"></script>
-</body>
 
+
+<div class="image-wrap image-flex ">
+    <p>
+        <img class="animation" src="assets/images/logo_menu.png">
+    </p>
+    <p class="p-center">
+        ЗАГРУЗКА...
+    </p>
+
+</div>
+
+</body>
 </html>
