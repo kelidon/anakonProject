@@ -1,0 +1,93 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Anakon</title>
+  <!--PRELOAD-HERE-->
+  <script defer src="index.dart.js" type="application/javascript"></script>
+
+  <style>
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #06285A;
+      border-right: 16px solid #06285A;
+      border-bottom: 16px solid #06285A;
+      border-left: 16px solid #06285A;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    .pulse {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 150px;
+      height: 150px;
+      color: #06285A;
+      background: white;
+      /*border: 16px solid #f3f3f3*/
+      border-radius: 50%;
+      border-top: 16px solid #06285A;
+      border-right: 16px solid #06285A;
+      border-bottom: 16px solid #06285A;
+      border-left: 16px solid #06285A;
+      animation: radial-pulse 1s infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes radial-pulse {
+      0% {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.5);
+      }
+
+      100% {
+        box-shadow: 0 0 0 40px rgba(0, 0, 0, 0);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+<div class="loading">
+<!--  <div class="loader"></div>-->
+  <div class="pulse"></div>
+</div>
+
+<script src="main.dart.js" type="application/javascript"></script>
+</body>
+
+</html>
