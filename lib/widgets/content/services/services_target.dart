@@ -30,20 +30,17 @@ class ServicesTargetWidget extends StatelessWidget {
               color: Colors.white,
               child: Row(
                 children: [
-                  Hero(
-                    tag: tag,
-                    child: Container(
-                        padding: EdgeInsets.only(right: 20),
-                        width: MediaQuery.of(context).size.width / 5,
-                        child: Text(
-                          ServicesTypeToStateMapper.typeToStateMap[tag].key,
-                          style: isMouse
-                              ? AppStyles.SERVICES_TITLE
-                              : AppStyles.TITLE_M,
-                          textAlign: TextAlign.center,
-                          softWrap: true,
-                        )),
-                  ),
+                  Container(
+                      padding: EdgeInsets.only(right: 20),
+                      width: MediaQuery.of(context).size.width / 5,
+                      child: Text(
+                        ServicesTypeToStateMapper.typeToStateMap[tag].key,
+                        style: isMouse
+                            ? AppStyles.SERVICES_TITLE
+                            : AppStyles.TITLE_M,
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                      )),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 20),
                     height: MediaQuery.of(context).size.height,

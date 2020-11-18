@@ -7,9 +7,7 @@ class ImageUtils {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(20)),
       child: FadeInImage.assetNetwork(
-          placeholder: "assets/images/null.png",
-          image: image,
-          fit: BoxFit.cover),
+          placeholder: "", image: image, fit: BoxFit.cover),
     );
   }
 
@@ -20,7 +18,7 @@ class ImageUtils {
       (e) => MapEntry(
           e,
           FadeInImage.assetNetwork(
-              placeholder: "assets/images/null.png",
+              placeholder: "",
               image: AnimatedTypeToStateMapper.typeToStateMap[e].key,
               fit: BoxFit.cover))));
 

@@ -1,12 +1,14 @@
-import 'package:anakonProject/bloc/contacts_overlay/contacts_overlay_bloc.dart';
 import 'package:anakonProject/bloc/drawer/drawer_bloc.dart';
 import 'package:anakonProject/bloc/drawer/menu_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:anakonProject/fonts_icons/anakon_greek_icons.dart';
+import 'package:anakonProject/widgets/content/inner_widgets/contacts_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'drawer_button_widget.dart';
@@ -78,11 +80,14 @@ class _AppBarWidgetState extends State<AppBarWidget> {
                         fit: BoxFit.contain,
                         child: InkWell(
                           onTap: () {
-                            if (context.bloc<ContactsOverlayBloc>().state) {
-                              context.bloc<ContactsOverlayBloc>().add(false);
-                            } else {
-                              context.bloc<ContactsOverlayBloc>().add(true);
-                            }
+                            showDialog(
+                                context: context,
+                                builder: (_) => new AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20))),
+                                      content: ContactsWidget(),
+                                    ));
                           },
                           child: Container(
                               child: Column(

@@ -53,7 +53,7 @@ class _ContentWidgetState extends State<ContentWidget> {
             child: Container(
                 child: Container(
                     alignment: Alignment.center,
-                    margin: isMouse
+                    padding: isMouse
                         ? EdgeInsets.only(
                             right: MediaQuery.of(context).size.width * 0.065,
                             left: MediaQuery.of(context).size.width * 0.15)

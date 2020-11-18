@@ -1,10 +1,11 @@
-import 'package:anakonProject/bloc/contacts_overlay/contacts_overlay_bloc.dart';
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'contacts_widget.dart';
 
 class ContactButtonWidget extends StatelessWidget {
   @override
@@ -18,7 +19,14 @@ class ContactButtonWidget extends StatelessWidget {
             FittedBox(
               fit: BoxFit.cover,
               child: InkWell(
-                onTap: () => context.bloc<ContactsOverlayBloc>().add(true),
+                onTap: () => showDialog(
+                    context: context,
+                    builder: (_) => new AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          content: ContactsWidget(),
+                        )),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   margin: EdgeInsets.only(top: 10),
