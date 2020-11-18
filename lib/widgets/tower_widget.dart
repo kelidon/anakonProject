@@ -25,7 +25,7 @@ class _TowerWidgetState extends State<TowerWidget>
   void initState() {
     super.initState();
     _desktopVideoController =
-        VideoPlayerController.asset("assets/video/tower.m4v");
+        VideoPlayerController.asset("../web/tower.mp4");
     _initializeVideoPlayerFuture = _desktopVideoController.initialize();
 
     _mobileGifController = GifController(vsync: this);

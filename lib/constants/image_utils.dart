@@ -27,5 +27,5 @@ class ImageUtils {
     fit: BoxFit.fitWidth,
   );
 
-  static final mobileGif = AssetImage("assets/video/tower_horizontal.gif");
+  static final mobileGif = AssetImage("../web/tower_horizontal.gif");
 }
