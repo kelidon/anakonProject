@@ -20,9 +20,9 @@ class ImageUtils {
               fit: BoxFit.cover))));
 
   static final towerLogo = Image.asset(
-    "../web/logo_on_tower.png",
+    "assets/images/logo_on_tower.png",
     fit: BoxFit.fitWidth,
   );
 
-  static final mobileGif = AssetImage("../web/tower_horizontal.gif");
+  static final mobileGif = AssetImage("../web/assets/images/tower_horizontal.gif");
 }
