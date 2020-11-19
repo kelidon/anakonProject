@@ -6,8 +6,7 @@ class ImageUtils {
   static buildHeroImage(String image) {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(20)),
-      child: FadeInImage.assetNetwork(
-          placeholder: "", image: image, fit: BoxFit.cover),
+      child: Image( image: AssetImage(image), fit: BoxFit.cover),
     );
   }
 
@@ -17,13 +16,11 @@ class ImageUtils {
   static final heroImagesMobileMap = Map.fromEntries(AnimatedTitle.values.map(
       (e) => MapEntry(
           e,
-          FadeInImage.assetNetwork(
-              placeholder: "",
-              image: AnimatedTypeToStateMapper.typeToStateMap[e].key,
+          Image( image: AssetImage(AnimatedTypeToStateMapper.typeToStateMap[e].key),
               fit: BoxFit.cover))));
 
   static final towerLogo = Image.asset(
-    "assets/images/logo_on_tower.png",
+    "../web/logo_on_tower.png",
     fit: BoxFit.fitWidth,
   );
 

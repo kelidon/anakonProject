@@ -9,7 +9,7 @@ class AnimatedTypeToStateMapper {
         MapEntry(AppText.ABOUT_US_2, AppText.ABOUT_US_2_CONTENT)),
     AnimatedTitle.CONS_3: MapEntry("assets/images/effective.jpg",
         MapEntry(AppText.ABOUT_US_3, AppText.ABOUT_US_3_CONTENT)),
-    AnimatedTitle.CONS_4: MapEntry("assets/images/individuality.jpg",
+    AnimatedTitle.CONS_4: MapEntry("../web/individuality.jpg",
         MapEntry(AppText.ABOUT_US_4, AppText.ABOUT_US_4_CONTENT)),
     AnimatedTitle.HOW_WORK_1: MapEntry(
         "assets/images/personal_engineer.jpg",
