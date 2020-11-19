@@ -10,7 +10,10 @@
   <link rel="preload" href="icons/favicon2.png" as="fetch" crossorigin>
   <link rel="preload" href="manifest.json" as="fetch" crossorigin>
   <link rel="preload" href="tower_horizontal.gif" as="fetch" crossorigin>
-  <script defer src="index.dart.js" type="application/javascript"></script>
+
+    <script defer src="index.dart.js" type="application/javascript"></script>
+
+<!--    <meta http-equiv="refresh" content=5; URL= web/index0.html />-->
 
     <style>
 
@@ -111,16 +114,10 @@
 
 <body>
 
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-            navigator.serviceWorker.register('flutter_service_worker.js');
-        });
-    }
-</script>
 
 
-<script src="main.dart.js" type="application/javascript"></script>
+
+
 
 
 <div class="image-wrap image-flex ">
@@ -132,6 +129,17 @@
     </p>
 
 </div>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('flutter_service_worker.js');
+        });
+    }
+</script>
+
+
+<script src="main.dart.js" type="application/javascript"></script>
 
 </body>
 
