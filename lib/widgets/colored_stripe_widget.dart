@@ -10,9 +10,9 @@ class ColoredStripeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var pictures = ["../web/assets/images/blur.jpg"];
+    var pictures = ["../../web/assets/images/blur.jpg"];
 
-    var picturesMobile = ["../web/assets/images/blur_horizontal.png"];
+    var picturesMobile = ["../../web/assets/images/blur_horizontal.png"];
 
     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (_, state) {

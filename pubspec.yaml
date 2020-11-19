@@ -34,6 +34,8 @@ flutter:
   assets:
     - assets/images/
     - assets/video/
+    - web/assets/images/
+    - web/assets/video/
   fonts:
     - family:  AnakonGreek
       fonts:

@@ -53,8 +53,8 @@ class _ScrollButtonWidgetState extends State<ScrollButtonWidget> {
               ..layout())
             .size;
         final String assetName = isMenu
-            ? '../web/assets/images/logo_menu.png'
-            : '../web/assets/images/logo_appbar.png';
+            ? '../../web/assets/images/logo_menu.png'
+            : '../../web/assets/images/logo_appbar.png';
         final Widget logoWidget = BlocBuilder<MetricsBloc, Metrics>(
           builder: (context, state) {
             bool isMouse = state != Metrics.SMALL;
