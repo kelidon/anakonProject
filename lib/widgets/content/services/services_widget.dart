@@ -243,9 +243,9 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                   child: CarouselSlider(
                     carouselController: _controller,
                     options: CarouselOptions(
-                        height: MediaQuery.of(context).size.height > 750
+                        height: MediaQuery.of(context).size.height > 770
                             ? MediaQuery.of(context).size.height - 190
-                            : 560,
+                            : 580,
                         scrollPhysics: NeverScrollableScrollPhysics(),
                         enableInfiniteScroll: false,
                         viewportFraction: 1,

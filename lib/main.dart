@@ -90,7 +90,7 @@ class _ApplicationPageState extends State<ApplicationPage>
     print(
         "width: ${MediaQuery.of(context).size.width}, height: ${MediaQuery.of(context).size.height}");
     isMouse = MediaQuery.of(context).size.width > 1000;
-    if (MediaQuery.of(context).size.width > 1400) {
+    if (MediaQuery.of(context).size.width > 1500) {
       context.bloc<MetricsBloc>().add(Metrics.BIG);
     } else if (MediaQuery.of(context).size.width > 1000) {
       context.bloc<MetricsBloc>().add(Metrics.MEDIUM);

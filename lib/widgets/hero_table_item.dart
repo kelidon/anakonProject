@@ -60,9 +60,9 @@ class HeroTableItem extends StatelessWidget {
                           ], // boxShadow
                         ),
                         width: MediaQuery.of(context).size.width / 4.1,
-                        height: MediaQuery.of(context).size.height > 750
+                        height: MediaQuery.of(context).size.height > 770
                             ? MediaQuery.of(context).size.height / 4.3
-                            : 174,
+                            : 179,
                         child: ImageUtils.heroImagesMap[tag],
                       ),
                     ),
