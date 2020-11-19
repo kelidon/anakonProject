@@ -30,7 +30,7 @@ class _ContactsWidgetState extends State<ContactsWidget> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image(
-              image: AssetImage("assets/images/logo_menu.png"),
+              image: AssetImage("../web/assets/images/logo_menu.png"),
               width: 200,
               fit: BoxFit.fitWidth,
             ),

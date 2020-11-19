@@ -14,15 +14,17 @@ class ImageUtils {
       MapEntry(
           e, buildHeroImage(AnimatedTypeToStateMapper.typeToStateMap[e].key))));
   static final heroImagesMobileMap = Map.fromEntries(AnimatedTitle.values.map(
-      (e) => MapEntry(
+          (e) => MapEntry(
           e,
-          Image( image: AssetImage(AnimatedTypeToStateMapper.typeToStateMap[e].key),
+          FadeInImage.assetNetwork(
+              placeholder: "../web/assets/images/null.png",
+              image: AnimatedTypeToStateMapper.typeToStateMap[e].key,
               fit: BoxFit.cover))));
 
   static final towerLogo = Image.asset(
-    "assets/images/logo_on_tower.png",
+    "../web/assets/images/logo_on_tower.png",
     fit: BoxFit.fitWidth,
   );
 
-  static final mobileGif = AssetImage("../web/assets/images/tower_horizontal.gif");
+  static final mobileGif = AssetImage("../web/assets/video/tower_horizontal.gif");
 }

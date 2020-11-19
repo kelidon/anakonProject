@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <meta name="description" content="Anakon">
 
     <!-- iOS meta tags & icons -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Anakon">
-    <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png"/>
 
     <title>Anakon</title>
     <!--PRELOAD-HERE-->
@@ -30,7 +26,7 @@
             position: absolute;
             margin-top: 500px;
             color: #06285A;
-            animation: text-focus-in 3s infinite alternate;
+            animation: text-focus-in 10s infinite alternate;
             font-family: Tahoma;
             font-weight: normal;
         }
@@ -41,7 +37,7 @@
         }
 
         .animation {
-            animation: scale-up-center 1s infinite alternate;
+            animation: scale-up-center 10s infinite alternate;
         }
 
         .image-flex {
@@ -131,20 +127,6 @@
 </script>
 <script src="main.dart.js" type="application/javascript">
 
-    jQuery(document).ready(function() {
-        //Preloader
-        jQuery(window).on("load", function() {
-            preloaderFadeOutTime = 500;
-
-            function hidePreloader() {
-                var wrapper = jQuery('.image-wrap');
-                var spinner = jQuery('.image-flex');
-                wrapper.fadeOut(preloaderFadeOutTime);
-                spinner.fadeOut(preloaderFadeOutTime);
-            }
-            hidePreloader();
-        });
-    });
 
 </script>
 </body>
