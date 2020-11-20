@@ -31,52 +31,62 @@ class ColoredStripeWidget extends StatelessWidget {
                     ),
                   ),
                   Container(
+                    alignment: Alignment.center,
+                  child: FadeInImage.memoryNetwork(
+                    placeholder: kTransparentImage,
+                    image: "assets/images/right_stripe_hover.png",
                     width: MediaQuery.of(context).size.width * 0.065,
-                    child: Center(
-                        child: FittedBox(
-                      fit: BoxFit.fitHeight,
-                      child: Column(
-                        children: [
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("А",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("Н",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("А",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("К",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("О",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                          FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text("Н",
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 100))),
-                        ],
-                      ),
-                    )),
+                     height:  MediaQuery.of(context).size.height * 0.9,
+                     fit: BoxFit.contain,
+                  )
                   ),
+                  // Container(
+                  //   width: MediaQuery.of(context).size.width * 0.065,
+                  //   child: Center(
+                  //       child: FittedBox(
+                  //     fit: BoxFit.fitHeight,
+                  //     child: Column(
+                  //       children: [
+                  //         FittedBox(
+                  //             fit: BoxFit.contain,
+                  //             child: Text("А",
+                  //                 style: TextStyle(
+                  //                     color: Colors.black.withOpacity(0.7),
+                  //                     fontSize: 100))),
+                  //         FittedBox(
+                  //             fit: BoxFit.contain,
+                  //             child: Text("Н",
+                  //                 style: TextStyle(
+                  //                     color: Colors.white.withOpacity(0.7),
+                  //                     fontSize: 100))),
+                  //         FittedBox(
+                  //             fit: BoxFit.contain,
+                  //             child: Text("А",
+                  //                 style: TextStyle(
+                  //                     color: Colors.white.withOpacity(0.7),
+                  //                     fontSize: 100))),
+                  //         FittedBox(
+                  //             fit: BoxFit.contain,
+                  //             child: Text("К",
+                  //                 style: TextStyle(
+                  //                     color: Colors.white.withOpacity(0.7),
+                  //                     fontSize: 100))),
+                  //         FittedBox(
+                  //             fit: BoxFit.contain,
+                  //             child: Text("О",
+                  //                 style: TextStyle(
+                  //                     color: Colors.white.withOpacity(0.7),
+                  //                     fontSize: 100))),
+                  //         FittedBox(
+                  //             fit: BoxFit.contain,
+                  //             child: Text("Н",
+                  //                 style: TextStyle(
+                  //                     color: Colors.white.withOpacity(0.7),
+                  //                     fontSize: 100))),
+                  //       ],
+                  //     ),
+                  //   )),
+                  // ),
                 ],
               )
             : Stack(children: [
