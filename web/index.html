@@ -15,7 +15,7 @@
     <link rel="preload" href="assets/images/blur_horizontal.png" as="image"  >
     <link rel="preload" href="assets/images/effective.jpg" as="image"  >
     <link rel="preload" href="assets/images/experience.jpg" as="image"  >
-    <link rel="preload" href="assets/images/facture1.png" as="image"  >
+    <link rel="preload" href="assets/images/right_stripe_hover.png" as="image"  >
     <link rel="preload" href="assets/images/individuality.jpg" as="image"  >
     <link rel="preload" href="assets/images/logo_appbar.png" as="image"  >
     <link rel="preload" href="assets/images/logo_appbar_1.png" as="image"  >
@@ -146,9 +146,22 @@
         });
     }
 </script>
-<script src="main.dart.js" type="application/javascript">
+<script>
+    function onLoad(url){
+        var script = document.createElement('script');
+        script.src="main.dart.js";
+        script.setAttribute('async','true');
+        document.documentElement.firstChild.appendChild(script);
+    }
+    onLoad("main.dart.js");
+    setTimeout(function (){
+        onLoad("main.dart.js");
+    },2000);
 
 
 </script>
+<!--<script src="main.dart.js" type="application/javascript"></script>-->
+
+
 </body>
 </html>
