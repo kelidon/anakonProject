@@ -19,7 +19,10 @@ class _TowerWidgetState extends State<TowerWidget>
   VideoPlayerController _desktopVideoController;
   Future<void> _initializeVideoPlayerFuture;
 
-  GifController _mobileGifController;
+  VideoPlayerController _mobileVideoController;
+  Future<void> _initializeMobileVideoPlayerFuture;
+
+  //GifController _mobileGifController;
 
   @override
   void initState() {
@@ -28,21 +31,32 @@ class _TowerWidgetState extends State<TowerWidget>
         VideoPlayerController.asset("video/tower.mp4");
     _initializeVideoPlayerFuture = _desktopVideoController.initialize();
 
-    _mobileGifController = GifController(vsync: this);
-    _mobileGifController.animateTo(0.5, duration: Duration(milliseconds: 1000));
+    //_mobileGifController = GifController(vsync: this);
+    //_mobileGifController.animateTo(0.5, duration: Duration(milliseconds: 1000));
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _desktopVideoController.setVolume(0);
       _desktopVideoController.play();
       _desktopVideoController.setLooping(true);
     });
+
+  _mobileVideoController =
+      VideoPlayerController.asset("video/tower_horizontal.mp4");
+  _initializeMobileVideoPlayerFuture = _mobileVideoController.initialize();
+
+  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    _mobileVideoController.setVolume(0);
+    _mobileVideoController.play();
+    _mobileVideoController.setLooping(true);
+  });
   }
 
   @override
   void dispose() {
     super.dispose();
     _desktopVideoController.dispose();
-    _mobileGifController.dispose();
+    _desktopVideoController.dispose();
+    //_mobileGifController.dispose();
   }
 
   @override
@@ -61,20 +75,7 @@ class _TowerWidgetState extends State<TowerWidget>
                   SingleChildScrollView(
                       physics: NeverScrollableScrollPhysics(),
                       controller: widget.towerController,
-                      child: BlocBuilder<MetricsBloc, Metrics>(
-                          builder: (context, state) {
-                            if (state != Metrics.SMALL) {
-                              _initializeVideoPlayerFuture = null;
-                              _initializeVideoPlayerFuture =
-                                  _desktopVideoController.initialize();
-                              WidgetsBinding.instance
-                                  .addPostFrameCallback((timeStamp) {
-                                _desktopVideoController.setVolume(0);
-                                _desktopVideoController.play();
-                                _desktopVideoController.setLooping(true);
-                              });
-                            }
-                            return Container(
+                      child: Container(
                               child: FutureBuilder(
                                   future: _initializeVideoPlayerFuture,
                                   builder: (context, snapshot) {
@@ -90,8 +91,8 @@ class _TowerWidgetState extends State<TowerWidget>
                                       return Container();
                                     }
                                   }),
-                            );
-                          })),
+                            )
+                          ),
                   Column(
                     children: [
                       Spacer(),
@@ -110,12 +111,25 @@ class _TowerWidgetState extends State<TowerWidget>
             alignment: Alignment.topLeft,
             height: 40,
             child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: NeverScrollableScrollPhysics(),
-              child: GifImage(
-                controller: _mobileGifController,
-                image: ImageUtils.mobileGif,
-              ),
+                scrollDirection: Axis.horizontal,
+                physics: NeverScrollableScrollPhysics(),
+                child: Container(
+                  child: FutureBuilder(
+                      future: _initializeMobileVideoPlayerFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.done) {
+                          return AspectRatio(
+                            aspectRatio: _mobileVideoController
+                                .value.aspectRatio,
+                            child: VideoPlayer(
+                                _mobileVideoController),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      }),
+                )
             ));
       },
     );
