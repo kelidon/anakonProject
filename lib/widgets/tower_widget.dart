@@ -61,20 +61,7 @@ class _TowerWidgetState extends State<TowerWidget>
                   SingleChildScrollView(
                       physics: NeverScrollableScrollPhysics(),
                       controller: widget.towerController,
-                      child: BlocBuilder<MetricsBloc, Metrics>(
-                          builder: (context, state) {
-                            if (state != Metrics.SMALL) {
-                              _initializeVideoPlayerFuture = null;
-                              _initializeVideoPlayerFuture =
-                                  _desktopVideoController.initialize();
-                              WidgetsBinding.instance
-                                  .addPostFrameCallback((timeStamp) {
-                                _desktopVideoController.setVolume(0);
-                                _desktopVideoController.play();
-                                _desktopVideoController.setLooping(true);
-                              });
-                            }
-                            return Container(
+                            child: Container(
                               child: FutureBuilder(
                                   future: _initializeVideoPlayerFuture,
                                   builder: (context, snapshot) {
@@ -90,14 +77,15 @@ class _TowerWidgetState extends State<TowerWidget>
                                       return Container();
                                     }
                                   }),
-                            );
-                          })),
+                            )
+                          ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Spacer(),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.15,
                         child: Container(child: ImageUtils.towerLogo),
+
                       ),
                     ],
                   )

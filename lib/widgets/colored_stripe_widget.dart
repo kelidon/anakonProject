@@ -2,6 +2,7 @@ import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ColoredStripeWidget extends StatelessWidget {
   final ScrollController stripeController;
@@ -10,11 +11,7 @@ class ColoredStripeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var pictures = ["images/blur.jpg"];
-
-    var picturesMobile = ["images/blur_horizontal.png"];
-
-    return BlocBuilder<MetricsBloc, Metrics>(
+     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (_, state) {
         bool isMobile = state == Metrics.SMALL;
         return !isMobile
@@ -25,12 +22,25 @@ class ColoredStripeWidget extends StatelessWidget {
                     child: SingleChildScrollView(
                       physics: NeverScrollableScrollPhysics(),
                       controller: stripeController,
-                      child: Image(
-                        image: AssetImage(pictures[0]),
+                      child: FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: "assets/images/blur.jpg",
                         width: MediaQuery.of(context).size.width * 0.065,
                         fit: BoxFit.fitWidth,
                       ),
                     ),
+                  ),
+                  Container(
+                    alignment: Alignment.topRight,
+                  child: SingleChildScrollView(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: stripeController,
+                    child: Container(
+                      width: 50,
+                      height: 2000,
+                      color: Colors.red,
+                    ),
+                  )
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.065,
@@ -87,8 +97,9 @@ class ColoredStripeWidget extends StatelessWidget {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     physics: NeverScrollableScrollPhysics(),
-                    child: Image.asset(
-                      picturesMobile[0],
+                    child:FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: "assets/images/blur_horizontal.png",
                       height: 50,
                       fit: BoxFit.fitHeight,
                     ),
