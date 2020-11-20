@@ -1,6 +1,7 @@
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/image_utils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:video_player/video_player.dart';
@@ -57,7 +58,7 @@ class _TowerWidgetState extends State<TowerWidget>
   Widget build(BuildContext context) {
     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (_, state) {
-        return true
+        return state != Metrics.SMALL
             ? Stack(
                 children: [
                   Container(
@@ -71,15 +72,15 @@ class _TowerWidgetState extends State<TowerWidget>
                             controller: widget.towerController,
                             child: BlocBuilder<MetricsBloc, Metrics>(
                                 builder: (context, state) {
-                                _initializeVideoPlayerFuture = null;
-                                _initializeVideoPlayerFuture =
-                                    _desktopVideoController.initialize();
-                                WidgetsBinding.instance
-                                    .addPostFrameCallback((timeStamp) {
-                                  _desktopVideoController.setVolume(0);
-                                  _desktopVideoController.play();
-                                  _desktopVideoController.setLooping(true);
-                                });
+                                // _initializeVideoPlayerFuture = null;
+                                // _initializeVideoPlayerFuture =
+                                //     _desktopVideoController.initialize();
+                                // WidgetsBinding.instance
+                                //     .addPostFrameCallback((timeStamp) {
+                                //   _desktopVideoController.setVolume(0);
+                                //   _desktopVideoController.play();
+                                //   _desktopVideoController.setLooping(true);
+                                // });
                               return Container(
                                 child: FutureBuilder(
                                     future: _initializeVideoPlayerFuture,
@@ -113,41 +114,25 @@ class _TowerWidgetState extends State<TowerWidget>
                 ],
               )
             : Container(
-                alignment: Alignment.topLeft,
-                height: 40,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: NeverScrollableScrollPhysics(),
-                  child: BlocBuilder<MetricsBloc, Metrics>(
-                      builder: (context, state) {
-                          _initializeMobileVideoPlayerFuture = null;
-                          _initializeMobileVideoPlayerFuture =
-                              _mobileVideoController.initialize();
-                          WidgetsBinding.instance
-                              .addPostFrameCallback((timeStamp) {
-                            _mobileVideoController.setVolume(0);
-                            _mobileVideoController.play();
-                            _mobileVideoController.setLooping(true);
-                          });
-                        return Container(
-                          child: FutureBuilder(
-                              future: _initializeMobileVideoPlayerFuture,
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  return AspectRatio(
-                                    aspectRatio: _mobileVideoController
-                                        .value.aspectRatio,
-                                    child: VideoPlayer(
-                                        _mobileVideoController),
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              }),
-                        );
-                      }),
-                ));
+              color: Colors.blue,
+            height: 40,
+            width: MediaQuery.of(context).size.width,
+            child: FutureBuilder(
+                future: _initializeMobileVideoPlayerFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState ==
+                      ConnectionState.done) {
+                    return AspectRatio(
+                      aspectRatio: _mobileVideoController
+                          .value.aspectRatio,
+                      child: VideoPlayer(
+                          _mobileVideoController),
+                    );
+                  } else {
+                    return Container(color: Colors.red,);
+                  }
+                }),
+                    );
       },
     );
   }
