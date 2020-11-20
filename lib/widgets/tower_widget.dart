@@ -94,11 +94,12 @@ class _TowerWidgetState extends State<TowerWidget>
                             )
                           ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Spacer(),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.15,
                         child: Container(child: ImageUtils.towerLogo),
+
                       ),
                     ],
                   )
