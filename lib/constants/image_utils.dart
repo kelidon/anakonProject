@@ -7,7 +7,8 @@ class ImageUtils {
   static buildHeroImage(String image) {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(20)),
-      child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image: image, fit: BoxFit.cover),
+      child: FadeInImage.memoryNetwork(
+          placeholder: kTransparentImage, image: image, fit: BoxFit.cover),
     );
   }
 
@@ -15,10 +16,10 @@ class ImageUtils {
       MapEntry(
           e, buildHeroImage(AnimatedTypeToStateMapper.typeToStateMap[e].key))));
   static final heroImagesMobileMap = Map.fromEntries(AnimatedTitle.values.map(
-          (e) => MapEntry(
+      (e) => MapEntry(
           e,
-              FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
+          FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
               image: AnimatedTypeToStateMapper.typeToStateMap[e].key,
               fit: BoxFit.cover))));
 

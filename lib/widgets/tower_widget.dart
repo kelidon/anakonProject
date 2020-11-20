@@ -3,7 +3,6 @@ import 'package:anakonProject/constants/image_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:video_player/video_player.dart';
 
 class TowerWidget extends StatefulWidget {
@@ -28,8 +27,7 @@ class _TowerWidgetState extends State<TowerWidget>
   @override
   void initState() {
     super.initState();
-    _desktopVideoController =
-        VideoPlayerController.asset("video/tower.mp4");
+    _desktopVideoController = VideoPlayerController.asset("video/tower.mp4");
     _initializeVideoPlayerFuture = _desktopVideoController.initialize();
 
     //_mobileGifController = GifController(vsync: this);
@@ -41,15 +39,15 @@ class _TowerWidgetState extends State<TowerWidget>
       _desktopVideoController.setLooping(true);
     });
 
-  _mobileVideoController =
-      VideoPlayerController.asset("video/tower_horizontal.mp4");
-  _initializeMobileVideoPlayerFuture = _mobileVideoController.initialize();
+    _mobileVideoController =
+        VideoPlayerController.asset("video/tower_horizontal.mp4");
+    _initializeMobileVideoPlayerFuture = _mobileVideoController.initialize();
 
-  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    _mobileVideoController.setVolume(0);
-    _mobileVideoController.play();
-    _mobileVideoController.setLooping(true);
-  });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _mobileVideoController.setVolume(0);
+      _mobileVideoController.play();
+      _mobileVideoController.setLooping(true);
+    });
   }
 
   @override
@@ -66,17 +64,17 @@ class _TowerWidgetState extends State<TowerWidget>
       builder: (_, state) {
         return state != Metrics.SMALL
             ? Stack(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 1),
-              width: MediaQuery.of(context).size.width * 0.15,
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
                 children: [
-                  SingleChildScrollView(
-                      physics: NeverScrollableScrollPhysics(),
-                      controller: widget.towerController,
-                      child: Container(
+                  Container(
+                    margin: EdgeInsets.only(top: 1),
+                    width: MediaQuery.of(context).size.width * 0.15,
+                    height: MediaQuery.of(context).size.height,
+                    child: Stack(
+                      children: [
+                        SingleChildScrollView(
+                            physics: NeverScrollableScrollPhysics(),
+                            controller: widget.towerController,
+                            child: Container(
                               child: FutureBuilder(
                                   future: _initializeVideoPlayerFuture,
                                   builder: (context, snapshot) {
@@ -92,48 +90,44 @@ class _TowerWidgetState extends State<TowerWidget>
                                       return Container();
                                     }
                                   }),
-                            )
-                          ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        alignment: Alignment.bottomCenter,
-                        width: MediaQuery.of(context).size.width * 0.15,
-                        child: Container(child: ImageUtils.towerLogo),
-
-                      ),
-                    ],
-                  )
+                            )),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              alignment: Alignment.bottomCenter,
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              child: Container(child: ImageUtils.towerLogo),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ],
-              ),
-            ),
-          ],
-        )
+              )
             : Container(
-            alignment: Alignment.topLeft,
-            height: 40,
-            child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: NeverScrollableScrollPhysics(),
-                child: Container(
-                  child: FutureBuilder(
-                      future: _initializeMobileVideoPlayerFuture,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.done) {
-                          return AspectRatio(
-                            aspectRatio: _mobileVideoController
-                                .value.aspectRatio,
-                            child: VideoPlayer(
-                                _mobileVideoController),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      }),
-                )
-            ));
+                alignment: Alignment.topLeft,
+                height: 40,
+                child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    physics: NeverScrollableScrollPhysics(),
+                    child: Container(
+                      child: FutureBuilder(
+                          future: _initializeMobileVideoPlayerFuture,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              return AspectRatio(
+                                aspectRatio:
+                                    _mobileVideoController.value.aspectRatio,
+                                child: VideoPlayer(_mobileVideoController),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          }),
+                    )));
       },
     );
   }

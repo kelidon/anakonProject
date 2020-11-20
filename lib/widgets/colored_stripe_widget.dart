@@ -11,7 +11,7 @@ class ColoredStripeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     return BlocBuilder<MetricsBloc, Metrics>(
+    return BlocBuilder<MetricsBloc, Metrics>(
       builder: (_, state) {
         bool isMobile = state == Metrics.SMALL;
         return !isMobile
@@ -31,62 +31,14 @@ class ColoredStripeWidget extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    alignment: Alignment.center,
-                  child: FadeInImage.memoryNetwork(
-                    placeholder: kTransparentImage,
-                    image: "assets/images/right_stripe_hover.png",
-                    width: MediaQuery.of(context).size.width * 0.065,
-                     height:  MediaQuery.of(context).size.height * 0.9,
-                     fit: BoxFit.contain,
-                  )
-                  ),
-                  // Container(
-                  //   width: MediaQuery.of(context).size.width * 0.065,
-                  //   child: Center(
-                  //       child: FittedBox(
-                  //     fit: BoxFit.fitHeight,
-                  //     child: Column(
-                  //       children: [
-                  //         FittedBox(
-                  //             fit: BoxFit.contain,
-                  //             child: Text("А",
-                  //                 style: TextStyle(
-                  //                     color: Colors.black.withOpacity(0.7),
-                  //                     fontSize: 100))),
-                  //         FittedBox(
-                  //             fit: BoxFit.contain,
-                  //             child: Text("Н",
-                  //                 style: TextStyle(
-                  //                     color: Colors.white.withOpacity(0.7),
-                  //                     fontSize: 100))),
-                  //         FittedBox(
-                  //             fit: BoxFit.contain,
-                  //             child: Text("А",
-                  //                 style: TextStyle(
-                  //                     color: Colors.white.withOpacity(0.7),
-                  //                     fontSize: 100))),
-                  //         FittedBox(
-                  //             fit: BoxFit.contain,
-                  //             child: Text("К",
-                  //                 style: TextStyle(
-                  //                     color: Colors.white.withOpacity(0.7),
-                  //                     fontSize: 100))),
-                  //         FittedBox(
-                  //             fit: BoxFit.contain,
-                  //             child: Text("О",
-                  //                 style: TextStyle(
-                  //                     color: Colors.white.withOpacity(0.7),
-                  //                     fontSize: 100))),
-                  //         FittedBox(
-                  //             fit: BoxFit.contain,
-                  //             child: Text("Н",
-                  //                 style: TextStyle(
-                  //                     color: Colors.white.withOpacity(0.7),
-                  //                     fontSize: 100))),
-                  //       ],
-                  //     ),
-                  //   )),
-                  // ),
+                      alignment: Alignment.center,
+                      child: FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: "assets/images/right_stripe_hover.png",
+                        width: MediaQuery.of(context).size.width * 0.065,
+                        height: MediaQuery.of(context).size.height * 0.9,
+                        fit: BoxFit.contain,
+                      )),
                 ],
               )
             : Stack(children: [
@@ -95,7 +47,7 @@ class ColoredStripeWidget extends StatelessWidget {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     physics: NeverScrollableScrollPhysics(),
-                    child:FadeInImage.memoryNetwork(
+                    child: FadeInImage.memoryNetwork(
                       placeholder: kTransparentImage,
                       image: "assets/images/blur_horizontal.png",
                       height: 50,

@@ -81,7 +81,8 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                             child: HeroTableWidget(
                               mainContext: _,
                               title: AppText.HOW_WORK_TITLE,
-                            )), Duration(milliseconds: 600));
+                            )),
+                        Duration(milliseconds: 600));
                   },
                 )),
                 ContactButtonWidget()

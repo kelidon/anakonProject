@@ -88,7 +88,8 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                                 child: HeroTableWidget(
                                   mainContext: _,
                                   title: AppText.ABOUT_US_TITLE,
-                                )), Duration(milliseconds: 600));
+                                )),
+                            Duration(milliseconds: 600));
                       },
                     )),
                     ContactButtonWidget()

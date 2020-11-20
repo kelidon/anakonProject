@@ -68,88 +68,87 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                         observers: [heroController],
                         onGenerateRoute: (settings) {
                           return CustomPageRoute(
-                            BlocBuilder<MetricsBloc, Metrics>(
-                                builder: (_, state) {
-                              bool isMouse = state != Metrics.SMALL;
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Spacer(),
-                                  isMouse
-                                      ? Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                ServiceIconWidget(
-                                                  serviceType: serviceTypes[0],
-                                                  mainContext: _,
-                                                ),
-                                                SizedBox(
-                                                  width: 80,
-                                                ),
-                                                ServiceIconWidget(
-                                                  serviceType: serviceTypes[1],
-                                                  mainContext: _,
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              height: 50,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                ServiceIconWidget(
-                                                  serviceType: serviceTypes[2],
-                                                  mainContext: _,
-                                                ),
-                                                SizedBox(
-                                                  width: 80,
-                                                ),
-                                                ServiceIconWidget(
-                                                  serviceType: serviceTypes[3],
-                                                  mainContext: _,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                      : Column(
-                                          children: [
-                                            ServiceIconWidget(
-                                              serviceType: serviceTypes[0],
-                                              mainContext: _,
-                                            ),
-                                            SizedBox(
-                                              width: 50,
-                                            ),
-                                            ServiceIconWidget(
-                                              serviceType: serviceTypes[1],
-                                              mainContext: _,
-                                            ),
-                                            ServiceIconWidget(
-                                              serviceType: serviceTypes[2],
-                                              mainContext: _,
-                                            ),
-                                            SizedBox(
-                                              width: 50,
-                                            ),
-                                            ServiceIconWidget(
-                                              serviceType: serviceTypes[3],
-                                              mainContext: _,
-                                            ),
-                                          ],
-                                        ),
-                                  Spacer(),
-                                  ContactButtonWidget(),
-                                ],
-                              );
-                            }), Duration(milliseconds: 600)
-                          );
+                              BlocBuilder<MetricsBloc, Metrics>(
+                                  builder: (_, state) {
+                            bool isMouse = state != Metrics.SMALL;
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Spacer(),
+                                isMouse
+                                    ? Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ServiceIconWidget(
+                                                serviceType: serviceTypes[0],
+                                                mainContext: _,
+                                              ),
+                                              SizedBox(
+                                                width: 80,
+                                              ),
+                                              ServiceIconWidget(
+                                                serviceType: serviceTypes[1],
+                                                mainContext: _,
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 50,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              ServiceIconWidget(
+                                                serviceType: serviceTypes[2],
+                                                mainContext: _,
+                                              ),
+                                              SizedBox(
+                                                width: 80,
+                                              ),
+                                              ServiceIconWidget(
+                                                serviceType: serviceTypes[3],
+                                                mainContext: _,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )
+                                    : Column(
+                                        children: [
+                                          ServiceIconWidget(
+                                            serviceType: serviceTypes[0],
+                                            mainContext: _,
+                                          ),
+                                          SizedBox(
+                                            width: 50,
+                                          ),
+                                          ServiceIconWidget(
+                                            serviceType: serviceTypes[1],
+                                            mainContext: _,
+                                          ),
+                                          ServiceIconWidget(
+                                            serviceType: serviceTypes[2],
+                                            mainContext: _,
+                                          ),
+                                          SizedBox(
+                                            width: 50,
+                                          ),
+                                          ServiceIconWidget(
+                                            serviceType: serviceTypes[3],
+                                            mainContext: _,
+                                          ),
+                                        ],
+                                      ),
+                                Spacer(),
+                                ContactButtonWidget(),
+                              ],
+                            );
+                          }), Duration(milliseconds: 600));
                         },
                       ),
                     ),
