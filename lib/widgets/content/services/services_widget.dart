@@ -10,6 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../custom_page_route.dart';
+
 class ServicesWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _ServicesWidgetState();
@@ -65,8 +67,8 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                       child: Navigator(
                         observers: [heroController],
                         onGenerateRoute: (settings) {
-                          return MaterialPageRoute(
-                            builder: (_) => BlocBuilder<MetricsBloc, Metrics>(
+                          return CustomPageRoute(
+                            BlocBuilder<MetricsBloc, Metrics>(
                                 builder: (_, state) {
                               bool isMouse = state != Metrics.SMALL;
                               return Column(
@@ -146,7 +148,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                   ContactButtonWidget(),
                                 ],
                               );
-                            }),
+                            }), Duration(milliseconds: 600)
                           );
                         },
                       ),

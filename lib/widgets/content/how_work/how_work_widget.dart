@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../custom_page_route.dart';
 import '../../hero_table.dart';
 
 class HowWorkWidget extends StatefulWidget {
@@ -74,13 +75,13 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                   observers: [_heroController],
                   key: howWorkNavigatorKey,
                   onGenerateRoute: (settings) {
-                    return MaterialPageRoute(
-                        builder: (_) => Container(
+                    return CustomPageRoute(
+                        Container(
                             alignment: Alignment.center,
                             child: HeroTableWidget(
                               mainContext: _,
                               title: AppText.HOW_WORK_TITLE,
-                            )));
+                            )), Duration(milliseconds: 600));
                   },
                 )),
                 ContactButtonWidget()

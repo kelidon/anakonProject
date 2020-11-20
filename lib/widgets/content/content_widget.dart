@@ -51,30 +51,29 @@ class _ContentWidgetState extends State<ContentWidget> {
                   curve: Curves.easeInOutSine);
             },
             child: Container(
+                alignment: Alignment.center,
+                padding: isMouse
+                    ? EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.065,
+                        left: MediaQuery.of(context).size.width * 0.15)
+                    : null,
                 child: Container(
-                    alignment: Alignment.center,
-                    padding: isMouse
-                        ? EdgeInsets.only(
-                            right: MediaQuery.of(context).size.width * 0.065,
-                            left: MediaQuery.of(context).size.width * 0.15)
-                        : null,
-                    child: Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: isMouse ? 25 : 10),
-                      child: Column(
-                        children: [
-                          Container(
-                            key: aboutKey,
-                            child: AboutUsWidget(),
-                          ),
-                          Container(key: servicesKey, child: ServicesWidget()),
-                          Container(
-                            key: howWorkWidget,
-                            child: HowWorkWidget(),
-                          ),
-                        ],
+                  margin:
+                      EdgeInsets.symmetric(horizontal: isMouse ? 25 : 10),
+                  child: Column(
+                    children: [
+                      Container(
+                        key: aboutKey,
+                        child: AboutUsWidget(),
                       ),
-                    ))));
+                      Container(key: servicesKey, child: ServicesWidget()),
+                      Container(
+                        key: howWorkWidget,
+                        child: HowWorkWidget(),
+                      ),
+                    ],
+                  ),
+                )));
       });
     }
 
