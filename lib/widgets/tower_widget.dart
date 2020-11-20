@@ -1,6 +1,7 @@
 import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/image_utils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:video_player/video_player.dart';
@@ -97,6 +98,7 @@ class _TowerWidgetState extends State<TowerWidget>
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Container(
+                        alignment: Alignment.bottomCenter,
                         width: MediaQuery.of(context).size.width * 0.15,
                         child: Container(child: ImageUtils.towerLogo),
 
