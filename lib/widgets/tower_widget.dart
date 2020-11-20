@@ -22,16 +22,11 @@ class _TowerWidgetState extends State<TowerWidget>
   VideoPlayerController _mobileVideoController;
   Future<void> _initializeMobileVideoPlayerFuture;
 
-  //GifController _mobileGifController;
-
   @override
   void initState() {
     super.initState();
     _desktopVideoController = VideoPlayerController.asset("video/tower.mp4");
     _initializeVideoPlayerFuture = _desktopVideoController.initialize();
-
-    //_mobileGifController = GifController(vsync: this);
-    //_mobileGifController.animateTo(0.5, duration: Duration(milliseconds: 1000));
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _desktopVideoController.setVolume(0);
@@ -55,7 +50,6 @@ class _TowerWidgetState extends State<TowerWidget>
     super.dispose();
     _desktopVideoController.dispose();
     _desktopVideoController.dispose();
-    //_mobileGifController.dispose();
   }
 
   @override
