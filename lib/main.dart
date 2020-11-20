@@ -66,7 +66,7 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   _mainScrollListener() {
     if (_towerController.hasClients && _stripeController.hasClients) {
-      _towerController.jumpTo(_mainController.offset * 0.1);
+      _towerController.jumpTo(_mainController.offset * 0.06);
       _stripeController.jumpTo(_mainController.offset * 0.03);
     }
   }

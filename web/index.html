@@ -11,33 +11,31 @@
 
 
     <title>Anakon</title>
-    <link rel="preload" href="assets/images/blur.jpg" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/blur_for_bs.jpg" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/blur_horizontal.png" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/effective.jpg" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/experience.jpg" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/facture1.png" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/individuality.jpg" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/logo_appbar.png" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/logo_appbar_1.png" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/logo_menu.png" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/logo_on_tower.png" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/null.png" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/online_support.jpg" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/outstaffing.jpg" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/personal_engineer.jpg" as="fetch" crossorigin>
-    <link rel="preload" href="assets/images/unique.jpg" as="fetch" crossorigin>
-    <link rel="preload" href="assets/video/tower.m4v" as="fetch" crossorigin>
-    <link rel="preload" href="assets/video/tower.mp4" as="fetch" crossorigin>
-    <link rel="preload" href="assets/video/tower_horizontal.gif" as="fetch" crossorigin>
-    <link rel="preload" href="assets/video/tower_old.mp4" as="fetch" crossorigin>
-    <link rel="preload" href="fonts/Poppins-Bold.ttf" as="font" crossorigin>
-    <link rel="preload" href="fonts/Poppins.ttf" as="font" crossorigin>
-    <link rel="preload" href="icons/favicon.png" as="fetch" crossorigin>
-    <link rel="preload" href="icons/favicon1.png" as="fetch" crossorigin>
-    <link rel="preload" href="icons/favicon2.png" as="fetch" crossorigin>
-    <link rel="preload" href="manifest.json" as="fetch" crossorigin>
-    <link rel="manifest" href="manifest.json">
+    <link rel="preload" href="assets/images/blur.jpg" as="image" >
+    <link rel="preload" href="assets/images/blur_for_bs.jpg" as="image" >
+    <link rel="preload" href="assets/images/blur_horizontal.png" as="image"  >
+    <link rel="preload" href="assets/images/effective.jpg" as="image"  >
+    <link rel="preload" href="assets/images/experience.jpg" as="image"  >
+    <link rel="preload" href="assets/images/facture1.png" as="image"  >
+    <link rel="preload" href="assets/images/individuality.jpg" as="image"  >
+    <link rel="preload" href="assets/images/logo_appbar.png" as="image"  >
+    <link rel="preload" href="assets/images/logo_appbar_1.png" as="image"  >
+    <link rel="preload" href="assets/images/logo_menu.png" as="image"  >
+    <link rel="preload" href="assets/images/logo_on_tower.png" as="image"  >
+    <link rel="preload" href="assets/images/null.png" as="image"  >
+    <link rel="preload" href="assets/images/online_support.jpg" as="image"  >
+    <link rel="preload" href="assets/images/outstaffing.jpg" as="image"  >
+    <link rel="preload" href="assets/images/personal_engineer.jpg" as="image"  >
+    <link rel="preload" href="assets/images/unique.jpg" as="image"  >
+    <link rel="preload" href="assets/video/tower.mp4" as="video"  >
+    <link rel="preload" href="assets/video/tower_mobile.mp4" as="video"  >
+    <link rel="preload" href="fonts/Poppins-Bold.ttf" as="font"  >
+    <link rel="preload" href="fonts/Poppins.ttf" as="font"  >
+    <link rel="preload" href="icons/favicon.png" as="image"  >
+    <link rel="preload" href="icons/favicon1.png" as="image"  >
+    <link rel="preload" href="icons/favicon2.png" as="image"  >
+    <link rel="preload" href="manifest.json" as="document">
+    <link rel="manifest" href="manifest.json" as="document">
 
     <style>
 
@@ -51,7 +49,7 @@
             position: absolute;
             margin-top: 500px;
             color: #06285A;
-            animation: text-focus-in 10s infinite alternate;
+            animation: text-focus-in 3s infinite alternate;
             font-family: Tahoma;
             font-weight: normal;
         }
@@ -62,7 +60,7 @@
         }
 
         .animation {
-            animation: scale-up-center 10s infinite alternate;
+            animation: scale-up-center 1s infinite alternate;
         }
 
         .image-flex {
@@ -131,7 +129,7 @@
 </head>
 <body>
 
-<div class="image-wrap image-flex ">
+<div class="image-wrap image-flex">
     <p>
         <img class="animation" src="assets/images/logo_menu.png">
     </p>
