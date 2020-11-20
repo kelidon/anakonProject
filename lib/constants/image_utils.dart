@@ -18,7 +18,8 @@ class ImageUtils {
           (e) => MapEntry(
           e,
               FadeInImage.memoryNetwork(
-              image: (AnimatedTypeToStateMapper.typeToStateMap[e].key),
+                placeholder: kTransparentImage,
+              image: AnimatedTypeToStateMapper.typeToStateMap[e].key,
               fit: BoxFit.cover))));
 
   static final towerLogo = FadeInImage.memoryNetwork(

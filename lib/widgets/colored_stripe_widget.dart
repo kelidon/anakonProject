@@ -31,18 +31,6 @@ class ColoredStripeWidget extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    alignment: Alignment.topRight,
-                  child: SingleChildScrollView(
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: stripeController,
-                    child: Container(
-                      width: 50,
-                      height: 2000,
-                      color: Colors.red,
-                    ),
-                  )
-                  ),
-                  Container(
                     width: MediaQuery.of(context).size.width * 0.065,
                     child: Center(
                         child: FittedBox(
