@@ -17,16 +17,12 @@ class TowerWidget extends StatefulWidget {
 class _TowerWidgetState extends State<TowerWidget>
     with TickerProviderStateMixin {
   VideoPlayerController _desktopVideoController;
-  Future<void> _initializeVideoPlayerFuture;
-
   VideoPlayerController _mobileVideoController;
-  Future<void> _initializeMobileVideoPlayerFuture;
 
   @override
   void initState() {
     super.initState();
     _desktopVideoController = VideoPlayerController.asset("video/tower.mp4");
-    _initializeVideoPlayerFuture = _desktopVideoController.initialize();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _desktopVideoController.setVolume(0);
@@ -34,9 +30,9 @@ class _TowerWidgetState extends State<TowerWidget>
       _desktopVideoController.setLooping(true);
     });
 
+    //todo
     _mobileVideoController =
-        VideoPlayerController.asset("video/tower_horizontal.mp4");
-    _initializeMobileVideoPlayerFuture = _mobileVideoController.initialize();
+        VideoPlayerController.asset("video/tower_mobile.mp4");
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _mobileVideoController.setVolume(0);
@@ -57,71 +53,74 @@ class _TowerWidgetState extends State<TowerWidget>
     return BlocBuilder<MetricsBloc, Metrics>(
       builder: (_, state) {
         return state != Metrics.SMALL
-            ? Stack(
+            ? Container(
+              margin: EdgeInsets.only(top: 1),
+              width: MediaQuery.of(context).size.width * 0.15,
+              height: MediaQuery.of(context).size.height,
+              child: Stack(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 1),
-                    width: MediaQuery.of(context).size.width * 0.15,
-                    height: MediaQuery.of(context).size.height,
-                    child: Stack(
-                      children: [
-                        SingleChildScrollView(
-                            physics: NeverScrollableScrollPhysics(),
-                            controller: widget.towerController,
-                            child: Container(
-                              child: FutureBuilder(
-                                  future: _initializeVideoPlayerFuture,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      return AspectRatio(
-                                        aspectRatio: _desktopVideoController
-                                            .value.aspectRatio,
-                                        child: VideoPlayer(
-                                            _desktopVideoController),
-                                      );
-                                    } else {
-                                      return Container();
-                                    }
-                                  }),
-                            )),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              alignment: Alignment.bottomCenter,
-                              width: MediaQuery.of(context).size.width * 0.15,
-                              child: Container(child: ImageUtils.towerLogo),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
+                  SingleChildScrollView(
+                      physics: NeverScrollableScrollPhysics(),
+                      controller: widget.towerController,
+                      child: Container(
+                        child: FutureBuilder(
+                            future: _desktopVideoController.initialize(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return AspectRatio(
+                                  aspectRatio: _desktopVideoController
+                                      .value.aspectRatio,
+                                  child: VideoPlayer(
+                                      _desktopVideoController),
+                                );
+                              } else {
+                                return Container();
+                              }
+                            }),
+                      )),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        alignment: Alignment.bottomCenter,
+                        width: MediaQuery.of(context).size.width * 0.15,
+                        child: Container(child: ImageUtils.towerLogo),
+                      ),
+                    ],
+                  )
                 ],
-              )
+              ),
+            )
             : Container(
-                alignment: Alignment.topLeft,
-                height: 40,
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    physics: NeverScrollableScrollPhysics(),
-                    child: Container(
-                      child: FutureBuilder(
-                          future: _initializeMobileVideoPlayerFuture,
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              return AspectRatio(
-                                aspectRatio:
-                                    _mobileVideoController.value.aspectRatio,
-                                child: VideoPlayer(_mobileVideoController),
-                              );
-                            } else {
-                              return Container();
-                            }
-                          }),
-                    )));
+          width: MediaQuery.of(context).size.width,
+          height: 40,
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                  physics: NeverScrollableScrollPhysics(),
+                  child: Container(
+                    child: FutureBuilder(
+                        future: _mobileVideoController.initialize(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            //todo
+                            return AspectRatio(
+                              aspectRatio: _mobileVideoController
+                                  .value.aspectRatio,
+                              child: VideoPlayer(
+                                  _mobileVideoController),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        }),
+                  )),
+            ],
+          ),
+        );
       },
     );
   }

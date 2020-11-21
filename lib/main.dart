@@ -44,6 +44,12 @@ class Application extends StatelessWidget {
         title: 'Anakon',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.macOS: FadeUpwardsPageTransitionsBuilder(),
+              TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
+            }
+          ),
             primarySwatch: Colors.indigo,
             visualDensity: VisualDensity.adaptivePlatformDensity,
             fontFamily: 'Poppins'),

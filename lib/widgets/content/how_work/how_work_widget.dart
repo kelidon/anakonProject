@@ -75,14 +75,13 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                   observers: [_heroController],
                   key: howWorkNavigatorKey,
                   onGenerateRoute: (settings) {
-                    return CustomPageRoute(
-                        Container(
+                    return MaterialPageRoute(
+                        builder: (_) => Container(
                             alignment: Alignment.center,
                             child: HeroTableWidget(
                               mainContext: _,
                               title: AppText.HOW_WORK_TITLE,
-                            )),
-                        Duration(milliseconds: 600));
+                            )));
                   },
                 )),
                 ContactButtonWidget()

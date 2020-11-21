@@ -82,14 +82,13 @@ class _AboutUsWidgetState extends State<AboutUsWidget> {
                       observers: [_heroController],
                       key: aboutNavigatorKey,
                       onGenerateRoute: (settings) {
-                        return CustomPageRoute(
-                            Container(
+                        return MaterialPageRoute(
+                            builder: (_) => Container(
                                 alignment: Alignment.center,
                                 child: HeroTableWidget(
                                   mainContext: _,
                                   title: AppText.ABOUT_US_TITLE,
-                                )),
-                            Duration(milliseconds: 600));
+                                )));
                       },
                     )),
                     ContactButtonWidget()

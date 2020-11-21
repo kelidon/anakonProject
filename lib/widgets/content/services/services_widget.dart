@@ -67,8 +67,8 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                       child: Navigator(
                         observers: [heroController],
                         onGenerateRoute: (settings) {
-                          return CustomPageRoute(
-                              BlocBuilder<MetricsBloc, Metrics>(
+                          return MaterialPageRoute(
+                              builder: (_) => BlocBuilder<MetricsBloc, Metrics>(
                                   builder: (_, state) {
                             bool isMouse = state != Metrics.SMALL;
                             return Column(
@@ -148,7 +148,7 @@ class _ServicesWidgetState extends State<ServicesWidget> {
                                 ContactButtonWidget(),
                               ],
                             );
-                          }), Duration(milliseconds: 600));
+                          }));
                         },
                       ),
                     ),
