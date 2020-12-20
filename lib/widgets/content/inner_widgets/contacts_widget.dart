@@ -119,7 +119,7 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                             color: AppColors.PRIMARY,
                           ),
                           onTap: () async {
-                            const _tgLaunchUri = 'https://t.me/Appolon_13';
+                            const _tgLaunchUri = 'https://t.me/ANAKONBY';
 
                             if (await canLaunch(_tgLaunchUri.toString())) {
                               await launch(_tgLaunchUri.toString());

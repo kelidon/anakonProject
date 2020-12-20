@@ -4,7 +4,7 @@ enum DrawerButtons { ABOUT_US, HOW_WORK, SERVICES }
 
 const Map drawerButtonLabels = {
   DrawerButtons.ABOUT_US: "НАШИ ПРЕИМУЩЕСТВА",
-  DrawerButtons.HOW_WORK: "КАК МЫ РАБОТАЕМ?",
+  DrawerButtons.HOW_WORK: "КАК МЫ РАБОТАЕМ",
   DrawerButtons.SERVICES: "УСЛУГИ",
 };
 

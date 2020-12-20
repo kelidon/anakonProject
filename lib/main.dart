@@ -42,7 +42,7 @@ class Application extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Anakon',
+        title: 'АНАКОН',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           pageTransitionsTheme: PageTransitionsTheme(
