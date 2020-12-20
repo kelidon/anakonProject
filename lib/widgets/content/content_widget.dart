@@ -6,10 +6,12 @@ import 'package:anakonProject/widgets/content/services/services_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContentWidget extends StatefulWidget {
-  const ContentWidget({Key key}) : super(key: key);
+  final ScrollController mainController;
+  const ContentWidget({Key key, this.mainController}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ContentWidgetState();
@@ -28,7 +30,15 @@ class _ContentWidgetState extends State<ContentWidget> {
     super.initState();
     currentKey = aboutKey;
   }
+  bool lockScroll = false;
 
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.dispose();
+  }
+  final FocusNode _focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     var _buttonToKey = {
@@ -79,37 +89,39 @@ class _ContentWidgetState extends State<ContentWidget> {
     List<GlobalKey> keysList = _buttonToKey.values.toList();
     List<DrawerButtons> buttonsList = _buttonToKey.keys.toList();
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-        bool isMouse = state != Metrics.SMALL;
-        return isMouse && MediaQuery.of(context).size.height > 770
-            ? Listener(
-                onPointerSignal: (PointerSignalEvent event) {
-                  if (event is PointerScrollEvent) {
-                    var currentIndex = keysList.indexOf(currentKey);
-                    var isLastElement = currentIndex == keysList.length - 1;
-                    var isFirstElement = currentIndex == 0;
+    void _handleKeyEvent(RawKeyEvent event) {
+      if (!lockScroll) {
+        setState(() {
+          lockScroll = true;
+        });
+        var offset = widget.mainController.offset;
+        var delta = 180;
+        if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+          setState(() {
+            widget.mainController.position.moveTo(offset-delta, curve: Curves.linear, duration: Duration(milliseconds: 500)).then((value) {
+              setState(() {
+                lockScroll = false;
+              });
+            });
+          });
+        }
+        else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+          setState(() {
+            widget.mainController.position.moveTo(offset+delta, curve: Curves.linear, duration: Duration(milliseconds: 500)).then((value) {
+              setState(() {
+                lockScroll = false;
+              });
+            });
+          });
+        }
+      }
 
-                    if (event.scrollDelta.dy > 0 && !isLastElement) {
-                      context
-                          .bloc<DrawerBloc>()
-                          .add(buttonsList[currentIndex + 1]);
-                    } else if (event.scrollDelta.dy < 0 && !isFirstElement) {
-                      context
-                          .bloc<DrawerBloc>()
-                          .add(buttonsList[currentIndex - 1]);
-                    }
-                  }
-                },
-                child: _buildContentBlocks(),
-              )
-            : Listener(
-                onPointerMove: (PointerMoveEvent event) {
-                  if (context.bloc<DrawerBloc>().state != null)
-                    context.bloc<DrawerBloc>().add(null);
-                },
-                child: _buildContentBlocks());
-      });
-    });
+    }
+        return RawKeyboardListener(
+            onKey: _handleKeyEvent,
+            focusNode: _focusNode,
+            autofocus: true,
+            child: _buildContentBlocks()
+        );
   }
 }

@@ -14,6 +14,7 @@ import 'package:anakonProject/widgets/content/services/bottom_sheet.dart';
 import 'package:anakonProject/widgets/tower_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/servises_items/services_items_bloc.dart';
@@ -173,11 +174,10 @@ class _ApplicationPageState extends State<ApplicationPage>
                         child: scrollThumb);
                   },
                   child: ListView.builder(
-                    physics: isMouse ? NeverScrollableScrollPhysics() : null,
                     controller: _mainController,
                     itemCount: 1,
                     itemBuilder: (_, i) {
-                      return ContentWidget();
+                      return ContentWidget(mainController: _mainController,);
                     },
                   ),
                 ),
@@ -187,6 +187,7 @@ class _ApplicationPageState extends State<ApplicationPage>
       ),
     );
   }
+
 
   @override
   void dispose() {
