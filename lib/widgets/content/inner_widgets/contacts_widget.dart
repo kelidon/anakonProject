@@ -29,13 +29,28 @@ class _ContactsWidgetState extends State<ContactsWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
             Image(
               image: AssetImage("images/logo_menu.png"),
               width: 200,
               fit: BoxFit.fitWidth,
             ),
+
+              SizedBox(
+                height: 40,
+              ),
+
+            Text(
+              AppText.UNP
+            ),
+
             SizedBox(
               width: 50,
+            ),
+            ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,

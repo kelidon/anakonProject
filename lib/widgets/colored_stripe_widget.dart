@@ -55,6 +55,7 @@ class ColoredStripeWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 Container(
                     height: 50,
                     child: Center(

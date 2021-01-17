@@ -119,5 +119,7 @@ class AppText {
 
   static const String CONTACTS_NUMBER = "+375-44-570-57-57";
 
+  static const String UNP = "УНП 192618947";
+
   static const String CONTACTS_GMAIL = "ANAKONBY@GMAIL.COM";
 }
