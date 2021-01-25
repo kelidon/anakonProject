@@ -2,7 +2,7 @@
 
 A Futter Web animated landing page.
 
-Available on anakon.by
+Available on [anakon.by](http://anakon.by/)
 
 ##  About
 
