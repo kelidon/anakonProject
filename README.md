@@ -1,8 +1,6 @@
 # Anakon website 
 
-A Futter Web animated landing page.
-
-Progressive Web Application.
+A Futter Web animated landing page (Progressive Web Application).
 
 Available on [anakon.by](http://anakon.by/)
 
