@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum Metrics { SMALL, BIG }
+enum Metrics { SMALL, BIG, MEDIUM }
 
 class MetricsBloc extends Bloc<Metrics, Metrics> {
   MetricsBloc() : super(Metrics.BIG);

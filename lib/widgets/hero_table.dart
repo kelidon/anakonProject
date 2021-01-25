@@ -1,16 +1,20 @@
+import 'dart:developer';
+
 import 'package:anakonProject/bloc/collapsing_headers/animated_pictures_bloc.dart';
+import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
-import 'package:anakonProject/widgets/hero_table_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'hero_table_item.dart';
 
 class HeroTableWidget extends StatefulWidget {
-  final GlobalKey<NavigatorState> navKey;
   final BuildContext mainContext;
   final String title;
 
-  const HeroTableWidget({Key key, this.navKey, this.mainContext, this.title})
+  const HeroTableWidget({Key key, this.mainContext, this.title})
       : super(key: key);
 
   @override
@@ -41,7 +45,6 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
       for (int i = 0; i < titles.length; i += 2) {
         var row = TableRow(children: [
           HeroTableItem(
-            navKey: widget.navKey,
             mainContext: widget.mainContext,
             tag: titles[i],
             titleTag: widget.title,
@@ -49,7 +52,6 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
           titles[i + 1] == null
               ? Container()
               : HeroTableItem(
-                  navKey: widget.navKey,
                   mainContext: widget.mainContext,
                   tag: titles[i + 1],
                   titleTag: widget.title,
@@ -60,22 +62,67 @@ class _HeroTableWidgetState extends State<HeroTableWidget> {
       return tableRows;
     }
 
-    return Row(
-      children: [
-        Hero(
-          tag: widget.title,
-          child: Center(
-            child: Text(
-              widget.title,
-              style: AppStyles.TITLE,
-            ),
-          ),
-        ),
-        Table(
-            defaultColumnWidth:
-                FixedColumnWidth(MediaQuery.of(context).size.width / 4),
-            children: _buildTableRows()),
-      ],
-    );
+    _buildTableRowsMobile() {
+      List<AnimatedTitle> titles;
+      if (widget.title == AppText.ABOUT_US_TITLE) {
+        titles = [
+          AnimatedTitle.CONS_1,
+          AnimatedTitle.CONS_2,
+          AnimatedTitle.CONS_3,
+          AnimatedTitle.CONS_4
+        ];
+      } else if (widget.title == AppText.HOW_WORK_TITLE) {
+        titles = [
+          AnimatedTitle.HOW_WORK_1,
+          AnimatedTitle.HOW_WORK_2,
+          AnimatedTitle.HOW_WORK_3,
+        ];
+      }
+      List<Widget> items = [];
+      for (int i = 0; i < titles.length; i++) {
+        items.add(HeroTableItem(
+          mainContext: widget.mainContext,
+          tag: titles[i],
+          titleTag: widget.title,
+        ));
+      }
+      return items;
+    }
+
+    return BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
+      bool isMouse = state != Metrics.SMALL;
+      return isMouse
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Hero(
+                      tag: widget.title,
+                      child: Container(
+                        padding: EdgeInsets.only(top: 100),
+                        child: Text(
+                          widget.title.split(" ").join("\n"),
+                          style: state == Metrics.BIG
+                              ? AppStyles.TITLE
+                              : AppStyles.TITLE_M,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Table(
+                    defaultColumnWidth:
+                        FixedColumnWidth(MediaQuery.of(context).size.width / 4),
+                    children: _buildTableRows()),
+              ],
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _buildTableRowsMobile());
+    });
   }
 }

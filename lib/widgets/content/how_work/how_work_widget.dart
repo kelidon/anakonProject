@@ -1,26 +1,22 @@
+import 'package:anakonProject/bloc/metrics/metrics_bloc.dart';
 import 'package:anakonProject/constants/styles.dart';
 import 'package:anakonProject/constants/text.dart';
+import 'package:anakonProject/widgets/content/inner_widgets/contact_button_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../custom_page_route.dart';
 import '../../hero_table.dart';
 
 class HowWorkWidget extends StatefulWidget {
-  final double height;
-
-  const HowWorkWidget({Key key, this.height}) : super(key: key);
-
   @override
-  State<StatefulWidget> createState() => _HowWorkWidgetState(height);
+  State<StatefulWidget> createState() => _HowWorkWidgetState();
 }
 
 var howWorkNavigatorKey = GlobalKey<NavigatorState>();
 
 class _HowWorkWidgetState extends State<HowWorkWidget> {
-  final double height;
-
-  _HowWorkWidgetState(this.height);
-
   HeroController _heroController;
 
   @override
@@ -35,22 +31,25 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return BlocBuilder<MetricsBloc, Metrics>(builder: (_, state) {
+      bool isMouse = state != Metrics.SMALL;
+      return Column(children: [
         FittedBox(
           fit: BoxFit.scaleDown,
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(
               AppText.TAGLINE_3,
-              style: AppStyles.TITLE,
+              style: state == Metrics.BIG ? AppStyles.TITLE : AppStyles.TITLE_M,
               maxLines: 1,
             ),
           ),
         ),
         Container(
-            margin: EdgeInsets.fromLTRB(15, 0, 15, 30),
-            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+            margin:
+                EdgeInsets.fromLTRB(isMouse ? 15 : 0, 0, isMouse ? 15 : 0, 30),
+            padding: EdgeInsets.symmetric(
+                horizontal: isMouse ? 40 : 25, vertical: 10),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -61,15 +60,16 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                     offset: Offset(1, 3)),
               ], // boxShadow
             ),
-            height: height,
+            height: MediaQuery.of(context).size.height > 770
+                ? MediaQuery.of(context).size.height - 160
+                : 610,
             child: Column(
               children: [
-                Center(
-                  child: Text(
-                    AppText.HOW_WORK_TITLE,
-                    style: AppStyles.TITLE,
+                if (!isMouse)
+                  Center(
+                    child: Text(AppText.HOW_WORK_TITLE,
+                        style: AppStyles.TITLE_M, textAlign: TextAlign.center),
                   ),
-                ),
                 Expanded(
                     child: Navigator(
                   observers: [_heroController],
@@ -79,15 +79,15 @@ class _HowWorkWidgetState extends State<HowWorkWidget> {
                         builder: (_) => Container(
                             alignment: Alignment.center,
                             child: HeroTableWidget(
-                              navKey: howWorkNavigatorKey,
                               mainContext: _,
                               title: AppText.HOW_WORK_TITLE,
                             )));
                   },
                 )),
+                ContactButtonWidget()
               ],
-            )),
-      ],
-    );
+            ))
+      ]);
+    });
   }
 }

@@ -6,10 +6,12 @@ import 'package:anakonProject/widgets/content/services/services_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContentWidget extends StatefulWidget {
-  const ContentWidget({Key key}) : super(key: key);
+  final ScrollController mainController;
+  const ContentWidget({Key key, this.mainController}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _ContentWidgetState();
@@ -28,7 +30,15 @@ class _ContentWidgetState extends State<ContentWidget> {
     super.initState();
     currentKey = aboutKey;
   }
+  bool lockScroll = false;
 
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.dispose();
+  }
+  final FocusNode _focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     var _buttonToKey = {
@@ -39,90 +49,79 @@ class _ContentWidgetState extends State<ContentWidget> {
 
     Widget _buildContentBlocks() {
       return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-        bool isMouse = state == Metrics.BIG;
+        bool isMouse = state != Metrics.SMALL;
         return BlocListener<DrawerBloc, DrawerButtons>(
             listenWhen: (prev, curr) => true,
             listener: (context, state) {
-              print("content listen $state");
               setState(() {
                 currentKey = _buttonToKey[state];
               });
-              Scrollable.ensureVisible(
-                _buttonToKey[state].currentContext,
-                duration: Duration(milliseconds: 600),
-              );
+              Scrollable.ensureVisible(_buttonToKey[state].currentContext,
+                  duration: Duration(milliseconds: 1500),
+                  curve: Curves.easeInOutSine);
             },
             child: Container(
+                alignment: Alignment.center,
+                padding: isMouse
+                    ? EdgeInsets.only(
+                        right: MediaQuery.of(context).size.width * 0.065,
+                        left: MediaQuery.of(context).size.width * 0.15)
+                    : null,
                 child: Container(
-                    alignment: Alignment.center,
-                    margin: isMouse
-                        ? EdgeInsets.only(
-                            right: MediaQuery.of(context).size.width * 0.065,
-                            left: MediaQuery.of(context).size.width * 0.15)
-                        : null,
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 25),
-                      child: Column(
-                        children: [
-                          Container(
-                            key: aboutKey,
-                            child: AboutUsWidget(
-                              height: MediaQuery.of(context).size.height - 160,
-                            ),
-                          ),
-                          Container(
-                              key: servicesKey,
-                              height: MediaQuery.of(context).size.height - 95,
-                              child: ServicesWidget(
-                                height:
-                                    MediaQuery.of(context).size.height - 210,
-                              )),
-                          Container(
-                            key: howWorkWidget,
-                            child: HowWorkWidget(
-                              height: MediaQuery.of(context).size.height - 160,
-                            ),
-                          ),
-                        ],
+                  margin: EdgeInsets.symmetric(horizontal: isMouse ? 25 : 10),
+                  child: Column(
+                    children: [
+                      Container(
+                        key: aboutKey,
+                        child: AboutUsWidget(),
                       ),
-                    ))));
+                      Container(key: servicesKey, child: ServicesWidget()),
+                      Container(
+                        key: howWorkWidget,
+                        child: HowWorkWidget(),
+                      ),
+                    ],
+                  ),
+                )));
       });
     }
 
     List<GlobalKey> keysList = _buttonToKey.values.toList();
     List<DrawerButtons> buttonsList = _buttonToKey.keys.toList();
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return BlocBuilder<MetricsBloc, Metrics>(builder: (context, state) {
-        bool isMouse = state == Metrics.BIG;
-        return isMouse
-            ? Listener(
-                onPointerSignal: (PointerSignalEvent event) {
-                  if (event is PointerScrollEvent) {
-                    var currentIndex = keysList.indexOf(currentKey);
-                    var isLastElement = currentIndex == keysList.length - 1;
-                    var isFirstElement = currentIndex == 0;
+    void _handleKeyEvent(RawKeyEvent event) {
+      if (!lockScroll) {
+        setState(() {
+          lockScroll = true;
+        });
+        var offset = widget.mainController.offset;
+        var delta = 180;
+        if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+          setState(() {
+            widget.mainController.position.moveTo(offset-delta, curve: Curves.linear, duration: Duration(milliseconds: 500)).then((value) {
+              setState(() {
+                lockScroll = false;
+              });
+            });
+          });
+        }
+        else if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+          setState(() {
+            widget.mainController.position.moveTo(offset+delta, curve: Curves.linear, duration: Duration(milliseconds: 500)).then((value) {
+              setState(() {
+                lockScroll = false;
+              });
+            });
+          });
+        }
+      }
 
-                    if (event.scrollDelta.dy > 0 && !isLastElement) {
-                      context
-                          .bloc<DrawerBloc>()
-                          .add(buttonsList[currentIndex + 1]);
-                    } else if (event.scrollDelta.dy < 0 && !isFirstElement) {
-                      context
-                          .bloc<DrawerBloc>()
-                          .add(buttonsList[currentIndex - 1]);
-                    }
-                  }
-                },
-                child: _buildContentBlocks(),
-              )
-            : Listener(
-                onPointerMove: (PointerMoveEvent event) {
-                  if (context.bloc<DrawerBloc>().state != null)
-                    context.bloc<DrawerBloc>().add(null);
-                },
-                child: _buildContentBlocks());
-      });
-    });
+    }
+        return RawKeyboardListener(
+            onKey: _handleKeyEvent,
+            focusNode: _focusNode,
+            autofocus: true,
+            child: _buildContentBlocks()
+        );
   }
 }
