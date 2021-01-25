@@ -6,7 +6,7 @@ Site is available on [anakon.by](http://anakon.by/)
 
 ##  About
 
-An extraordinary designed web application created in a cloce collaboration with the customer, enriched with interactive flutter animations.
+An extraordinary designed web application developed in a close collaboration with the customer, enriched with interactive animations of navigation and acquaintance.
 
 Dev tools:
   * BLoC Pattern
